@@ -1,0 +1,11 @@
+open sftp://yso02:0961375@linux.socs.uoguelph.ca/ -hostkey="ecdsa-sha2-nistp256 256 5e:2e:71:b0:e7:09:1c:3f:86:93:5c:a1:63:2f:02:86"
+
+lcd "C:\Users\Ena So\Desktop\Software"
+cd "/home/undergrad/0/yso02/2750"
+
+put GEDCOM
+
+exit
+
+# Execute the script using a command like:
+# "C:\Program Files (x86)\WinSCP\WinSCP.exe" /log="C:\writable\path\to\log\WinSCP.log" /ini=nul /script="C:\path\to\script\script.txt"
