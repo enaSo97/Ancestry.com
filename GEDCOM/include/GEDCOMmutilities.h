@@ -13,7 +13,7 @@ void toLower(char * toBeLower);
 
 enum eCode validateFile(char* fileName);
 
-enum eCode validateGEDCOM(char * fileName);
+enum eCode validateGEDCOM(char ** fileName);
 
 char** fileReader(char * fileName);
 
