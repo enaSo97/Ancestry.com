@@ -2,8 +2,10 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
+#include "GEDCOMparser.h"
+#include "GEDCOMmutilities.h"
 #include "LinkedListAPI.h"
+
 
 //***************************************** GEDCOOM object functions *****************************************
 
@@ -21,13 +23,19 @@
  **/
 GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   GEDCOMerror errorCheck;
-  FILE * file = fopen(fileName, "r");
-
-  if (file == NULL || strcmp(fileName, "") == 0){
-    setType(INV_FILE, 0);
-    return
+  //if(DEBUG)printf("int the create\n");
+  char** read = fileReader(fileName); // storing the each line of GEDCOM file in double pointer array
+  if (validateFile(fileName) == INV_FILE){
+    errorCheck = setType(INV_FILE, -1);
+    obj = NULL;
   }
+  int length = fileLength(read);
+  for (int i = 0; i < length; i++){ // freeing the allocated memory after done parsing the file
+    free(read[i]);
+  }
+  free(read);
 
+  return errorCheck;
 }
 
 
@@ -86,19 +94,209 @@ List getDescendants(const GEDCOMobject* failyRecord, const Individual* person);
 //************************************************************************************************************
 
 //****************************************** List helper functions *******************************************
-void deleteEvent(void* toBeDeleted);
-int compareEvents(const void* first,const void* second);
-char* printEvent(void* toBePrinted);
+void deleteEvent(void* toBeDeleted){
+  Event * Delete;
 
-void deleteIndividual(void* toBeDeleted);
-int compareIndividuals(const void* first,const void* second);
-char* printIndividual(void* toBePrinted);
+  if (toBeDeleted == NULL){
+    return;
+  }
+  Delete = (Event*)toBeDeleted;
 
-void deleteFamily(void* toBeDeleted);
-int compareFamilies(const void* first,const void* second);
-char* printFamily(void* toBePrinted);
+  free(Delete->date);
+  free(Delete->place);
+  free(Delete);
 
-void deleteField(void* toBeDeleted);
-int compareFields(const void* first,const void* second);
-char* printField(void* toBePrinted);
+}
+/**
+**return 0 when they are same
+**return 1 when second first > second
+**return -1 when
+*/
+int compareEvents(const void* first,const void* second){
+  Event * A = (Event*)first;
+  Event * B = (Event*)second;
+  int result;
+  /**************/
+  int date1 = 0;
+  char month1[5];
+  int year1 = 0;
+  /**************/
+  /**************/
+  int date2 = 0;
+  char month2[5];
+  int year2 = 0;
+  /**************/
+  if (first == NULL || second == NULL){
+    return 0;
+  }
+  toLower(A->date);
+  sscanf((char*)A->date, "%d %s %d", &date1, month1, &year1);
+  sscanf((char*)B->date, "%d %s %d", &date2, month2, &year2);
+
+  if (year1 > year2){ // clearly means that year1 is greater than year2
+    result = 1;
+  }
+  if (year1 < year2){
+    result = -1;
+  }
+  else if (year1 == year2){// when both event has the same year than we have to compare month
+    if (month1 > month2){
+      result = 1;
+    }
+    else if (month1 < month2){
+      result = -1;
+    }
+    else if (month1 == month2){ //when both event have same month and same year we have to compare dates
+      if (date1 > date2){
+        result = 1;
+      }else if (date1 < date2){
+        result = -1;
+      }else if (date1 == date2){
+        result = 0; // when both events have exactly same dates
+      }
+      }
+    }
+    return result;
+}
+char* printEvent(void* toBePrinted){ //type date place other fields
+  char* chrTemp;
+  Event* temp;
+  int length;
+
+  if (toBePrinted == NULL){
+    return NULL;
+  }
+
+  temp = (Event*)toBePrinted;
+
+  length = strlen(temp->type) + strlen(temp->date) + strlen(temp->place) + 40;
+  chrTemp = (char*)malloc(sizeof(char)*length);
+  sprintf(chrTemp, "type: %s, date: %s, place: %s\n", temp->type, temp->date, temp->place);
+  strcat(chrTemp, toString(temp->otherFields));
+
+  return chrTemp;
+}
+
+void deleteIndividual (void* toBeDeleted){
+  Individual * Delete;
+
+  if (toBeDeleted == NULL){
+    return;
+  }
+
+  Delete = (Individual*)toBeDeleted;
+
+  free(Delete->givenName);
+  free(Delete->surname);
+  free(Delete);
+}
+
+int compareIndividuals(const void* first,const void* second){
+  Individual * compare1;
+  Individual * compare2;
+
+  if (first == NULL || second == NULL){
+    return 0;
+  }
+
+  compare1 = (Individual*)first;
+  compare2 = (Individual*)second;
+
+  return strcmp(compare1->surname, compare2->surname);
+}
+
+char* printIndividual(void* toBePrinted){
+  char* string;
+  Individual* print;
+  int length;
+
+  if (toBePrinted == NULL){
+    return NULL;
+  }
+
+  print = (Individual*)toBePrinted;
+  length = strlen(print->givenName) + strlen(print->surname) + 150;
+  string = (char*)malloc(sizeof(char) * length);
+
+  sprintf(string, "FirstName: %s, LastName: %s", print->givenName, print->surname);
+  strcat(string, toString(print->events));
+  strcat(string, toString(print->families));
+  strcat(string, toString(print->otherFields));
+  return string;
+}
+
+void deleteFamily(void* toBeDeleted){
+  Family * Delete;
+
+  if (toBeDeleted == NULL){
+    return;
+  }
+  Delete = (Family*)toBeDeleted;
+  deleteIndividual(Delete->wife);
+  deleteIndividual(Delete->husband);
+  free(Delete);
+}
+/*int compareFamilies(const void* first,const void* second){
+  Family * compare1 = (Family*)first;
+  Fmaily * compare2 = (Family*)second;
+
+  int count1 = getLength(compare1->);
+  int count2;
+
+  return 0;
+}*/
+char* printFamily(void* toBePrinted){
+  char * string;
+  char * toadd;
+  Family * print;
+
+  if (toBePrinted == NULL){
+    return NULL;
+  }
+
+  print = (Family*)toBePrinted;
+  string = printIndividual(print->wife);
+  string = (char*)realloc(string, sizeof(char) * 100);// reallocating memory for next elements that;s in the struct
+  toadd = printIndividual(print->husband);
+  strcat(string, toadd);
+  strcat(string, toString(print->children));
+  strcat(string, toString(print->otherFields));
+
+  return string;
+}
+
+void deleteField(void* toBeDeleted){
+  Field * Delete;
+
+  if (toBeDeleted == NULL){
+    return;
+  }
+
+  Delete = (Field*)toBeDeleted;
+
+  free(Delete->tag);
+  free(Delete->value);
+  free(Delete);
+}
+int compareFields(const void* first,const void* second){
+  Field * compare1 = (Field*)first;
+  Field * compare2 = (Field*)second;
+  return 0;
+}
+char* printField(void* toBePrinted){
+  char* string;
+  Field * print;
+  int length;
+
+  if(toBePrinted == NULL){
+    return NULL;
+  }
+
+  print = (Field*)toBePrinted;
+
+  length = strlen(print->tag) + strlen(print->value) + 100;
+  string = (char*)malloc(sizeof(char) * length);
+  sprintf(string, "Tag: %s, Value: %s", print->tag, print->value);
+  return string;
+}
 //************************************************************************************************************

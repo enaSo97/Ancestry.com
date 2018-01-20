@@ -9,10 +9,10 @@
 #include "LinkedListAPI.h"
 
 //For simplicity, the examples we will use will only use the ASCII subset of these encodings 
-typedef enum CharSet {ANSEL, UTF-8, UNICODE, ASCII};
+typedef enum cSet {ANSEL, UTF8, UNICODE, ASCII} CharSet;
 
 //error code enum
-typedef enum ErrorCode {OK, INV_FILE, INV_GEDCOM, INV_HEADER, INV_RECORD, OTHER};
+typedef enum eCode {OK, INV_FILE, INV_GEDCOM, INV_HEADER, INV_RECORD, OTHER} ErrorCode;
 
 //Represents a generic event, e.g. individual event, family event, etc.
 typedef struct {
@@ -25,7 +25,7 @@ typedef struct {
     //Empty string if not provided
     char* place;
     
-    //All other submitter fields. All objects in the list will be of type Field.  It may be empty.
+    //All other event fields. All objects in the list will be of type Field.  It may be empty.
     List    otherFields;
     
 } Event;
@@ -44,12 +44,11 @@ typedef struct {
     //Submitter name has a max length and only appears once, so we can hardcode it
     char    submitterName[61];
     
-    //Submitted address.  We use a C99 flexible array member, which we will discuss in class.
-    char    address[];
-    
     //All other submitter fields. All objects in the list will be of type Field.  It may be empty.
     List    otherFields;
     
+    //Submitted address.  We use a C99 flexible array member, which we will discuss in class.
+    char    address[];
 } Submitter;
 
 /*
@@ -71,7 +70,7 @@ typedef struct {
     Submitter*  submitter;
     
     //All other header fields. All objects in the list will be of type Field.  It may be empty.
-    List    otherFields;
+    List        otherFields;
     
 } Header;
 
@@ -142,7 +141,7 @@ typedef struct {
 //***************************************** GEDCOOM object functions *****************************************
 
 /** Function to create a GEDCOM object based on the contents of an GEDCOM file.
- *@pre File name cannot be an empty string or NULL.  File name must have the .ics extension.
+ *@pre File name cannot be an empty string or NULL.  File name must have the .ged extension.
  File represented by this name must exist and must be readable.
  *@post Either:
  A valid GEDCOM has been created, its address was stored in the variable obj, and OK was returned
@@ -193,7 +192,7 @@ char* printError(GEDCOMerror err);
  *Note: while the arguments of compare() and person are all void, it is assumed that records they point to are
  *      all of the same type - just like arguments to the compare() function in the List struct
  **/
-Individual* findPerson(const GEDCOMobject* failyRecord, bool (*compare)(const void* first, const void* second), const void* person);
+Individual* findPerson(const GEDCOMobject* familyRecord, bool (*compare)(const void* first, const void* second), const void* person);
 
 
 /** Function to return a list of all descendants of an individual in a GEDCOM
@@ -202,10 +201,10 @@ Individual* findPerson(const GEDCOMobject* failyRecord, bool (*compare)(const vo
  *@return a list of descendants.  The list may be empty.  All list members must be of type Individual, and can appear in any order.
  *All list members must be COPIES of the Individual records in the GEDCOM file.  If the returned list is freed, the original GEDCOM
  *must remain unaffected.
- *@param failyRecord - a pointer to a GEDCOMobject struct
+ *@param familyRecord - a pointer to a GEDCOMobject struct
  *@param person - the Individual record whose descendants we want
  **/
-List getDescendants(const GEDCOMobject* failyRecord, const Individual* person);
+List getDescendants(const GEDCOMobject* familyRecord, const Individual* person);
 
 
 //************************************************************************************************************
@@ -228,4 +227,4 @@ int compareFields(const void* first,const void* second);
 char* printField(void* toBePrinted);
 //************************************************************************************************************
 
-#endif GEDCOMPARSER_H
+#endif

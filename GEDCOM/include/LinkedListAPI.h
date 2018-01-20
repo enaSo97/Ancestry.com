@@ -34,7 +34,7 @@ typedef struct listHead{
     Node* tail;
     int length;
     void (*deleteData)(void* toBeDeleted);
-    int (*compareData)(const void* first,const void* second);
+    int (*compare)(const void* first,const void* second);
     char* (*printData)(void* toBePrinted);
 } List;
 

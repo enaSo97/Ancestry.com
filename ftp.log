@@ -1,280 +1,45 @@
-. 2018-01-16 15:52:13.391 --------------------------------------------------------------------------
-. 2018-01-16 15:52:13.393 WinSCP Version 5.11.2 (Build 7781) (OS 10.0.16299 - Windows 10 Home)
-. 2018-01-16 15:52:13.393 Configuration: nul
-. 2018-01-16 15:52:13.393 Log level: Normal
-. 2018-01-16 15:52:13.393 Local account: DESKTOP-E0V3QOB\Ena So
-. 2018-01-16 15:52:13.393 Working directory: C:\Users\Ena So\Desktop\Software
-. 2018-01-16 15:52:13.393 Process ID: 6392
-. 2018-01-16 15:52:13.394 Command-line: "C:\Program Files (x86)\WinSCP\WinSCP.exe" /console=5.11.2 /consoleinstance=_6108_274 "/ini=nul" "/log=ftp.log" "/script=script.txt" 
-. 2018-01-16 15:52:13.394 Time zone: Current: GMT-5, Standard: GMT-5 (Eastern Standard Time), DST: GMT-4 (Eastern Daylight Time), DST Start: 2018-03-11, DST End: 2018-11-04
-. 2018-01-16 15:52:13.394 Login time: January 16, 2018 3:52:13 PM
-. 2018-01-16 15:52:13.394 --------------------------------------------------------------------------
-. 2018-01-16 15:52:13.394 Script: Retrospectively logging previous script records:
-> 2018-01-16 15:52:13.394 Script: open sftp://yso02:***@linux.socs.uoguelph.ca/ -hostkey="ecdsa-sha2-nistp256 256 5e:2e:71:b0:e7:09:1c:3f:86:93:5c:a1:63:2f:02:86"
-. 2018-01-16 15:52:13.394 --------------------------------------------------------------------------
-. 2018-01-16 15:52:13.394 Session name: yso02@linux.socs.uoguelph.ca (Ad-Hoc site)
-. 2018-01-16 15:52:13.394 Host name: linux.socs.uoguelph.ca (Port: 22)
-. 2018-01-16 15:52:13.394 User name: yso02 (Password: Yes, Key file: No, Passphrase: No)
-. 2018-01-16 15:52:13.395 Tunnel: No
-. 2018-01-16 15:52:13.395 Transfer Protocol: SFTP
-. 2018-01-16 15:52:13.395 Ping type: Off, Ping interval: 30 sec; Timeout: 15 sec
-. 2018-01-16 15:52:13.395 Disable Nagle: No
-. 2018-01-16 15:52:13.395 Proxy: None
-. 2018-01-16 15:52:13.395 Send buffer: 262144
-. 2018-01-16 15:52:13.395 SSH protocol version: 2; Compression: No
-. 2018-01-16 15:52:13.395 Bypass authentication: No
-. 2018-01-16 15:52:13.395 Try agent: Yes; Agent forwarding: No; TIS/CryptoCard: No; KI: Yes; GSSAPI: Yes
-. 2018-01-16 15:52:13.395 GSSAPI: Forwarding: No
-. 2018-01-16 15:52:13.395 Ciphers: aes,chacha20,blowfish,3des,WARN,arcfour,des; Ssh2DES: No
-. 2018-01-16 15:52:13.395 KEX: ecdh,dh-gex-sha1,dh-group14-sha1,rsa,WARN,dh-group1-sha1
-. 2018-01-16 15:52:13.395 SSH Bugs: Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto
-. 2018-01-16 15:52:13.395 Simple channel: Yes
-. 2018-01-16 15:52:13.395 Return code variable: Autodetect; Lookup user groups: Auto
-. 2018-01-16 15:52:13.395 Shell: default
-. 2018-01-16 15:52:13.395 EOL: LF, UTF: Auto
-. 2018-01-16 15:52:13.395 Clear aliases: Yes, Unset nat.vars: Yes, Resolve symlinks: Yes; Follow directory symlinks: No
-. 2018-01-16 15:52:13.395 LS: ls -la, Ign LS warn: Yes, Scp1 Comp: No
-. 2018-01-16 15:52:13.395 SFTP Bugs: Auto,Auto
-. 2018-01-16 15:52:13.395 SFTP Server: default
-. 2018-01-16 15:52:13.395 Local directory: default, Remote directory: home, Update: Yes, Cache: Yes
-. 2018-01-16 15:52:13.395 Cache directory changes: Yes, Permanent: Yes
-. 2018-01-16 15:52:13.395 Recycle bin: Delete to: No, Overwritten to: No, Bin path: 
-. 2018-01-16 15:52:13.395 DST mode: Unix
-. 2018-01-16 15:52:13.395 --------------------------------------------------------------------------
-. 2018-01-16 15:52:13.399 Looking up host "linux.socs.uoguelph.ca" for SSH connection
-. 2018-01-16 15:52:13.410 Connecting to 131.104.48.72 port 22
-. 2018-01-16 15:52:13.413 We claim version: SSH-2.0-WinSCP_release_5.11.2
-. 2018-01-16 15:52:13.430 Server version: SSH-2.0-OpenSSH_7.4p1 Debian-10+deb9u2
-. 2018-01-16 15:52:13.430 Using SSH protocol version 2
-. 2018-01-16 15:52:13.430 Have a known host key of type ecdsa-sha2-nistp256
-. 2018-01-16 15:52:13.434 Doing ECDH key exchange with curve Curve25519 and hash SHA-256
-. 2018-01-16 15:52:13.577 Server also has ssh-rsa host key, but we don't know it
-. 2018-01-16 15:52:13.577 Host key fingerprint is:
-. 2018-01-16 15:52:13.578 ecdsa-sha2-nistp256 256 5e:2e:71:b0:e7:09:1c:3f:86:93:5c:a1:63:2f:02:86
-. 2018-01-16 15:52:13.578 Verifying host key ecdsa-sha2-nistp256 nistp256,0x7e0c13e191371043 1b4edf7ec31b29ef 623f2f10f83cee07 5e4bf2217c5c59a0 ,0x860a5f7185fb6840 266cf76e16ac8d4e a2c3330f48a1069f 4c691d8494d63e63  with fingerprint ecdsa-sha2-nistp256 256 5e:2e:71:b0:e7:09:1c:3f:86:93:5c:a1:63:2f:02:86
-. 2018-01-16 15:52:13.578 Host key matches configured key
-. 2018-01-16 15:52:13.579 Initialised AES-256 SDCTR client->server encryption
-. 2018-01-16 15:52:13.579 Initialised HMAC-SHA-256 client->server MAC algorithm
-. 2018-01-16 15:52:13.579 Initialised AES-256 SDCTR server->client encryption
-. 2018-01-16 15:52:13.579 Initialised HMAC-SHA-256 server->client MAC algorithm
-! 2018-01-16 15:52:13.626 Using username "yso02".
-. 2018-01-16 15:52:13.633 Server offered these authentication methods: publickey,gssapi-keyex,gssapi-with-mic,password
-. 2018-01-16 15:52:13.633 Using SSPI from SECUR32.DLL
-. 2018-01-16 15:52:13.633 Attempting GSSAPI authentication
-. 2018-01-16 15:52:13.655 GSSAPI authentication initialisation failed
-. 2018-01-16 15:52:13.655 The target was not recognized.
-. 2018-01-16 15:52:13.656 Prompt (password, "SSH password", <no instructions>, "&Password: ")
-. 2018-01-16 15:52:13.656 Using stored password.
-. 2018-01-16 15:52:13.657 Sent password
-. 2018-01-16 15:52:13.751 Access granted
-. 2018-01-16 15:52:13.751 Opening session as main channel
-. 2018-01-16 15:52:13.819 Opened main channel
-. 2018-01-16 15:52:13.867 Started a shell/command
-. 2018-01-16 15:52:13.867 --------------------------------------------------------------------------
-. 2018-01-16 15:52:13.867 Using SFTP protocol.
-. 2018-01-16 15:52:13.868 Doing startup conversation with host.
-> 2018-01-16 15:52:13.868 Type: SSH_FXP_INIT, Size: 5, Number: -1
-< 2018-01-16 15:52:13.891 Type: SSH_FXP_VERSION, Size: 150, Number: -1
-. 2018-01-16 15:52:13.891 SFTP version 3 negotiated.
-. 2018-01-16 15:52:13.891 Unknown server extension posix-rename@openssh.com="1"
-. 2018-01-16 15:52:13.891 Supports statvfs@openssh.com extension version "2"
-. 2018-01-16 15:52:13.891 Unknown server extension fstatvfs@openssh.com="2"
-. 2018-01-16 15:52:13.891 Supports hardlink@openssh.com extension version "1"
-. 2018-01-16 15:52:13.891 Unknown server extension fsync@openssh.com="1"
-. 2018-01-16 15:52:13.891 We believe the server has signed timestamps bug
-. 2018-01-16 15:52:13.891 We will use UTF-8 strings until server sends an invalid UTF-8 string as with SFTP version 3 and older UTF-8 strings are not mandatory
-. 2018-01-16 15:52:13.891 Limiting packet size to OpenSSH sftp-server limit of 262148 bytes
-. 2018-01-16 15:52:13.891 Getting current directory name.
-. 2018-01-16 15:52:13.891 Getting real path for '.'
-> 2018-01-16 15:52:13.891 Type: SSH_FXP_REALPATH, Size: 10, Number: 16
-< 2018-01-16 15:52:13.894 Type: SSH_FXP_NAME, Size: 67, Number: 16
-. 2018-01-16 15:52:13.894 Real path is '/home/undergrad/0/yso02'
-. 2018-01-16 15:52:13.894 Startup conversation with host finished.
-< 2018-01-16 15:52:13.895 Script: Active session: [1] yso02@linux.socs.uoguelph.ca
-> 2018-01-16 15:52:13.896 Script: lcd "C:\Users\Ena So\Desktop\Software"
-< 2018-01-16 15:52:13.896 Script: C:\Users\Ena So\Desktop\Software
-> 2018-01-16 15:52:13.897 Script: cd "/home/undergrad/0/yso02/2750"
-. 2018-01-16 15:52:13.897 Changing directory to "/home/undergrad/0/yso02/2750".
-. 2018-01-16 15:52:13.897 Getting real path for '/home/undergrad/0/yso02/2750'
-> 2018-01-16 15:52:13.897 Type: SSH_FXP_REALPATH, Size: 37, Number: 272
-< 2018-01-16 15:52:13.901 Type: SSH_FXP_NAME, Size: 77, Number: 272
-. 2018-01-16 15:52:13.901 Real path is '/home/undergrad/0/yso02/2750'
-. 2018-01-16 15:52:13.901 Trying to open directory "/home/undergrad/0/yso02/2750".
-> 2018-01-16 15:52:13.901 Type: SSH_FXP_LSTAT, Size: 37, Number: 519
-< 2018-01-16 15:52:13.903 Type: SSH_FXP_ATTRS, Size: 37, Number: 519
-. 2018-01-16 15:52:13.903 Getting current directory name.
-< 2018-01-16 15:52:13.903 Script: /home/undergrad/0/yso02/2750
-> 2018-01-16 15:52:13.905 Script: put GEDCOM
-. 2018-01-16 15:52:13.906 Copying 1 files/directories to remote directory "/home/undergrad/0/yso02/2750"
-. 2018-01-16 15:52:13.906   PrTime: Yes; PrRO: No; Rght: rw-r--r--; PrR: No (No); FnCs: N; RIC: 0100; Resume: S (102400); CalcS: No; Mask: 
-. 2018-01-16 15:52:13.906   TM: B; ClAr: No; RemEOF: No; RemBOM: No; CPS: 0; NewerOnly: No; InclM: ; ResumeL: 0
-. 2018-01-16 15:52:13.906   AscM: *.*html; *.htm; *.txt; *.php; *.php3; *.cgi; *.c; *.cpp; *.h; *.pas; *.bas; *.tex; *.pl; *.js; .htaccess; *.xtml; *.css; *.cfg; *.ini; *.sh; *.xml
-. 2018-01-16 15:52:13.907 File: 'GEDCOM' [2018-01-16T20:47:07.768Z] [0]
-. 2018-01-16 15:52:13.907 Trying to open directory "/home/undergrad/0/yso02/2750/GEDCOM/".
-> 2018-01-16 15:52:13.907 Type: SSH_FXP_LSTAT, Size: 45, Number: 775
-< 2018-01-16 15:52:13.911 Type: SSH_FXP_STATUS, Size: 29, Number: 775
-< 2018-01-16 15:52:13.911 Status code: 2, Message: 775, Server: No such file, Language:  
-. 2018-01-16 15:52:13.911 Creating directory "/home/undergrad/0/yso02/2750/GEDCOM/".
-. 2018-01-16 15:52:13.911 Canonifying: "/home/undergrad/0/yso02/2750/GEDCOM/"
-. 2018-01-16 15:52:13.911 Getting real path for '/home/undergrad/0/yso02/2750/GEDCOM/'
-> 2018-01-16 15:52:13.911 Type: SSH_FXP_REALPATH, Size: 45, Number: 1296
-< 2018-01-16 15:52:13.914 Type: SSH_FXP_STATUS, Size: 29, Number: 1296
-< 2018-01-16 15:52:13.914 Status code: 2, Message: 1296, Server: No such file, Language:  
-. 2018-01-16 15:52:13.914 Getting real path for '/home/undergrad/0/yso02/2750/'
-> 2018-01-16 15:52:13.914 Type: SSH_FXP_REALPATH, Size: 38, Number: 1552
-< 2018-01-16 15:52:13.917 Type: SSH_FXP_NAME, Size: 77, Number: 1552
-. 2018-01-16 15:52:13.917 Real path is '/home/undergrad/0/yso02/2750'
-. 2018-01-16 15:52:13.917 Canonified: "/home/undergrad/0/yso02/2750/GEDCOM"
-> 2018-01-16 15:52:13.918 Type: SSH_FXP_MKDIR, Size: 48, Number: 1038
-< 2018-01-16 15:52:13.940 Type: SSH_FXP_STATUS, Size: 24, Number: 1038
-< 2018-01-16 15:52:13.940 Status code: 0
-. 2018-01-16 15:52:13.941 File: 'GEDCOM\bin' [2018-01-16T20:45:01.700Z] [0]
-. 2018-01-16 15:52:13.959 Trying to open directory "/home/undergrad/0/yso02/2750/GEDCOM/bin/".
-> 2018-01-16 15:52:13.959 Type: SSH_FXP_LSTAT, Size: 49, Number: 1799
-< 2018-01-16 15:52:13.968 Type: SSH_FXP_STATUS, Size: 29, Number: 1799
-< 2018-01-16 15:52:13.968 Status code: 2, Message: 1799, Server: No such file, Language:  
-. 2018-01-16 15:52:13.968 Creating directory "/home/undergrad/0/yso02/2750/GEDCOM/bin/".
-. 2018-01-16 15:52:13.968 Canonifying: "/home/undergrad/0/yso02/2750/GEDCOM/bin/"
-. 2018-01-16 15:52:13.969 Getting real path for '/home/undergrad/0/yso02/2750/GEDCOM/bin/'
-> 2018-01-16 15:52:13.969 Type: SSH_FXP_REALPATH, Size: 49, Number: 2320
-< 2018-01-16 15:52:13.971 Type: SSH_FXP_STATUS, Size: 29, Number: 2320
-< 2018-01-16 15:52:13.971 Status code: 2, Message: 2320, Server: No such file, Language:  
-. 2018-01-16 15:52:13.972 Getting real path for '/home/undergrad/0/yso02/2750/GEDCOM/'
-> 2018-01-16 15:52:13.972 Type: SSH_FXP_REALPATH, Size: 45, Number: 2576
-< 2018-01-16 15:52:13.975 Type: SSH_FXP_NAME, Size: 91, Number: 2576
-. 2018-01-16 15:52:13.975 Real path is '/home/undergrad/0/yso02/2750/GEDCOM'
-. 2018-01-16 15:52:13.975 Canonified: "/home/undergrad/0/yso02/2750/GEDCOM/bin"
-> 2018-01-16 15:52:13.975 Type: SSH_FXP_MKDIR, Size: 52, Number: 2062
-< 2018-01-16 15:52:13.999 Type: SSH_FXP_STATUS, Size: 24, Number: 2062
-< 2018-01-16 15:52:13.999 Status code: 0
-. 2018-01-16 15:52:14.000 File: 'GEDCOM\include' [2018-01-16T20:48:15.623Z] [0]
-. 2018-01-16 15:52:14.001 Trying to open directory "/home/undergrad/0/yso02/2750/GEDCOM/include/".
-> 2018-01-16 15:52:14.001 Type: SSH_FXP_LSTAT, Size: 53, Number: 2823
-< 2018-01-16 15:52:14.006 Type: SSH_FXP_STATUS, Size: 29, Number: 2823
-< 2018-01-16 15:52:14.006 Status code: 2, Message: 2823, Server: No such file, Language:  
-. 2018-01-16 15:52:14.006 Creating directory "/home/undergrad/0/yso02/2750/GEDCOM/include/".
-. 2018-01-16 15:52:14.006 Canonifying: "/home/undergrad/0/yso02/2750/GEDCOM/include/"
-. 2018-01-16 15:52:14.006 Getting real path for '/home/undergrad/0/yso02/2750/GEDCOM/include/'
-> 2018-01-16 15:52:14.006 Type: SSH_FXP_REALPATH, Size: 53, Number: 3344
-< 2018-01-16 15:52:14.009 Type: SSH_FXP_STATUS, Size: 29, Number: 3344
-< 2018-01-16 15:52:14.010 Status code: 2, Message: 3344, Server: No such file, Language:  
-. 2018-01-16 15:52:14.010 Getting real path for '/home/undergrad/0/yso02/2750/GEDCOM/'
-> 2018-01-16 15:52:14.010 Type: SSH_FXP_REALPATH, Size: 45, Number: 3600
-< 2018-01-16 15:52:14.013 Type: SSH_FXP_NAME, Size: 91, Number: 3600
-. 2018-01-16 15:52:14.013 Real path is '/home/undergrad/0/yso02/2750/GEDCOM'
-. 2018-01-16 15:52:14.013 Canonified: "/home/undergrad/0/yso02/2750/GEDCOM/include"
-> 2018-01-16 15:52:14.013 Type: SSH_FXP_MKDIR, Size: 56, Number: 3086
-< 2018-01-16 15:52:14.017 Type: SSH_FXP_STATUS, Size: 24, Number: 3086
-< 2018-01-16 15:52:14.017 Status code: 0
-. 2018-01-16 15:52:14.017 File: 'GEDCOM\include\GEDCOMparser.h' [2018-01-16T15:00:43.693Z] [8623]
-. 2018-01-16 15:52:14.019 Copying "GEDCOM\include\GEDCOMparser.h" to remote directory started.
-. 2018-01-16 15:52:14.019 Binary transfer mode selected.
-. 2018-01-16 15:52:14.019 Opening remote file.
-> 2018-01-16 15:52:14.019 Type: SSH_FXP_OPEN, Size: 83, Number: 3843
-< 2018-01-16 15:52:14.022 Type: SSH_FXP_HANDLE, Size: 13, Number: 3843
-> 2018-01-16 15:52:14.023 Type: SSH_FXP_WRITE, Size: 8648, Number: 4358
-> 2018-01-16 15:52:14.024 Type: SSH_FXP_CLOSE, Size: 13, Number: 4612
-> 2018-01-16 15:52:14.024 Type: SSH_FXP_SETSTAT, Size: 79, Number: 4105
-< 2018-01-16 15:52:14.032 Type: SSH_FXP_STATUS, Size: 24, Number: 4358
-< 2018-01-16 15:52:14.032 Status code: 0
-< 2018-01-16 15:52:14.032 Type: SSH_FXP_STATUS, Size: 24, Number: 4612
-< 2018-01-16 15:52:14.032 Status code: 0
-. 2018-01-16 15:52:14.032 Preserving timestamp [2018-01-16T15:00:43.000Z]
-< 2018-01-16 15:52:14.034 Type: SSH_FXP_STATUS, Size: 24, Number: 4105
-< 2018-01-16 15:52:14.034 Status code: 0
-. 2018-01-16 15:52:14.034 Transfer done: 'GEDCOM\include\GEDCOMparser.h' => '/home/undergrad/0/yso02/2750/GEDCOM/include/GEDCOMparser.h' [8623]
-. 2018-01-16 15:52:14.035 File: 'GEDCOM\include\LinkedListAPI.h' [2018-01-16T15:00:43.603Z] [8268]
-. 2018-01-16 15:52:14.035 Copying "GEDCOM\include\LinkedListAPI.h" to remote directory started.
-. 2018-01-16 15:52:14.035 Binary transfer mode selected.
-. 2018-01-16 15:52:14.035 Opening remote file.
-> 2018-01-16 15:52:14.035 Type: SSH_FXP_OPEN, Size: 84, Number: 4867
-< 2018-01-16 15:52:14.046 Type: SSH_FXP_HANDLE, Size: 13, Number: 4867
-> 2018-01-16 15:52:14.046 Type: SSH_FXP_WRITE, Size: 8293, Number: 5382
-> 2018-01-16 15:52:14.047 Type: SSH_FXP_CLOSE, Size: 13, Number: 5636
-> 2018-01-16 15:52:14.047 Type: SSH_FXP_SETSTAT, Size: 80, Number: 5129
-< 2018-01-16 15:52:14.053 Type: SSH_FXP_STATUS, Size: 24, Number: 5382
-< 2018-01-16 15:52:14.053 Status code: 0
-< 2018-01-16 15:52:14.054 Type: SSH_FXP_STATUS, Size: 24, Number: 5636
-< 2018-01-16 15:52:14.054 Status code: 0
-. 2018-01-16 15:52:14.054 Preserving timestamp [2018-01-16T15:00:43.000Z]
-< 2018-01-16 15:52:14.057 Type: SSH_FXP_STATUS, Size: 24, Number: 5129
-< 2018-01-16 15:52:14.057 Status code: 0
-. 2018-01-16 15:52:14.057 Transfer done: 'GEDCOM\include\LinkedListAPI.h' => '/home/undergrad/0/yso02/2750/GEDCOM/include/LinkedListAPI.h' [8268]
-. 2018-01-16 15:52:14.057 File: 'GEDCOM\lib' [2018-01-16T20:44:32.194Z] [0]
-. 2018-01-16 15:52:14.057 Trying to open directory "/home/undergrad/0/yso02/2750/GEDCOM/lib/".
-> 2018-01-16 15:52:14.057 Type: SSH_FXP_LSTAT, Size: 49, Number: 5895
-< 2018-01-16 15:52:14.063 Type: SSH_FXP_STATUS, Size: 29, Number: 5895
-< 2018-01-16 15:52:14.063 Status code: 2, Message: 5895, Server: No such file, Language:  
-. 2018-01-16 15:52:14.063 Creating directory "/home/undergrad/0/yso02/2750/GEDCOM/lib/".
-. 2018-01-16 15:52:14.063 Canonifying: "/home/undergrad/0/yso02/2750/GEDCOM/lib/"
-. 2018-01-16 15:52:14.065 Getting real path for '/home/undergrad/0/yso02/2750/GEDCOM/lib/'
-> 2018-01-16 15:52:14.065 Type: SSH_FXP_REALPATH, Size: 49, Number: 6416
-< 2018-01-16 15:52:14.067 Type: SSH_FXP_STATUS, Size: 29, Number: 6416
-< 2018-01-16 15:52:14.067 Status code: 2, Message: 6416, Server: No such file, Language:  
-. 2018-01-16 15:52:14.068 Getting real path for '/home/undergrad/0/yso02/2750/GEDCOM/'
-> 2018-01-16 15:52:14.068 Type: SSH_FXP_REALPATH, Size: 45, Number: 6672
-< 2018-01-16 15:52:14.072 Type: SSH_FXP_NAME, Size: 91, Number: 6672
-. 2018-01-16 15:52:14.072 Real path is '/home/undergrad/0/yso02/2750/GEDCOM'
-. 2018-01-16 15:52:14.072 Canonified: "/home/undergrad/0/yso02/2750/GEDCOM/lib"
-> 2018-01-16 15:52:14.072 Type: SSH_FXP_MKDIR, Size: 52, Number: 6158
-< 2018-01-16 15:52:14.076 Type: SSH_FXP_STATUS, Size: 24, Number: 6158
-< 2018-01-16 15:52:14.076 Status code: 0
-. 2018-01-16 15:52:14.076 File: 'GEDCOM\makefile' [2017-10-05T23:06:28.000Z] [837]
-. 2018-01-16 15:52:14.077 Copying "GEDCOM\makefile" to remote directory started.
-. 2018-01-16 15:52:14.077 Binary transfer mode selected.
-. 2018-01-16 15:52:14.077 Opening remote file.
-> 2018-01-16 15:52:14.077 Type: SSH_FXP_OPEN, Size: 69, Number: 6915
-< 2018-01-16 15:52:14.081 Type: SSH_FXP_HANDLE, Size: 13, Number: 6915
-> 2018-01-16 15:52:14.081 Type: SSH_FXP_WRITE, Size: 862, Number: 7430
-> 2018-01-16 15:52:14.082 Type: SSH_FXP_CLOSE, Size: 13, Number: 7684
-> 2018-01-16 15:52:14.082 Type: SSH_FXP_SETSTAT, Size: 65, Number: 7177
-< 2018-01-16 15:52:14.088 Type: SSH_FXP_STATUS, Size: 24, Number: 7430
-< 2018-01-16 15:52:14.088 Status code: 0
-< 2018-01-16 15:52:14.095 Type: SSH_FXP_STATUS, Size: 24, Number: 7684
-< 2018-01-16 15:52:14.095 Status code: 0
-. 2018-01-16 15:52:14.096 Preserving timestamp [2017-10-05T23:06:28.000Z]
-< 2018-01-16 15:52:14.096 Type: SSH_FXP_STATUS, Size: 24, Number: 7177
-< 2018-01-16 15:52:14.096 Status code: 0
-. 2018-01-16 15:52:14.096 Transfer done: 'GEDCOM\makefile' => '/home/undergrad/0/yso02/2750/GEDCOM/makefile' [837]
-. 2018-01-16 15:52:14.096 File: 'GEDCOM\src' [2018-01-16T20:47:32.943Z] [0]
-. 2018-01-16 15:52:14.097 Trying to open directory "/home/undergrad/0/yso02/2750/GEDCOM/src/".
-> 2018-01-16 15:52:14.097 Type: SSH_FXP_LSTAT, Size: 49, Number: 7943
-< 2018-01-16 15:52:14.107 Type: SSH_FXP_STATUS, Size: 29, Number: 7943
-< 2018-01-16 15:52:14.107 Status code: 2, Message: 7943, Server: No such file, Language:  
-. 2018-01-16 15:52:14.107 Creating directory "/home/undergrad/0/yso02/2750/GEDCOM/src/".
-. 2018-01-16 15:52:14.107 Canonifying: "/home/undergrad/0/yso02/2750/GEDCOM/src/"
-. 2018-01-16 15:52:14.107 Getting real path for '/home/undergrad/0/yso02/2750/GEDCOM/src/'
-> 2018-01-16 15:52:14.107 Type: SSH_FXP_REALPATH, Size: 49, Number: 8464
-< 2018-01-16 15:52:14.109 Type: SSH_FXP_STATUS, Size: 29, Number: 8464
-< 2018-01-16 15:52:14.109 Status code: 2, Message: 8464, Server: No such file, Language:  
-. 2018-01-16 15:52:14.110 Getting real path for '/home/undergrad/0/yso02/2750/GEDCOM/'
-> 2018-01-16 15:52:14.110 Type: SSH_FXP_REALPATH, Size: 45, Number: 8720
-< 2018-01-16 15:52:14.112 Type: SSH_FXP_NAME, Size: 91, Number: 8720
-. 2018-01-16 15:52:14.112 Real path is '/home/undergrad/0/yso02/2750/GEDCOM'
-. 2018-01-16 15:52:14.112 Canonified: "/home/undergrad/0/yso02/2750/GEDCOM/src"
-> 2018-01-16 15:52:14.113 Type: SSH_FXP_MKDIR, Size: 52, Number: 8206
-< 2018-01-16 15:52:14.116 Type: SSH_FXP_STATUS, Size: 24, Number: 8206
-< 2018-01-16 15:52:14.116 Status code: 0
-. 2018-01-16 15:52:14.117 File: 'GEDCOM\src\LinkedList.c' [2018-01-16T20:10:23.773Z] [5426]
-. 2018-01-16 15:52:14.117 Copying "GEDCOM\src\LinkedList.c" to remote directory started.
-. 2018-01-16 15:52:14.117 Binary transfer mode selected.
-. 2018-01-16 15:52:14.117 Opening remote file.
-> 2018-01-16 15:52:14.118 Type: SSH_FXP_OPEN, Size: 77, Number: 8963
-< 2018-01-16 15:52:14.121 Type: SSH_FXP_HANDLE, Size: 13, Number: 8963
-> 2018-01-16 15:52:14.122 Type: SSH_FXP_WRITE, Size: 5451, Number: 9478
-> 2018-01-16 15:52:14.122 Type: SSH_FXP_CLOSE, Size: 13, Number: 9732
-> 2018-01-16 15:52:14.123 Type: SSH_FXP_SETSTAT, Size: 73, Number: 9225
-< 2018-01-16 15:52:14.129 Type: SSH_FXP_STATUS, Size: 24, Number: 9478
-< 2018-01-16 15:52:14.129 Status code: 0
-< 2018-01-16 15:52:14.134 Type: SSH_FXP_STATUS, Size: 24, Number: 9732
-< 2018-01-16 15:52:14.135 Status code: 0
-. 2018-01-16 15:52:14.135 Preserving timestamp [2018-01-16T20:10:23.000Z]
-< 2018-01-16 15:52:14.136 Type: SSH_FXP_STATUS, Size: 24, Number: 9225
-< 2018-01-16 15:52:14.136 Status code: 0
-. 2018-01-16 15:52:14.136 Transfer done: 'GEDCOM\src\LinkedList.c' => '/home/undergrad/0/yso02/2750/GEDCOM/src/LinkedList.c' [5426]
-. 2018-01-16 15:52:14.136 Copying finished: Transferred: 23,154, Elapsed: 0:00:00, CPS: 132,100/s
-> 2018-01-16 15:52:14.137 Script: exit
-. 2018-01-16 15:52:14.137 Script: Exit code: 0
-. 2018-01-16 15:52:14.137 Closing connection.
-. 2018-01-16 15:52:14.137 Sending special code: 12
-. 2018-01-16 15:52:14.138 Sent EOF message
+. 2018-01-20 13:56:39.877 --------------------------------------------------------------------------
+. 2018-01-20 13:56:39.877 WinSCP Version 5.11.2 (Build 7781) (OS 10.0.16299 - Windows 10 Home)
+. 2018-01-20 13:56:39.877 Configuration: nul
+. 2018-01-20 13:56:39.878 Log level: Normal
+. 2018-01-20 13:56:39.878 Local account: DESKTOP-E0V3QOB\Ena So
+. 2018-01-20 13:56:39.878 Working directory: C:\Users\Ena So\Desktop\Software
+. 2018-01-20 13:56:39.878 Process ID: 15560
+. 2018-01-20 13:56:39.878 Command-line: "C:\Program Files (x86)\WinSCP\WinSCP.exe" /console=5.11.2 /consoleinstance=_16592_521 "/ini=nul" "/log=ftp.log" "/script=script.txt" 
+. 2018-01-20 13:56:39.878 Time zone: Current: GMT-5, Standard: GMT-5 (Eastern Standard Time), DST: GMT-4 (Eastern Daylight Time), DST Start: 2018-03-11, DST End: 2018-11-04
+. 2018-01-20 13:56:39.879 Login time: January 20, 2018 1:56:39 PM
+. 2018-01-20 13:56:39.879 --------------------------------------------------------------------------
+. 2018-01-20 13:56:39.879 Script: Retrospectively logging previous script records:
+> 2018-01-20 13:56:39.879 Script: open sftp://yso02:***@linux.socs.uoguelph.ca/ -hostkey="ecdsa-sha2-nistp256 256 5e:2e:71:b0:e7:09:1c:3f:86:93:5c:a1:63:2f:02:86"
+. 2018-01-20 13:56:39.879 --------------------------------------------------------------------------
+. 2018-01-20 13:56:39.879 Session name: yso02@linux.socs.uoguelph.ca (Ad-Hoc site)
+. 2018-01-20 13:56:39.879 Host name: linux.socs.uoguelph.ca (Port: 22)
+. 2018-01-20 13:56:39.879 User name: yso02 (Password: Yes, Key file: No, Passphrase: No)
+. 2018-01-20 13:56:39.879 Tunnel: No
+. 2018-01-20 13:56:39.879 Transfer Protocol: SFTP
+. 2018-01-20 13:56:39.879 Ping type: Off, Ping interval: 30 sec; Timeout: 15 sec
+. 2018-01-20 13:56:39.879 Disable Nagle: No
+. 2018-01-20 13:56:39.879 Proxy: None
+. 2018-01-20 13:56:39.879 Send buffer: 262144
+. 2018-01-20 13:56:39.879 SSH protocol version: 2; Compression: No
+. 2018-01-20 13:56:39.879 Bypass authentication: No
+. 2018-01-20 13:56:39.879 Try agent: Yes; Agent forwarding: No; TIS/CryptoCard: No; KI: Yes; GSSAPI: Yes
+. 2018-01-20 13:56:39.879 GSSAPI: Forwarding: No
+. 2018-01-20 13:56:39.879 Ciphers: aes,chacha20,blowfish,3des,WARN,arcfour,des; Ssh2DES: No
+. 2018-01-20 13:56:39.879 KEX: ecdh,dh-gex-sha1,dh-group14-sha1,rsa,WARN,dh-group1-sha1
+. 2018-01-20 13:56:39.879 SSH Bugs: Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto
+. 2018-01-20 13:56:39.880 Simple channel: Yes
+. 2018-01-20 13:56:39.880 Return code variable: Autodetect; Lookup user groups: Auto
+. 2018-01-20 13:56:39.880 Shell: default
+. 2018-01-20 13:56:39.880 EOL: LF, UTF: Auto
+. 2018-01-20 13:56:39.880 Clear aliases: Yes, Unset nat.vars: Yes, Resolve symlinks: Yes; Follow directory symlinks: No
+. 2018-01-20 13:56:39.880 LS: ls -la, Ign LS warn: Yes, Scp1 Comp: No
+. 2018-01-20 13:56:39.880 SFTP Bugs: Auto,Auto
+. 2018-01-20 13:56:39.880 SFTP Server: default
+. 2018-01-20 13:56:39.880 Local directory: default, Remote directory: home, Update: Yes, Cache: Yes
+. 2018-01-20 13:56:39.880 Cache directory changes: Yes, Permanent: Yes
+. 2018-01-20 13:56:39.880 Recycle bin: Delete to: No, Overwritten to: No, Bin path: 
+. 2018-01-20 13:56:39.880 DST mode: Unix
+. 2018-01-20 13:56:39.880 --------------------------------------------------------------------------
+. 2018-01-20 13:56:39.880 Looking up host "linux.socs.uoguelph.ca" for SSH connection
+. 2018-01-20 13:56:39.889 Connecting to 131.104.48.74 port 22
