@@ -22,6 +22,20 @@ GEDCOMobject * createObject(Header * head, List families, List Individual, Submi
 
 GEDCOMerror setType(ErrorCode code, int line);
 
+void freeEvent(Event * toBeFreed);
+
+void freeField(Field * toBeFreed);
+
+void freeSubmitter(Submitter * toBeFreed);
+
+void freeHeader(Head * toBeFreed);
+
+void freeIndividual(Individual * toBeFreed);
+
+void freeFmaily(Fmaily * toBeFreed);
+
+void freeOject(GEDCOMobject * toBeFreed);
+
 void toLower(char * toBeLower);
 
 enum eCode validateFile(char* fileName);
