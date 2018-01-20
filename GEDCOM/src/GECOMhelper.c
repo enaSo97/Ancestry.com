@@ -8,6 +8,108 @@
 #include "GEDCOMmutilities.h"
 
 
+Event * createEvent(char type[5], char * date, char * place, List other){
+  Event * create = malloc(sizeof(Event));// creating a memory for Event
+
+  strpcy(create->type, type);
+  create->date = malloc(sizeof(char)*(strlen(date) +1));
+  strcpy(cteate->date, date);
+  create->place = malloc(sizeof(char)*(strlen(place) + 1));
+  strpcy(create->place, place);
+  createEvent->otherFields = other;
+
+  return create;
+}
+
+Field * createField(char * tag, char * value){
+  Field * create = malloc(sizeof(Field));
+
+  create->tag = malloc(sizeof(char)*(strlen(tag) + 1));
+  strcpy(create->tag, tag);
+  create->value = malloc(sizeof(char)*(strlen(value) + 1));
+  strpcy(create->value, value);
+
+  return create;
+}
+
+Submitter * createSubmitter(char Name[61], List other, char address[]){
+  Submitter * create = malloc(sizeof(Submitter));
+
+  strcpy(create->Name, Name);
+  create->otherFields = other;
+  create->address = address;
+
+  return create;
+}
+
+Header * createHeader(char source[249], float version, CharSet encode, Submitter * submit, List other){
+  Header * Head = malloc(sizeof(Header));
+
+  strcpy(Head->source, source);
+  Head->gedcVersion = version;
+  Head->encoding = encode;
+  Head->submitter = sumbit;
+  Head->otherFields = other;
+
+  return Head;
+}
+
+Individual * createIndividual(char * name, char * surname, List event, List family, List other){
+  Individual * person = malloc(sizeof(Individual));
+
+  person->givenName = malloc(sizeof(char)*(strlen(name)+1));
+  strcpy(person->givenName, name);
+  person->surname = malloc(sizeof(char)*(strlen(surname)+1));
+  strcpy(person->surname, surname);
+  person->events = event;
+  person->families = familty;
+  person->otherFields = other;
+
+   return person;
+}
+
+Family * createFamily(Individual * wife, Individual * husband, List children, List other){
+  Family toCreate = malloc(sizeof(Family));
+
+  toCreate->wife = malloc(sizeof(Inividual));
+  toCreate->wife = wife;
+  toCreate->husband = malloc(sizeof(Individual));
+  toCreate->husband = husband;
+  toCreate->children = children;
+  toCreate->otherFields = other;
+
+  return toCreate;
+}
+
+GEDCOMobject * createObject(Header * head, List families, List Individual, Submitter * submit){
+  GEDCOMobject obj = malloc(sizeof(GEDCOMobject));
+
+  obj->head = malloc(sizeof(Head));
+  obj->head = head;
+  obj->families = families;
+  obj->Individual = Individual;
+  obj->submitter = malloc(sizeof(Submitter));
+  obj->submitter = submit;
+
+  return obj;
+}
+
+void freeEvent(Event * toBeFreed);
+
+void freeField(Field * toBeFreed);
+
+void freeSubmitter(Submitter * toBeFreed);
+
+void freeHeader(Head * toBeFreed);
+
+void freeIndividual(Individual * toBeFreed);
+
+void freeFmaily(Fmaily * toBeFreed);
+
+void freeOject(GEDCOMobject * toBeFreed);
+
+void toLower(char * toBeLower);
+
 GEDCOMerror setType(ErrorCode code, int line){
   GEDCOMerror temp;
   temp.type = code;
@@ -60,7 +162,7 @@ enum eCode validateGEDCOM(char ** read){
   int length = fileLength(read);
   int term;
   for (int i = 0; i < length; i++){
-    term = checkTerminate(read[i])
+    term = checkTerminate(read[i]);
     if (term == 0 && strlen(read[i]) == 0){
       i++;
     }
