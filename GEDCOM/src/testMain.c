@@ -6,7 +6,7 @@
 
 int main (int argc, char ** argv){
   printf("This is test main\n");
-  char reader[1000];
+  //char reader[1000];
   FILE * file = fopen(argv[1], "r");
 
   GEDCOMobject* object;

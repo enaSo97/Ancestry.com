@@ -279,8 +279,8 @@ void deleteField(void* toBeDeleted){
   free(Delete);
 }
 int compareFields(const void* first,const void* second){
-  Field * compare1 = (Field*)first;
-  Field * compare2 = (Field*)second;
+  //Field * compare1 = (Field*)first;
+  //Field * compare2 = (Field*)second;
   return 0;
 }
 char* printField(void* toBePrinted){

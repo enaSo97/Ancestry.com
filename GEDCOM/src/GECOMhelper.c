@@ -58,10 +58,13 @@ enum eCode validateFile(char* fileName){
 
 enum eCode validateGEDCOM(char ** read){
   int length = fileLength(read);
+  int term;
   for (int i = 0; i < length; i++){
-    if (checkTerminate(read[i]) == 0 && strlen(read[i]) == 0){
+    term = checkTerminate(read[i])
+    if (term == 0 && strlen(read[i]) == 0){
       i++;
     }
+  }
     /*const char s[2] = "-";
     char *token;
     token = strtok(str, s);
