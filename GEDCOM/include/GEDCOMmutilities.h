@@ -56,4 +56,4 @@ int checkTerminate(char * string);
 
 void testTockenize(char * tocken);
 
-char ** tockenInfo(char * toParse);
+Info tockenInfo(char * toParse);

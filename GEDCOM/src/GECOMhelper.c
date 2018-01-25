@@ -184,7 +184,6 @@ int checkTerminate(char * string){
 char** fileReader(char * fileName){
   char** array = (char**)malloc(sizeof(char*)*1);
   char reader[1000];
-  char ** parsed;
   int counter = 1;
   int i = 0;
   FILE * file = fopen(fileName, "r");
@@ -220,22 +219,6 @@ int fileLength(char ** array){
   return i;
 }
 
-char * parseWhiteSpace(char * parse){
-  char result[254];
-  int i = 0;
-
-  while(strcmp(parse[i], " ") == 0){// checking for the first white space
-    i++;// iterates until it finds the first white space
-  }
-  for (int j = 0; j < i; j++){
-    strcpy(result[j], parse[j]); //puts the characters till white space to result
-  }
-  for (int j = 0; j < i; j++){
-    parse[j] = parse[j + 1];// removing the characters till white space for the next parse
-  }
-  return result;
-}
-
 Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temporary info struct
   Info temp;
   int i = 0;
@@ -243,16 +226,16 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   char tag[255];
   char information[255];
 
-  while(strcmp(toParse[i + 1], " ") == 0){// iterating the first white space
-    strcpy(level[i], toParse[i]);
+  while(toParse[i + 1] == " ") == 0){// iterating the first white space
+    strcpy(level[i], *toParse[i]);
     i++;// iterates until it finds the first white space
   }
-  while(strcmp(toParse[i + 1], " ") == 0){// iterating till the second white space
-    strcpy(tag[i], toParse[i]); // saving the characters in the tag
+  while(toParse[i + 1] == " ") == 0){// iterating till the second white space
+    strcpy(tag[i], *toParse[i]); // saving the characters in the tag
     i++;
   }
-  while(strcmp(toParse[i + 1], "\0") == 0){
-    strcpy(information[i], toParse[i]); saving the rest of the info into information
+  while(toParse[i + 1] == "\0") == 0){
+    strcpy(information[i], *toParse[i]); //saving the rest of the info into information
     i++;
   }
 
