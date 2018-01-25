@@ -190,7 +190,7 @@ char** fileReader(char * fileName){
   if(DEBUG) printf("\nopening the file\n");
 
   while(fgets(reader, 800, file) != NULL){
-    if(DEBUG)printf("\nread a line \n");
+    //if(DEBUG)printf("\nread a line \n");
 
     array = (char**)realloc(array, sizeof(char*)*counter);
     while(reader[strlen(reader) - 1] == '\n' || reader[strlen(reader) - 1] =='\r'){
@@ -199,7 +199,7 @@ char** fileReader(char * fileName){
 
     array[i] = (char*)malloc(sizeof(char) * 253);
     strcpy(array[i], reader);
-    printf("reading in file: %s\n", array[i]);
+    //printf("reading in file: %s\n", array[i]);
     printf("\n\n");
     i++;
     counter++;
@@ -226,9 +226,9 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   char tag[255];
   char information[255];
 
-  printf("parsing this line : %s\n", toParse);
+  //printf("parsing this line : %s\n", toParse);
 
-  /*while(strcmp(*toParse[i + 1]," ") == 0){// iterating the first white space
+  while(strcmp(*toParse[i + 1]," ") == 0){// iterating the first white space
     strcpy(level[i], *toParse[i]);
     i++;// iterates until it finds the first white space
   }
@@ -244,6 +244,7 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   strcpy(temp.level, level);
   strcpy(temp.tag, tag);
   strcpy(temp.info, information);
-  printf("[[%s %s %s]]\n", level, tag, information);*/
+  printf("[[%s %s %s]]\n", level, tag, information);
+
   return temp;
 }
