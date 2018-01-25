@@ -32,6 +32,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     obj = NULL;
   }
   for (int i = 0; i < length; i++){
+    printf("read at {%d: %s}\n", i, read[i]);
     info[i] = tockenInfo(read[i]);
   }
   for (int i = 0; i < length; i++){ // freeing the allocated memory after done parsing the file
