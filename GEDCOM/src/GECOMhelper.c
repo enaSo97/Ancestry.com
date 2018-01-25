@@ -226,22 +226,22 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   char tag[255];
   char information[255];
 
-  while(toParse[i + 1] == " "){// iterating the first white space
+  while(strcmp(*toParse[i + 1]," ") == 0){// iterating the first white space
     strcpy(level[i], *toParse[i]);
     i++;// iterates until it finds the first white space
   }
-  while(toParse[i + 1] == " "){// iterating till the second white space
+  while(strcmp(*toParse[i + 1]," ") == 0){// iterating till the second white space
     strcpy(tag[i], *toParse[i]); // saving the characters in the tag
     i++;
   }
-  while(toParse[i + 1] == "\0"){
+  while(strcmp(*toParse[i + 1],"\0") == 0){
     strcpy(information[i], *toParse[i]); //saving the rest of the info into information
     i++;
   }
 
-  strcpy(temp->level, level);
-  strcpy(temp->tag, tag);
-  strcpy(temp->info, information);
+  strcpy(temp.level, level);
+  strcpy(temp.tag, tag);
+  strcpy(temp.info, information);
   printf("[[%s %s %s]]\n", level, tag, information);
   return temp;
 }
