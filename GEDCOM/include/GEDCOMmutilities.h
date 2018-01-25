@@ -6,7 +6,7 @@
 
 #define DEBUG true
 
-struct info{
+typedef struct info{
   char level[5];
   char tag[255];
   char info[255];
