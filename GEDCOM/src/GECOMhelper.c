@@ -11,12 +11,12 @@
 Event * createEvent(char type[5], char * date, char * place, List other){
   Event * create = malloc(sizeof(Event));// creating a memory for Event
 
-  strpcy(create->type, type);
+  strcpy(create->type, type);
   create->date = malloc(sizeof(char)*(strlen(date) +1));
-  strcpy(cteate->date, date);
+  strcpy(create->date, date);
   create->place = malloc(sizeof(char)*(strlen(place) + 1));
-  strpcy(create->place, place);
-  createEvent->otherFields = other;
+  strcpy(create->place, place);
+  create->otherFields = other;
 
   return create;
 }
@@ -27,17 +27,17 @@ Field * createField(char * tag, char * value){
   create->tag = malloc(sizeof(char)*(strlen(tag) + 1));
   strcpy(create->tag, tag);
   create->value = malloc(sizeof(char)*(strlen(value) + 1));
-  strpcy(create->value, value);
+  strcpy(create->value, value);
 
   return create;
 }
 
 Submitter * createSubmitter(char Name[61], List other, char address[]){
-  Submitter * create = malloc(sizeof(Submitter));
+  Submitter * create = malloc(sizeof(Submitter) + (sizeof(char)*strlen(address)));
 
-  strcpy(create->Name, Name);
+  strcpy(create->submitterName, Name);
   create->otherFields = other;
-  create->address = address;
+  strcpy(create->address, address);
 
   return create;
 }
@@ -48,7 +48,7 @@ Header * createHeader(char source[249], float version, CharSet encode, Submitter
   strcpy(Head->source, source);
   Head->gedcVersion = version;
   Head->encoding = encode;
-  Head->submitter = sumbit;
+  Head->submitter = submit;
   Head->otherFields = other;
 
   return Head;
@@ -62,16 +62,16 @@ Individual * createIndividual(char * name, char * surname, List event, List fami
   person->surname = malloc(sizeof(char)*(strlen(surname)+1));
   strcpy(person->surname, surname);
   person->events = event;
-  person->families = familty;
+  person->families = family;
   person->otherFields = other;
 
    return person;
 }
 
 Family * createFamily(Individual * wife, Individual * husband, List children, List other){
-  Family toCreate = malloc(sizeof(Family));
+  Family * toCreate = malloc(sizeof(Family));
 
-  toCreate->wife = malloc(sizeof(Inividual));
+  toCreate->wife = malloc(sizeof(Individual));
   toCreate->wife = wife;
   toCreate->husband = malloc(sizeof(Individual));
   toCreate->husband = husband;
@@ -82,12 +82,12 @@ Family * createFamily(Individual * wife, Individual * husband, List children, Li
 }
 
 GEDCOMobject * createObject(Header * head, List families, List Individual, Submitter * submit){
-  GEDCOMobject obj = malloc(sizeof(GEDCOMobject));
+  GEDCOMobject * obj = malloc(sizeof(GEDCOMobject));
 
-  obj->head = malloc(sizeof(Head));
-  obj->head = head;
+  obj->header = malloc(sizeof(Header));
+  obj->header = head;
   obj->families = families;
-  obj->Individual = Individual;
+  obj->individuals = Individual;
   obj->submitter = malloc(sizeof(Submitter));
   obj->submitter = submit;
 
@@ -100,11 +100,11 @@ void freeField(Field * toBeFreed);
 
 void freeSubmitter(Submitter * toBeFreed);
 
-void freeHeader(Head * toBeFreed);
+void freeHeader(Header * toBeFreed);
 
 void freeIndividual(Individual * toBeFreed);
 
-void freeFmaily(Fmaily * toBeFreed);
+void freeFmaily(Family * toBeFreed);
 
 void freeOject(GEDCOMobject * toBeFreed);
 
@@ -142,7 +142,7 @@ int getMonth(char * getter){
 
 enum eCode validateFile(char* fileName){
   printf("in the function\n");
-  char ext[80];
+  //char ext[80];
   if (strlen(fileName) == 0){ // checking if the file argument is empty, file is invalid
     printf("empty file name\n");
     return INV_FILE;
@@ -158,24 +158,10 @@ enum eCode validateFile(char* fileName){
   return OK;
 }
 
-enum eCode validateGEDCOM(char ** read){
-  int length = fileLength(read);
-  int term;
-  for (int i = 0; i < length; i++){
-    term = checkTerminate(read[i]);
-    if (term == 0 && strlen(read[i]) == 0){
-      i++;
-    }
-  }
-    /*const char s[2] = "-";
-    char *token;
-    token = strtok(str, s);
+enum eCode validateGEDCOM(char * read){
+  //int length = fileLength(read);
+  //int term;
 
-    while( token != NULL ) {
-        printf( " %s\n", token );
-
-        token = strtok(NULL, s);
-    }*/
 
   return OK;
 }
@@ -198,20 +184,24 @@ int checkTerminate(char * string){
 char** fileReader(char * fileName){
   char** array = (char**)malloc(sizeof(char*)*1);
   char reader[1000];
+  char ** parsed;
   int counter = 1;
   int i = 0;
   FILE * file = fopen(fileName, "r");
+  if(DEBUG) printf("\nopening the file\n");
 
-  while(fgets(reader, 1000, file) != NULL){
+  while(fgets(reader, 800, file) != NULL){
+    if(DEBUG)printf("\nread a line \n");
+
     array = (char**)realloc(array, sizeof(char*)*counter);
-
     while(reader[strlen(reader) - 1] == '\n' || reader[strlen(reader) - 1] =='\r'){
       reader[strlen(reader) - 1] = '\0';
     }
 
     array[i] = (char*)malloc(sizeof(char) * 249);
     strcpy(array[i], reader);
-    printf("reading in file: %s\n", array[i]);
+    //printf("reading in file: %s\n", array[i]);
+    printf("\n\n");
     i++;
     counter++;
   }
@@ -222,9 +212,53 @@ char** fileReader(char * fileName){
 
 int fileLength(char ** array){
   int i = 0;
+  if (DEBUG)printf("\ngetting the length of file\n");
   while(array[i] != NULL){
     i++;
   }
   //printf("number of element in array %d\n", i);
   return i;
+}
+
+char * parseWhiteSpace(char * parse){
+  char result[254];
+  int i = 0;
+
+  while(strcmp(parse[i], " ") == 0){// checking for the first white space
+    i++;// iterates until it finds the first white space
+  }
+  for (int j = 0; j < i; j++){
+    strcpy(result[j], parse[j]); //puts the characters till white space to result
+  }
+  for (int j = 0; j < i; j++){
+    parse[j] = parse[j + 1];// removing the characters till white space for the next parse
+  }
+  return result;
+}
+
+Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temporary info struct
+  Info temp;
+  int i = 0;
+  char level[5];
+  char tag[255];
+  char information[255];
+
+  while(strcmp(toParse[i + 1], " ") == 0){// iterating the first white space
+    strcpy(level[i], toParse[i]);
+    i++;// iterates until it finds the first white space
+  }
+  while(strcmp(toParse[i + 1], " ") == 0){// iterating till the second white space
+    strcpy(tag[i], toParse[i]); // saving the characters in the tag
+    i++;
+  }
+  while(strcmp(toParse[i + 1], "\0") == 0){
+    strcpy(information[i], toParse[i]); saving the rest of the info into information
+    i++;
+  }
+
+  strcpy(temp->level, level);
+  strcpy(temp->tag, tag);
+  strcpy(temp->info, information);
+  printf("[[%s %s %s]]\n", level, tag, information);
+  return temp;
 }
