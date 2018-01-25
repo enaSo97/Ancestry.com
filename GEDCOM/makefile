@@ -1,17 +1,7 @@
 CC = gcc
-CFLAGS = -Wall -g -Iinclude
+CFLAGS = -std=c11 -Wall -pedantic -Iinclude -g
 
-UNAME := $(shell uname)
+all: test
 
-ifeq ($(UNAME), Linux)
-	CCFLAGS += -std=gnu11
-endif
-ifeq ($(UNAME), Darwin)
-	CCFLAGS += -std=c11
-endif
-
-program:
-		$(CC)	$(CFLAGS) src/*.c -o bin/run
-
-runTest:
-		.bin/run ./assets/simpleGEDCOM.ged
+test:
+	$(CC) $(CFLAGS) src/GEDCOMhelper.c src/GEDCOMparser.c src/LinkedList.c src/testMain.c -o bin/test

@@ -7,7 +7,7 @@
 int main (int argc, char ** argv){
   printf("This is test main\n");
   //char reader[1000];
-  FILE * file = fopen(argv[1], "r");
+  //FILE * file = fopen(argv[1], "r");
 
   GEDCOMobject* object;
 
@@ -15,7 +15,7 @@ int main (int argc, char ** argv){
   createGEDCOM(argv[1],&object);
   if(DEBUG)printf("obejct has been called\n");
 
-  fclose(file);
+  //fclose(file);
 
   return 0;
 }

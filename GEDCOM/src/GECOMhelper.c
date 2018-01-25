@@ -197,9 +197,9 @@ char** fileReader(char * fileName){
       reader[strlen(reader) - 1] = '\0';
     }
 
-    array[i] = (char*)malloc(sizeof(char) * 249);
+    array[i] = (char*)malloc(sizeof(char) * 253);
     strcpy(array[i], reader);
-    //printf("reading in file: %s\n", array[i]);
+    printf("reading in file: %s\n", array[i]);
     printf("\n\n");
     i++;
     counter++;
