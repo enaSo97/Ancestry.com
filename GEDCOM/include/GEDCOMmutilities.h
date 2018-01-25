@@ -6,6 +6,12 @@
 
 #define DEBUG true
 
+struct info{
+  char level[5];
+  char tag[255];
+  char info[255];
+}Info;
+
 Event * createEvent(char type[5], char * date, char * place, List other);
 
 Field * createField(char * tag, char * value);
@@ -16,7 +22,7 @@ Header * createHeader(char source[249], float version, CharSet encode, Submitter
 
 Individual * createIndividual(char * name, char * surname, List event, List family, List other);
 
-Familty * createFamily(Individual * wife, Individual * husband, List children, List other);
+Family * createFamily(Individual * wife, Individual * husband, List children, List other);
 
 GEDCOMobject * createObject(Header * head, List families, List Individual, Submitter * submit);
 
@@ -28,11 +34,11 @@ void freeField(Field * toBeFreed);
 
 void freeSubmitter(Submitter * toBeFreed);
 
-void freeHeader(Head * toBeFreed);
+void freeHeader(Header * toBeFreed);
 
 void freeIndividual(Individual * toBeFreed);
 
-void freeFmaily(Fmaily * toBeFreed);
+void freeFmaily(Family * toBeFreed);
 
 void freeOject(GEDCOMobject * toBeFreed);
 
@@ -40,10 +46,14 @@ void toLower(char * toBeLower);
 
 enum eCode validateFile(char* fileName);
 
-enum eCode validateGEDCOM(char ** fileName);
+enum eCode validateGEDCOM(char * read);
 
 char** fileReader(char * fileName);
 
 int fileLength(char ** array);
 
 int checkTerminate(char * string);
+
+void testTockenize(char * tocken);
+
+char ** tockenInfo(char * toParse);

@@ -25,13 +25,18 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   GEDCOMerror errorCheck;
   //if(DEBUG)printf("int the create\n");
   char** read = fileReader(fileName); // storing the each line of GEDCOM file in double pointer array
+  Info * info = malloc(sizeof(Info)*length - 1);
   if (validateFile(fileName) == INV_FILE){
     errorCheck = setType(INV_FILE, -1);
     obj = NULL;
   }
+  for (int i = 0; i < length; i++){
+    info[i] = tockenInfo(read[i]);
+  }
   int length = fileLength(read);
   for (int i = 0; i < length; i++){ // freeing the allocated memory after done parsing the file
-    free(read[i]);
+    free(info[i]); // freeing the allocated information struct
+    free(read[i]);//freeing the allocated strings
   }
   free(read);
 
