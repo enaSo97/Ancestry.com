@@ -244,7 +244,7 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
     i++;
     j++;
   }
-  printf("tag : %s ||  %s\n", tag, toParse);
+  printf(" i = %d || tag : %s ||  %s\n", i, tag, toParse);
   i++;
   while(temp[i] != '\0'){
     int j = 0;
@@ -252,7 +252,7 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
     i++;
     j++;
   }
-  printf("info %s || %s\n", information, temp);
+  printf("i = %d || info %s || %s\n",i, information, temp);
 
   strcpy(info.level, level);
   strcpy(info.tag, tag);
