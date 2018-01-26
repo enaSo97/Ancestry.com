@@ -229,7 +229,7 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   strcpy(temp, toParse);
   //printf("parsing this line : %s\n", toParse);
 
-  while(strcmp(temp[i + 1]," ") == 0){// iterating the first white space
+  while(strcmp((char*)temp[i + 1]," ") == 0){// iterating the first white space
     strcpy(level[i], temp[i]);
     i++;// iterates until it finds the first white space
   }
