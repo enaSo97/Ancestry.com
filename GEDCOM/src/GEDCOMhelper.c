@@ -240,7 +240,7 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   }
   if (i > 2){
     printf("in the if state\n");
-    while(strcmp(parsed[j], "\0") == 0){
+    while(strcmp(parsed[j], "\0") != 0){
       printf("in the while\n");
       strcat(information, parsed[j]);
       strcat(information, " ");
