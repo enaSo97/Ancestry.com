@@ -225,11 +225,10 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   //char temp[500];
   //char level[5];
   //char tag[500];
-  char information[500];
+  char information[500] = "";
   char parsed[50][255];
-  char * token = strtok(toParse, " ");
-  //strcpy(temp, toParse);
   printf("parsing this line : %s\n", toParse);
+  char * token = strtok(toParse, " ");
 
   while(token != NULL){
     //printf("%s\n", token);
@@ -238,6 +237,13 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
     token = strtok(NULL, " ");
     i++;
   }
+
+  while(strcmp(parsed[i], "\0") == 0){
+    strcat(information, parsed[i])
+    strcat(information, " ");
+  }
+
+
 
   //updated
   /*while(toParse[i] !=  ' '){// iterating the first white space
@@ -266,10 +272,10 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
 
 
 
-  /*strcpy(info.level, level);
-  strcpy(info.tag, tag);
+  strcpy(info.level, parsed[0]);
+  strcpy(info.tag, parsed[1]);
   strcpy(info.info, information);
-  printf("[[%s %s %s]]\n", level, tag, information);*/
+  printf("[[%s %s %s]]\n", info.level, info.tag, info.info);
 
   return info;
 }
