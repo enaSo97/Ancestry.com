@@ -222,15 +222,25 @@ int fileLength(char ** array){
 Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temporary info struct
   Info info;
   int i = 0;
-  char temp[500];
-  char level[5];
-  char tag[500];
+  //char temp[500];
+  //char level[5];
+  //char tag[500];
   char information[500];
-  strcpy(temp, toParse);
+  char parsed[50][255];
+  char * token = strtok(toParse, " ");
+  //strcpy(temp, toParse);
   printf("parsing this line : %s\n", toParse);
 
+  while(token != NULL){
+    //printf("%s\n", token);
+    strcpy(parsed[i], token);
+    printf("tockenized <%s>\n", parsed[i]);
+    token = strtok(NULL, " ");
+    i++;
+  }
+
   //updated
-  while(toParse[i] !=  ' '){// iterating the first white space
+  /*while(toParse[i] !=  ' '){// iterating the first white space
     int j = 0;
     level[j] = toParse[i];
     i++;// iterates until it finds the first white space
@@ -252,7 +262,9 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
     i++;
     j++;
   }
-  printf("i = %d || info %s || %s\n",i, information, temp);
+  printf("i = %d || info %s || %s\n",i, information, temp);*/
+
+
 
   strcpy(info.level, level);
   strcpy(info.tag, tag);
