@@ -239,7 +239,7 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   }
 
   while(strcmp(parsed[i], "\0") == 0){
-    strcat(information, parsed[i])
+    strcat(information, parsed[i]);
     strcat(information, " ");
   }
 
