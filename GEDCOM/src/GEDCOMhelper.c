@@ -222,10 +222,10 @@ int fileLength(char ** array){
 Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temporary info struct
   Info info;
   int i = 0;
-  char temp[255];
+  char temp[500];
   char level[5];
-  char tag[255];
-  char information[255];
+  char tag[500];
+  char information[500];
   strcpy(temp, toParse);
   printf("parsing this line : %s\n", toParse);
 
