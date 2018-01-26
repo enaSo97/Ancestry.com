@@ -226,7 +226,7 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   char level[5];
   char tag[255];
   char information[255];
-  temp = toParse;
+  strcpy(temp, toParse);
   //printf("parsing this line : %s\n", toParse);
 
   while(temp[i + 1] ==" "){// iterating the first white space
@@ -247,5 +247,5 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   strcpy(info.info, information);
   printf("[[%s %s %s]]\n", level, tag, information);
 
-  return temp;
+  return info;
 }
