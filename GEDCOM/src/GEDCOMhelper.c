@@ -236,7 +236,7 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
     i++;// iterates until it finds the first white space
     j++;
   }
-  printf("level: %s %s\n", level, toParse);
+  printf("level: %s || %s\n", level, toParse);
   i++;//increments that it won;t count the white space that the index is currently pointing at
   while(toParse[i] != ' '){// iterating till the second white space
     int j = 0;
@@ -244,7 +244,7 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
     i++;
     j++;
   }
-  printf("tag : %s %s\n", tag, toParse);
+  printf("tag : %s ||  %s\n", tag, toParse);
   i++;
   while(temp[i] != '\0'){
     int j = 0;
@@ -252,7 +252,7 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
     i++;
     j++;
   }
-  printf("info %s %s\n", information, temp);
+  printf("info %s || %s\n", information, temp);
 
   strcpy(info.level, level);
   strcpy(info.tag, tag);
