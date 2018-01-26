@@ -238,7 +238,7 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
     token = strtok(NULL, " ");
     i++;
   }
-  if (i > 2){
+  if (i > 1){
     while(strcmp(parsed[j], "\0") == 0){
       strcat(information, parsed[j]);
       strcat(information, " ");
