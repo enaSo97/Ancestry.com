@@ -222,6 +222,7 @@ int fileLength(char ** array){
 Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temporary info struct
   Info info;
   int i = 0;
+  int j = 0;
   //char temp[500];
   //char level[5];
   //char tag[500];
@@ -237,12 +238,12 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
     token = strtok(NULL, " ");
     i++;
   }
-
-  while(strcmp(parsed[i], "\0") == 0){
-    strcat(information, parsed[i]);
-    strcat(information, " ");
+  if (i > 2){
+    while(strcmp(parsed[j], "\0") == 0){
+      strcat(information, parsed[j]);
+      strcat(information, " ");
+    }
   }
-
 
 
   //updated
