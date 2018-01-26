@@ -232,17 +232,17 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   for (int i = 0; i < 40; i++){
     printf("each character %s\n", temp[i]);
   }
-
-  while(toParse[i + 1] ==  " "){// iterating the first white space
-    strcpy(level[i], temp[i]);
+  //updated
+  while(toParse[i + 1] ==  ' '){// iterating the first white space
+    level[i] = toParse[i];
     i++;// iterates until it finds the first white space
   }
-  while(strcmp(temp[i + 1], " ")){// iterating till the second white space
-    strcpy(tag[i], temp[i]); // saving the characters in the tag
+  while(toParse[i + 1] == ' ')){// iterating till the second white space
+    tag[i] == temp[i]; // saving the characters in the tag
     i++;
   }
-  while(strcmp(temp[i + 1],"\0") == 0){
-    strcpy(information[i], temp[i]); //saving the rest of the info into information
+  while(temp[i + 1] == '\0'){
+    information[i] == temp[i]; //saving the rest of the info into information
     i++;
   }
 
