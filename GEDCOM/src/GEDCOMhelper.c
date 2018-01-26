@@ -200,7 +200,6 @@ char** fileReader(char * fileName){
     array[i] = (char*)malloc(sizeof(char) * 253);
     strcpy(array[i], reader);
     //printf("reading in file: %s\n", array[i]);
-    printf("\n\n");
     i++;
     counter++;
   }
@@ -234,28 +233,27 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
     token = strtok(NULL, " ");
     i++;
   }
-  //if (i > 1){
-    if (i > 1){
-      printf("in the if state\n");
-      while(strcmp(parsed[j], "\0") != 0){
+  if (i > 1){
+    printf("in the if state\n");
+    while(strcmp(parsed[j], "\0") != 0){
         //printf("in the while\n");
-        strcat(information, parsed[j]);
-        strcpy(parsed[j], "\0");
-        strcat(information, "-");
-        j++;
-        //printf("information in while %s\n", information);
-      }
-      parsed[j][strlen(parsed[j] - 2)] = '\0';
-    }else{
-      strcat(information, parsed[2]);
-      strcpy(parsed[i], "\0");
+      strcat(information, parsed[j]);
+      strcpy(parsed[j], "\0");
+      strcat(information, " ");
+      j++;
+      //printf("information in while %s\n", information);
     }
-  //}
+    parsed[j][strlen(parsed[j] - 2)] = '\0';
+  }else{
+    strcat(information, parsed[2]);
+    strcpy(parsed[i], "\0");
+  }
 
   strcpy(info.level, parsed[0]);
   strcpy(info.tag, parsed[1]);
   strcpy(info.info, information);
 
-  printf("\n[[%s || %s || %s]]\n", info.level, info.tag, info.info);
+  //printf("\n[[%s || %s || %s]]\n", info.level, info.tag, info.info);
+
   return info;
 }
