@@ -223,18 +223,14 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   Info info;
   int i = 0;
   int j = 2;
-  //char temp[500];
-  //char level[5];
-  //char tag[500];
   char information[500] = "";
   char parsed[50][255];
-  printf("parsing this line : %s\n", toParse);
+  //printf("parsing this line : %s\n", toParse);
   char * token = strtok(toParse, " ");
 
   while(token != NULL){
     //printf("%s\n", token);
     strcpy(parsed[i], token);
-    printf("tockenized <%s>\n", parsed[i]);
     token = strtok(NULL, " ");
     i++;
   }
@@ -250,39 +246,11 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   }else{
     strcat(information, parsed[2]);
   }
-
-
-  //updated
-  /*while(toParse[i] !=  ' '){// iterating the first white space
-    int j = 0;
-    level[j] = toParse[i];
-    i++;// iterates until it finds the first white space
-    j++;
-  }
-  printf("i = %d || level: %s || %s\n", i, level, toParse);
-  i++;//increments that it won;t count the white space that the index is currently pointing at
-  while(toParse[i] != ' '){// iterating till the second white space
-    int j = 0;
-    tag[i] = temp[i]; // saving the characters in the tag
-    i++;
-    j++;
-  }
-  printf(" i = %d || tag : %s ||  %s\n", i, tag, toParse);
-  i++;
-  while(temp[i] != '\0'){
-    int j = 0;
-    information[i] = temp[i]; //saving the rest of the info into information
-    i++;
-    j++;
-  }
-  printf("i = %d || info %s || %s\n",i, information, temp);*/
-
-
-
   strcpy(info.level, parsed[0]);
   strcpy(info.tag, parsed[1]);
   strcpy(info.info, information);
-  printf("[[%s %s %s]]\n", info.level, info.tag, info.info);
+
+  printf("\n[[%s || %s || %s]]\n", info.level, info.tag, info.info);
 
   return info;
 }
