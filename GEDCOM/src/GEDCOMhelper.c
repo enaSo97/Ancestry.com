@@ -244,6 +244,7 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
       j++;
       //printf("information in while %s\n", information);
     }
+    strcpy(parsed[j][strlen(parsed[j] - 1)], "\0");
   }else{
     strcat(information, parsed[2]);
     strcpy(parsed[i], "\0");
