@@ -40,13 +40,14 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     info[i] = tockenInfo(read[i]);
     //printf("struct info <%s><%s><%s>\n", info[i].level, info[i].tag, info[i].info);
   }
-  for (int i = 0; i < length; i++){
+  for (int i = 0; i < 10; i++){
     if(strcmp(info[i+1].level, "0") != 0){//when it is the start of the new record
       //printf("not 0\n");
       int n = 0; //counter for the new record;
       int j = 1;//increment to reallocate size of new record
       record = realloc(record, sizeof(Info) * j);
       record[n] = info[i];
+      printf("\n||%s||%s||%s||\n", record[i].level, record[i].tag, record[i].info);
       n++;
       recLength = n;
     }else{//when it reaches the end of the record
