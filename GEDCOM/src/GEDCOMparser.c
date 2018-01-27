@@ -60,8 +60,8 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     free(read[i]);//freeing the allocated strings
   }
   free(read);
-  free(info);
-  free(record);
+  //free(info);
+  //free(record);
 
   return errorCheck;
 }
