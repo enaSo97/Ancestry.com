@@ -57,7 +57,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       //printf("it is 0 so new record ended\n");
       if (strcmp(record[0].tag, "HEAD") == 0){
         printf("found head\n");
-        headParser(&record, recLength); //if the tag was "HEAD" then it calls parser function that parses head GEDCOM line
+        headParser(&record[recLength + 1], recLength); //if the tag was "HEAD" then it calls parser function that parses head GEDCOM line
       }
     }
   }
