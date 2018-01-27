@@ -261,6 +261,7 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
 Header * headParser(Info * record, int length){
   Header * head = malloc(sizeof(Header));
   for (int i = 0; i < length; i++){
+    printf("in head parser\n");
     printf("\n||%s || %s || %s||\n", record[i].level, record[i].tag, record[i].info);
   }
   return head;
