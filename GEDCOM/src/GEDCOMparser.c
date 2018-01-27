@@ -51,6 +51,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       strcpy(record[i].info, info[i].info);
       printf("\n||%s||%s||%s||\n", record[i].level, record[i].tag, record[i].info);
       n++;
+      j++;
       recLength = n;
     }else{//when it reaches the end of the record
       //printf("it is 0 so new record ended\n");
