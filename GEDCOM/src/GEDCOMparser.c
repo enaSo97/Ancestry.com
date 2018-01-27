@@ -28,7 +28,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   int length = fileLength(read);
   int recLength;
   Info * info = malloc(sizeof(Info)*(length - 1));
-  Info * record = malloc(sizeof(Info));
+  Info * record = malloc(sizeof(Info) * 100);
   if (validateFile(fileName) == INV_FILE){
     errorCheck = setType(INV_FILE, -1);
     obj = NULL;
@@ -45,7 +45,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       //printf("not 0\n");
       int n = 0; //counter for the new record;
       int j = 1;//increment to reallocate size of new record
-      record = (Info*)realloc(record, sizeof(Info) * j);
+      //record = realloc(record, sizeof(Info) * j);
       strcpy(record[i].level, info[i].level);
       strcpy(record[i].tag, info[i].tag);
       strcpy(record[i].info, info[i].info);
