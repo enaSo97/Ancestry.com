@@ -26,15 +26,33 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   //if(DEBUG)printf("int the create\n");
   char** read = fileReader(fileName); // storing the each line of GEDCOM file in double pointer array
   int length = fileLength(read);
+  int recLength;
   Info * info = malloc(sizeof(Info)*(length - 1));
+  Info * record = malloc(sizeof(Info));
   if (validateFile(fileName) == INV_FILE){
     errorCheck = setType(INV_FILE, -1);
     obj = NULL;
   }
+  /**
+  ** this function tockenizes the line of GEDCOM line and put it into information struct
+  **/
   for (int i = 0; i < length; i++){
-    //printf("read at {%d: %s}\n", i, read[i]);
     info[i] = tockenInfo(read[i]);
-    printf("struct info <%s><%s><%s>\n", info[i].level, info[i].tag, info[i].info);
+    //printf("struct info <%s><%s><%s>\n", info[i].level, info[i].tag, info[i].info);
+  }
+  for (int i = 0; i < length; i++){
+    if(strcmp(info[i+1].level, "0") != 0){//when it is the start of the new record
+      int n = 0; //counter for the new record;
+      int j = 1;//increment to reallocate size of new record
+      record = realloc(record, sizeof(Info) * j);
+      record[n] = info[i];
+      n++;
+      recLength = n;
+    }else{//when it reaches the end of the record
+      if (strcmp(record[0].tag, "HEAD") == 0){
+        headParser(record, recLength); //if the tag was "HEAD" then it calls parser function that parses head GEDCOM line
+      }
+    }
   }
   length--;
   for (int i = 0; i < length; i++){ // freeing the allocated memory after done parsing the file
@@ -42,6 +60,8 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     free(read[i]);//freeing the allocated strings
   }
   free(read);
+  free(info);
+  free(record);
 
   return errorCheck;
 }

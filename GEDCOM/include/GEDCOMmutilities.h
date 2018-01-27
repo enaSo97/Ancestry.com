@@ -10,6 +10,7 @@ typedef struct info{
   char level[5];
   char tag[255];
   char info[255];
+  int line;
 }Info;
 
 Event * createEvent(char type[5], char * date, char * place, List other);
@@ -57,3 +58,5 @@ int checkTerminate(char * string);
 void testTockenize(char * tocken);
 
 Info tockenInfo(char * toParse);
+
+Header * headParser(Info * record, int length);
