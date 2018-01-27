@@ -49,7 +49,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       strcpy(record[i].level, info[i].level);
       strcpy(record[i].tag, info[i].tag);
       strcpy(record[i].info, info[i].info);
-      printf("\n||%s||%s||%s||\n", record[i].level, record[i].tag, record[i].info);
+      //printf("\n||%s||%s||%s||\n", record[i].level, record[i].tag, record[i].info);
       n++;
       j++;
       recLength = n;
