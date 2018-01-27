@@ -46,8 +46,10 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       int n = 0; //counter for the new record;
       int j = 1;//increment to reallocate size of new record
       record = realloc(record, sizeof(Info) * j);
-      record[n] = info[i];
-      printf("\n||%s||%s||%s||\n", info[i].level, info[i].tag, info[i].info);
+      strcpy(record[i].level, info[i].level);
+      strcpy(record[i].tag, info[i].tag);
+      strcpy(record[i].info, info[i].info);
+      printf("\n||%s||%s||%s||\n", record[i].level, record[i].tag, record[i].info);
       n++;
       recLength = n;
     }else{//when it reaches the end of the record
