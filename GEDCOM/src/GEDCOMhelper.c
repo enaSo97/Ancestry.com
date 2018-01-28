@@ -254,7 +254,7 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   //strcpy(info.level, parsed[0]);
   if (parsed[1][0] == '@'){//when the address is in second place in GEDCOM line
     strcpy(info.info, parsed[1]);
-    information[strlen(information) - 2] = '\0';
+    information[strlen(information) - 1] = '\0';
     printf("printing info %s||\n", information);
     strcpy(info.tag, information);
   }else{
