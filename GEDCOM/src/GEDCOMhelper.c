@@ -253,7 +253,7 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   info.level = level;
   //strcpy(info.level, parsed[0]);
   if (parsed[1][0] == '@'){//when the address is in second place in GEDCOM line
-    strcpy(info.info, parse[1]);
+    strcpy(info.info, parsed[1]);
     information[strlen(information) - 2] = '\0';
     printf("printing info %s||\n", information);
     strcpy(info.tag, information);
@@ -301,7 +301,7 @@ Header * headParser(Info * record, int length){
         }
         else if (strcmp(record[i].tag,"CORP") == 0){
           insertBack(&other, &record[i]);
-          if (stcmp(record[i].tag,"ADDR") == 0){
+          if (strcmp(record[i].tag,"ADDR") == 0){
             insertBack(&other, &record[i]);
           }
         }
