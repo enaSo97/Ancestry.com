@@ -58,7 +58,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     if (info[i].level == 0){
       k = 0;
       record = realloc(record, sizeof(Info) * j);
-      record[k].level = info[i].level);
+      record[k].level = info[i].level;
       strcpy(record[k].tag, info[i].tag);
       strcpy(record[k].info, info[i].info);
       //printf("\nnew ||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
@@ -67,7 +67,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       j++;
       while(info[i].level != 0){
         record = realloc(record, sizeof(Info) * j);
-        record[k].level = info[i].level);
+        record[k].level = info[i].level;
         strcpy(record[k].tag, info[i].tag);
         strcpy(record[k].info, info[i].info);
         //printf("\nfollowing ||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
