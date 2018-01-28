@@ -29,7 +29,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   length = fileLength(read);
   int recLength = 0;
   Info * info;
-  Info ** record;
+  Info * record;
   int flag = 0;
   char ** stuff;
   int k =0;
@@ -42,7 +42,6 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   /**
   ** this function tockenizes the line of GEDCOM line and put it into information struct
   **/
-  stuff = malloc(sizeof(char*)*(length - 1));
   for (int i = 0; i < length; i++){
     info[i] = tockenInfo(read[i]);
     /*if (strcmp(info[i].level, "0") == 0){ // it means it is a new record
@@ -57,7 +56,8 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     printf("tracking i %d\n", i);
     if (strcmp(info[i].level, "0") == 0){
       k = 0;
-      record = realloc(record, sizeof(Info) * j);
+      record = realloc(record, sizeof(Info*) * j);
+      record[i] = malloc(sizeof(Info) * )
       strcpy(record[k].level, info[i].level);
       strcpy(record[k].tag, info[i].tag);
       strcpy(record[k].info, info[i].info);
@@ -81,11 +81,9 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   length--;
   for (int i = 0; i < length; i++){ // freeing the allocated memory after done parsing the file
     //free(info[i]); // freeing the allocated information struct
-    free(stuff[i]);
     free(read[i]);//freeing the allocated strings
   }
   free(read);
-  free(stuff);
   free(info);
   //free(record);
 
