@@ -74,6 +74,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         j++;
       }
       if (strcmp(record[0].tag, "HEAD") == 0){
+        printf("Head found\n");
         headParser(record, (k+1));
       }
     }
