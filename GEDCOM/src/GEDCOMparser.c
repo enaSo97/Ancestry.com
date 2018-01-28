@@ -67,17 +67,13 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     i--;
     //i = k;
   }
-
-  for (int i = 0; i < length; i++){
-    free(info[i]);
-  }
   length--;
   for (int i = 0; i < length; i++){ // freeing the allocated memory after done parsing the file
     //free(info[i]); // freeing the allocated information struct
     free(read[i]);//freeing the allocated strings
   }
   free(read);
-  //free(info);
+  free(info);
   //free(record);
 
   return errorCheck;
