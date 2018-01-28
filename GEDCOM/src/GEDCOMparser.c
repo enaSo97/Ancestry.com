@@ -41,10 +41,9 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     //printf("struct info <%s><%s><%s>\n", info[i].level, info[i].tag, info[i].info);
   }
   for (int i = 0; i < 10; i++){
+    int n = 0; //counter for the new record;
+    int j = 1;//increment to reallocate size of new record
     if(strcmp(info[i].level, "0") != 0){//when it is the start of the new record
-      //printf("not 0\n");
-      int n = 0; //counter for the new record;
-      int j = 1;//increment to reallocate size of new record
       //record = realloc(record, sizeof(Info) * j);
       strcpy(record[n].level, info[i].level);
       strcpy(record[n].tag, info[i].tag);
@@ -54,8 +53,15 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       j++;
       recLength = n;
     }else{//when it reaches the end of the record
+      //when the level is 0 it will save it in the new record that needs to be paresed
       //printf("it is 0 so new record ended\n");
+      strcpy(record[n].level, info[i].level);
+      strcpy(record[n].tag, info[i].tag);
+      strcpy(record[n].info, info[i].info);
+      n++;
+      printf("\n when record is 0: ||%s||%s||%s||\n", record[n].level, record[n].tag, record[n].info);
       if (strcmp(record[0].tag, "HEAD") == 0){
+
         printf("found head\n");
         headParser(record, recLength); //if the tag was "HEAD" then it calls parser function that parses head GEDCOM line
       }
