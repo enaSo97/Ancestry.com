@@ -296,7 +296,7 @@ Header * headParser(Info * record, int length){
         if (strcmp(record[i].tag,"VERS") == 0){
           insertBack(&other, &record[i]); // Version for SOUR
         }
-        else if (stcmp(record[i].tag,"NAME") == 0){//name of SOUR
+        else if (strcmp(record[i].tag,"NAME") == 0){//name of SOUR
           insertBack(&other, &record[i])
         }
         else if (stcmp(record[i].tag,"CORP") == 0){
