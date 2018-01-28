@@ -276,18 +276,18 @@ Header * headParser(Info * record, int length){
   Header * head = malloc(sizeof(Header));
   char sour[249];
   float ver = 0;
-  List other = initializeList(&printFunc, &deleteFunc, &compare);
+  List * other;
 
   printf("in head parser\n");
   for (int i = 0; i < length; i++){
     //printf("in head parser\n");
     if (strcmp(record[i].tag, "SOUR") == 0){ //name of the source
-      strcpy(head.source, info[i].info);
+      strcpy(head->source, record[i].info);
     }
     if (strcmp(record[i-1].tag, "SOUR") == 0 && strcmp(record[i].level, "2") == 0 && strcmp(record[i].tag, "VERS") == 0){//version of the SOUR
       insertBack(other, record[i]);
     }
-    if (strcmp(record[i-2]))
+    //if (strcmp(record[i-2]))
 
     printf("\n<<%s || %s || %s>>\n", record[i].level, record[i].tag, record[i].info);
   }
