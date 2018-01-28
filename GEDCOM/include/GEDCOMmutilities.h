@@ -7,7 +7,7 @@
 #define DEBUG true
 
 typedef struct info{
-  char level[5];
+  int level;
   char tag[255];
   char info[255];
   int line;
@@ -60,3 +60,9 @@ void testTockenize(char * tocken);
 Info tockenInfo(char * toParse);
 
 Header * headParser(Info * record, int length);
+
+void printFunc(void * data);
+
+void deleteFunc(void * erase);
+
+int compare(const void *first,const void *second);

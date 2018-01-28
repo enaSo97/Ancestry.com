@@ -222,6 +222,7 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   Info info;
   int i = 0;
   int j = 2;
+  int level = 0;
   char information[500] = "";
   char parsed[50][255];
   //printf("parsing this line : %s\n", toParse);
@@ -248,8 +249,9 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
     strcat(information, parsed[2]);
     strcpy(parsed[i], "\0");
   }
-
-  strcpy(info.level, parsed[0]);
+  level = atoi(parsed[0]);
+  info.level = level;
+  //strcpy(info.level, parsed[0]);
   strcpy(info.tag, parsed[1]);
   strcpy(info.info, information);
 
@@ -258,12 +260,36 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   return info;
 }
 
+void printFunc(void * data){
+  printf("data: %s\n", (char*)data);
+}
+
+void deleteFunc(void * erase){
+
+}
+
+int compare(const void *first,const void *second){
+  return 0;
+}
+
 Header * headParser(Info * record, int length){
   Header * head = malloc(sizeof(Header));
+  char sour[249];
+  float ver = 0;
+  List other = initializeList(&printFunc, &deleteFunc, &compare);
+
   printf("in head parser\n");
   for (int i = 0; i < length; i++){
     //printf("in head parser\n");
-    printf("\n||%s || %s || %s||\n", record[i].level, record[i].tag, record[i].info);
+    if (strcmp(record[i].tag, "SOUR") == 0){ //name of the source
+      strcpy(head.source, info[i].info);
+    }
+    if (strcmp(record[i-1].tag, "SOUR") == 0 && strcmp(record[i].level, "2") == 0 && strcmp(record[i].tag, "VERS") == 0){//version of the SOUR
+      insertBack(other, record[i]);
+    }
+    if (strcmp(record[i-2]))
+
+    printf("\n<<%s || %s || %s>>\n", record[i].level, record[i].tag, record[i].info);
   }
   return head;
 }

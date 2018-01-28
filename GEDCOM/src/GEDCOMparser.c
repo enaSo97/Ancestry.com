@@ -44,6 +44,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   **/
   for (int i = 0; i < length; i++){
     info[i] = tockenInfo(read[i]);
+    infopi[i].line = i + 1;
     /*if (strcmp(info[i].level, "0") == 0){ // it means it is a new record
       flag = 0;
     }else{
@@ -53,20 +54,20 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   }
   for (int i = 0; i < 45; i++){
     int j = 1;
-    printf("tracking i %d\n", i);
-    if (strcmp(info[i].level, "0") == 0){
+    //printf("tracking i %d\n", i);
+    if (info[i].level == 0){
       k = 0;
       record = realloc(record, sizeof(Info) * j);
-      strcpy(record[k].level, info[i].level);
+      record[k].level = info[i].level);
       strcpy(record[k].tag, info[i].tag);
       strcpy(record[k].info, info[i].info);
       //printf("\nnew ||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
       k++;
       i++;
       j++;
-      while(strcmp(info[i].level, "0") != 0){
+      while(info[i].level != 0){
         record = realloc(record, sizeof(Info) * j);
-        strcpy(record[k].level, info[i].level);
+        record[k].level = info[i].level);
         strcpy(record[k].tag, info[i].tag);
         strcpy(record[k].info, info[i].info);
         //printf("\nfollowing ||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
@@ -74,10 +75,10 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         i++;
         j++;
       }
-      printf("record 0 ||%s||%s||%s||\n", record[0].level, record[0].tag, record[0].info);
+      //printf("record 0 ||%d||%s||%s||\n", record[0].level, record[0].tag, record[0].info);
       if (strcmp(record[0].tag, "HEAD") == 0){
         printf("Head found\n");
-        headParser(record, (k+1));
+        headParser(record, (k));
       }
     }
     i--;
