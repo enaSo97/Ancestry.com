@@ -73,6 +73,9 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         i++;
         j++;
       }
+      if (strcmp(record[i].tag, "HEAD") == 0){
+        headParser(record, (k+1));
+      }
     }
     i--;
     //i = k;
