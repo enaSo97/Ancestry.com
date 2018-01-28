@@ -40,7 +40,8 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     info[i] = tockenInfo(read[i]);
     //printf("struct info <%s><%s><%s>\n", info[i].level, info[i].tag, info[i].info);
   }
-  while (int i < length){// iterate till the end of the file
+  int i = 0;
+  while (i < length){// iterate till the end of the file
     int k = 0;
     if (strcmp(info[i].level, "0") == 0){//means it is the start of the record
       record = malloc(sizeof(Info));
