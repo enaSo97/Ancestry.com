@@ -61,7 +61,7 @@ Info tockenInfo(char * toParse);
 
 Header * headParser(Info * record, int length);
 
-void printFunc(void * data);
+char * printFunc(void * data);
 
 void deleteFunc(void * erase);
 
