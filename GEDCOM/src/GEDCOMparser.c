@@ -52,7 +52,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       printf("\nnew ||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
       i++;
       j++;
-      while((strcmp(info[i].level, "0") != 0){
+      while(strcmp(info[i].level, "0") != 0){
         record = realloc(record, sizeof(Info) * j);
         strcpy(record[k].level, info[i].level);
         strcpy(record[k].tag, info[i].tag);
