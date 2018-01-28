@@ -49,7 +49,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       strcpy(record[i].level, info[i].level);
       strcpy(record[i].tag, info[i].tag);
       strcpy(record[i].info, info[i].info);
-      //printf("\n||%s||%s||%s||\n", record[i].level, record[i].tag, record[i].info);
+      printf("\n||%s||%s||%s||\n", record[i].level, record[i].tag, record[i].info);
       n++;
       j++;
       recLength = n;
@@ -59,7 +59,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         printf("found head\n");
         for (int i = 0; i < recLength; i++){
           //printf("in head parser\n");
-          printf("\n||%s || %s || %s||\n", record[i].level, record[i].tag, record[i].info);
+          //printf("\n||%s || %s || %s||\n", record[i].level, record[i].tag, record[i].info);
         }
         headParser(record, recLength); //if the tag was "HEAD" then it calls parser function that parses head GEDCOM line
       }
