@@ -55,9 +55,9 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     }else{//when it reaches the end of the record
       //when the level is 0 it will save it in the new record that needs to be paresed
       //printf("it is 0 so new record ended\n");
-      strcpy(record[n].level, info[i].level);
-      strcpy(record[n].tag, info[i].tag);
-      strcpy(record[n].info, info[i].info);
+      strcpy(record[n].level, info[n].level);
+      strcpy(record[n].tag, info[n].tag);
+      strcpy(record[n].info, info[n].info);
 
       printf("\n when record is 0: ||%s||%s||%s||\n", info[n].level, info[n].tag, info[n].info);
       if (strcmp(record[0].tag, "HEAD") == 0){
