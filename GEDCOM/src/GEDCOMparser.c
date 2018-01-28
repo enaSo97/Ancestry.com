@@ -28,7 +28,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   int length = fileLength(read);
   int recLength;
   Info * info = malloc(sizeof(Info)*(length - 1));
-  Info * record = malloc(sizeof(Info) * 100);
+  Info * record/* = malloc(sizeof(Info) * 100)*/;
   if (validateFile(fileName) == INV_FILE){
     errorCheck = setType(INV_FILE, -1);
     obj = NULL;
@@ -40,32 +40,22 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     info[i] = tockenInfo(read[i]);
     //printf("struct info <%s><%s><%s>\n", info[i].level, info[i].tag, info[i].info);
   }
-  for (int i = 0; i < 10; i++){
-    int n = 0; //counter for the new record;
-    int j = 1;//increment to reallocate size of new record
-    if(strcmp(info[i].level, "0") != 0){//when it is the start of the new record
-      //record = realloc(record, sizeof(Info) * j);
-      strcpy(record[n].level, info[i].level);
-      strcpy(record[n].tag, info[i].tag);
-      strcpy(record[n].info, info[i].info);
-      printf("\n||%s||%s||%s||\n", record[n].level, record[n].tag, record[n].info);
-      n++;
-      j++;
-      recLength = n;
-    }else{//when it reaches the end of the record
-      //when the level is 0 it will save it in the new record that needs to be paresed
-      //printf("it is 0 so new record ended\n");
-      strcpy(record[n].level, info[n].level);
-      strcpy(record[n].tag, info[n].tag);
-      strcpy(record[n].info, info[n].info);
-
-      printf("\n when record is 0: ||%s||%s||%s||\n", info[n].level, info[n].tag, info[n].info);
-      if (strcmp(record[0].tag, "HEAD") == 0){
-
-        printf("found head\n");
-        headParser(record, recLength); //if the tag was "HEAD" then it calls parser function that parses head GEDCOM line
+  while (int i < length){// iterate till the end of the file
+    int k = 0;
+    if (strcmp(info[i].level, "0") == 0){//means it is the start of the record
+      record = malloc(sizeof(Info));
+      strcpy(record[k].level, info[k].level);
+      strcpy(record[k].tag, info[k].tag);
+      strcpy(record[k].info, info[k].info);
+      printf("\n||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
+      while(strcmp(info[i+1].level, "0") != 0){
+        record = realloc(record, sizeof(Info) * (k + 1));
+        strcpy(record[k].level, info[k].level);
+        strcpy(record[k].tag, info[k].tag);
+        strcpy(record[k].info, info[k].info);
+        printf("\n||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
+        k++;
       }
-      n++;
     }
   }
   length--;
