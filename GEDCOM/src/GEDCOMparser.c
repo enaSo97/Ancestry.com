@@ -74,7 +74,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         j++;
       }
     }
-    i--;
+    //i--;
     //i = k;
   }
   length--;
