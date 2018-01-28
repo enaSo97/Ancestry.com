@@ -28,7 +28,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   int length = fileLength(read);
   int recLength;
   Info * info = malloc(sizeof(Info)*(length - 1));
-  Info * record = malloc(sizeof(Info) * 100);
+  Info * record = malloc(sizeof(Info));
   if (validateFile(fileName) == INV_FILE){
     errorCheck = setType(INV_FILE, -1);
     obj = NULL;
@@ -40,32 +40,29 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     info[i] = tockenInfo(read[i]);
     //printf("struct info <%s><%s><%s>\n", info[i].level, info[i].tag, info[i].info);
   }
-  int i = 0;
-  int k =0;
-  while (i < 30){// iterate till the end of the file
-    //int k = 0;
-    if (strcmp(info[i].level, "0") == 0){//means it is the start of the record
-      //record = malloc(sizeof(Info));
-      strcpy(record[k].level, info[k].level);
-      strcpy(record[k].tag, info[k].tag);
-      strcpy(record[k].info, info[k].info);
-      printf("\n new record: ||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
-      /*while(strcmp(info[i+1].level, "0") != 0){
-        record = realloc(record, sizeof(Info) * (k + 1));
-        strcpy(record[k].level, info[k].level);
-        strcpy(record[k].tag, info[k].tag);
-        strcpy(record[k].info, info[k].info);
-        printf("\n||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
+
+  for (int i = 0; i < 43; i++){
+    int k = 0;
+    int j = 1;
+    if (strcmp(info[i].level, "0") == 0){
+      record = realloc(record, sizeof(Info) * j);
+      strcpy(record[k].level, info[i].level);
+      strcpy(record[k].tag, info[i].tag);
+      strcpy(record[k].info, info[i].info);
+      printf("\nnew ||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
+      i++;
+      j++;
+      while((strcmp(info[i].level, "0") != 0){
+        record = realloc(record, sizeof(Info) * j);
+        strcpy(record[k].level, info[i].level);
+        strcpy(record[k].tag, info[i].tag);
+        strcpy(record[k].info, info[i].info);
+        printf("\nfollowing ||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
         k++;
+        j++;
       }
-      strcpy(record[k].level, info[k].level);
-      strcpy(record[k].tag, info[k].tag);
-      strcpy(record[k].info, info[k].info);
-      printf("\n||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
-      i = k;*/
-      k++;
     }
-    i++;
+    i = k;
   }
   length--;
   for (int i = 0; i < length; i++){ // freeing the allocated memory after done parsing the file
