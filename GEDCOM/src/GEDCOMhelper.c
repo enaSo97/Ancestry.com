@@ -260,8 +260,9 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   return info;
 }
 
-void printFunc(void * data){
+char * printFunc(void * data){
   printf("data: %s\n", (char*)data);
+  return NULL;
 }
 
 void deleteFunc(void * erase){
