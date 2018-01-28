@@ -33,7 +33,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   int flag = 0;
   char ** stuff;
   int k =0;
-  info = calloc(sizeof(Info)*(length - 1));
+  info = calloc((length - 1), sizeof(Info));
 
   if (validateFile(fileName) == INV_FILE){
     errorCheck = setType(INV_FILE, -1);
@@ -221,7 +221,7 @@ char* printEvent(void* toBePrinted){ //type date place other fields
   temp = (Event*)toBePrinted;
 
   length = strlen(temp->type) + strlen(temp->date) + strlen(temp->place) + 40;
-  chrTemp = (char*)calloc(sizeof(char)*length);
+  chrTemp = (char*)calloc(length, sizeof(char));
   sprintf(chrTemp, "type: %s, date: %s, place: %s\n", temp->type, temp->date, temp->place);
   strcat(chrTemp, toString(temp->otherFields));
 
@@ -267,7 +267,7 @@ char* printIndividual(void* toBePrinted){
 
   print = (Individual*)toBePrinted;
   length = strlen(print->givenName) + strlen(print->surname) + 150;
-  string = (char*)calloc(sizeof(char) * length);
+  string = (char*)calloc(length, sizeof(char));
 
   sprintf(string, "FirstName: %s, LastName: %s", print->givenName, print->surname);
   strcat(string, toString(print->events));
@@ -346,7 +346,7 @@ char* printField(void* toBePrinted){
   print = (Field*)toBePrinted;
 
   length = strlen(print->tag) + strlen(print->value) + 100;
-  string = (char*)calloc(sizeof(char) * length);
+  string = (char*)calloc(length, sizeof(char));
   sprintf(string, "Tag: %s, Value: %s", print->tag, print->value);
   return string;
 }
