@@ -59,7 +59,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       strcpy(record[n].tag, info[i].tag);
       strcpy(record[n].info, info[i].info);
       n++;
-      printf("\n when record is 0: ||%s||%s||%s||\n", record[n].level, record[n].tag, record[n].info);
+      printf("\n when record is 0: ||%s||%s||%s||\n", info[n].level, info[n].tag, info[n].info);
       if (strcmp(record[0].tag, "HEAD") == 0){
 
         printf("found head\n");
