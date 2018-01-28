@@ -49,7 +49,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     }else{
       flag++;
     }*/
-    //printf("struct info <%s><%s><%s>\n", info[i].level, info[i].tag, info[i].info);
+    printf("struct info <%s><%s><%s>\n", info[i].level, info[i].tag, info[i].info);
   }
   for (int i = 0; i < 30000; i++){
     int j = 1;
@@ -60,7 +60,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       strcpy(record[k].level, info[i].level);
       strcpy(record[k].tag, info[i].tag);
       strcpy(record[k].info, info[i].info);
-      printf("\nnew ||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
+      //printf("\nnew ||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
       i++;
       j++;
       while(strcmp(info[i].level, "0") != 0){
@@ -68,7 +68,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         strcpy(record[k].level, info[i].level);
         strcpy(record[k].tag, info[i].tag);
         strcpy(record[k].info, info[i].info);
-        printf("\nfollowing ||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
+        //printf("\nfollowing ||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
         k++;
         i++;
         j++;
