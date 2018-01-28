@@ -28,7 +28,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   int length = fileLength(read);
   int recLength;
   Info * info = malloc(sizeof(Info)*(length - 1));
-  Info * record/* = malloc(sizeof(Info) * 100)*/;
+  Info * record = malloc(sizeof(Info) * 100);
   if (validateFile(fileName) == INV_FILE){
     errorCheck = setType(INV_FILE, -1);
     obj = NULL;
@@ -45,7 +45,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   while (i < 30){// iterate till the end of the file
     //int k = 0;
     if (strcmp(info[i].level, "0") == 0){//means it is the start of the record
-      record = malloc(sizeof(Info));
+      //record = malloc(sizeof(Info));
       strcpy(record[k].level, info[k].level);
       strcpy(record[k].tag, info[k].tag);
       strcpy(record[k].info, info[k].info);
