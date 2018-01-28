@@ -252,7 +252,7 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   level = atoi(parsed[0]);
   info.level = level;
   //strcpy(info.level, parsed[0]);
-  if (parse[1][0] == '@'){//when the address is in second place in GEDCOM line
+  if (parsed[1][0] == '@'){//when the address is in second place in GEDCOM line
     strcpy(info.info, parse[1]);
     information[strlen(information) - 2] = '\0';
     printf("printing info %s||\n", information);
@@ -283,6 +283,7 @@ Header * headParser(Info * record, int length){
   Header * head = malloc(sizeof(Header));
   //char sour[249];
   //float ver = 0;
+  int i = 0;
   List  other = initializeList(printFunc, deleteFunc, compare);
 
   printf("in head parser\n");
@@ -292,7 +293,7 @@ Header * headParser(Info * record, int length){
       strcpy(head->source, record[i].info);
       i++;
       while(record[i].level == 1){//until next sub record
-        if (stcmp(record[i].tag,"VERS") == 0){
+        if (strcmp(record[i].tag,"VERS") == 0){
           insertBack(&other, &record[i]); // Version for SOUR
         }
         else if (stcmp(record[i].tag,"NAME") == 0){//name of SOUR
@@ -307,7 +308,7 @@ Header * headParser(Info * record, int length){
         i++;
       }
     }
-    if (strcmp(record][i].tag, "DEST") == 0){ // recieving system name
+    if (strcmp(record[i].tag, "DEST") == 0){ // recieving system name
       insertBack(&other, &record[i]);
     }
     if (strcmp(record[i].tag, "DATE") == 0){//Transmission date
