@@ -285,7 +285,7 @@ Header * headParser(Info * record, int length){
       strcpy(head->source, record[i].info);
     }
     if (strcmp(record[i-1].tag, "SOUR") == 0 && record[i].level == 2 && strcmp(record[i].tag, "VERS") == 0){//version of the SOUR
-      insertBack(&other, (void*)record[i]);
+      insertBack(&other, &record[i]);
     }
     //if (strcmp(record[i-2]))
 
