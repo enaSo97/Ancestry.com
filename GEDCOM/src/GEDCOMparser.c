@@ -59,10 +59,11 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         strcpy(record[k].info, info[i].info);
         printf("\nfollowing ||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
         k++;
+        i++;
         j++;
       }
     }
-    i = k;
+    //i = k;
   }
   length--;
   for (int i = 0; i < length; i++){ // freeing the allocated memory after done parsing the file
