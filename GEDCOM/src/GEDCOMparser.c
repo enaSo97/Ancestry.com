@@ -44,7 +44,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   **/
   for (int i = 0; i < length; i++){
     info[i] = tockenInfo(read[i]);
-    infopi[i].line = i + 1;
+    info[i].line = i + 1;
     /*if (strcmp(info[i].level, "0") == 0){ // it means it is a new record
       flag = 0;
     }else{

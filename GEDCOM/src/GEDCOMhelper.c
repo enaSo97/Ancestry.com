@@ -289,7 +289,7 @@ Header * headParser(Info * record, int length){
     }
     //if (strcmp(record[i-2]))
 
-    printf("\n<<%s || %s || %s>>\n", record[i].level, record[i].tag, record[i].info);
+    printf("\n<<%d || %s || %s>>\n", record[i].level, record[i].tag, record[i].info);
   }
   return head;
 }
