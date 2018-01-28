@@ -41,7 +41,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     //printf("struct info <%s><%s><%s>\n", info[i].level, info[i].tag, info[i].info);
   }
   for (int i = 0; i < 10; i++){
-    if(strcmp(info[i+1].level, "0") != 0){//when it is the start of the new record
+    if(strcmp(info[i].level, "0") != 0){//when it is the start of the new record
       //printf("not 0\n");
       int n = 0; //counter for the new record;
       int j = 1;//increment to reallocate size of new record
@@ -57,10 +57,6 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       //printf("it is 0 so new record ended\n");
       if (strcmp(record[0].tag, "HEAD") == 0){
         printf("found head\n");
-        for (int i = 0; i < recLength; i++){
-          //printf("in head parser\n");
-          //printf("\n||%s || %s || %s||\n", record[i].level, record[i].tag, record[i].info);
-        }
         headParser(record, recLength); //if the tag was "HEAD" then it calls parser function that parses head GEDCOM line
       }
     }
