@@ -44,6 +44,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   for (int i = 0; i < 43; i++){
     int k = 0;
     int j = 1;
+    printf("tracking i %d\n", i);
     if (strcmp(info[i].level, "0") == 0){
       record = realloc(record, sizeof(Info) * j);
       strcpy(record[k].level, info[i].level);
