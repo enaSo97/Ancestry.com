@@ -58,13 +58,14 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       strcpy(record[n].level, info[i].level);
       strcpy(record[n].tag, info[i].tag);
       strcpy(record[n].info, info[i].info);
-      n++;
+
       printf("\n when record is 0: ||%s||%s||%s||\n", info[n].level, info[n].tag, info[n].info);
       if (strcmp(record[0].tag, "HEAD") == 0){
 
         printf("found head\n");
         headParser(record, recLength); //if the tag was "HEAD" then it calls parser function that parses head GEDCOM line
       }
+      n++;
     }
   }
   length--;
