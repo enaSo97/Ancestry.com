@@ -38,12 +38,11 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   **/
   for (int i = 0; i < length; i++){
     info[i] = tockenInfo(read[i]);
-    
     //printf("struct info <%s><%s><%s>\n", info[i].level, info[i].tag, info[i].info);
   }
   int k = 0;
   for (int i = 0; i < 43; i++){
-    /*int j = 1;
+    int j = 1;
     printf("tracking i %d\n", i);
     if (strcmp(info[i].level, "0") == 0){
       k = 0;
@@ -67,14 +66,14 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     }
     i--;
     //i = k;
-  }*/
+  }
   length--;
   for (int i = 0; i < length; i++){ // freeing the allocated memory after done parsing the file
     //free(info[i]); // freeing the allocated information struct
     free(read[i]);//freeing the allocated strings
   }
   free(read);
-  free(info);
+  //free(info);
   //free(record);
 
   return errorCheck;
