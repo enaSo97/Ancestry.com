@@ -60,7 +60,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       strcpy(record[k].level, info[i].level);
       strcpy(record[k].tag, info[i].tag);
       strcpy(record[k].info, info[i].info);
-      printf("\nnew ||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
+      //printf("\nnew ||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
       i++;
       j++;
       while(strcmp(info[i].level, "0") != 0){
@@ -68,12 +68,13 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         strcpy(record[k].level, info[i].level);
         strcpy(record[k].tag, info[i].tag);
         strcpy(record[k].info, info[i].info);
-        printf("\nfollowing ||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
+        //printf("\nfollowing ||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
         k++;
         i++;
         j++;
       }
-      if (strcmp(info[0].tag, "HEAD") == 0){
+      printf("record 0 ||%s||%s||%s||\n", record[0].level, record[0].tag, record[0].info);
+      if (strcmp(record[0].tag, "HEAD") == 0){
         printf("Head found\n");
         headParser(record, (k+1));
       }
