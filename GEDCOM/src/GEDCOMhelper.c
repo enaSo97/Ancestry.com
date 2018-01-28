@@ -252,9 +252,15 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   level = atoi(parsed[0]);
   info.level = level;
   //strcpy(info.level, parsed[0]);
+  if (parse[1][0] == '@'){//when the address is in second place in GEDCOM line
+    strcpy(info.info, parse[1]);
+    information[strlen(information) - 2] = '\0';
+    printf("printing info %s||\n", information);
+    strcpy(info.tag, information);
+  }else{
   strcpy(info.tag, parsed[1]);
   strcpy(info.info, information);
-
+  }
   //printf("\n[[%s || %s || %s]]\n", info.level, info.tag, info.info);
 
   return info;
@@ -280,17 +286,45 @@ Header * headParser(Info * record, int length){
   List  other = initializeList(printFunc, deleteFunc, compare);
 
   printf("in head parser\n");
-  for (int i = 0; i < length; i++){
+  //for (int i = 0; i < length; i++){
     //printf("in head parser\n");
     if (strcmp(record[i].tag, "SOUR") == 0){ //name of the source
       strcpy(head->source, record[i].info);
+      i++;
+      while(record[i].level == 1){//until next sub record
+        if (stcmp(record[i].tag,"VERS") == 0){
+          insertBack(&other, &record[i]); // Version for SOUR
+        }
+        else if (stcmp(record[i].tag,"NAME") == 0){//name of SOUR
+          insertBack(&other, &record[i])
+        }
+        else if (stcmp(record[i].tag,"CORP") == 0){
+          insertBack(&other, &record[i]);
+          if (stcmp(record[i].tag,"ADDR") == 0){
+            insertBack(&other, &record[i]);
+          }
+        }
+        i++;
+      }
     }
-    if (strcmp(record[i-1].tag, "SOUR") == 0 && record[i].level == 2 && strcmp(record[i].tag, "VERS") == 0){//version of the SOUR
+    if (strcmp(record][i].tag, "DEST") == 0){ // recieving system name
       insertBack(&other, &record[i]);
     }
+    if (strcmp(record[i].tag, "DATE") == 0){//Transmission date
+      insertBack(&other, &record[i]);
+      i++;
+      if (strcmp(record[i].tag, "TIME") == 0){
+        insertBack(&other, &record[i]);//time value
+      }
+    }
+    if (strcmp(record[i].tag, "SUBM") == 0){
+
+    }
+
+
     //if (strcmp(record[i-2]))
 
-    printf("\n<<%d || %s || %s>>\n", record[i].level, record[i].tag, record[i].info);
-  }
+    //printf("\n<<%d || %s || %s>>\n", record[i].level, record[i].tag, record[i].info);
+  //}
   return head;
 }
