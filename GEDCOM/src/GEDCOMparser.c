@@ -75,7 +75,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       }
     }
     //i--;
-    //i = k;
+    i = k;
   }
   length--;
   for (int i = 0; i < length; i++){ // freeing the allocated memory after done parsing the file
