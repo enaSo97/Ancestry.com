@@ -41,7 +41,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     //printf("struct info <%s><%s><%s>\n", info[i].level, info[i].tag, info[i].info);
   }
 
-  for (int i = 0; i < 43; i++){
+  for (int i = 0; i < length; i++){
     int k = 0;
     int j = 1;
     printf("tracking i %d\n", i);
