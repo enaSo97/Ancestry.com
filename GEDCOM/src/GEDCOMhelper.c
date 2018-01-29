@@ -280,7 +280,7 @@ int compare(const void *first,const void *second){
   return 0;
 }
 
-headParser(Info * record, int length){
+Header * headParser(Info * record, int length){
   Header * head = malloc(sizeof(Header));
   int flag = 0;
   //char sour[249];
