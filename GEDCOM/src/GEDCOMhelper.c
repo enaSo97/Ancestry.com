@@ -344,7 +344,7 @@ Header * headParser(Info * record, int length){
       insertBack(&other, field);
       //i++;
     }
-    if (strcmp(record[i].tag, "FILE") = 0){
+    if (strcmp(record[i].tag, "FILE") == 0){
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
       //i++;
@@ -354,7 +354,7 @@ Header * headParser(Info * record, int length){
       insertBack(&other, field);
       //i++;
     }
-    if (strcmp(record[i], "GEDC") == 0){
+    if (strcmp(record[i].tag, "GEDC") == 0){
       i++;
       while(record[i].level != 1){
         if (strcmp(record[i].tag, "VERS") == 0){//version of the GEDCOM file
@@ -373,7 +373,7 @@ Header * headParser(Info * record, int length){
         head->encoding = ANSEL;
       }
       else if (strcmp(record[i].info, "UTF-8") == 0){
-        head->encoding = UTF-8;
+        head->encoding = UTF8;
       }
       else if (strcmp(record[i].info, "UNICODE") == 0){
         head->encoding = UNICODE;
@@ -397,7 +397,7 @@ Header * headParser(Info * record, int length){
     if (strcmp(record[i].tag, "PLAC") == 0){
       i++;
       while(record[i].level != 1){
-        if (strcmp(record[i].level, "FORM") == 0){
+        if (strcmp(record[i].tag, "FORM") == 0){
           field = createField(record[i].tag, record[i].info);
           insertBack(&other, field);
         }
