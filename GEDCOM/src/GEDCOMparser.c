@@ -34,7 +34,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   char ** stuff;
   int k =0;
   info = calloc((length - 1), sizeof(Info));
-  GEDCOMobject object = malloc(sizeof(GEDCOMobject));
+  GEDCOMobject * object = malloc(sizeof(GEDCOMobject));
   //*obj = malloc(sizeof(GEDCOMobject));
 
   if (validateFile(fileName) == INV_FILE){
