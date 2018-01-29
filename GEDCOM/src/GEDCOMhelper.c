@@ -280,7 +280,7 @@ int compare(const void *first,const void *second){
   return 0;
 }
 
-Header * headParser(Info * record, int length){
+headParser(Info * record, int length){
   Header * head = malloc(sizeof(Header));
   int flag = 0;
   //char sour[249];
@@ -297,18 +297,22 @@ Header * headParser(Info * record, int length){
   for (int i = 0; i < length; i++){
     //printf("in head parser\n");
     if (strcmp(record[i].tag, "SOUR") == 0){ //name of the source
+      printf("in SOUR\n");
       strcpy(head->source, record[i].info);
       i++;
       while(record[i].level != 1){//until next sub record
         if (strcmp(record[i].tag,"VERS") == 0){
+          printf("in sOUR vers\n");
           field = createField(record[i].tag, record[i].info);
           insertBack(&other, field); // Version for SOUR
         }
         else if (strcmp(record[i].tag,"NAME") == 0){//name of SOUR
+          printf("in NAME\n");
           field = createField(record[i].tag, record[i].info);
           insertBack(&other, field);
         }
         else if (strcmp(record[i].tag,"CORP") == 0){
+          printf("in CIRO\n");
           field = createField(record[i].tag, record[i].info);
           insertBack(&other, field);
           if (strcmp(record[i].tag,"ADDR") == 0){
@@ -320,10 +324,12 @@ Header * headParser(Info * record, int length){
       }
     }
     if (strcmp(record[i].tag, "DEST") == 0){ // recieving system name
+      printf("in DEST\n");
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
     }
     if (strcmp(record[i].tag, "DATE") == 0){//Transmission date
+      printf("in DATE\n");
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
       i++;
@@ -336,6 +342,7 @@ Header * headParser(Info * record, int length){
       }
     }
     if (strcmp(record[i].tag, "SUBM") == 0){
+      printf("in SUBM\n");
       flag = 1;//means submitter exist
       //i++;
     }
@@ -345,19 +352,23 @@ Header * headParser(Info * record, int length){
       //i++;
     }
     if (strcmp(record[i].tag, "FILE") == 0){
+      printf("in FILE\n");
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
       //i++;
     }
     if (strcmp(record[i].tag, "COPR") == 0){
+      printf("in CORP\n");
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
       //i++;
     }
     if (strcmp(record[i].tag, "GEDC") == 0){
+      printf("in GEDC\n");
       i++;
       while(record[i].level != 1){
         if (strcmp(record[i].tag, "VERS") == 0){//version of the GEDCOM file
+          printf("in VERS GEDCM\n");
           ver = strtol(record[i].info, NULL, 0);
           head->gedcVersion = ver;
         }
