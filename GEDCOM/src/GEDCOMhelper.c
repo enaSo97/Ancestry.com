@@ -255,9 +255,10 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   if (parsed[1][0] == '@'){//when the address is in second place in GEDCOM line
     strcpy(info.info, parsed[1]);
     information[strlen(information) - 1] = '\0';
-    printf("printing info %s||\n", information);
+    //printf("printing info %s||\n", information);
     strcpy(info.tag, information);
   }else{
+  information[strlen(information) - 1] = '\0';
   strcpy(info.tag, parsed[1]);
   strcpy(info.info, information);
   }
@@ -281,51 +282,154 @@ int compare(const void *first,const void *second){
 
 Header * headParser(Info * record, int length){
   Header * head = malloc(sizeof(Header));
+  int flag = 0;
   //char sour[249];
-  //float ver = 0;
+  float ver = 0;
   int i = 0;
-  List  other = initializeList(printFunc, deleteFunc, compare);
+  char * string = malloc(sizeof(char));
+
+  List  other = initializeList(printField, deleteField, compareFields);
+  Field * field;
+  //insertBack(other, field);
+  //char dadsd  = toString(other)
 
   printf("in head parser\n");
-  //for (int i = 0; i < length; i++){
+  for (int i = 0; i < length; i++){
     //printf("in head parser\n");
     if (strcmp(record[i].tag, "SOUR") == 0){ //name of the source
       strcpy(head->source, record[i].info);
       i++;
-      while(record[i].level == 1){//until next sub record
+      while(record[i].level != 1){//until next sub record
         if (strcmp(record[i].tag,"VERS") == 0){
-          insertBack(&other, &record[i]); // Version for SOUR
+          field = createField(record[i].tag, record[i].info);
+          insertBack(&other, field); // Version for SOUR
         }
         else if (strcmp(record[i].tag,"NAME") == 0){//name of SOUR
-          insertBack(&other, &record[i]);
+          field = createField(record[i].tag, record[i].info);
+          insertBack(&other, field);
         }
         else if (strcmp(record[i].tag,"CORP") == 0){
-          insertBack(&other, &record[i]);
+          field = createField(record[i].tag, record[i].info);
+          insertBack(&other, field);
           if (strcmp(record[i].tag,"ADDR") == 0){
-            insertBack(&other, &record[i]);
+            field = createField(record[i].tag, record[i].info);
+            insertBack(&other, field);
           }
         }
         i++;
       }
     }
     if (strcmp(record[i].tag, "DEST") == 0){ // recieving system name
-      insertBack(&other, &record[i]);
+      field = createField(record[i].tag, record[i].info);
+      insertBack(&other, field);
     }
     if (strcmp(record[i].tag, "DATE") == 0){//Transmission date
-      insertBack(&other, &record[i]);
+      field = createField(record[i].tag, record[i].info);
+      insertBack(&other, field);
       i++;
-      if (strcmp(record[i].tag, "TIME") == 0){
-        insertBack(&other, &record[i]);//time value
+      while(record[i].level != 1){
+        if (strcmp(record[i].tag, "TIME") == 0){
+          field = createField(record[i].tag, record[i].info);
+          insertBack(&other, field);
+        }
+        i++;
       }
     }
     if (strcmp(record[i].tag, "SUBM") == 0){
-
+      flag = 1;//means submitter exist
+      //i++;
     }
+    if (strcmp(record[i].tag, "SUBN") == 0){
+      field = createField(record[i].tag, record[i].info);
+      insertBack(&other, field);
+      //i++;
+    }
+    if (strcmp(record[i].tag, "FILE") = 0){
+      field = createField(record[i].tag, record[i].info);
+      insertBack(&other, field);
+      //i++;
+    }
+    if (strcmp(record[i].tag, "COPR") == 0){
+      field = createField(record[i].tag, record[i].info);
+      insertBack(&other, field);
+      //i++;
+    }
+    if (strcmp(record[i], "GEDC") == 0){
+      i++;
+      while(record[i].level != 1){
+        if (strcmp(record[i].tag, "VERS") == 0){//version of the GEDCOM file
+          ver = strtol(record[i].info, NULL, 0);
+          head->gedcVersion = ver;
+        }
+        if (strcmp(record[i].tag, "FORM") == 0){
+          field = createField(record[i].tag, record[i].info);
+          insertBack(&other, field);
+        }
+        i++;
+      }
+    }
+    if (strcmp(record[i].tag, "CHAR") == 0){
+      if (strcmp(record[i].info, "ANSEL") == 0){
+        head->encoding = ANSEL;
+      }
+      else if (strcmp(record[i].info, "UTF-8") == 0){
+        head->encoding = UTF-8;
+      }
+      else if (strcmp(record[i].info, "UNICODE") == 0){
+        head->encoding = UNICODE;
+      }
+      else if (strcmp(record[i].info, "ASCII") == 0){
+        head->encoding = ASCII;
+      }
+      i++;
+      while(record[i].level != 1){
+        if (strcmp(record[i], "VERS") == 0){
+          field = createField(record[i].tag, record[i].info);
+          insertBack(&other, field);
+        }
+        i++;
+      }
+    }
+    if (strcmp(record[i].tag, "LANG") == 0){
+      field = createField(record[i].tag, record[i].info);
+      insertBack(&other, field);
+    }
+    if (strcmp(record[i].tag, "PLAC") == 0){
+      i++;
+      while(record[i].level != 1){
+        if (strcmp(record[i].level, "FORM") == 0){
+          field = createField(record[i].tag, record[i].info);
+          insertBack(&other, field);
+        }
+        i++;
+      }
+    }
+    if (strcmp(record[i].tag, "NOTE") == 0){
+      i++;
+    /*  while(record[i].level < != NULL){
+        if (strcmp(record[i].tag, "CONT") == 0){
+          string = realloc(string, sizeof(char)*(strlen(record[i].info) + strlen(string)));
+          strcat(string, record[i].info);
+        }
+        i++;
+      }*/
+    }
+    //printf("\n<<%s || %f>>\n", head->source, head->gedcVersion);
 
-
-    //if (strcmp(record[i-2]))
-
-    //printf("\n<<%d || %s || %s>>\n", record[i].level, record[i].tag, record[i].info);
-  //}
+  }
+    printf("\nhead : <<%s || %f>>\n", head->source, head->gedcVersion);\
+    char * print = toString(other);
   return head;
 }
+
+/*submitter * subParser(){
+  submitter * sub = malloc(sizeof(submitter));
+  pointer * tmep = malloc
+  if (sub.tag == NAMe){
+    s
+  }
+  temp->adrss = Wolverhampton
+  temp->pointer = sub;
+  return
+}
+*/
