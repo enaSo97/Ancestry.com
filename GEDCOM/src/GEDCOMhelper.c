@@ -383,7 +383,7 @@ Header * headParser(Info * record, int length){
       }
       i++;
       while(record[i].level != 1){
-        if (strcmp(record[i], "VERS") == 0){
+        if (strcmp(record[i].tag, "VERS") == 0){
           field = createField(record[i].tag, record[i].info);
           insertBack(&other, field);
         }

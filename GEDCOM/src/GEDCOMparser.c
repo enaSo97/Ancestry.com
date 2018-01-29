@@ -34,8 +34,8 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   char ** stuff;
   int k =0;
   info = calloc((length - 1), sizeof(Info));
-  //GEDCOMobject object = createObject(NULL, NULL, NULL)
-  *obj = malloc(sizeof(GEDCOMobject));
+  GEDCOMobject object = malloc(sizeof(GEDCOMobject));
+  //*obj = malloc(sizeof(GEDCOMobject));
 
   if (validateFile(fileName) == INV_FILE){
     errorCheck = setType(INV_FILE, -1);
@@ -80,7 +80,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       //printf("record 0 ||%d||%s||%s||\n", record[0].level, record[0].tag, record[0].info);
       if (strcmp(record[0].tag, "HEAD") == 0){
         printf("Head found\n");
-        obj->header = headParser(record, (k));
+        object->header = headParser(record, (k));
       }
 
     }
