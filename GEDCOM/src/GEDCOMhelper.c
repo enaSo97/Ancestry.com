@@ -213,7 +213,7 @@ int fileLength(char ** array){
   char ** temp = array;
   if (DEBUG)printf("\ngetting the length of file\n");
 
-  while(tempy[i] != NULL){
+  while(temp[i] != NULL){
     i++;
   }
   //printf("number of element in array %d\n", i);
