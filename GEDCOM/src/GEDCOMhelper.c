@@ -324,12 +324,12 @@ Header * headParser(Info * record, int length){
         i++;
       }
     }
-    if (strcmp(record[i].tag, "DEST") == 0){ // recieving system name
+    else if (strcmp(record[i].tag, "DEST") == 0){ // recieving system name
       printf("in DEST\n");
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
     }
-    if (strcmp(record[i].tag, "DATE") == 0){//Transmission date
+    else if (strcmp(record[i].tag, "DATE") == 0){//Transmission date
       printf("in DATE\n");
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
@@ -342,29 +342,29 @@ Header * headParser(Info * record, int length){
         i++;
       }
     }
-    if (strcmp(record[i].tag, "SUBM") == 0){
+    else if (strcmp(record[i].tag, "SUBM") == 0){
       printf("in SUBM\n");
       flag = 1;//means submitter exist
       //i++;
     }
-    if (strcmp(record[i].tag, "SUBN") == 0){
+    else if (strcmp(record[i].tag, "SUBN") == 0){
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
       //i++;
     }
-    if (strcmp(record[i].tag, "FILE") == 0){
+    else if (strcmp(record[i].tag, "FILE") == 0){
       printf("in FILE\n");
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
       //i++;
     }
-    if (strcmp(record[i].tag, "COPR") == 0){
+    else if (strcmp(record[i].tag, "COPR") == 0){
       printf("in CORP\n");
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
       //i++;
     }
-    if (strcmp(record[i].tag, "GEDC") == 0){
+    else if (strcmp(record[i].tag, "GEDC") == 0){
       printf("in GEDC\n");
       i++;
       while(record[i].level != 1){
@@ -380,7 +380,7 @@ Header * headParser(Info * record, int length){
         i++;
       }
     }
-    if (strcmp(record[i].tag, "CHAR") == 0){
+    else if (strcmp(record[i].tag, "CHAR") == 0){
       if (strcmp(record[i].info, "ANSEL") == 0){
         head->encoding = ANSEL;
       }
@@ -402,11 +402,11 @@ Header * headParser(Info * record, int length){
         i++;
       }
     }
-    if (strcmp(record[i].tag, "LANG") == 0){
+    else if (strcmp(record[i].tag, "LANG") == 0){
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
     }
-    if (strcmp(record[i].tag, "PLAC") == 0){
+    else if (strcmp(record[i].tag, "PLAC") == 0){
       i++;
       while(record[i].level != 1){
         if (strcmp(record[i].tag, "FORM") == 0){
@@ -416,7 +416,7 @@ Header * headParser(Info * record, int length){
         i++;
       }
     }
-    if (strcmp(record[i].tag, "NOTE") == 0){
+    else if (strcmp(record[i].tag, "NOTE") == 0){
       i++;
     /*  while(record[i].level < != NULL){
         if (strcmp(record[i].tag, "CONT") == 0){
@@ -426,11 +426,11 @@ Header * headParser(Info * record, int length){
         i++;
       }*/
     }
-    printf("Track of i %d \n", i);
+    printf("Track of i %d\n", i);
     //printf("\n<<%s || %f>>\n", head->source, head->gedcVersion);
   }
-    printf("\nhead : <<%s || %f>>\n", head->source, head->gedcVersion);
-    char * print = toString(other);
+  printf("\nhead : <<%s || %f>>\n", head->source, head->gedcVersion);
+  char * print = toString(other);
   return head;
 }
 
