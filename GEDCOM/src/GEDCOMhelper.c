@@ -440,6 +440,7 @@ Header * headParser(Info * record, int length){
     }
   }
   char * print = toString(other);
+  puts(print);
   return head;
 }
 
