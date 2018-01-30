@@ -357,7 +357,9 @@ char* printField(void* toBePrinted){
 
   length = strlen(print->tag) + strlen(print->value) + 100;
   string = (char*)calloc(length, sizeof(char));
+  printf("calloc length!!\n");
   sprintf(string, "Tag: %s, Value: %s", print->tag, print->value);
+  printf("sprint!!!!!!!!!!\n");
   return string;
 }
 //************************************************************************************************************
