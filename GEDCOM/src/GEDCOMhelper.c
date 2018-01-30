@@ -358,6 +358,7 @@ Header * headParser(Info * record, int length){
     }
     else if (strcmp(record[i].tag, "FILE") == 0){
       printf("in FILE\n");
+      printf("in struct <%s><%s>\n", record[i].tag, record[i].info);
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
       printf("Tag: %s, Value: %s", ((Field*)other.head->data)->tag, ((Field*)other.head->data)->value);
