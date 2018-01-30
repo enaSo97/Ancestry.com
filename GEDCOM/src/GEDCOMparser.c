@@ -45,16 +45,12 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   ** this function tockenizes the line of GEDCOM line and put it into information struct
   **/
   for (int i = 0; i < length; i++){
+    printf("before tockenizing\n");
     info[i] = tockenInfo(read[i]);
     info[i].line = i + 1;
-    /*if (strcmp(info[i].level, "0") == 0){ // it means it is a new record
-      flag = 0;
-    }else{
-      flag++;
-    }*/
-    //printf("struct info <%s><%s><%s>\n", info[i].level, info[i].tag, info[i].info);
   }
   for (int i = 0; i < 45; i++){
+    printf("finding for record\n");
     int j = 1;
     //printf("tracking i %d\n", i);
     if (info[i].level == 0){
