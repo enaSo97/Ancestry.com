@@ -438,7 +438,12 @@ Header * headParser(Info * record, int length){
     //printf("\n<<%s || %f>>\n", head->source, head->gedcVersion);
   }
   printf("\nhead : <<%s || %f>>\n", head->source, head->gedcVersion);
-  char * print = toString(other);
+  //char * print = toString(other);
+  Node * temp = other->head;
+  while(temp -> next != NULL){
+    printField(temp->data);
+    temp = temp->next;
+  }
   return head;
 }
 
