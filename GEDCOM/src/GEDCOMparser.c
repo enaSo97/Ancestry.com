@@ -50,7 +50,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     info[i].line = i + 1;
   }
   for (int i = 0; i < length; i++){
-    printf("finding for record\n");
+    printf("finding for record <%d>\n", i);
     int j = 1;
     //printf("tracking i %d\n", i);
     if (info[i].level == 0){
