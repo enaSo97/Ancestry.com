@@ -49,7 +49,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     info[i] = tockenInfo(read[i]);
     info[i].line = i + 1;
   }
-  for (int i = 0; i < 45; i++){
+  for (int i = 0; i < length; i++){
     printf("finding for record\n");
     int j = 1;
     //printf("tracking i %d\n", i);
