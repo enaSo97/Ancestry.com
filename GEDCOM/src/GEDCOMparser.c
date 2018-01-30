@@ -348,12 +348,9 @@ char* printField(void* toBePrinted){
   char* string;
   Field * print;
   int length;
-  printf("in the print field\n");
   if(toBePrinted == NULL){
-    printf("it is null\n");
     return NULL;
   }
-  printf("set to null\n");
   print = (Field*)toBePrinted;
   printf("Tag: %s, Value: %s", (char*)print->tag, (char*)print->value);
   length = strlen(print->tag) + strlen(print->value) + 100;
