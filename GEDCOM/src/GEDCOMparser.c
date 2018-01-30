@@ -32,12 +32,15 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   int flag = 0;
   char ** stuff;
   int k =0;
-  info = calloc((length - 1), sizeof(Info));
+
+  
   GEDCOMobject * object = malloc(sizeof(GEDCOMobject));
   //*obj = malloc(sizeof(GEDCOMobject));
 
   read = fileReader(fileName);
   length = fileLength(read);
+  info = calloc((length - 1), sizeof(Info));
+
   if (validateFile(fileName) == INV_FILE){
     errorCheck = setType(INV_FILE, -1);
     obj = NULL;
