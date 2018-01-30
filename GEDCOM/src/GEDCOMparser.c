@@ -80,6 +80,9 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       if (strcmp(record[0].tag, "HEAD") == 0){
         object->header = headParser(record, (k));
       }
+      else if (strcmp(record[0].tag, "SUBM") == 0){
+        object->submitter = subParser(record, k);
+      }
 
     }
     i--;
@@ -93,7 +96,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   }
   free(read);
   free(info);
-  //free(record);
+  free(record);
 
   return errorCheck;
 }

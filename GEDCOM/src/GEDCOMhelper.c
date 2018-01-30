@@ -447,7 +447,7 @@ Header * headParser(Info * record, int length){
   return head;
 }
 
-/*submitter * subParser(){
+submitter * subParser(){
   submitter * sub = malloc(sizeof(submitter));
   pointer * tmep = malloc
   if (sub.tag == NAMe){
@@ -455,6 +455,6 @@ Header * headParser(Info * record, int length){
   }
   temp->adrss = Wolverhampton
   temp->pointer = sub;
-  return
+  
+  return sub;
 }
-*/
