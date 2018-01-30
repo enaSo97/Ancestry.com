@@ -441,7 +441,7 @@ Header * headParser(Info * record, int length){
       }*/
     }
   }
-  printf("Source: %s, GED VER: %f, Encoding: %d", head->source, head->gedcVersion, head->encoding);
+  printf("\nSource: %s, GED VER: %f, Encoding: %d\n", head->source, head->gedcVersion, head->encoding);
   char * print = toString(other);
   puts(print);
   return head;
