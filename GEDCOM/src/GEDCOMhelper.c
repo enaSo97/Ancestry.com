@@ -328,8 +328,9 @@ Header * headParser(Info * record, int length){
     else if (strcmp(record[i].tag, "DEST") == 0){ // recieving system name
       printf("in DEST\n");
       field = createField(record[i].tag, record[i].info);
-      printf("Tag: %s, Value: %s", (char*)field->tag, (char*)field->value);
-      insertBack(&other, &field);
+      //printf("Tag: %s, Value: %s", (char*)field->tag, (char*)field->value);
+      insertBack(&other, field);
+      printf("Tag: %s, Value: %s", ((Field*)other->data)->tag, ((Field*)other->data)->value);
     }
     else if (strcmp(record[i].tag, "DATE") == 0){//Transmission date
       printf("in DATE\n");
