@@ -440,6 +440,7 @@ Header * headParser(Info * record, int length){
   printf("\nhead : <<%s || %f>>\n", head->source, head->gedcVersion);
   //char * print = toString(other);
   //char * print;
+  printf("length of the list %d\n", getLength(other));
   Node * temp = &(other.head);
   while(temp -> next != NULL){
     char * print = printField(temp->data);
