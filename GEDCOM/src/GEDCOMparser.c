@@ -348,7 +348,7 @@ char* printField(void* toBePrinted){
   char* string;
   Field * print;
   int length;
-
+  printf("in the print field\n");
   if(toBePrinted == NULL){
     return NULL;
   }
