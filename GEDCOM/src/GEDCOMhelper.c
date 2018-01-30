@@ -441,11 +441,11 @@ Header * headParser(Info * record, int length){
   //char * print = toString(other);
   //char * print;
   printf("length of the list %d\n", getLength(other));
-  Node * temp = &(other.head);
+  Node temp = (other.head);
   while(temp -> next != NULL){
-    char * print = printField(temp->data);
+    char * print = printField(temp.data);
     puts(print);
-    temp = temp->next;
+    temp = temp.next;
   }
   return head;
 }
