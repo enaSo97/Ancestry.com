@@ -397,15 +397,17 @@ Header * headParser(Info * record, int length){
       else if (strcmp(record[i].info, "ASCII") == 0){
         head->encoding = ASCII;
       }
-      i++;
-      while(record[i].level != 1){
-        if (strcmp(record[i].tag, "VERS") == 0){
-          field = createField(record[i].tag, record[i].info);
-          insertBack(&other, field);
-        }
+      if (i + 1 < length){
         i++;
+        while(record[i].level != 1){
+          if (strcmp(record[i].tag, "VERS") == 0){
+            field = createField(record[i].tag, record[i].info);
+            insertBack(&other, field);
+          }
+          i++;
+        }
+        i--;
       }
-      i--;
     }
     else if (strcmp(record[i].tag, "LANG") == 0){
       field = createField(record[i].tag, record[i].info);
