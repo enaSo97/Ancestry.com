@@ -45,7 +45,6 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   ** this function tockenizes the line of GEDCOM line and put it into information struct
   **/
   for (int i = 0; i < length; i++){
-    printf("before tockenizing\n");
     info[i] = tockenInfo(read[i]);
     info[i].line = i + 1;
   }
@@ -64,11 +63,11 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       i++;
       j++;
       while(info[i].level != 0){
+        printf("info : %s\n", info[i].info);
         record = realloc(record, sizeof(Info) * j);
         record[k].level = info[i].level;
         strcpy(record[k].tag, info[i].tag);
         strcpy(record[k].info, info[i].info);
-        //printf("\nfollowing ||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
         k++;
         i++;
         j++;
