@@ -384,6 +384,7 @@ Header * headParser(Info * record, int length){
       i--;
     }
     else if (strcmp(record[i].tag, "CHAR") == 0){
+      printf("checking for char\n");
       if (strcmp(record[i].info, "ANSEL") == 0){
         head->encoding = ANSEL;
       }
