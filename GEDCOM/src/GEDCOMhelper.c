@@ -357,11 +357,11 @@ Header * headParser(Info * record, int length){
       //i++;
     }
     else if (strcmp(record[i].tag, "FILE") == 0){
-      printf("in FILE\n");
-      printf("in struct <%s><%s>\n", record[i].tag, record[i].info);
+    //  printf("in FILE\n");
+      //printf("in struct <%s><%s>\n", record[i].tag, record[i].info);
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
-      printf("Tag: %s, Value: %s", ((Field*)other.head->next->next->data)->tag, ((Field*)other.head->next->next->data)->value);
+      //printf("Tag: %s, Value: %s", ((Field*)other.head->next->next->data)->tag, ((Field*)other.head->next->next->data)->value);
       //i++;
     }
     else if (strcmp(record[i].tag, "COPR") == 0){
@@ -444,7 +444,7 @@ Header * headParser(Info * record, int length){
   printf("\nhead : <<%s || %f>>\n", head->source, head->gedcVersion);
   char * print = toString(other);
   //char * print;
-  printf("length of the list %d\n", getLength(other));
+  //printf("length of the list %d\n", getLength(other));
   //Node * temp = other.head;
   /*while(temp -> next != NULL){
     char * print = printField(temp->data);
