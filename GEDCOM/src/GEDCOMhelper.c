@@ -330,7 +330,7 @@ Header * headParser(Info * record, int length){
       field = createField(record[i].tag, record[i].info);
       //printf("Tag: %s, Value: %s", (char*)field->tag, (char*)field->value);
       insertBack(&other, field);
-      printf("Tag: %s, Value: %s", ((Field*)other->data)->tag, ((Field*)other->data)->value);
+      printf("Tag: %s, Value: %s", ((Field*)other.data)->tag, ((Field*)other.data)->value);
     }
     else if (strcmp(record[i].tag, "DATE") == 0){//Transmission date
       printf("in DATE\n");
@@ -443,7 +443,7 @@ Header * headParser(Info * record, int length){
   //char * print = toString(other);
   //char * print;
   printf("length of the list %d\n", getLength(other));
-  Node * temp = &(other.head);
+  Node * temp = other.head;
   while(temp -> next != NULL){
     char * print = printField(temp->data);
     puts(print);
