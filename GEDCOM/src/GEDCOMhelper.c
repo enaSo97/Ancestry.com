@@ -439,7 +439,7 @@ Header * headParser(Info * record, int length){
   }
   printf("\nhead : <<%s || %f>>\n", head->source, head->gedcVersion);
   //char * print = toString(other);
-  Node * temp = other->head;
+  Node * temp = &(other.head);
   while(temp -> next != NULL){
     printField(temp->data);
     temp = temp->next;
