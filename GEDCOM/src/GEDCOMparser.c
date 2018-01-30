@@ -33,13 +33,14 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   char ** stuff;
   int k =0;
 
-  
+
   GEDCOMobject * object = malloc(sizeof(GEDCOMobject));
   //*obj = malloc(sizeof(GEDCOMobject));
 
   read = fileReader(fileName);
   length = fileLength(read);
-  info = calloc((length - 1), sizeof(Info));
+  info = calloc(1000000, sizeof(Info));
+  record = calloc(1000000, sizeof(Info));
 
   if (validateFile(fileName) == INV_FILE){
     errorCheck = setType(INV_FILE, -1);
@@ -58,7 +59,6 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     //printf("tracking i %d\n", i);
     if (info[i].level == 0){
       k = 0;
-      record = realloc(record, sizeof(Info) * j);
       record[k].level = info[i].level;
       strcpy(record[k].tag, info[i].tag);
       strcpy(record[k].info, info[i].info);
@@ -78,7 +78,6 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       }
       //printf("record 0 ||%d||%s||%s||\n", record[0].level, record[0].tag, record[0].info);
       if (strcmp(record[0].tag, "HEAD") == 0){
-        printf("Head found\n");
         object->header = headParser(record, (k));
       }
 
@@ -88,7 +87,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     //i = k;
   }
   length--;
-  for (int i = 0; i < length; i++){ // freeing the allocated memory after done parsing the file
+  for (int i = 0; i < 10000000; i++){ // freeing the allocated memory after done parsing the file
     //free(info[i]); // freeing the allocated information struct
     free(read[i]);//freeing the allocated strings
   }
