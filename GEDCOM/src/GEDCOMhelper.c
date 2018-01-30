@@ -210,8 +210,10 @@ char** fileReader(char * fileName){
 
 int fileLength(char ** array){
   int i = 0;
+  char ** temp = array;
   if (DEBUG)printf("\ngetting the length of file\n");
-  while(array[i] != NULL){
+
+  while(tempy[i] != NULL){
     i++;
   }
   //printf("number of element in array %d\n", i);
