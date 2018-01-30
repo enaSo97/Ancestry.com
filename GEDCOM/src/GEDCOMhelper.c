@@ -323,6 +323,7 @@ Header * headParser(Info * record, int length){
         }
         i++;
       }
+      i--;
     }
     else if (strcmp(record[i].tag, "DEST") == 0){ // recieving system name
       printf("in DEST\n");
@@ -341,6 +342,7 @@ Header * headParser(Info * record, int length){
         }
         i++;
       }
+      i--;
     }
     else if (strcmp(record[i].tag, "SUBM") == 0){
       printf("in SUBM\n");
@@ -379,6 +381,7 @@ Header * headParser(Info * record, int length){
         }
         i++;
       }
+      i--;
     }
     else if (strcmp(record[i].tag, "CHAR") == 0){
       if (strcmp(record[i].info, "ANSEL") == 0){
@@ -401,6 +404,7 @@ Header * headParser(Info * record, int length){
         }
         i++;
       }
+      i--;
     }
     else if (strcmp(record[i].tag, "LANG") == 0){
       field = createField(record[i].tag, record[i].info);
@@ -415,10 +419,11 @@ Header * headParser(Info * record, int length){
         }
         i++;
       }
+      i--;
     }
     else if (strcmp(record[i].tag, "NOTE") == 0){
-      i++;
-    /*  while(record[i].level < != NULL){
+      /*i++;
+      while(record[i].level < != NULL){
         if (strcmp(record[i].tag, "CONT") == 0){
           string = realloc(string, sizeof(char)*(strlen(record[i].info) + strlen(string)));
           strcat(string, record[i].info);
