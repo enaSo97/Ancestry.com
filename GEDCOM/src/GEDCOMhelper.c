@@ -292,6 +292,7 @@ Header * headParser(Info * record, int length){
   Field * field;
   //insertBack(other, field);
   //char dadsd  = toString(other)
+  printf("length of one record %d\n", length);
 
   printf("in head parser\n");
   for (int i = 0; i < length; i++){
@@ -425,10 +426,10 @@ Header * headParser(Info * record, int length){
         i++;
       }*/
     }
+    printf("Track of i %d \n", i);
     //printf("\n<<%s || %f>>\n", head->source, head->gedcVersion);
-
   }
-    printf("\nhead : <<%s || %f>>\n", head->source, head->gedcVersion);\
+    printf("\nhead : <<%s || %f>>\n", head->source, head->gedcVersion);
     char * print = toString(other);
   return head;
 }
