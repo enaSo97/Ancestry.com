@@ -328,7 +328,6 @@ Header * headParser(Info * record, int length){
     else if (strcmp(record[i].tag, "DEST") == 0){ // recieving system name
       printf("in DEST\n");
       field = createField(record[i].tag, record[i].info);
-      p
       insertBack(&other, field);
     }
     else if (strcmp(record[i].tag, "DATE") == 0){//Transmission date
@@ -444,7 +443,7 @@ Header * headParser(Info * record, int length){
   Node * temp = &(other.head);
   while(temp -> next != NULL){
     char * print = printField(temp->data);
-    put(print);
+    puts(print);
     temp = temp->next;
   }
   return head;
