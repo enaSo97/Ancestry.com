@@ -182,7 +182,7 @@ int checkTerminate(char * string){
 }
 
 char** fileReader(char * fileName){
-  char** array = (char**)malloc(sizeof(char*)*1);
+  char** array = (char**)malloc(sizeof(char*)*10000000);
   char reader[1000];
   int counter = 1;
   int i = 0;
@@ -192,7 +192,7 @@ char** fileReader(char * fileName){
   while(fgets(reader, 800, file) != NULL){
     //if(DEBUG)printf("\nread a line \n");
 
-    array = (char**)realloc(array, sizeof(char*)*counter);
+    //array = (char**)realloc(array, sizeof(char*)*counter);
     while(reader[strlen(reader) - 1] == '\n' || reader[strlen(reader) - 1] =='\r'){
       reader[strlen(reader) - 1] = '\0';
     }
