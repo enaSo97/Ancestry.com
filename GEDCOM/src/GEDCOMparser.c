@@ -54,7 +54,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     info[i].line = i + 1;
   }
   for (int i = 0; i < length; i++){
-    printf("finding for record <%d>\n", i);
+    //printf("finding for record <%d>\n", i);
     int j = 1;
     //printf("tracking i %d\n", i);
     if (info[i].level == 0){
@@ -67,7 +67,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       i++;
       j++;
       while(info[i].level != 0){
-        printf("info : %s i <%d>\n", info[i].info, i);
+        //printf("info : %s i <%d>\n", info[i].info, i);
         record = realloc(record, sizeof(Info) * j);
         record[k].level = info[i].level;
         strcpy(record[k].tag, info[i].tag);
@@ -83,7 +83,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
 
     }
     i--;
-    printf("<<<i : %d>>>\n", i);
+    //printf("<<<i : %d>>>\n", i);
     //i = k;
   }
   length--;
