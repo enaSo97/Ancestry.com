@@ -24,9 +24,8 @@
 GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   GEDCOMerror errorCheck;
   //if(DEBUG)printf("int the create\n");
-  char** read = fileReader(fileName); // storing the each line of GEDCOM file in double pointer array
+  char** read; // storing the each line of GEDCOM file in double pointer array
   int length;
-  length = fileLength(read);
   int recLength = 0;
   Info * info;
   Info * record;
@@ -37,6 +36,8 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   GEDCOMobject * object = malloc(sizeof(GEDCOMobject));
   //*obj = malloc(sizeof(GEDCOMobject));
 
+  read = fileReader(fileName);
+  length = fileLength(read);
   if (validateFile(fileName) == INV_FILE){
     errorCheck = setType(INV_FILE, -1);
     obj = NULL;
