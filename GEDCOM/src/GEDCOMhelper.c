@@ -476,6 +476,7 @@ Submitter * subParser(Info * record, int length){
       if (strlen(string) > 0){
         field = createField(record[i].tag, record[i].info);
         insertBack(&other, field);
+        i++;
       }
       i--;
     }
