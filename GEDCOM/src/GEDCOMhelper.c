@@ -115,13 +115,13 @@ char * printPointers(void * data){
 }
 
 void deletePointers(void * erase){
-  Pointers * Delete;
+  Pointer * Delete;
 
-  if (toBeDeleted == NULL){
+  if (erase == NULL){
     return;
   }
 
-  Delete = (Pointers*)toBeDeleted;
+  Delete = (Pointer*)erase;
 
   free(Delete->point);
   free(Delete);
@@ -345,7 +345,7 @@ Header * headParser(Info * record, int length, List pointers, List receiver){
   char * string = malloc(sizeof(char));
 
   List  other = initializeList(printField, deleteField, compareFields);
-  pointer * point = calloc(1, sizeof(Pointer));
+  Pointer * point = calloc(1, sizeof(Pointer));
   Field * field;
   Submitter sub;
   //insertBack(other, field);
@@ -572,7 +572,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
   Field * field = calloc(1, sizeof(Field));
   List other = initializeList(printField, deleteField, compareFields);
   List events = initializeList(printEvent, deleteEvent, compareEvents);
-  char temp[50] = "";
+  char string[50] = "";
   char names[5][50];
 
   for (int i = 0; i < length; i++){
@@ -587,16 +587,16 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
         }
         for (int j = 0; j < n; j++){
           if (names[j][0] == '/' && names[j][strlen(names[j]) - 1] == '/'){
-            names[j][0] == '\0';
-            names[j][strlen(names[j]) - 1] == '\0';
+            names[j][0] = '\0';
+            names[j][strlen(names[j]) - 1] = '\0';
             //checking if it is last name and if it is set it.
             strcpy(person->surname, names[j]);
           }else{
-            strcat(temp, names[j]);
+            strcat(string, names[j]);
           }
         }
-        if (strlen(temp) > 0){
-          strcpy(person->givenName, temp);
+        if (strlen(string) > 0){
+          strcpy(person->givenName, string);
         }
       }
       i++;
@@ -608,17 +608,17 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
       i--;
     }
     else if (validateIndividualEvent(record[i].tag) == 1){
-      Event * event = calloc(sizeof(Event));
+      Event * event = calloc(1, sizeof(Event));
       strcpy(event->type, record[i].tag);
       i++;
       while(record[i].level != 1){
         if(strcmp(record[i].tag, "PLAC") == 0){
           event->place = malloc(sizeof(char) * strlen(record[i].info));
-          strcpy(event->place, info[i].info);
+          strcpy(event->place, record[i].info);
         }
         else if (strcmp(record[i].tag, "DATE") == 0){
           event->date = malloc(sizeof(char) * strlen(record[i].info));
-          strcpy(event->date, info[i].info);
+          strcpy(event->date, record[i].info);
         }else{
           field = createField(record[i].tag, record[i].info);
           insertBack(&other, field);
@@ -645,7 +645,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
   puts(print);
   char * output = toString(other);
   puts(output);
-  
+
 
   return person;
 }

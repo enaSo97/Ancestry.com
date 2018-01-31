@@ -86,7 +86,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         object->submitter = subParser(record, k, pointers, reciever);
       }
       else if (strcmp(record[0].tag, "INDI") == 0){
-        object->Individual = parseIndividual(record, k, pointers, reciever);
+        object->individuals = parseIndividual(record, k, pointers, reciever);
       }
     }
     i--;
