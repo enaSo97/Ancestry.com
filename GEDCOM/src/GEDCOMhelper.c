@@ -600,15 +600,19 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
         }
         for (int j = 0; j < n; j++){
           if (j == n - 1){
-            strcpy(person->givenName, names[j]);
+            names[j][strlen(names[j] - 1)] = '\0';
+            strcpy(person->surname, names[j]);
+            printf("last Name : %s\n", person->surname);
           }else{
             printf("first name exitst\n");
+            names[j][strlen(names[j] - 1)] = '\0';
             strcat(string, names[j]);
           }
         }
         if (strlen(string) > 0){
           printf("saving the firstname\n");
           strcpy(person->givenName, string);
+          printf("last Name : %s\n", person->givenName);
         }
       }
       i++;
