@@ -402,7 +402,7 @@ Header * headParser(Info * record, int length, List pointers, List receiver){
       flag = 1;//means submitter exist
       strcpy(point->addr, record[i].info);
       strcpy(point->type, record[i].tag);
-      point->point = (void*)sub;
+      point->point = sub;
       insertBack(&receiver, point);
       //i++;
     }
