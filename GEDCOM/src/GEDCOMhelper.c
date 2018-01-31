@@ -591,23 +591,15 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
       printf("has name\n");
       if (strlen(record[i].info) > 0){// if name exist
         printf("gonna parse it\n");
-        char * personName = strtok(record[i].info, " ");
+        char * personName = strtok(record[i].info, " /");
         while(personName != NULL){ //parses the full name
           strcpy(names[n], personName);
           personName = strtok(NULL, ""); // saving parsed name in to temp 2d array
           n++;
         }
         for (int j = 0; j < n; j++){
-          if (names[j][0] == '/' && names[j][strlen(names[j]) - 1] == '/'){
-            int k = 0;
-            for (int m = 1; m < strlen(names[j]-2); m++){
-              last[k] = names[j][m];
-              k++;
-            }
-            printf("gonna save last name\n");
-            //checking if it is last name and if it is set it.
-            strcpy(person->surname, last);
-            printf("last NAme : %s\n", last);
+          if (j == n - 1){
+            strcpy(person->givenName, names[j]);
           }else{
             printf("first name exitst\n");
             strcat(string, names[j]);
