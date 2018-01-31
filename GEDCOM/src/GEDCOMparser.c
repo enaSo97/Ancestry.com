@@ -32,7 +32,9 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   int flag = 0;
   char ** stuff;
   int k =0;
+  List pointers = initializeList(printPointers, deletePointers, comparePointers);
 
+  List reciever = initializeList(printPointers, deletePointers, comparePointers);
 
   GEDCOMobject * object = malloc(sizeof(GEDCOMobject));
   //*obj = malloc(sizeof(GEDCOMobject));
@@ -78,12 +80,14 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       }
       //printf("record 0 ||%d||%s||%s||\n", record[0].level, record[0].tag, record[0].info);
       if (strcmp(record[0].tag, "HEAD") == 0){
-        object->header = headParser(record, (k));
+        object->header = headParser(record, k, pointers, reciever);
       }
       else if (strcmp(record[0].tag, "SUBM") == 0){
-        object->submitter = subParser(record, k);
+        object->submitter = subParser(record, k, pointers, reciever);
       }
-
+      else if (strcmp(record[0].tag, "INDI") == 0){
+        object->Individual = parseIndividual(record, k, pointers, reciever);
+      }
     }
     i--;
     //printf("<<<i : %d>>>\n", i);
@@ -164,6 +168,8 @@ void deleteEvent(void* toBeDeleted){
     return;
   }
   Delete = (Event*)toBeDeleted;
+
+
 
   free(Delete->date);
   free(Delete->place);

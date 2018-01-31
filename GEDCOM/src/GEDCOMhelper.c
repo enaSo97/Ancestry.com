@@ -8,6 +8,7 @@
 #include "GEDCOMmutilities.h"
 
 
+/*******sets the information of the Event ********************************/
 Event * createEvent(char type[5], char * date, char * place, List other){
   Event * create = malloc(sizeof(Event));// creating a memory for Event
 
@@ -20,6 +21,7 @@ Event * createEvent(char type[5], char * date, char * place, List other){
 
   return create;
 }
+/*************************************************************************/
 
 Field * createField(char * tag, char * value){
   Field * create = malloc(sizeof(Field));
@@ -94,6 +96,53 @@ GEDCOMobject * createObject(Header * head, List families, List Individual, Submi
   return obj;
 }
 
+/*****************Helper Function for List of Pointers *****************/
+char * printPointers(void * data){
+  Pointer * point;
+  char * string;
+  int length;
+
+  if (data == NULL){
+    return NULL;
+  }
+
+  point = (Pointer*)data;
+  length = strlen(point->addr) + strlen(point->type) + 40;
+  string = (char*)calloc(length, sizeof(char));
+  sprintf(string, "Type: %s, Address: %s\n", point->type, point->addr);
+
+  return string;
+}
+
+void deletePointers(void * erase){
+  Pointers * Delete;
+
+  if (toBeDeleted == NULL){
+    return;
+  }
+
+  Delete = (Pointers*)toBeDeleted;
+
+  free(Delete->point);
+  free(Delete);
+}
+
+int comparePointers(const void *first,const void *second){
+  Pointer * compare1;
+  Pointer * compare2;
+
+  if (first == NULL || second == NULL){
+    return 0;
+  }
+
+  compare1 = (Pointer*)first;
+  compare2 = (Pointer*)second;
+
+  return strcmp(compare1->surname, compare2->surname);
+}
+
+/*************************************************************************/
+
 void freeEvent(Event * toBeFreed);
 
 void freeField(Field * toBeFreed);
@@ -128,6 +177,7 @@ void toLower(char * toBeLower){
    }
 }
 
+/** converting month of the year in to numbers ***/
 int getMonth(char * getter){
   char month[12][5] = {"jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"};
 
@@ -138,8 +188,9 @@ int getMonth(char * getter){
   }
     return 0;
 }
+/*************************************************/
 
-
+/******Validating the File ************************/
 enum eCode validateFile(char* fileName){
   printf("in the function\n");
   //char ext[80];
@@ -157,7 +208,9 @@ enum eCode validateFile(char* fileName){
   //ext = strrchr(fileName, '.');
   return OK;
 }
+/**************************************************/
 
+/***********validating the GEDCOM line ************/
 enum eCode validateGEDCOM(char * read){
   //int length = fileLength(read);
   //int term;
@@ -165,6 +218,7 @@ enum eCode validateGEDCOM(char * read){
 
   return OK;
 }
+/***************************************************/
 
 int checkTerminate(char * string){
   for (int i = 0; i < strlen(string); i++){
@@ -282,7 +336,7 @@ int compare(const void *first,const void *second){
   return 0;
 }
 
-Header * headParser(Info * record, int length){
+Header * headParser(Info * record, int length, List pointers, List receiver){
   Header * head = malloc(sizeof(Header));
   int flag = 0;
   //char sour[249];
@@ -291,7 +345,9 @@ Header * headParser(Info * record, int length){
   char * string = malloc(sizeof(char));
 
   List  other = initializeList(printField, deleteField, compareFields);
+  pointer * point = calloc(1, sizeof(Pointer));
   Field * field;
+  Submitter sub;
   //insertBack(other, field);
   //char dadsd  = toString(other)
   printf("length of one record %d\n", length);
@@ -300,22 +356,18 @@ Header * headParser(Info * record, int length){
   for (int i = 0; i < length; i++){
     //printf("in head parser\n");
     if (strcmp(record[i].tag, "SOUR") == 0){ //name of the source
-      printf("in SOUR\n");
       strcpy(head->source, record[i].info);
       i++;
       while(record[i].level != 1){//until next sub record
         if (strcmp(record[i].tag,"VERS") == 0){
-          printf("in sOUR vers\n");
           field = createField(record[i].tag, record[i].info);
           insertBack(&other, field); // Version for SOUR
         }
         else if (strcmp(record[i].tag,"NAME") == 0){//name of SOUR
-          printf("in NAME\n");
           field = createField(record[i].tag, record[i].info);
           insertBack(&other, field);
         }
         else if (strcmp(record[i].tag,"CORP") == 0){
-          printf("in CIRO\n");
           field = createField(record[i].tag, record[i].info);
           insertBack(&other, field);
           if (strcmp(record[i].tag,"ADDR") == 0){
@@ -328,14 +380,12 @@ Header * headParser(Info * record, int length){
       i--;
     }
     else if (strcmp(record[i].tag, "DEST") == 0){ // recieving system name
-      printf("in DEST\n");
       field = createField(record[i].tag, record[i].info);
       //printf("Tag: %s, Value: %s", (char*)field->tag, (char*)field->value);
       insertBack(&other, field);
       //printf("Tag: %s, Value: %s", ((Field*)other.head->data)->tag, ((Field*)other.head->data)->value);
     }
     else if (strcmp(record[i].tag, "DATE") == 0){//Transmission date
-      printf("in DATE\n");
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
       i++;
@@ -349,8 +399,11 @@ Header * headParser(Info * record, int length){
       i--;
     }
     else if (strcmp(record[i].tag, "SUBM") == 0){
-      printf("in SUBM\n");
       flag = 1;//means submitter exist
+      strcpy(point->addr, record[i].info);
+      strcpy(point->type, record[i].tag);
+      point->point = sub;
+      insertBack(&receiver, point);
       //i++;
     }
     else if (strcmp(record[i].tag, "SUBN") == 0){
@@ -367,17 +420,14 @@ Header * headParser(Info * record, int length){
       //i++;
     }
     else if (strcmp(record[i].tag, "COPR") == 0){
-      printf("in CORP\n");
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
       //i++;
     }
     else if (strcmp(record[i].tag, "GEDC") == 0){
-      printf("in GEDC\n");
       i++;
       while(record[i].level != 1){
         if (strcmp(record[i].tag, "VERS") == 0){//version of the GEDCOM file
-          printf("in VERS GEDCM\n");
           ver = strtol(record[i].info, NULL, 0);
           head->gedcVersion = ver;
         }
@@ -448,13 +498,12 @@ Header * headParser(Info * record, int length){
   return head;
 }
 
-Submitter * subParser(Info * record, int length){
+Submitter * subParser(Info * record, int length, List pointers, List receiver){
+
   Submitter * sub = calloc(1,sizeof(Submitter));
   Pointer * temp = calloc(1,sizeof(Pointer));
   Field * field;
   List other = initializeList(printField, deleteField, compareFields);
-  List pointers;
-  int flag = 0;
   char string[5000] = "";
 
   for (int i = 0; i < length; i++){
@@ -495,10 +544,108 @@ Submitter * subParser(Info * record, int length){
     strcpy(temp->type, record[0].tag);
     temp->point = sub;
   }
+  insertBack(&pointers, temp);
 
   printf("\nName: %s, Address: %s\n", sub->submitterName, sub->address);
   char * print = toString(other);
   puts(print);
 
   return sub;
+}
+
+int validateIndividualEvent(char * check){
+  char * events[] = {"BIRT", "CHR", "DEAT", "BURI", "CREM", "ADOP", "BAPM", "BARM", "BASM", "BLES", "CHRA",
+                      "CONF", "FCOM", "ORDN", "NATU", "EMIG", "IMMI", "CENS", "PROB", "WILL", "GRAD", "RETI", "EVEN"};
+
+  for (int i = 0; i < 24; i++){
+    if (strcmp(check, events[i]) == 0){
+      return 1;
+    }
+  }
+
+  return -1;
+}
+
+Individual * parseIndividual(Info * record, int length, List pointers, List receiver){
+  Individual * person = calloc(1, sizeof(Individual));
+  Pointer * temp = calloc(1, sizeof(Pointer));
+  Field * field = calloc(1, sizeof(Field));
+  List other = initializeList(printField, deleteField, compareFields);
+  List events = initializeList(printEvent, deleteEvent, compareEvents);
+  char temp[50] = "";
+  char names[5][50];
+
+  for (int i = 0; i < length; i++){
+    int n = 0;
+    if (strcmp(record[i].tag, "NAME") == 0){
+      if (strlen(record[i].info) > 0){// if name exist
+        char * personName = strtok(record[i].info, " ");
+        while(personName != NULL){ //parses the full name
+          strcpy(names[n], personName);
+          personName = strtok(NULL, ""); // saving parsed name in to temp 2d array
+          n++;
+        }
+        for (int j = 0; j < n; j++){
+          if (names[j][0] == '/' && names[j][strlen(names[j]) - 1] == '/'){
+            names[j][0] == '\0';
+            names[j][strlen(names[j]) - 1] == '\0';
+            //checking if it is last name and if it is set it.
+            strcpy(person->surname, names[j]);
+          }else{
+            strcat(temp, names[j]);
+          }
+        }
+        if (strlen(temp) > 0){
+          strcpy(person->givenName, temp);
+        }
+      }
+      i++;
+      while(record[i].level != 1){
+        field = createField(record[i].tag, record[i].info);
+        insertBack(&other, field);
+        i++;
+      }
+      i--;
+    }
+    else if (validateIndividualEvent(record[i].tag) == 1){
+      Event * event = calloc(sizeof(Event));
+      strcpy(event->type, record[i].tag);
+      i++;
+      while(record[i].level != 1){
+        if(strcmp(record[i].tag, "PLAC") == 0){
+          event->place = malloc(sizeof(char) * strlen(record[i].info));
+          strcpy(event->place, info[i].info);
+        }
+        else if (strcmp(record[i].tag, "DATE") == 0){
+          event->date = malloc(sizeof(char) * strlen(record[i].info));
+          strcpy(event->date, info[i].info);
+        }else{
+          field = createField(record[i].tag, record[i].info);
+          insertBack(&other, field);
+        }
+        i++;
+      }
+      insertBack(&events, event);
+      i--;
+    }
+    else if(strcmp(record[i].tag, "FAMC") == 0 || strcmp(record[i].tag, "FAMS") == 0){
+      strcpy(temp->type, record[i].tag);
+      strcpy(temp->addr, record[i].info);
+      temp->point = person;
+      insertBack(&receiver, temp);
+    }
+    else{
+      field = createField(record[i].tag, record[i].info);
+      insertBack(&other, field);
+    }
+  }
+
+  printf("\nFirst: %s, Last: %s\n", person->givenName, person->surname);
+  char * print = toString(events);
+  puts(print);
+  char * output = toString(other);
+  puts(output);
+  
+
+  return person;
 }

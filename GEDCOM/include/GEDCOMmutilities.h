@@ -65,12 +65,20 @@ void testTockenize(char * tocken);
 
 Info tockenInfo(char * toParse);
 
-Header * headParser(Info * record, int length);
+Header * headParser(Info * record, int length, List pointers, List receiver);
 
-Submitter * subParser(Info * record, int length);
+Submitter * subParser(Info * record, int length, List pointers, List receiver);
+
+Individual * parseIndividual(Info * record, int length, List pointers, List receiver);
 
 char * printFunc(void * data);
 
 void deleteFunc(void * erase);
 
 int compare(const void *first,const void *second);
+
+char * printPointers(void * data);
+
+void deletePointers(void * erase);
+
+int comparePointers(const void *first,const void *second);
