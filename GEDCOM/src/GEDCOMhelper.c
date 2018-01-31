@@ -474,16 +474,20 @@ Submitter * subParser(Info * record, int length){
         }
         i++;
       }
-      if (strlen(string) > 0){
+      /*if (strlen(string) > 0){
         field = createField(record[i].tag, record[i].info);
         insertBack(&other, field);
-      }
+      }*/
       i--;
     }
     else{
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
     }
+  }
+  if (strlen(string) > 0){
+    field = createField(record[i].tag, record[i].info);
+    insertBack(&other, field);
   }
   sub->otherFields = other;
   if (record[0].info[0] == '@' && record[0].info[strlen(record[0].tag) - 1] == '@'){
