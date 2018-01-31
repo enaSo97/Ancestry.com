@@ -609,6 +609,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
             strcpy(person->surname, last);
             printf("last NAme : %s\n", last);
           }else{
+            printf("first name exitst\n");
             strcat(string, names[j]);
           }
         }
