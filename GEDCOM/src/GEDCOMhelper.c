@@ -574,9 +574,18 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
   char string[50] = "";
   char names[5][50];
   printf("in individual parser\n");
-  for (int i = 0; i < length; i++){
+
+  /*******Saving the pointer of the individual in the sender list*****/
+  strcpy(temp->addr, record[i].info);
+  strpcy(temp->type, record[i].tag);
+  temp->point = person;
+  insertBack(&pointers, temo);
+  /*******************************************************************/
+
+  for (int i = 1; i < length; i++){
     int n = 0;
     printf("\n<<%d||%s||%s>>\n", record[i].level, record[i].tag, record[i].info);
+
     if (strcmp(record[i].tag, "NAME") == 0){
       printf("has name\n");
       if (strlen(record[i].info) > 0){// if name exist
