@@ -573,7 +573,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
   List events = initializeList(printEvent, deleteEvent, compareEvents);
   char string[50] = "";
   char last[50] = "";
-  char names[5][50];
+  char names[10][50];
   printf("in individual parser\n");
 
   /*******Saving the pointer of the individual in the sender list*****/
@@ -603,7 +603,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
           if (j == n - 1){
             names[j][strlen(names[j])-1] = '\0';
             printf("askdjfalskdjfslakdj <<%s>>\n", names[j]);
-            person->surname = malloc(sizeof(char)*strlen(names[j]));
+            person->surname = malloc(sizeof(char)*(strlen(names[j])+1));
             strcpy(person->surname, names[j]);
             printf("last Name : %s\n", person->surname);
           }else{
