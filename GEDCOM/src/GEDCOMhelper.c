@@ -486,7 +486,7 @@ Submitter * subParser(Info * record, int length){
     }
   }
   if (strlen(string) > 0){
-    field = createField(record[i].tag, record[i].info);
+    field = createField("CONT", string);
     insertBack(&other, field);
   }
   sub->otherFields = other;
