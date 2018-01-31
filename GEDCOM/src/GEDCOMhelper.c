@@ -598,8 +598,9 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
         }
         for (int j = 0; j < n; j++){
           if (names[j][0] == '/' && names[j][strlen(names[j]) - 1] == '/'){
-            names[j][0] = '\0';
-            names[j][strlen(names[j]) - 1] = '\0';
+            for (int m = 0; m < strlne(names[j]); m++){
+              names[j][m] = names[j][m + 1];
+            }
             printf("gonna save last name\n");
             //checking if it is last name and if it is set it.
             strcpy(person->surname, names[j]);
