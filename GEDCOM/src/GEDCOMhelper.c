@@ -608,6 +608,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
           }else{
             printf("first name exitst\n");
             names[j][strlen(names[j] - 1)] = '\0';
+            printf("lslslslslsls : %s\n", names[j]);
             strcat(string, names[j]);
             printf("printing first <%s>\n", string);
           }
