@@ -347,7 +347,7 @@ Header * headParser(Info * record, int length, List pointers, List receiver){
   List  other = initializeList(printField, deleteField, compareFields);
   Pointer * point = calloc(1, sizeof(Pointer));
   Field * field;
-  Submitter sub;
+  //Submitter sub;
   //insertBack(other, field);
   //char dadsd  = toString(other)
   printf("length of one record %d\n", length);
@@ -402,7 +402,7 @@ Header * headParser(Info * record, int length, List pointers, List receiver){
       flag = 1;//means submitter exist
       strcpy(point->addr, record[i].info);
       strcpy(point->type, record[i].tag);
-      point->point = sub;
+      point->point = head->submitter;
       insertBack(&receiver, point);
       //i++;
     }
