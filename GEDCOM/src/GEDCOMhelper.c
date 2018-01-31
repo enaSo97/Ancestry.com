@@ -491,10 +491,10 @@ Header * headParser(Info * record, int length, List pointers, List receiver){
       }*/
     }
   }
-  printf("\nSource: %s, GED VER: %f, Encoding: %d\n", head->source, head->gedcVersion, head->encoding);
+  /*printf("\nSource: %s, GED VER: %f, Encoding: %d\n", head->source, head->gedcVersion, head->encoding);
   char * print = toString(other);
   puts(print);
-  head->otherFields = other;
+  head->otherFields = other;*/
   return head;
 }
 
@@ -546,9 +546,9 @@ Submitter * subParser(Info * record, int length, List pointers, List receiver){
   }
   insertBack(&pointers, temp);
 
-  printf("\nName: %s, Address: %s\n", sub->submitterName, sub->address);
+  /*printf("\nName: %s, Address: %s\n", sub->submitterName, sub->address);
   char * print = toString(other);
-  puts(print);
+  puts(print);*/
 
   return sub;
 }
@@ -578,7 +578,9 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
   for (int i = 0; i < length; i++){
     int n = 0;
     if (strcmp(record[i].tag, "NAME") == 0){
+      printf("has name\n");
       if (strlen(record[i].info) > 0){// if name exist
+        printf("gonna parse it\n");
         char * personName = strtok(record[i].info, " ");
         while(personName != NULL){ //parses the full name
           strcpy(names[n], personName);
@@ -589,6 +591,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
           if (names[j][0] == '/' && names[j][strlen(names[j]) - 1] == '/'){
             names[j][0] = '\0';
             names[j][strlen(names[j]) - 1] = '\0';
+            printf("gonna save last name\n");
             //checking if it is last name and if it is set it.
             strcpy(person->surname, names[j]);
           }else{
@@ -596,11 +599,13 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
           }
         }
         if (strlen(string) > 0){
+          printf("saving the firstname\n");
           strcpy(person->givenName, string);
         }
       }
       i++;
       while(record[i].level != 1){
+        printf("saveing other things that's in the name\n");
         field = createField(record[i].tag, record[i].info);
         insertBack(&other, field);
         i++;
@@ -608,18 +613,22 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
       i--;
     }
     else if (validateIndividualEvent(record[i].tag) == 1){
+      printf("it is valid event\n");
       Event * event = calloc(1, sizeof(Event));
       strcpy(event->type, record[i].tag);
       i++;
       while(record[i].level != 1){
         if(strcmp(record[i].tag, "PLAC") == 0){
+          printf("place\n");
           event->place = malloc(sizeof(char) * strlen(record[i].info));
           strcpy(event->place, record[i].info);
         }
         else if (strcmp(record[i].tag, "DATE") == 0){
+          printf("date\n");
           event->date = malloc(sizeof(char) * strlen(record[i].info));
           strcpy(event->date, record[i].info);
         }else{
+          printf("other stuff about the event\n");
           field = createField(record[i].tag, record[i].info);
           insertBack(&other, field);
         }
@@ -629,12 +638,14 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
       i--;
     }
     else if(strcmp(record[i].tag, "FAMC") == 0 || strcmp(record[i].tag, "FAMS") == 0){
+      printf("family poitners\n");
       strcpy(temp->type, record[i].tag);
       strcpy(temp->addr, record[i].info);
       temp->point = person;
       insertBack(&receiver, temp);
     }
     else{
+      printf("whole bunch of other stuff\n");
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
     }
@@ -642,8 +653,10 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
 
   printf("\nFirst: %s, Last: %s\n", person->givenName, person->surname);
   char * print = toString(events);
+  printf("printing events\n");
   puts(print);
   char * output = toString(other);
+  printf("printing other fiekds\n");
   puts(output);
 
 
