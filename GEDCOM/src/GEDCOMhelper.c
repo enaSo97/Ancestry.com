@@ -599,6 +599,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
           n++;
         }
         for (int j = 0; j < n; j++){
+          printf("printing j [[%s]]\n", names[j]);
           if (j == n - 1){
             printf("in last name\n");
             names[j][strlen(names[j] - 1)] = '\0';
