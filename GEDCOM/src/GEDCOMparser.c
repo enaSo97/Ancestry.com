@@ -30,7 +30,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   Info * info;
   Info * record;
   //int flag = 0;
-  char ** stuff;
+  //char ** stuff;
   int k =0;
   List pointers = initializeList(printPointers, deletePointers, comparePointers);
 

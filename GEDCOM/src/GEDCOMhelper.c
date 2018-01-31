@@ -399,7 +399,6 @@ Header * headParser(Info * record, int length, List pointers, List receiver){
       i--;
     }
     else if (strcmp(record[i].tag, "SUBM") == 0){
-      flag = 1;//means submitter exist
       strcpy(point->addr, record[i].info);
       strcpy(point->type, record[i].tag);
       point->point = head->submitter;
