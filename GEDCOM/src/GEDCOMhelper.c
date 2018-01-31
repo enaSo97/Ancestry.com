@@ -450,7 +450,7 @@ Header * headParser(Info * record, int length){
 
 Submitter * subParser(Info * record, int length){
   Submitter * sub = calloc(1,sizeof(Submitter));
-  Pointer * tmep = calloc(1,sizeof(Pointer));
+  Pointer * temp = calloc(1,sizeof(Pointer));
   Field * field;
   List other = initializeList(printField, deleteField, compareFields);
   List pointers;
