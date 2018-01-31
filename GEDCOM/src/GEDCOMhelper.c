@@ -573,7 +573,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
   List events = initializeList(printEvent, deleteEvent, compareEvents);
   char string[50] = "";
   char names[5][50];
-
+  printf("in individual parser\n");
   for (int i = 0; i < length; i++){
     int n = 0;
     if (strcmp(record[i].tag, "NAME") == 0){
