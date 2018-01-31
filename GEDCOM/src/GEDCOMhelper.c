@@ -464,7 +464,7 @@ Submitter * subParser(Info * record, int length){
     else if (strcmp(record[i].tag, "ADDR") == 0){
       strcpy(sub->address, record[i].info);
       i++;
-      while(record[i].level != (record[i - 1].level- 1)){
+      while(record[i].level != (record[i - 1].level)){
         if (strcmp(record[i].tag, "CONT") == 0){
           strcpy(string, record[i].info);
         }
