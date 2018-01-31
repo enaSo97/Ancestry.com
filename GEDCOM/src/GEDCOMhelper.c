@@ -602,7 +602,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
           printf("printing j [[%s]]\n", names[j]);
           if (j == n - 1){
             printf("in last name\n");
-            names[j][strlen(names[j] - 1)] = '\0';
+            names[j][strlen(names[j])-1] = '\0';
             strcpy(person->surname, names[j]);
             printf("last Name : %s\n", person->surname);
           }else{
