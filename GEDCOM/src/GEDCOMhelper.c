@@ -601,14 +601,12 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
         for (int j = 0; j < n; j++){
           printf("printing j [[%s]]\n", names[j]);
           if (j == n - 1){
-            printf("in last name\n");
             names[j][strlen(names[j])-1] = '\0';
+            printf("askdjfalskdjfslakdj <<%s>>\n", names[j]);
             strcpy(person->surname, names[j]);
             printf("last Name : %s\n", person->surname);
           }else{
-            printf("first name exitst\n");
             names[j][strlen(names[j]) - 1] = '\0';
-            printf("lslslslslsls : %s\n", names[j]);
             strcat(string, names[j]);
             printf("printing first <%s>\n", string);
           }
