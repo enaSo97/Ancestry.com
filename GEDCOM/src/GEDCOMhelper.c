@@ -572,6 +572,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
   List other = initializeList(printField, deleteField, compareFields);
   List events = initializeList(printEvent, deleteEvent, compareEvents);
   char string[50] = "";
+  char last[50] = "";
   char names[5][50];
   printf("in individual parser\n");
 
@@ -598,13 +599,13 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
         }
         for (int j = 0; j < n; j++){
           if (names[j][0] == '/' && names[j][strlen(names[j]) - 1] == '/'){
-            for (int m = 0; m < strlen(names[j]); m++){
-              names[j][m] = names[j][m + 1];
+            for (int m = 1; m < strlen(names[j]-2); m++){
+              strcpy(last, names[j][m]);
             }
             printf("gonna save last name\n");
             //checking if it is last name and if it is set it.
-            strcpy(person->surname, names[j]);
-            printf("last NAme : %s\n", names[j]);
+            strcpy(person->surname, last);
+            printf("last NAme : %s\n", last);
           }else{
             strcat(string, names[j]);
           }
