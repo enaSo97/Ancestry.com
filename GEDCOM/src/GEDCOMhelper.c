@@ -577,7 +577,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
 
   /*******Saving the pointer of the individual in the sender list*****/
   strcpy(temp->addr, record[0].info);
-  strpcy(temp->type, record[0].tag);
+  strcpy(temp->type, record[0].tag);
   temp->point = person;
   insertBack(&pointers, temp);
   /*******************************************************************/
