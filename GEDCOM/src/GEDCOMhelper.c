@@ -601,7 +601,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
           if (names[j][0] == '/' && names[j][strlen(names[j]) - 1] == '/'){
             int k = 0;
             for (int m = 1; m < strlen(names[j]-2); m++){
-              last[k] names[j][m]);
+              last[k] = names[j][m];
               k++;
             }
             printf("gonna save last name\n");
