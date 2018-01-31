@@ -338,11 +338,11 @@ int compare(const void *first,const void *second){
 
 Header * headParser(Info * record, int length, List pointers, List receiver){
   Header * head = malloc(sizeof(Header));
-  int flag = 0;
+  //int flag = 0;
   //char sour[249];
   float ver = 0;
-  int i = 0;
-  char * string = malloc(sizeof(char));
+  //int i = 0;
+  //char * string = malloc(sizeof(char));
 
   List  other = initializeList(printField, deleteField, compareFields);
   Pointer * point = calloc(1, sizeof(Pointer));

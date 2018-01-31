@@ -26,10 +26,10 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   //if(DEBUG)printf("int the create\n");
   char** read; // storing the each line of GEDCOM file in double pointer array
   int length;
-  int recLength = 0;
+  //int recLength = 0;
   Info * info;
   Info * record;
-  int flag = 0;
+  //int flag = 0;
   char ** stuff;
   int k =0;
   List pointers = initializeList(printPointers, deletePointers, comparePointers);
