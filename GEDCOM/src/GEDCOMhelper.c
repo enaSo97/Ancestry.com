@@ -591,7 +591,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
       printf("has name\n");
       if (strlen(record[i].info) > 0){// if name exist
         printf("gonna parse it\n");
-        char * personName = strtok(record[i].info, " /");
+        char * personName = strtok(record[i].info, "/");
         while(personName != NULL){ //parses the full name
           strcpy(names[n], personName);
           printf("tocken names <%s>\n", names[n]);
