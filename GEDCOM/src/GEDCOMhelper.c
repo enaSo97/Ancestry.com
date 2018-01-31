@@ -603,6 +603,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
           if (j == n - 1){
             names[j][strlen(names[j])-1] = '\0';
             printf("askdjfalskdjfslakdj <<%s>>\n", names[j]);
+            person->surname = malloc(sizeof(char)*strlen(names[j]));
             strcpy(person->surname, names[j]);
             printf("last Name : %s\n", person->surname);
           }else{
@@ -613,6 +614,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
         }
         if (strlen(string) > 0){
           printf("saving the firstname\n");
+          person->givenName = malloc(sizeof(char)*strlen(string));
           strcpy(person->givenName, string);
           printf("last Name : %s\n", person->givenName);
         }
