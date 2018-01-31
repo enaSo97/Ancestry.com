@@ -36,6 +36,10 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
 
   List reciever = initializeList(printPointers, deletePointers, comparePointers);
 
+  List people = initializeList(printIndividual, deleteIndividual, compareIndividuals);
+
+  Individual * dummyPerson;
+
   GEDCOMobject * object = malloc(sizeof(GEDCOMobject));
   //*obj = malloc(sizeof(GEDCOMobject));
 
@@ -86,7 +90,8 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         object->submitter = subParser(record, k, pointers, reciever);
       }
       else if (strcmp(record[0].tag, "INDI") == 0){
-        object->individuals = parseIndividual(record, k, pointers, reciever);
+        dummyPerson = parseIndividual(record, k, pointers, reciever);
+        insertBack(&people, dummyPerson);
       }
     }
     i--;

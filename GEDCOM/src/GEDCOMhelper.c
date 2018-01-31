@@ -138,7 +138,7 @@ int comparePointers(const void *first,const void *second){
   compare1 = (Pointer*)first;
   compare2 = (Pointer*)second;
 
-  return strcmp(compare1->surname, compare2->surname);
+  return strcmp(compare1->addr, compare2->addr);
 }
 
 /*************************************************************************/
@@ -402,7 +402,7 @@ Header * headParser(Info * record, int length, List pointers, List receiver){
       flag = 1;//means submitter exist
       strcpy(point->addr, record[i].info);
       strcpy(point->type, record[i].tag);
-      point->point = sub;
+      point->point = (void*)sub;
       insertBack(&receiver, point);
       //i++;
     }
