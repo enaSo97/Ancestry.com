@@ -603,6 +603,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
             printf("gonna save last name\n");
             //checking if it is last name and if it is set it.
             strcpy(person->surname, names[j]);
+            printf("last NAme : %s\n", names[j]);
           }else{
             strcat(string, names[j]);
           }
