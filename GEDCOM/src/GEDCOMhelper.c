@@ -594,6 +594,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
         char * personName = strtok(record[i].info, " /");
         while(personName != NULL){ //parses the full name
           strcpy(names[n], personName);
+          printf("tocken names <%s>\n", names[n]);
           personName = strtok(NULL, ""); // saving parsed name in to temp 2d array
           n++;
         }
