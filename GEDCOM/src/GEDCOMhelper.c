@@ -556,7 +556,7 @@ int validateIndividualEvent(char * check){
   char * events[] = {"BIRT", "CHR", "DEAT", "BURI", "CREM", "ADOP", "BAPM", "BARM", "BASM", "BLES", "CHRA",
                       "CONF", "FCOM", "ORDN", "NATU", "EMIG", "IMMI", "CENS", "PROB", "WILL", "GRAD", "RETI", "EVEN"};
 
-  for (int i = 0; i < 24; i++){
+  for (int i = 0; i < 23; i++){
     if (strcmp(check, events[i]) == 0){
       return 1;
     }
@@ -595,7 +595,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
         while(personName != NULL){ //parses the full name
           strcpy(names[n], personName);
           printf("tocken names <%s>\n", names[n]);
-          personName = strtok(NULL, ""); // saving parsed name in to temp 2d array
+          personName = strtok(NULL, "/"); // saving parsed name in to temp 2d array
           n++;
         }
         for (int j = 0; j < n; j++){
