@@ -576,10 +576,10 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
   printf("in individual parser\n");
 
   /*******Saving the pointer of the individual in the sender list*****/
-  strcpy(temp->addr, record[i].info);
-  strpcy(temp->type, record[i].tag);
+  strcpy(temp->addr, record[0].info);
+  strpcy(temp->type, record[0].tag);
   temp->point = person;
-  insertBack(&pointers, temo);
+  insertBack(&pointers, temp);
   /*******************************************************************/
 
   for (int i = 1; i < length; i++){
