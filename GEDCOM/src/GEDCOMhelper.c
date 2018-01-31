@@ -613,10 +613,8 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
           }
         }
         if (strlen(string) > 0){
-          printf("saving the firstname\n");
           person->givenName = malloc(sizeof(char)*strlen(string));
           strcpy(person->givenName, string);
-          printf("last Name : %s\n", person->givenName);
         }
       }
       i++;
@@ -628,7 +626,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
       }
       i--;
     }
-    else if (validateIndividualEvent(record[i].tag) == 1){
+    if (validateIndividualEvent(record[i].tag) == 1){
       printf("it is valid event\n");
       Event * event = calloc(1, sizeof(Event));
       strcpy(event->type, record[i].tag);
@@ -653,7 +651,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
       insertBack(&events, event);
       i--;
     }
-    else if(strcmp(record[i].tag, "FAMC") == 0 || strcmp(record[i].tag, "FAMS") == 0){
+    if(strcmp(record[i].tag, "FAMC") == 0 || strcmp(record[i].tag, "FAMS") == 0){
       printf("family poitners\n");
       strcpy(temp->type, record[i].tag);
       strcpy(temp->addr, record[i].info);
