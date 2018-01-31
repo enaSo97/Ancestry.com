@@ -444,17 +444,56 @@ Header * headParser(Info * record, int length){
   printf("\nSource: %s, GED VER: %f, Encoding: %d\n", head->source, head->gedcVersion, head->encoding);
   char * print = toString(other);
   puts(print);
+  head->otherFields = other;
   return head;
 }
 
-submitter * subParser(){
-  submitter * sub = malloc(sizeof(submitter));
-  pointer * tmep = malloc
-  if (sub.tag == NAMe){
-    s
+Submitter * subParser(Info * record, int length){
+  Submitter * sub = calloc(1,sizeof(Submitter));
+  Pointer * tmep = calloc(1,sizeof(Pointer));
+  Field * field;
+  List other = initializeList(printField, deleteField, compareFields);
+  List pointers;
+  int flag = 0;
+  char string[5000] = "";
+
+  for (int i = 0; i < length; i++){
+    if (strcmp(record[i].tag, "NAME") == 0){
+      strcpy(sub->submitterName, record[i].info);
+    }
+    else if (strcmp(record[i].tag, "ADDR") == 0){
+      strcpy(sub->address, record[i].info);
+      i++;
+      while(record[i].level != (record[i - 1].level- 1)){
+        if (strcmp(record[i].tag, "CONT") == 0){
+          strcpy(string, record[i].info);
+        }
+        else{
+          field = createField(record[i].tag, record[i].info);
+          insertBack(&other, field);
+        }
+      }
+      if (strlen(string) > 0){
+        field = createField(record[i].tag, record[i].info);
+        insertBack(&other, field);
+      }
+      i--;
+    }
+    else{
+      field = createField(record[i].tag, record[i].info);
+      insertBack(&other, field);
+    }
   }
-  temp->adrss = Wolverhampton
-  temp->pointer = sub;
-  
+  sub->otherFields = other;
+  if (record[0].info[0] == '@' && record[0].info[strlen(record[0].tag) - 1] == '@'){
+    strcpy(temp->addr, record[0].info);
+    strcpy(temp->type, record[0].tag);
+    temp->point = sub;
+  }
+
+  printf("\nName: %s, Address: %s\n", sub->submitterName, sub->address);
+  char * print = toString(other);
+  puts(print);
+
   return sub;
 }

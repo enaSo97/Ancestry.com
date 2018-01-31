@@ -13,6 +13,12 @@ typedef struct info{
   int line;
 }Info;
 
+typedef struct pointer{
+  char addr[10];
+  void * point;
+  char type[10];
+}Pointer;
+
 Event * createEvent(char type[5], char * date, char * place, List other);
 
 Field * createField(char * tag, char * value);
