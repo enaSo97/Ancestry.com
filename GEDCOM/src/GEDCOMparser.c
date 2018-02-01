@@ -38,7 +38,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
 
   List people = initializeList(printIndividual, deleteIndividual, compareIndividuals);
 
-  Individual * dummyPerson;
+  Individual * dummyPerson = malloc(sizeof(Individual));
 
   GEDCOMobject * object = malloc(sizeof(GEDCOMobject));
   //*obj = malloc(sizeof(GEDCOMobject));

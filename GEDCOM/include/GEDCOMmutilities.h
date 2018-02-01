@@ -15,7 +15,7 @@ typedef struct info{
 
 typedef struct pointer{
   char addr[10];
-  void * point;
+  void ** point;
   char type[10];
 }Pointer;
 
@@ -82,3 +82,5 @@ char * printPointers(void * data);
 void deletePointers(void * erase);
 
 int comparePointers(const void *first,const void *second);
+
+int validateIndividualEvent(char * check);
