@@ -735,7 +735,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
 
 void linkerFunction(List * receiver, List * pointers){
   Node * temp = receiver->head;
-  Node * temp2 = pointers->head;
+  //Node * temp2 = pointers->head;
   //int REClength = getLength(*receiver);
   //int prtLength = getLength(*pointers);
   void * key;
@@ -743,7 +743,7 @@ void linkerFunction(List * receiver, List * pointers){
   int j = 0;
 
   while(temp->next != NULL){
-        key = findElement(pointers, comparePointers, temp->data);
+        key = findElement(*pointers, comparePointers, temp->data);
         if(key != temp->data){
           *temp->data->point = ((Pointer*)key)->point;
         }
