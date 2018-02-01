@@ -110,6 +110,8 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   linkerFunction(&receiver, &pointers);
   length--;
 
+
+
   char * print1 = toString(pointers);
   char * print2 = toString(receiver);
   printf("******pointers**************************\n");
@@ -338,7 +340,7 @@ char* printIndividual(void* toBePrinted){
 
   sprintf(string, "FirstName: %s, LastName: %s", print->givenName, print->surname);
   strcat(string, toString(print->events));
-  strcat(string, toString(print->families));
+  //strcat(string, toString(print->families));
   strcat(string, toString(print->otherFields));
   return string;
 }

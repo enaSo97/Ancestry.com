@@ -106,10 +106,15 @@ char * printPointers(void * data){
     return NULL;
   }
 
+
   point = (Pointer*)data;
-  length = strlen(point->addr) + strlen(point->type) + 40;
+
+  length = strlen(point->addr) + strlen(point->type) + 500;
   string = (char*)calloc(length, sizeof(char));
   sprintf(string, "Type: %s, Address: %s\n", point->type, point->addr);
+  if (strcmp(point->type, "CHIL") == 0){
+    strcat(string, printIndividual(((Individual*)point)->point));
+  }
 
   return string;
 }
