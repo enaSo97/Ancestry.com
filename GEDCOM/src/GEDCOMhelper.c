@@ -682,7 +682,7 @@ Family * parseFamily(Info * record, int length, List pointers, List receiver){
   //List kids = initializeList(printIndividual, deleteIndividual, compareIndividuals);
 
   strcpy(temp->addr, record[0].info);
-  strcpy(temp->type, record[0].type);
+  strcpy(temp->type, record[0].tag);
   temp->point = (void*)family;
   insertBack(&pointers, temp);
 
@@ -691,7 +691,7 @@ Family * parseFamily(Info * record, int length, List pointers, List receiver){
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, record[i].tag);
       temp->point = (void*)family->husband;
-      insertBack(&receiver, point);
+      insertBack(&receiver, temp);
     }
     else if (strcmp(record[i].tag, "WIFE") == 0){
       strcpy(temp->addr, record[i].info);
