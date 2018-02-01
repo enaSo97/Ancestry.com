@@ -252,6 +252,7 @@ char* printEvent(void* toBePrinted){ //type date place other fields
   chrTemp = (char*)calloc(length, sizeof(char));
   sprintf(chrTemp, "type: %s, date: %s, place: %s\n", temp->type, temp->date, temp->place);
   if (temp->otherFields.head != NULL){
+    printf("when it is not null\n");
     strcat(chrTemp, toString(temp->otherFields));
   }
 
