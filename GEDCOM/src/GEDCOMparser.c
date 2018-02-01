@@ -260,8 +260,6 @@ char* printEvent(void* toBePrinted){ //type date place other fields
   char* chrTemp;
   Event* temp;
   int length;
-
-  printf("inside printing events\n");
   if (toBePrinted == NULL){
     return NULL;
   }
@@ -280,15 +278,13 @@ char* printEvent(void* toBePrinted){ //type date place other fields
   }
 
 
-  //printf("\ntype: %s, date: %s, place: %s\n", temp->type, temp->date, temp->place);
+  printf("\ntype: %s, date: %s, place: %s\n", temp->type, temp->date, temp->place);
   //char * print = toString(temp->otherFields);
   //printf("%s\n\n",print);
 
   //length = strlen(temp->type) + strlen(temp->date) + strlen(temp->place) + 300;
   chrTemp = (char*)calloc(1000, sizeof(char));
   sprintf(chrTemp, "type: %s, date: %s, place: %s\n", temp->type, temp->date, temp->place);
-  printf("after sprintf\n");
-
   if (temp->otherFields.head != NULL){
     //printf("when it is not null\n");
     strcat(chrTemp, toString(temp->otherFields));
