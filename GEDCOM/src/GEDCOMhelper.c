@@ -236,7 +236,7 @@ int checkTerminate(char * string){
 }
 
 char** fileReader(char * fileName){
-  char** array = (char**)malloc(sizeof(char*)*10000000);
+  char** array = calloc(10000000, sizeof(char*));
   char reader[1000];
   int counter = 1;
   int i = 0;
@@ -264,10 +264,9 @@ char** fileReader(char * fileName){
 
 int fileLength(char ** array){
   int i = 0;
-  char ** temp = array;
   if (DEBUG)printf("\ngetting the length of file\n");
 
-  while(temp[i] != NULL){
+  while(array[i] != NULL){
     i++;
   }
   //printf("number of element in array %d\n", i);
