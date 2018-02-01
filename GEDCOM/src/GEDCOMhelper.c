@@ -766,8 +766,8 @@ void linkerFunction(List * receiver, List * pointers){
     printf("chekcing each node ||%s||\n", ((Pointer*)temp->data)->addr);
     key = findElement(*pointers, comparePointers, temp->data);
     if(key == temp->data){
-      printf("\nfound the matching ones\n");
-      printf("pointer %s == receiver %s || type %s == type %s\n", ((Pointer*)key)->addr, ((Pointer*)temp->data)->addr, ((Pointer*)key)->type, ((Pointer*)temp->data)->type);
+      //printf("\nfound the matching ones\n");
+      printf("\npointer %s == receiver %s || type %s == type %s\n\n", ((Pointer*)key)->addr, ((Pointer*)temp->data)->addr, ((Pointer*)key)->type, ((Pointer*)temp->data)->type);
       ((Pointer*)temp->data)->point = (void*)((Pointer*)key)->point;
     }
     temp = temp->next;
