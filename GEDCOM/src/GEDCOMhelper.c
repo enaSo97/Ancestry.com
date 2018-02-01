@@ -655,7 +655,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
       i++;
       while(record[i].level != 1){
         if(strcmp(record[i].tag, "PLAC") == 0){
-          event->place = (char*)calloc(300, sizeof(char));
+          event->place = calloc(500, sizeof(char));
           strcpy(event->place, record[i].info);
         }
         else if (strcmp(record[i].tag, "DATE") == 0){
