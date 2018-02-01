@@ -514,7 +514,7 @@ Submitter * subParser(Info * record, int length, List * pointers, List * receive
       strcpy(temp->addr, record[0].info);
       strcpy(temp->type, record[0].tag);
       temp->point = (void*)sub;
-      insertBack(pointers, temp)
+      insertBack(pointers, temp);
     }
     else if (strcmp(record[i].tag, "ADDR") == 0){
       strcpy(sub->address, record[i].info);
