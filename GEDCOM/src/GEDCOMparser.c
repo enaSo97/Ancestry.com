@@ -110,7 +110,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   linkerFunction(&receiver, &pointers);
   length--;
 
-  char * indi = toString(*dummyFamily);
+  char * indi = toString(people);
   puts(indi);
 
   /*char * print1 = toString(pointers);
