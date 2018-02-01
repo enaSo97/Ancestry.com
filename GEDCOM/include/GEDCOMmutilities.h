@@ -21,7 +21,7 @@ typedef struct pointer{
 
 Event * createEvent(char type[5], char * date, char * place, List other);
 
-Field * createField(char * tag, char * value);
+Field * createField(char tag[20], char value[255]);
 
 Submitter * createSubmiter(char Name[61], List other, char address[]);
 
