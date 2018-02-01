@@ -256,9 +256,9 @@ char* printEvent(void* toBePrinted){ //type date place other fields
   }
 
 
-  printf("\ntype: %s, date: %s, place: %s\n", temp->type, temp->date, temp->place);
-  char * print = toString(temp->otherFields);
-  printf("%s\n\n",print);
+  //printf("\ntype: %s, date: %s, place: %s\n", temp->type, temp->date, temp->place);
+  //char * print = toString(temp->otherFields);
+  //printf("%s\n\n",print);
 
   //length = strlen(temp->type) + strlen(temp->date) + strlen(temp->place) + 300;
   chrTemp = (char*)calloc(1000, sizeof(char));
@@ -266,11 +266,11 @@ char* printEvent(void* toBePrinted){ //type date place other fields
   printf("after sprintf\n");
 
   if (temp->otherFields.head != NULL){
-    printf("when it is not null\n");
+    //printf("when it is not null\n");
     strcat(chrTemp, toString(temp->otherFields));
   }
-  printf("right before returning print events\n");
-  puts(chrTemp);
+  //printf("right before returning print events\n");
+  //puts(chrTemp);
   return chrTemp;
 }
 

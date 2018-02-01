@@ -588,30 +588,23 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
   person->givenName = malloc(sizeof(char)*50);
   for (int i = 1; i < length; i++){
     int n = 0;
-    printf("\n<<%d||%s||%s>>\n", record[i].level, record[i].tag, record[i].info);
+    //printf("\n<<%d||%s||%s>>\n", record[i].level, record[i].tag, record[i].info);
 
     if (strcmp(record[i].tag, "NAME") == 0){
-      printf("has name\n");
       if (strlen(record[i].info) > 0){// if name exist
-        printf("gonna parse it\n");
         char * personName = strtok(record[i].info, "/");
         while(personName != NULL){ //parses the full name
           strcpy(names[n], personName);
-          printf("tocken names <%s>\n", names[n]);
           personName = strtok(NULL, "/"); // saving parsed name in to temp 2d array
           n++;
         }
         for (int j = 0; j < n; j++){
-          printf("printing j [[%s]]\n", names[j]);
           if (j == n - 1){
             names[j][strlen(names[j])-1] = '\0';
-            printf("askdjfalskdjfslakdj <<%s>>\n", names[j]);
             strcpy(person->surname, names[j]);
-            printf("last Name : %s\n", person->surname);
           }else{
             names[j][strlen(names[j]) - 1] = '\0';
             strcat(string, names[j]);
-            printf("printing first <%s>\n", string);
           }
         }
         if (strlen(string) > 0){
@@ -620,7 +613,6 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
       }
       i++;
       while(record[i].level != 1){
-        printf("saveing other things that's in the name\n");
         field = createField(record[i].tag, record[i].info);
         insertBack(&other, field);
         i++;
@@ -628,25 +620,18 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
       i--;
     }
     else if (validateIndividualEvent(record[i].tag) == 1){
-      printf("it is valid event\n");
       Event * event = calloc(1, sizeof(Event));
       strcpy(event->type, record[i].tag);
       i++;
       while(record[i].level != 1){
         if(strcmp(record[i].tag, "PLAC") == 0){
-          printf("place\n");
           event->place = (char*)calloc(300, sizeof(char));
-          if (record[i].info == NULL){
-            printf("it is empty 640\n");
-          }
           strcpy(event->place, record[i].info);
         }
         else if (strcmp(record[i].tag, "DATE") == 0){
-          printf("date\n");
           event->date = malloc(sizeof(char) * strlen(record[i].info));
           strcpy(event->date, record[i].info);
         }else{
-          printf("other stuff about the event\n");
           field = createField(record[i].tag, record[i].info);
           insertBack(&other, field);
         }
@@ -656,23 +641,19 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
       i--;
     }
     else if(strcmp(record[i].tag, "FAMC") == 0 || strcmp(record[i].tag, "FAMS") == 0){
-      printf("family poitners\n");
       strcpy(temp->type, record[i].tag);
       strcpy(temp->addr, record[i].info);
       temp->point = (void*)person;
       insertBack(&receiver, temp);
     }
     else{
-      printf("whole bunch of other stuff\n");
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
     }
   }
   char * print = toString(events);
-  printf("printing events\n");
   puts(print);
   char * output = toString(other);
-  printf("printing other fiekds\n");
   puts(output);
 
 
