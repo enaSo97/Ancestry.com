@@ -504,6 +504,8 @@ Submitter * subParser(Info * record, int length, List pointers, List receiver){
   List other = initializeList(printField, deleteField, compareFields);
   char string[5000] = "";
 
+  printf("\nin sub parser\n");
+
   for (int i = 0; i < length; i++){
     if (strcmp(record[i].tag, "NAME") == 0){
       strcpy(sub->submitterName, record[i].info);
