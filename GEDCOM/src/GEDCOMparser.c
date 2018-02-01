@@ -341,7 +341,7 @@ void deleteFamily(void* toBeDeleted){
   deleteIndividual(Delete->husband);
   free(Delete);
 }
-/*int compareFamilies(const void* first,const void* second){
+int compareFamilies(const void* first,const void* second){
   Family * compare1 = (Family*)first;
   Fmaily * compare2 = (Family*)second;
 
@@ -349,7 +349,7 @@ void deleteFamily(void* toBeDeleted){
   int count2;
 
   return 0;
-}*/
+}
 char* printFamily(void* toBePrinted){
   char * string;
   char * toadd;
