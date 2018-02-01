@@ -760,7 +760,7 @@ void linkerFunction(List * receiver, List * pointers){
     key = findElement(*pointers, comparePointers, temp->data);
     if(key == temp->data){
       printf("\nfound the matching ones\n");
-      printf("pointer %s == receiver %s\n", ((Pointer*)key)->addr, ((Pointer*)temp->data)->addr);
+      printf("pointer %s == receiver %s || type %s == type %s\n", ((Pointer*)key)->addr, ((Pointer*)temp->data)->addr, ((Pointer*)key)->type, ((Pointer*)temp->data)->type);
       ((Pointer*)temp->data)->point = (void*)((Pointer*)key)->point;
     }
     temp = temp->next;
