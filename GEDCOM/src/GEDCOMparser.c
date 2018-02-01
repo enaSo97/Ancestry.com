@@ -345,7 +345,6 @@ int compareFamilies(const void* first,const void* second){
   Family * compare1 = (Family*)first;
   Fmaily * compare2 = (Family*)second;
 
-  int count1 = getLength(compare1->);
   int count2;
 
   return 0;
