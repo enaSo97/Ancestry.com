@@ -99,7 +99,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     //i = k;
   }
   length--;
-  for (int i = 0; i < length; i++){ // freeing the allocated memory after done parsing the file
+  for (int i = 0; i < 10000000; i++){ // freeing the allocated memory after done parsing the file
     //free(info[i]); // freeing the allocated information struct
     free(read[i]);//freeing the allocated strings
   }
