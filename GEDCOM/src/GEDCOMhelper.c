@@ -652,10 +652,79 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
     }
   }
   char * print = toString(events);
-  puts(print);
+  //puts(print);
   char * output = toString(other);
-  puts(output);
+  //puts(output);
 
 
   return person;
+}
+
+int validateFamilyEvent(char * check){
+  char * events[] = {"ANUL", "CENS", "DIV", "DIVF", "ENGA", "MARB", "MARC", "MARR", "MARL",
+                    "MARS", "RESI", "EVEN"};
+
+  for (int i = 0; i < 12; i++){
+    if (strcmp(check, events[i]) == 0){
+      return 1;
+    }
+  }
+
+  return -1;
+}
+
+Family * parseFamily(Info * record, int length, List pointers, List receiver){
+  Family * family = calloc(1, sizeof(Family));
+  Pointer * temp = calloc(1, sizeof(Pointer));
+  Field * field = calloc(1, sizeof(Field));
+  List other = initializeList(printField, deleteField, compareFields);
+  List events = initializeList(printEvent, deleteEvent, compareEvents);
+  //List kids = initializeList(printIndividual, deleteIndividual, compareIndividuals);
+
+  strcpy(temp->addr, record[0].info);
+  strcpy(temp->type, record[0].type);
+  temp->point = (void*)family;
+  insertBack(&pointers, temp);
+
+  for (int i = 1; i < length; i++){
+    if (strcmp(record[i].tag, "HUSB") == 0){
+      strcpy(temp->addr, record[i].info);
+      strcpy(temp->type, record[i].tag);
+      temp->point = (void*)family->husband;
+      insertBack(&receiver, point);
+    }
+    else if (strcmp(record[i].tag, "WIFE") == 0){
+      strcpy(temp->addr, record[i].info);
+      strcpy(temp->type, record[i].tag);
+      temp->point = (void*)family->wife;
+      insertBack(&receiver, point);
+    }
+    else if (validateFamilyEvent(record[i].tag) == 1){
+      i++;
+      while(record[i].level != 1){
+        field = createField(record[i].tag, record[i].info);
+        insertBack(&other, field);
+        i++;
+      }
+      i--;
+    }
+    else if (strcmp(record[i].tag, "CHIL") == 0){
+      strcpy(temp->addr, record[i].info);
+      strcpy(temp->type, record[i].tag);
+      temp->point = (void*)family->children;
+      insertBack(&receiver, point);
+    }
+    else{
+      field = createField(record[i].tag, record[i].info);
+      insertBack(&other, field);
+    }
+  }
+
+  char * print1 = toString(pointers);
+  char * print2 = toString(receiver);
+  puts(print1);
+  printf("\n***************************************\n");
+  puts(print2);
+
+  return family;
 }

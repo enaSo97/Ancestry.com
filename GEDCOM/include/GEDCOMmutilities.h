@@ -71,6 +71,8 @@ Submitter * subParser(Info * record, int length, List pointers, List receiver);
 
 Individual * parseIndividual(Info * record, int length, List pointers, List receiver);
 
+Family * parseFamily(Info * record, int length, List pointers, List receiver);
+
 char * printFunc(void * data);
 
 void deleteFunc(void * erase);
@@ -84,3 +86,5 @@ void deletePointers(void * erase);
 int comparePointers(const void *first,const void *second);
 
 int validateIndividualEvent(char * check);
+
+int validateFamilyEvent(char * check);
