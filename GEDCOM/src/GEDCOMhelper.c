@@ -711,7 +711,7 @@ Family * parseFamily(Info * record, int length, List pointers, List receiver){
     else if (strcmp(record[i].tag, "CHIL") == 0){
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, record[i].tag);
-      temp->point = &family->children;
+      temp->point = (void*)&family->children;
       insertBack(&receiver, temp);
     }
     else{
