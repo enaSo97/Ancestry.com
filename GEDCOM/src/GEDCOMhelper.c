@@ -682,7 +682,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
     }
   }
   person->events = events;
-  person->field = other;
+  person->otherFields = other;
   //char * print = toString(events);
   //puts(print);
   //char * output = toString(other);
