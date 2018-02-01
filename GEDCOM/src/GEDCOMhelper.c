@@ -583,6 +583,8 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
   insertBack(&pointers, temp);
   /*******************************************************************/
 
+  person->surname = malloc(sizeof(char)*50);
+  person->givenName = malloc(sizeof(char)*50);
   for (int i = 1; i < length; i++){
     int n = 0;
     printf("\n<<%d||%s||%s>>\n", record[i].level, record[i].tag, record[i].info);
@@ -603,7 +605,6 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
           if (j == n - 1){
             names[j][strlen(names[j])-1] = '\0';
             printf("askdjfalskdjfslakdj <<%s>>\n", names[j]);
-            person->surname = malloc(sizeof(char)*(strlen(names[j])+1));
             strcpy(person->surname, names[j]);
             printf("last Name : %s\n", person->surname);
           }else{
@@ -613,7 +614,6 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
           }
         }
         if (strlen(string) > 0){
-          person->givenName = malloc(sizeof(char)*strlen(string));
           strcpy(person->givenName, string);
         }
       }
@@ -664,8 +664,6 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
       insertBack(&other, field);
     }
   }
-
-  printf("\nFirst: %s, Last: %s\n", person->givenName, person->surname);
   char * print = toString(events);
   printf("printing events\n");
   puts(print);
