@@ -343,7 +343,7 @@ void deleteFamily(void* toBeDeleted){
 }
 int compareFamilies(const void* first,const void* second){
   Family * compare1 = (Family*)first;
-  Fmaily * compare2 = (Family*)second;
+  Family * compare2 = (Family*)second;
 
   int count2;
 
