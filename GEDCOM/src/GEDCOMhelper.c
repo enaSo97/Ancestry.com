@@ -711,8 +711,8 @@ Family * parseFamily(Info * record, int length, List pointers, List receiver){
     else if (strcmp(record[i].tag, "CHIL") == 0){
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, record[i].tag);
-      temp->point = family->children;
-      insertBack(&receiver, point);
+      temp->point = &family->children;
+      insertBack(&receiver, temp);
     }
     else{
       field = createField(record[i].tag, record[i].info);
