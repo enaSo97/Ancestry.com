@@ -583,7 +583,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
   List other = initializeList(printField, deleteField, compareFields);
   List events = initializeList(printEvent, deleteEvent, compareEvents);
   char string[50] = "";
-  char last[50] = "";
+  //char last[50] = "";
   char names[10][50];
   printf("in individual parser\n");
 
@@ -661,9 +661,9 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
       insertBack(&other, field);
     }
   }
-  char * print = toString(events);
+  //char * print = toString(events);
   //puts(print);
-  char * output = toString(other);
+  //char * output = toString(other);
   //puts(output);
 
 
@@ -688,7 +688,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
   Pointer * temp = calloc(1, sizeof(Pointer));
   Field * field = calloc(1, sizeof(Field));
   List other = initializeList(printField, deleteField, compareFields);
-  List events = initializeList(printEvent, deleteEvent, compareEvents);
+  //List events = initializeList(printEvent, deleteEvent, compareEvents);
   //List kids = initializeList(printIndividual, deleteIndividual, compareIndividuals);
 
   strcpy(temp->addr, record[0].info);
@@ -736,16 +736,16 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
 void linkerFunction(List * receiver, List * pointers){
   Node * temp = receiver->head;
   Node * temp2 = pointers->head;
-  int REClength = getLength(receiver);
-  int prtLength = getLength(pointers);
+  //int REClength = getLength(*receiver);
+  //int prtLength = getLength(*pointers);
   void * key;
   int i = 0;
   int j = 0;
 
   while(temp->next != NULL){
-        key = findElement(pointers, comparePointers, temp->data));
+        key = findElement(pointers, comparePointers, temp->data);
         if(key != temp->data){
-          *temp->data->point = (Pointer*)key->point;
+          *temp->data->point = ((Pointer*)key)->point;
         }
   }
 }
