@@ -401,7 +401,7 @@ Header * headParser(Info * record, int length, List * pointers, List * receiver)
       strcpy(point->addr, record[i].info);
       strcpy(point->type, record[i].tag);
       point->point = (void*)head->submitter;
-      insertBack(&receiver, point);
+      insertBack(receiver, point);
       //i++;
     }
     else if (strcmp(record[i].tag, "SUBN") == 0){
@@ -544,7 +544,7 @@ Submitter * subParser(Info * record, int length, List * pointers, List * receive
     strcpy(temp->type, record[0].tag);
     temp->point = (void*)sub;
   }
-  insertBack(&pointers, temp);
+  insertBack(pointers, temp);
 
   //printf("\nName: %s, Address: %s\n", sub->submitterName, sub->address);
   char * print = toString(other);
@@ -581,7 +581,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
   strcpy(temp->addr, record[0].info);
   strcpy(temp->type, record[0].tag);
   temp->point = (void*)person;
-  insertBack(&pointers, temp);
+  insertBack(pointers, temp);
   /*******************************************************************/
 
   person->surname = malloc(sizeof(char)*50);
@@ -644,7 +644,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
       strcpy(temp->type, record[i].tag);
       strcpy(temp->addr, record[i].info);
       temp->point = (void*)person;
-      insertBack(&receiver, temp);
+      insertBack(receiver, temp);
     }
     else{
       field = createField(record[i].tag, record[i].info);
@@ -684,20 +684,20 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
   strcpy(temp->addr, record[0].info);
   strcpy(temp->type, record[0].tag);
   temp->point = (void*)family;
-  insertBack(&pointers, temp);
+  insertBack(pointers, temp);
 
   for (int i = 1; i < length; i++){
     if (strcmp(record[i].tag, "HUSB") == 0){
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, record[i].tag);
       temp->point = (void*)family->husband;
-      insertBack(&receiver, temp);
+      insertBack(receiver, temp);
     }
     else if (strcmp(record[i].tag, "WIFE") == 0){
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, record[i].tag);
       temp->point = (void*)family->wife;
-      insertBack(&receiver, temp);
+      insertBack(receiver, temp);
     }
     else if (validateFamilyEvent(record[i].tag) == 1){
       i++;
@@ -712,7 +712,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, record[i].tag);
       temp->point = (void*)&family->children;
-      insertBack(&receiver, temp);
+      insertBack(receiver, temp);
     }
     else{
       field = createField(record[i].tag, record[i].info);
