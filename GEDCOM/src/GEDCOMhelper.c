@@ -720,11 +720,5 @@ Family * parseFamily(Info * record, int length, List pointers, List receiver){
     }
   }
 
-  char * print1 = toString(pointers);
-  char * print2 = toString(receiver);
-  puts(print1);
-  printf("\n***************************************\n");
-  puts(print2);
-
   return family;
 }

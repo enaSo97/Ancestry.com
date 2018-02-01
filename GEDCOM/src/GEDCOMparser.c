@@ -34,7 +34,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   int k =0;
   List pointers = initializeList(printPointers, deletePointers, comparePointers);
 
-  List reciever = initializeList(printPointers, deletePointers, comparePointers);
+  List receiver = initializeList(printPointers, deletePointers, comparePointers);
 
   List people = initializeList(printIndividual, deleteIndividual, compareIndividuals);
 
@@ -107,6 +107,14 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     //i = k;
   }
   length--;
+
+  char * print1 = toString(pointers);
+  char * print2 = toString(receiver);
+  printf("******pointers**************************\n")
+  puts(print1);
+  printf("\n******receivers**********************\n");
+  puts(print2);
+  printf("*******************************************")
   for (int i = 0; i < 10000000; i++){ // freeing the allocated memory after done parsing the file
     //free(info[i]); // freeing the allocated information struct
     free(read[i]);//freeing the allocated strings
