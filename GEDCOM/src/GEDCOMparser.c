@@ -237,6 +237,7 @@ char* printEvent(void* toBePrinted){ //type date place other fields
   Event* temp;
   int length;
 
+  printf("inside printing events\n");
   if (toBePrinted == NULL){
     return NULL;
   }
