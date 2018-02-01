@@ -541,7 +541,7 @@ Submitter * subParser(Info * record, int length, List pointers, List receiver){
   if (record[0].info[0] == '@' && record[0].info[strlen(record[0].tag) - 1] == '@'){
     strcpy(temp->addr, record[0].info);
     strcpy(temp->type, record[0].tag);
-    temp->point = sub;
+    temp->point = (void*)sub;
   }
   insertBack(&pointers, temp);
 
@@ -579,7 +579,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
   /*******Saving the pointer of the individual in the sender list*****/
   strcpy(temp->addr, record[0].info);
   strcpy(temp->type, record[0].tag);
-  temp->point = person;
+  temp->point = (void*)person;
   insertBack(&pointers, temp);
   /*******************************************************************/
 
@@ -655,7 +655,7 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
       printf("family poitners\n");
       strcpy(temp->type, record[i].tag);
       strcpy(temp->addr, record[i].info);
-      temp->point = person;
+      temp->point = (void*)person;
       insertBack(&receiver, temp);
     }
     else{
