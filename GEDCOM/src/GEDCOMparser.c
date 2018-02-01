@@ -379,8 +379,8 @@ char* printFamily(void* toBePrinted){
   string = (char*)realloc(string, sizeof(char) * 100);// reallocating memory for next elements that;s in the struct
   toadd = printIndividual(print->husband);
   strcat(string, toadd);
-  strcat(string, printIndividual(print->children));
-  strcat(string, printField(print->otherFields));
+  strcat(string, *printIndividual(print->children));
+  strcat(string, *printField(print->otherFields));
 
   return string;
 }
