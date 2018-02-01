@@ -114,7 +114,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   puts(print1);
   printf("\n******receivers**********************\n");
   puts(print2);
-  printf("*******************************************")
+  printf("*******************************************");
   for (int i = 0; i < 10000000; i++){ // freeing the allocated memory after done parsing the file
     //free(info[i]); // freeing the allocated information struct
     free(read[i]);//freeing the allocated strings
