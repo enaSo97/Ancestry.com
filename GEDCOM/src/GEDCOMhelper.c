@@ -734,7 +734,9 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
     else if (validateFamilyEvent(record[i].tag) == 1){
       i++;
       while(record[i].level != 1){
-        field = createField(record[i].tag, record[i].info);
+        char * dummy = calloc(30, sizeof(char));
+        strcpy(dummy, record[i].tag);
+        field = createField(dummy, record[i].info);
         insertBack(&other, field);
         i++;
       }
