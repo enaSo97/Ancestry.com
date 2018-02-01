@@ -260,8 +260,8 @@ char* printEvent(void* toBePrinted){ //type date place other fields
   char * print = toString(temp->otherFields);
   printf("%s\n\n",print);
 
-  length = strlen(temp->type) + strlen(temp->date) + strlen(temp->place) + 300;
-  chrTemp = (char*)calloc(length, sizeof(char));
+  //length = strlen(temp->type) + strlen(temp->date) + strlen(temp->place) + 300;
+  chrTemp = (char*)calloc(1000, sizeof(char));
   sprintf(chrTemp, "type: %s, date: %s, place: %s\n", temp->type, temp->date, temp->place);
   printf("after sprintf\n");
 
