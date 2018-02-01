@@ -244,7 +244,7 @@ char* printEvent(void* toBePrinted){ //type date place other fields
 
   temp = (Event*)toBePrinted;
 
-  printf("type: %s, date: %s, place: %s\n", temp->type, temp->date, temp->place);
+  //printf("type: %s, date: %s, place: %s\n", temp->type, temp->date, temp->place);
   char * print = toString(temp->otherFields);
   printf("%s\n",print);
 
