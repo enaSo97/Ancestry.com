@@ -113,6 +113,7 @@ char * printPointers(void * data){
   string = (char*)calloc(length, sizeof(char));
   sprintf(string, "Type: %s, Address: %s\n", point->type, point->addr);
   if (strcmp(point->type, "CHIL") == 0){
+    printf("it's children\n");
     strcat(string, printIndividual((Individual*)point->point));
   }
 
