@@ -750,13 +750,15 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
 void linkerFunction(List * receiver, List * pointers){
   Node * temp = receiver->head;
   //Node * temp2 = pointers->head;
-  //int REClength = getLength(*receiver);
-  //int prtLength = getLength(*pointers);
+  int REClength = getLength(*receiver);
+  int prtLength = getLength(*pointers);
   void * key;
   int i = 0;
   int j = 0;
 
+  printf("pointer %d || receiver %d\n", REClength, prtLength);
   while(temp->next != NULL){
+    printf("chekcing each node ||%s||", ((Pointer*)temp->data)->addr);
     key = findElement(*pointers, comparePointers, temp->data);
     if(key == temp->data){
       printf("\nfound the matching ones\n");
