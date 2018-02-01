@@ -340,9 +340,9 @@ char* printIndividual(void* toBePrinted){
   string = (char*)calloc(length, sizeof(char));
 
   sprintf(string, "FirstName: %s, LastName: %s", print->givenName, print->surname);
-  strcat(string, printEvent(print->events)));
+  strcat(string, printEvent(print->events));
   //strcat(string, toString(print->families));
-  strcat(string, printField(print->otherFields)));
+  strcat(string, printField(print->otherFields));
   return string;
 }
 
@@ -379,8 +379,8 @@ char* printFamily(void* toBePrinted){
   string = (char*)realloc(string, sizeof(char) * 100);// reallocating memory for next elements that;s in the struct
   toadd = printIndividual(print->husband);
   strcat(string, toadd);
-  strcat(string, toString(print->children));
-  strcat(string, toString(printField(print->otherFields));
+  strcat(string, printIndividual(print->children));
+  strcat(string, printField(print->otherFields));
 
   return string;
 }
