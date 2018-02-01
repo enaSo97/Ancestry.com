@@ -78,7 +78,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       j++;
       while(info[i].level != 0){
         //printf("info : %s i <%d>\n", info[i].info, i);
-        record = realloc(record, sizeof(Info) * j);
+        //record = realloc(record, sizeof(Info) * j);
         record[k].level = info[i].level;
         strcpy(record[k].tag, info[i].tag);
         strcpy(record[k].info, info[i].info);
