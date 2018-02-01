@@ -65,13 +65,13 @@ void testTockenize(char * tocken);
 
 Info tockenInfo(char * toParse);
 
-Header * headParser(Info * record, int length, List pointers, List receiver);
+Header * headParser(Info * record, int length, List * pointers, List * receiver);
 
-Submitter * subParser(Info * record, int length, List pointers, List receiver);
+Submitter * subParser(Info * record, int length, List * pointers, List * receiver);
 
-Individual * parseIndividual(Info * record, int length, List pointers, List receiver);
+Individual * parseIndividual(Info * record, int length, List * pointers, List * receiver);
 
-Family * parseFamily(Info * record, int length, List pointers, List receiver);
+Family * parseFamily(Info * record, int length, List * pointers, List * receiver);
 
 char * printFunc(void * data);
 

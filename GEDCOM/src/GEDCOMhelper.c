@@ -335,7 +335,7 @@ int compare(const void *first,const void *second){
   return 0;
 }
 
-Header * headParser(Info * record, int length, List pointers, List receiver){
+Header * headParser(Info * record, int length, List * pointers, List * receiver){
   Header * head = malloc(sizeof(Header));
   //int flag = 0;
   //char sour[249];
@@ -496,7 +496,7 @@ Header * headParser(Info * record, int length, List pointers, List receiver){
   return head;
 }
 
-Submitter * subParser(Info * record, int length, List pointers, List receiver){
+Submitter * subParser(Info * record, int length, List * pointers, List * receiver){
 
   Submitter * sub = calloc(1,sizeof(Submitter));
   Pointer * temp = calloc(1,sizeof(Pointer));
@@ -566,7 +566,7 @@ int validateIndividualEvent(char * check){
   return -1;
 }
 
-Individual * parseIndividual(Info * record, int length, List pointers, List receiver){
+Individual * parseIndividual(Info * record, int length, List * pointers, List*  receiver){
   Individual * person = calloc(1, sizeof(Individual));
   Pointer * temp = calloc(1, sizeof(Pointer));
   Field * field = calloc(1, sizeof(Field));
@@ -673,7 +673,7 @@ int validateFamilyEvent(char * check){
   return -1;
 }
 
-Family * parseFamily(Info * record, int length, List pointers, List receiver){
+Family * parseFamily(Info * record, int length, List * pointers, List * receiver){
   Family * family = calloc(1, sizeof(Family));
   Pointer * temp = calloc(1, sizeof(Pointer));
   Field * field = calloc(1, sizeof(Field));
