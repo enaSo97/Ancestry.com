@@ -244,9 +244,9 @@ char* printEvent(void* toBePrinted){ //type date place other fields
 
   temp = (Event*)toBePrinted;
 
-  printf("type: %s, date: %s, place: %s\n", temp->type, temp->date, temp->place);
-  //char * print = toString(temp->otherFields);
-  //printf("%s\n",print);
+  printf("\ntype: %s, date: %s, place: %s\n", temp->type, temp->date, temp->place);
+  char * print = toString(temp->otherFields);
+  printf("%s\n\n",print);
 
   length = strlen(temp->type) + strlen(temp->date) + strlen(temp->place) + 100;
   chrTemp = (char*)calloc(length, sizeof(char));
