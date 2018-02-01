@@ -340,9 +340,9 @@ char* printIndividual(void* toBePrinted){
   string = (char*)calloc(length, sizeof(char));
 
   sprintf(string, "FirstName: %s, LastName: %s", print->givenName, print->surname);
-  strcat(string, toString(printEvent(print->events)));
+  strcat(string, printEvent(print->events)));
   //strcat(string, toString(print->families));
-  strcat(string, toString(printField(print->otherFields)));
+  strcat(string, printField(print->otherFields)));
   return string;
 }
 
