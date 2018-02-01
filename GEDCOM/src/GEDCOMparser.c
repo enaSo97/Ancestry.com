@@ -251,7 +251,7 @@ char* printEvent(void* toBePrinted){ //type date place other fields
   length = strlen(temp->type) + strlen(temp->date) + strlen(temp->place) + 100;
   chrTemp = (char*)calloc(length, sizeof(char));
   sprintf(chrTemp, "type: %s, date: %s, place: %s\n", temp->type, temp->date, temp->place);
-  if (temp->otherFields != NULL){
+  if (temp->otherFields->next != NULL){
     strcat(chrTemp, toString(temp->otherFields));
   }
 
