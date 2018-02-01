@@ -110,7 +110,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
 
   char * print1 = toString(pointers);
   char * print2 = toString(receiver);
-  printf("******pointers**************************\n")
+  printf("******pointers**************************\n");
   puts(print1);
   printf("\n******receivers**********************\n");
   puts(print2);
