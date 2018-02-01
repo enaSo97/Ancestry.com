@@ -88,17 +88,17 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       }
       //printf("record 0 ||%d||%s||%s||\n", record[0].level, record[0].tag, record[0].info);
       if (strcmp(record[0].tag, "HEAD") == 0){
-        object->header = headParser(record, k, pointers, reciever);
+        object->header = headParser(record, k, pointers, receiver);
       }
       else if (strcmp(record[0].tag, "SUBM") == 0){
-        object->submitter = subParser(record, k, pointers, reciever);
+        object->submitter = subParser(record, k, pointers, receiver);
       }
       else if (strcmp(record[0].tag, "INDI") == 0){
-        dummyPerson = parseIndividual(record, k, pointers, reciever);
+        dummyPerson = parseIndividual(record, k, pointers, receiver);
         insertBack(&people, dummyPerson);
       }
       else if (strcmp(record[0].tag, "FAM") == 0){
-        dummyFamily = parseFamily(record, k, pointers, reciever);
+        dummyFamily = parseFamily(record, k, pointers, receiver);
         insertBack(&family, dummyFamily);
       }
     }
