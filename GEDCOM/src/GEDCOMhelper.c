@@ -401,7 +401,7 @@ Header * headParser(Info * record, int length, List pointers, List receiver){
     else if (strcmp(record[i].tag, "SUBM") == 0){
       strcpy(point->addr, record[i].info);
       strcpy(point->type, record[i].tag);
-      point->point = head->submitter;
+      point->point = (void*)head->submitter;
       insertBack(&receiver, point);
       //i++;
     }
