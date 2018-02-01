@@ -106,6 +106,8 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     //printf("<<<i : %d>>>\n", i);
     //i = k;
   }
+
+  linkerFunction(&receiver, &pointers);
   length--;
 
   char * print1 = toString(pointers);
@@ -115,6 +117,9 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   printf("\n******receivers**********************\n");
   puts(print2);
   printf("*******************************************");
+
+
+
   for (int i = 0; i < 10000000; i++){ // freeing the allocated memory after done parsing the file
     //free(info[i]); // freeing the allocated information struct
     free(read[i]);//freeing the allocated strings

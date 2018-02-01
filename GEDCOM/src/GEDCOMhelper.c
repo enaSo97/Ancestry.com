@@ -127,7 +127,7 @@ void deletePointers(void * erase){
   free(Delete);
 }
 
-int comparePointers(const void *first,const void *second){
+bool comparePointers(const void *first,const void *second){
   Pointer * compare1;
   Pointer * compare2;
 
@@ -138,7 +138,11 @@ int comparePointers(const void *first,const void *second){
   compare1 = (Pointer*)first;
   compare2 = (Pointer*)second;
 
-  return strcmp(compare1->addr, compare2->addr);
+  if (strcmp(compare1->addr, compare2->addr) == 0){
+    return true;
+  }
+
+  return false;
 }
 
 /*************************************************************************/
@@ -727,4 +731,21 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
   }
 
   return family;
+}
+
+void linkerFunction(List * receiver, List * pointers){
+  Node * temp = receiver->head;
+  Node * temp2 = pointers->head;
+  int REClength = getLength(receiver);
+  int prtLength = getLength(pointers);
+  void * key;
+  int i = 0;
+  int j = 0;
+
+  while(temp->next != NULL){
+        key = findElement(pointers, comparePointers, temp->data));
+        if(key != temp->data){
+          *temp->data->point = (Pointer*)key->point;
+        }
+  }
 }

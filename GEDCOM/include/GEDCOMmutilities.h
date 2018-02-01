@@ -83,8 +83,10 @@ char * printPointers(void * data);
 
 void deletePointers(void * erase);
 
-int comparePointers(const void *first,const void *second);
+bool comparePointers(const void *first,const void *second);
 
 int validateIndividualEvent(char * check);
 
 int validateFamilyEvent(char * check);
+
+void linkerFunction(List * receiver, List * pointers);
