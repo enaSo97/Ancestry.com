@@ -758,7 +758,7 @@ void linkerFunction(List * receiver, List * pointers){
 
   printf("pointer %d || receiver %d\n", REClength, prtLength);
   while(temp->next != NULL){
-    printf("chekcing each node ||%s||", ((Pointer*)temp->data)->addr);
+    printf("chekcing each node ||%s||\n", ((Pointer*)temp->data)->addr);
     key = findElement(*pointers, comparePointers, temp->data);
     if(key == temp->data){
       printf("\nfound the matching ones\n");
