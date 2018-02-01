@@ -24,7 +24,7 @@ Event * createEvent(char type[5], char * date, char * place, List other){
 /*************************************************************************/
 
 Field * createField(char tag[20], char value[255]){
-  Field * create = malloc(sizeof(Field));
+  Field * create = calloc(1,sizeof(Field));
 
   create->tag = (char *)calloc(100,sizeof(char));
   strcpy(create->tag, tag);
@@ -734,8 +734,6 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
     else if (validateFamilyEvent(record[i].tag) == 1){
       i++;
       while(record[i].level != 1){
-        char * dummy = calloc(30, sizeof(char));
-        strcpy(dummy, record[i].tag);
         field = createField(dummy, record[i].info);
         insertBack(&other, field);
         i++;
