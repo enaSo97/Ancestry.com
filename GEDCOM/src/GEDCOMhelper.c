@@ -279,7 +279,7 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   int j = 2;
   int level = 0;
   char information[500] = "";
-  char parsed[100][255];
+  char parsed[100][255] = "";
   //printf("parsing this line : %s\n", toParse);
   char * token = strtok(toParse, " ");
 
