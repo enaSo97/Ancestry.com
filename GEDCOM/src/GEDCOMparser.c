@@ -343,7 +343,7 @@ char* printIndividual(void* toBePrinted){
 
   sprintf(string, "FirstName: %s, LastName: %s", print->givenName, print->surname);
   events = toString(print->events);
-  other = toString(print->otherFields)
+  other = toString(print->otherFields);
   puts(events);
   puts(other);
   strcat(string, toString(print->events));
