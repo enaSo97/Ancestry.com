@@ -85,6 +85,8 @@ void deletePointers(void * erase);
 
 bool comparePointers(const void *first,const void *second);
 
+int dummyCompare(const void *first,const void *second);
+
 int validateIndividualEvent(char * check);
 
 int validateFamilyEvent(char * check);

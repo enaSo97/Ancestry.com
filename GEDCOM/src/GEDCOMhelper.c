@@ -145,6 +145,20 @@ bool comparePointers(const void *first,const void *second){
   return false;
 }
 
+int dummyCompare(const void *first,const void *second){
+  Pointer * compare1;
+  Pointer * compare2;
+
+  if (first == NULL || second == NULL){
+    return 0;
+  }
+
+  compare1 = (Pointer*)first;
+  compare2 = (Pointer*)second;
+
+  return strcmp(compare1->addr, compare2->addr);
+}
+
 /*************************************************************************/
 
 void freeEvent(Event * toBeFreed);
@@ -745,7 +759,7 @@ void linkerFunction(List * receiver, List * pointers){
   while(temp->next != NULL){
         key = findElement(*pointers, comparePointers, temp->data);
         if(key != temp->data){
-          *temp->data->point = ((Pointer*)key)->point;
+          temp->data->point = ((Pointer*)key)->point;
         }
   }
 }

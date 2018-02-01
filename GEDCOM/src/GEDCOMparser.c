@@ -32,9 +32,9 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   //int flag = 0;
   //char ** stuff;
   int k =0;
-  List pointers = initializeList(printPointers, deletePointers, comparePointers);
+  List pointers = initializeList(printPointers, deletePointers, dummyCompare);
 
-  List receiver = initializeList(printPointers, deletePointers, comparePointers);
+  List receiver = initializeList(printPointers, deletePointers, dummyCompare);
 
   List people = initializeList(printIndividual, deleteIndividual, compareIndividuals);
 
