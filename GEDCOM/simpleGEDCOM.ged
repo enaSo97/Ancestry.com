@@ -18,6 +18,8 @@
 1 FAMS @F1@
 0 @I3@ INDI
 1 NAME James /Smith/
+1 BIRT
+2 DATE 2 JAN 2016
 1 SEX M
 1 FAMC @F1@
 0 @F1@ FAM
