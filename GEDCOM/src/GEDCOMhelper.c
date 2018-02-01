@@ -544,9 +544,9 @@ Submitter * subParser(Info * record, int length, List pointers, List receiver){
   }
   insertBack(&pointers, temp);
 
-  /*printf("\nName: %s, Address: %s\n", sub->submitterName, sub->address);
+  printf("\nName: %s, Address: %s\n", sub->submitterName, sub->address);
   char * print = toString(other);
-  puts(print);*/
+  puts(print);
 
   return sub;
 }
