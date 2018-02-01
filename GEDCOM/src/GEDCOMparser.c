@@ -257,7 +257,7 @@ char* printEvent(void* toBePrinted){ //type date place other fields
     strcat(chrTemp, toString(temp->otherFields));
   }
   printf("right before returning print events\n");
-
+  puts(chrTemp);
   return chrTemp;
 }
 
