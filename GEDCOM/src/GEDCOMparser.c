@@ -244,6 +244,10 @@ char* printEvent(void* toBePrinted){ //type date place other fields
 
   temp = (Event*)toBePrinted;
 
+  if (strcmp(temp->place, "\0") == 0){
+    strcpy(temp->place, "");
+  }
+
   printf("\ntype: %s, date: %s, place: %s\n", temp->type, temp->date, temp->place);
   char * print = toString(temp->otherFields);
   printf("%s\n\n",print);
