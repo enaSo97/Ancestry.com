@@ -23,7 +23,7 @@ Event * createEvent(char type[5], char * date, char * place, List other){
 }
 /*************************************************************************/
 
-Field * createField(char * tag, char * value){
+Field * createField(char tag[20], char value[255]){
   Field * create = malloc(sizeof(Field));
 
   create->tag = (char *)calloc(100,sizeof(char));
@@ -659,7 +659,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
           strcpy(event->place, record[i].info);
         }
         else if (strcmp(record[i].tag, "DATE") == 0){
-          event->date = malloc(sizeof(char) * strlen(record[i].info));
+          event->date = calloc(200,sizeof(char));
           strcpy(event->date, record[i].info);
         }else{
           field = createField(record[i].tag, record[i].info);
