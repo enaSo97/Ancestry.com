@@ -757,10 +757,11 @@ void linkerFunction(List * receiver, List * pointers){
   int j = 0;
 
   while(temp->next != NULL){
-    printf("linker while loop\n");  
+    printf("linker while loop\n");
     key = findElement(*pointers, comparePointers, temp->data);
-    if(key != temp->data){
+    if(key == temp->data){
       ((Pointer*)temp->data)->point = (void*)((Pointer*)key)->point;
     }
+    temp = temp->next;
   }
 }
