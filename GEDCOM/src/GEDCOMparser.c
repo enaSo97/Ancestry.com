@@ -254,11 +254,6 @@ char* printEvent(void* toBePrinted){ //type date place other fields
     strcpy(temp->date, "\0");
     printf("check if null\n");
   }
-  if (temp->type == NULL){
-    temp->type = calloc(1, sizeof(char));
-    strcpy(temp->type, "\0");
-    printf("check if null\n");
-  }
 
 
   printf("\ntype: %s, date: %s, place: %s\n", temp->type, temp->date, temp->place);
