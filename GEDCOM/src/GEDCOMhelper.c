@@ -26,9 +26,9 @@ Event * createEvent(char type[5], char * date, char * place, List other){
 Field * createField(char * tag, char * value){
   Field * create = malloc(sizeof(Field));
 
-  create->tag = malloc(sizeof(char)*(strlen(tag) + 1));
+  create->tag = calloc(100,sizeof(char));
   strcpy(create->tag, tag);
-  create->value = malloc(sizeof(char)*(strlen(value) + 1));
+  create->value = calloc(100,sizeof(char));
   strcpy(create->value, value);
 
   return create;
