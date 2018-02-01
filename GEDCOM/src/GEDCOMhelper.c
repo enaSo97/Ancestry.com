@@ -635,7 +635,10 @@ Individual * parseIndividual(Info * record, int length, List pointers, List rece
       while(record[i].level != 1){
         if(strcmp(record[i].tag, "PLAC") == 0){
           printf("place\n");
-          event->place = malloc(sizeof(char) * strlen(record[i].info));
+          event->place = (char*)calloc(300, sizeof(char));
+          if (record[i].info == NULL){
+            printf("it is empty 640\n");
+          }
           strcpy(event->place, record[i].info);
         }
         else if (strcmp(record[i].tag, "DATE") == 0){
