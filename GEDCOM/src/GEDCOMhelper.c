@@ -681,6 +681,8 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
       insertBack(&other, field);
     }
   }
+  person->events = events;
+  person->field = other;
   //char * print = toString(events);
   //puts(print);
   //char * output = toString(other);
