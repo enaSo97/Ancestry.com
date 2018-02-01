@@ -510,6 +510,12 @@ Submitter * subParser(Info * record, int length, List * pointers, List * receive
     if (strcmp(record[i].tag, "NAME") == 0){
       strcpy(sub->submitterName, record[i].info);
     }
+    else if (strcmp(record[i].tag, "SUBM") == 0){
+      strcpy(temp->addr, record[0].info);
+      strcpy(temp->type, record[0].tag);
+      temp->point = (void*)sub;
+      insertBack(pointers, temp)
+    }
     else if (strcmp(record[i].tag, "ADDR") == 0){
       strcpy(sub->address, record[i].info);
       i++;
@@ -539,12 +545,12 @@ Submitter * subParser(Info * record, int length, List * pointers, List * receive
     insertBack(&other, field);
   }
   sub->otherFields = other;
-  if (record[0].info[0] == '@' && record[0].info[strlen(record[0].tag) - 1] == '@'){
+  /*if (record[0].info[0] == '@' && record[0].info[strlen(record[0].tag) - 1] == '@'){
     strcpy(temp->addr, record[0].info);
     strcpy(temp->type, record[0].tag);
     temp->point = (void*)sub;
   }
-  insertBack(pointers, temp);
+  insertBack(pointers, temp);*/
 
   //printf("\nName: %s, Address: %s\n", sub->submitterName, sub->address);
   char * print = toString(other);
