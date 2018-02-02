@@ -101,6 +101,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       else if (strcmp(record[0].tag, "FAM") == 0){
         dummyFamily = parseFamily(record, k, &pointers, &receiver);
         insertBack(&family, dummyFamily);
+        printf("passed fmailu\n");
       }
     }
     i--;
