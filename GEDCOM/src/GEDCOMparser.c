@@ -106,60 +106,60 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       }
       else if (strcmp(record[0].tag, "FAM") == 0){
         //printf("in FAM\n");
-        dummyFamily = parseFamily(record, k, &pointers, &receiver);
-        Node * iter = people.head;
-        Individual * one;
-        Node * field;
-        Field * buff;
-        int num = getLength(people);
-        int a = 0;
-        while(a < num){
-          one = (Individual*)iter->data;
-          printf("length of num %d\n", num);
-          char * dat = printIndividual(one);
-          puts(dat);
-          //int other = getLength(one.otherFields);
-          //one = (Individual*)iter->data;
-          int other = getLength(one->otherFields);
-          int b = 0;
-          while(b < other){
-            field = one->otherFields.head;
-            buff = (Field*)field->data;
-            char * bum = printIndividual(buff);
-            puts(bum);
-            printf("record info print %s\n", record[i].info);
-            if (strcmp(record[i].info, buff->value) == 0){
-              if (strcmp(record[i].info, "HUSB") == 0){
-                printf("found husbnad\n");
-                //dummyFamily->husband = malloc(sizeof(Individual));
-                dummyFamily->husband = one;
-                char * hus = printIndividual(one);
-                puts(hus);
-              }//end husb if
-              else if (strcmp(record[i].info, "WIFE") == 0){
-                printf("wife exist\n");
-                //dummyFamily->wife = malloc(sizeof(Individual));
-                dummyFamily->wife = one;
-              }//end wife if
-              else if(strcmp(record[i].info, "CHIL") == 0){
-                printf("child exist\n");
-                dummyFamily->children = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
-                insertBack(&dummyFamily->children, one);
-              }//end child if
-              else{
-                printf("extra\n");
-                extraStuff = createField(record[i].tag, record[i].info);
-                insertBack(&dummyFamily->otherFields, extraStuff);
-              }
-            }//end compare info and otherfield
-            field = field->next;
-            b++;
-          }//end other while
-          iter = iter->next;
-          a++;
-        }//end num while
+        // dummyFamily = parseFamily(record, k, &pointers, &receiver);
+        // Node * iter = people.head;
+        // Individual * one;
+        // Node * field;
+        // Field * buff;
+        // int num = getLength(people);
+        // int a = 0;
+        // while(a < num){
+        //   one = (Individual*)iter->data;
+        //   printf("length of num %d\n", num);
+        //   char * dat = printIndividual(one);
+        //   puts(dat);
+        //   //int other = getLength(one.otherFields);
+        //   //one = (Individual*)iter->data;
+        //   int other = getLength(one->otherFields);
+        //   int b = 0;
+        //   while(b < other){
+        //     field = one->otherFields.head;
+        //     buff = (Field*)field->data;
+        //     char * bum = printIndividual(buff);
+        //     puts(bum);
+        //     printf("record info print %s\n", record[i].info);
+        //     if (strcmp(record[i].info, buff->value) == 0){
+        //       if (strcmp(record[i].info, "HUSB") == 0){
+        //         printf("found husbnad\n");
+        //         //dummyFamily->husband = malloc(sizeof(Individual));
+        //         dummyFamily->husband = one;
+        //         char * hus = printIndividual(one);
+        //         puts(hus);
+        //       }//end husb if
+        //       else if (strcmp(record[i].info, "WIFE") == 0){
+        //         printf("wife exist\n");
+        //         //dummyFamily->wife = malloc(sizeof(Individual));
+        //         dummyFamily->wife = one;
+        //       }//end wife if
+        //       else if(strcmp(record[i].info, "CHIL") == 0){
+        //         printf("child exist\n");
+        //         dummyFamily->children = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
+        //         insertBack(&dummyFamily->children, one);
+        //       }//end child if
+        //       else{
+        //         printf("extra\n");
+        //         extraStuff = createField(record[i].tag, record[i].info);
+        //         insertBack(&dummyFamily->otherFields, extraStuff);
+        //       }
+        //     }//end compare info and otherfield
+        //     field = field->next;
+        //     b++;
+        //   }//end other while
+        //   iter = iter->next;
+        //   a++;
+        // }//end num while
 
-        //dummyFamily = parseFamily(record, k, &pointers, &receiver);
+        dummyFamily = parseFamily(record, k, &pointers, &receiver);
         insertBack(&family, dummyFamily);
         printf("passed fmaily\n");
       }

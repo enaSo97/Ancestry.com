@@ -775,7 +775,7 @@ int validateFamilyEvent(char * check){
 }
 
 Family * parseFamily(Info * record, int length, List * pointers, List * receiver){
-  Family * family = calloc(1, sizeof(Family));
+  Family * dummyFamily = calloc(1, sizeof(Family));
   Individual * person;
   Pointer * temp = calloc(1, sizeof(Pointer));
   Field * field = calloc(1, sizeof(Field));
@@ -784,13 +784,64 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
   //List events = initializeList(printEvent, deleteEvent, compareEvents);
   //List kids = initializeList(printIndividual, deleteIndividual, compareIndividuals);
 
-  strcpy(temp->addr, record[0].info);
-  strcpy(temp->type, "FAM");
-  temp->family = family;
-  insertBack(pointers, temp);
+  // strcpy(temp->addr, record[0].info);
+  // strcpy(temp->type, "FAM");
+  // temp->family = family;
+  // insertBack(pointers, temp);
 
   for (int i = 1; i < length; i++){
-    if (strcmp(record[i].tag, "HUSB") == 0){
+    Node * iter = people.head;
+    Individual * one;
+    Node * field;
+    Field * buff;
+    int num = getLength(people);
+    int a = 0;
+    while(a < num){
+      one = (Individual*)iter->data;
+      printf("length of num %d\n", num);
+      char * dat = printIndividual(one);
+      puts(dat);
+      //int other = getLength(one.otherFields);
+      //one = (Individual*)iter->data;
+      int other = getLength(one->otherFields);
+      int b = 0;
+      while(b < other){
+        field = one->otherFields.head;
+        buff = (Field*)field->data;
+        char * bum = printIndividual(buff);
+        puts(bum);
+        printf("record info print %s\n", record[i].info);
+        if (strcmp(record[i].info, buff->value) == 0){
+          if (strcmp(record[i].info, "HUSB") == 0){
+            printf("found husbnad\n");
+            //dummyFamily->husband = malloc(sizeof(Individual));
+            dummyFamily->husband = one;
+            char * hus = printIndividual(one);
+            puts(hus);
+          }//end husb if
+          else if (strcmp(record[i].info, "WIFE") == 0){
+            printf("wife exist\n");
+            //dummyFamily->wife = malloc(sizeof(Individual));
+            dummyFamily->wife = one;
+          }//end wife if
+          else if(strcmp(record[i].info, "CHIL") == 0){
+            printf("child exist\n");
+            dummyFamily->children = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
+            insertBack(&dummyFamily->children, one);
+          }//end child if
+          else{
+            printf("extra\n");
+            extraStuff = createField(record[i].tag, record[i].info);
+            insertBack(&dummyFamily->otherFields, extraStuff);
+          }
+        }//end compare info and otherfield
+        field = field->next;
+        b++;
+      }//end other while
+      iter = iter->next;
+      a++;
+    }//end num while
+    /*if (strcmp(record[i].tag, "HUSB") == 0){
       temp = calloc(1, sizeof(Pointer));
       person = calloc(1,sizeof(Individual));
       family->husband = person;
@@ -829,9 +880,9 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
     else{
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
-    }
+    }*/
+
   }
-  family->otherFields = other;
 
   return family;
 }
