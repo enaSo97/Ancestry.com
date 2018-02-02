@@ -121,7 +121,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
               }//end husb if
               else if (strcmp(record[i].info, "WIFE") == 0){
                 dummyFamily->wife = calloc(1,sizeof(Individual));
-                dummyFamily->wife = (Individual)iter;
+                dummyFamily->wife = (Individual*)iter;
               }//end wife if
               else if(strcmp(record[i].info, "CHIL") == 0){
                 dummyFamily->children = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
@@ -315,7 +315,7 @@ int compareEvents(const void* first,const void* second){
 char* printEvent(void* toBePrinted){ //type date place other fields
   char* chrTemp;
   Event* temp;
-  int length;
+  //int length;
   if (toBePrinted == NULL){
     return NULL;
   }
@@ -379,8 +379,8 @@ int compareIndividuals(const void* first,const void* second){
 
 char* printIndividual(void* toBePrinted){
   char* string;
-  char * events;
-  char * other;
+  //char * events;
+  //char * other;
   Individual* print;
   if (toBePrinted == NULL){
     return NULL;
@@ -434,16 +434,16 @@ void deleteFamily(void* toBeDeleted){
   free(Delete);
 }
 int compareFamilies(const void* first,const void* second){
-  Family * compare1 = (Family*)first;
-  Family * compare2 = (Family*)second;
+  //Family * compare1 = (Family*)first;
+  //Family * compare2 = (Family*)second;
 
-  int count2;
+  //int count2;
 
   return 0;
 }
 char* printFamily(void* toBePrinted){
   char * string;
-  char * toadd;
+  //char * toadd;
   Family * print;
 
   if (toBePrinted == NULL){
