@@ -409,7 +409,7 @@ char* printFamily(void* toBePrinted){
   if (toBePrinted == NULL){
     return NULL;
   }
-  print->children = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
+  //print->children = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
   string = calloc(10000, sizeof(char));
   print = (Family*)toBePrinted;
   string = printIndividual(print->wife);
