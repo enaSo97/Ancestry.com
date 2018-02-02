@@ -713,7 +713,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
       temp->indiPoint = person;
       //printf("\nchecking for indi pointer %s || %s || \n", temp->addr, temp->type);
       insertBack(pointers, temp);
-      printf("printing address %p\n", (void*)&person);
+      printf("printing address %p\n", (void*)person);
       //printf("checking for pointer %s", (Pointer*)temp->indiPoint)
     }
     else if (validateIndividualEvent(record[i].tag) == 1){
