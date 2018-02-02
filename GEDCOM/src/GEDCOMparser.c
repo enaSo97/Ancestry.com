@@ -110,8 +110,10 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   linkerFunction(&receiver, &pointers);
   length--;
 
+  printf("\nprinting individual\n");
   char * indi = toString(people);
   puts(indi);
+  printf("*********************************************\n");
 
   /*char * print1 = toString(pointers);
   char * print2 = toString(receiver);
@@ -269,12 +271,12 @@ char* printEvent(void* toBePrinted){ //type date place other fields
   if (temp->place == NULL){
     temp->place = calloc(1, sizeof(char));
     strcpy(temp->place, "\0");
-    printf("check if null\n");
+    //printf("check if null\n");
   }
   if (temp->date == NULL){
     temp->date = calloc(1, sizeof(char));
     strcpy(temp->date, "\0");
-    printf("check if null\n");
+    //printf("check if null\n");
   }
 
 
@@ -290,7 +292,6 @@ char* printEvent(void* toBePrinted){ //type date place other fields
     strcat(chrTemp, toString(temp->otherFields));
   }
   //printf("right before returning print events\n");
-  puts(chrTemp);
   return chrTemp;
 }
 
