@@ -777,6 +777,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
 
 void linkerFunction(List * receiver, List * pointers){
   Node * temp = receiver->head;
+
   //Node * temp2 = pointers->head;
   int REClength = getLength(*receiver);
   int prtLength = getLength(*pointers);
@@ -792,7 +793,7 @@ void linkerFunction(List * receiver, List * pointers){
       //printf("\nfound the matching ones\n");
       printf("\npointer %s == receiver %s || type %s == type %s\n\n", ((Pointer*)key)->addr, ((Pointer*)temp->data)->addr, ((Pointer*)key)->type, ((Pointer*)temp->data)->type);
       if(strcmp(((Pointer*)key)->type,"HUSB") == 0 || strcmp(((Pointer*)key)->type,"WIFE") == 0 || strcmp(((Pointer*)key)->addr,"CHIL") == 0){
-        ((Pointer*)temp->data)->indiPoint = ((Pointer*)key)->indiPoint;
+        ((Pointer*)temp->data)->indiPoint = *((Pointer*)key)->indiPoint;
       }
       else if(strcmp(((Pointer*)key)->type,"SUBM") == 0){
         ((Pointer*)temp->data)->subPoint = ((Pointer*)key)->subPoint;
