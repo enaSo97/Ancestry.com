@@ -117,11 +117,11 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
             if (strcmp(record[i].info, ((Info*)field->data)->info) == 0){
               if (strcmp(record[i].info, "HUSB") == 0){
                 dummyFamily->husband = calloc(1,sizeof(Individual));
-                dummyFamily->husband = iter;
+                dummyFamily->husband = (Individual*)iter;
               }//end husb if
               else if (strcmp(record[i].info, "WIFE") == 0){
                 dummyFamily->wife = calloc(1,sizeof(Individual));
-                dummyFamily->wife = iter;
+                dummyFamily->wife = (Individual)iter;
               }//end wife if
               else if(strcmp(record[i].info, "CHIL") == 0){
                 dummyFamily->children = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
