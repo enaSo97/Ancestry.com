@@ -483,13 +483,13 @@ Header * headParser(Info * record, int length, List * pointers, List * receiver)
       }
       i--;
     }
-    else if (strcmp(record[i].tag, "SUBM") == 0){
+    /*else if (strcmp(record[i].tag, "SUBM") == 0){
       strcpy(point->addr, record[i].info);
       strcpy(point->type, record[i].tag);
       point->subPoint = head->submitter;
       insertBack(receiver, point);
       //i++;
-    }
+    }*/
     else if (strcmp(record[i].tag, "SUBN") == 0){
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
@@ -596,13 +596,13 @@ Submitter * subParser(Info * record, int length, List * pointers, List * receive
     if (strcmp(record[i].tag, "NAME") == 0){
       strcpy(sub->submitterName, record[i].info);
     }
-    else if (strcmp(record[i].tag, "SUBM") == 0){
+    /*else if (strcmp(record[i].tag, "SUBM") == 0){
       temp = calloc(1, sizeof(Pointer));
       strcpy(temp->addr, record[0].info);
       strcpy(temp->type, record[0].tag);
       temp->subPoint = sub;
       insertBack(pointers, temp);
-    }
+    }*/
     else if (strcmp(record[i].tag, "ADDR") == 0){
       strcpy(sub->address, record[i].info);
       i++;
@@ -869,12 +869,12 @@ void linkerFunction(List * pointer, void * data){
         printf("it's child\n");
         insertBack(&set->listPtr, ((Pointer*)temp->data)->indiPoint);
       }
-      else if(strcmp(set->type, "SUBM") == 0){
+      /*else if(strcmp(set->type, "SUBM") == 0){
         printf("it's submitter\n");
         set->subPoint = ((Pointer*)temp->data)->subPoint;
         printf("name: %s\n", ((Submitter*)set->subPoint)->submitterName);
       //  printf("set the submitter\n");
-      }
+    }*/
       else if(strcmp(set->type, "HUSB") == 0 || strcmp(set->type, "WIFE") == 0){
         printf
         ("it's wife or husband\n");
