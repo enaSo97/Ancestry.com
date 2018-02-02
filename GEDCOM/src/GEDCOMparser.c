@@ -366,9 +366,15 @@ char* printIndividual(void* toBePrinted){
   if (print->events.head != NULL){
     strcat(string, toString(print->events));
   }
+  if (print->events.head != NULL){
+    strcat(string, toString(print->families));
+  }
+  if (print->events.head != NULL){
+    strcat(string, toString(print->otherFields));
+  }
   //strcat(string, toString(print->events));
-  strcat(string, toString(print->families));
-  strcat(string, toString(print->otherFields));
+  //strcat(string, toString(print->families));
+  //strcat(string, toString(print->otherFields));
   return string;
 }
 
