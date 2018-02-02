@@ -95,8 +95,10 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         printf("passed submitter\n");
       }
       else if (strcmp(record[0].tag, "INDI") == 0){
+        printf("before parsing indi\n");
         dummyPerson = parseIndividual(record, k, &pointers, &receiver);
         insertBack(&people, dummyPerson);
+        printf("indi passed\n");
       }
       else if (strcmp(record[0].tag, "FAM") == 0){
         dummyFamily = parseFamily(record, k, &pointers, &receiver);
