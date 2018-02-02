@@ -345,6 +345,7 @@ char* printIndividual(void* toBePrinted){
   if (toBePrinted == NULL){
     return NULL;
   }
+  printf("in here\n");
   print = (Individual*)toBePrinted;
   if (print->givenName == NULL){
     print->givenName = calloc(1, sizeof(char));

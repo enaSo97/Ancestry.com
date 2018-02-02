@@ -879,7 +879,8 @@ void linkerFunction(List * pointer, void * data){
         printf("set the submitter\n");
       }
       else if(strcmp(set->type, "HUSB") == 0 || strcmp(set->type, "WIFE") == 0){
-        printf("it's wife or husband\n");
+        printf
+        ("it's wife or husband\n");
         set->indiPoint = ((Pointer*)temp->data)->indiPoint;
         printf("printint the addres %p\n", (void*)set->indiPoint);
         char* indi = printIndividual(set->indiPoint);
