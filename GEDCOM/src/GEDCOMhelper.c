@@ -823,12 +823,16 @@ void linkerFunction(List * pointer, void * data){
 
 char * returnString(void * data){
   char * str = calloc(50,sizeof(char));
-
+  int i = 0;
   if (data == NULL){
     return NULL;
   }
+  char * org = (char*)data;
 
-  str = (char*)data;
+  for (i = 0; i < strlen(org); i++){
+    str[i] = org[i];
+  }
+  str[i] = '\0';
 
   return str;
 }
