@@ -787,21 +787,21 @@ void linkerFunction(List * pointer, void * data){
 
   char * buff = toString(*pointer);
   //puts(buff);
-
+  int i = 0;
 
   int length = getLength(*pointer);
   //printf("lenfth of poitner %d\n", length);
-  List * childrenPtr = set->listPtr;
+  //List * childrenPtr = set->listPtr;
 
 
-  while(temp->next != NULL){
+  while(i <= length){
     //point = (Pointer*)temp;
     char * string = returnString(((Pointer*)temp)->addr);
     printf("pointer %s || receiver %s||\n", ((Pointer*)temp->data)->addr, set->addr);
     if (strcmp(((Pointer*)temp->data)->addr, set->addr) == 0){
       if (strcmp(set->type, "CHIL") == 0){
         printf("it's child\n");
-        insertBack(childrenPtr, ((Pointer*)temp->data)->indiPoint);
+        insertBack(set->listPtr, ((Pointer*)temp->data)->indiPoint);
       }
       else if(strcmp(set->type, "SUBM") == 0){
         printf("it's submitter\n");
@@ -810,11 +810,16 @@ void linkerFunction(List * pointer, void * data){
       else if(strcmp(set->type, "HUSB") == 0 || strcmp(set->type, "WIFE") == 0){
         printf("it's wife or husband\n");
         set->indiPoint = ((Pointer*)temp->data)->indiPoint;
+        //
         char* indi = printIndividual(set->indiPoint);
         //puts(indi);
       }
+      else if (strcmp(set->type, "FAMS") == 0 || strcmp(set->type, "FAMC") == 0){
+
+      }
     }
     temp = temp->next;
+    i++;
   }
    // printf("\n-----in linker------\n");
    // char * child = toString(*childrenPtr);
