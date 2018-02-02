@@ -773,8 +773,8 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
   return family;
 }
 
-void linkerFunction(List pointer, void * data){
-  Node temp = pointer->head;
+void linkerFunction(List * pointer, void * data){
+  Node * temp = pointer->head;
 
   Pointer * set = NULL;
 
@@ -794,11 +794,11 @@ void linkerFunction(List pointer, void * data){
   List * childrenPtr = set->listPtr;
 
 
-  while(temp.next != NULL){
+  while(temp->next != NULL){
     //point = (Pointer*)temp;
-    //char * string = returnString(((Pointer*)temp)->addr);
-    printf("pointer %s || receiver %s||\n", temp.addr, set->addr);
-    if (strcmp(((Pointer*)temp)->addr, set->addr) == 0){
+    char * string = returnString(((Pointer*)temp)->addr);
+    printf("pointer %s || receiver %s||\n", ((char*)temp)->addr, set->addr);
+    if (strcmp(((char*)temp)->addr, set->addr) == 0){
       if (strcmp(set->type, "CHIL") == 0){
         printf("it's child\n");
         insertBack(childrenPtr, ((Pointer*)temp)->indiPoint);
@@ -812,7 +812,7 @@ void linkerFunction(List pointer, void * data){
         set->indiPoint = ((Pointer*)temp)->indiPoint;
       }
     }
-    temp = temp.next;
+    temp = temp->next;
   }
    // printf("\n-----in linker------\n");
    // char * child = toString(*childrenPtr);
@@ -828,8 +828,8 @@ char * returnString(char * data){
     return NULL;
   }
 
-  for (i = 0; i < strlen(data); i++){
-    str[i] = data[i];
+  for (i = 0; i < strlen(org); i++){
+    str[i] = org[i];
   }
   str[i] = '\0';
 
