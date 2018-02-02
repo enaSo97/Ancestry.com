@@ -424,7 +424,7 @@ Header * headParser(Info * record, int length, List * pointers, List * receiver)
     else if (strcmp(record[i].tag, "SUBM") == 0){
       strcpy(point->addr, record[i].info);
       strcpy(point->type, record[i].tag);
-      point->point = (void*)head->submitter;
+      point->subPoint = head->submitter;
       insertBack(receiver, point);
       //i++;
     }
@@ -537,7 +537,7 @@ Submitter * subParser(Info * record, int length, List * pointers, List * receive
     else if (strcmp(record[i].tag, "SUBM") == 0){
       strcpy(temp->addr, record[0].info);
       strcpy(temp->type, record[0].tag);
-      temp->point = (void*)sub;
+      temp->subPoint = sub;
       insertBack(pointers, temp);
     }
     else if (strcmp(record[i].tag, "ADDR") == 0){
@@ -610,7 +610,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
   /*******Saving the pointer of the individual in the sender list*****/
   strcpy(temp->addr, record[0].info);
   strcpy(temp->type, record[0].tag);
-  temp->point = (void*)person;
+  temp->indiPoint = person;
   insertBack(pointers, temp);
   /*******************************************************************/
 
@@ -673,7 +673,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
     else if(strcmp(record[i].tag, "FAMC") == 0 || strcmp(record[i].tag, "FAMS") == 0){
       strcpy(temp->type, record[i].tag);
       strcpy(temp->addr, record[i].info);
-      temp->point = (void*)person;
+      temp->indiPoint = person;
       insertBack(receiver, temp);
     }
     else{
@@ -722,13 +722,13 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
     if (strcmp(record[i].tag, "HUSB") == 0){
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, record[i].tag);
-      temp->point = (void*)family->husband;
+      temp->indiPoint = family->husband;
       insertBack(receiver, temp);
     }
     else if (strcmp(record[i].tag, "WIFE") == 0){
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, record[i].tag);
-      temp->point = (void*)family->wife;
+      temp->indiPoint = family->wife;
       insertBack(receiver, temp);
     }
     else if (validateFamilyEvent(record[i].tag) == 1){
@@ -743,7 +743,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
     else if (strcmp(record[i].tag, "CHIL") == 0){
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, record[i].tag);
-      temp->point = (void*)&family->children;
+      temp->listPtr = family->children;
       insertBack(receiver, temp);
     }
     else{
@@ -764,14 +764,25 @@ void linkerFunction(List * receiver, List * pointers){
   int i = 0;
   int j = 0;
 
-  printf("pointer %d || receiver %d\n", REClength, prtLength);
+  //printf("pointer %d || receiver %d\n", REClength, prtLength);
   while(temp->next != NULL){
     printf("chekcing each node ||%s||\n", ((Pointer*)temp->data)->addr);
     key = findElement(*pointers, comparePointers, temp->data);
-    if(key == temp->data){
+    if(strcmp(((Pointer*)key)->addr, ((Pointer*)temp->data)->addr) == 0){
       //printf("\nfound the matching ones\n");
       printf("\npointer %s == receiver %s || type %s == type %s\n\n", ((Pointer*)key)->addr, ((Pointer*)temp->data)->addr, ((Pointer*)key)->type, ((Pointer*)temp->data)->type);
-      ((Pointer*)temp->data)->point = (void*)((Pointer*)key)->point;
+      if(strcmp(((Pointer*)key)->addr,"HUSB") == 0 || strcmp(((Pointer*)key)->addr,"WIFE") == 0 || strcmp(((Pointer*)key)->addr,"CHIL") == 0){
+        ((Pointer*)temp->data)->indiPoint = ((Pointer*)key)->indiPoint;
+      }
+      else if(strcmp(((Pointer*)key)->addr,"SUBM") == 0){
+        ((Pointer*)temp->data)->subPoint = ((Pointer*)key)->subPoint;
+      }
+      else if (strcmp(((Pointer*)key)->addr,"FAMC") == 0 || strcmp(((Pointer*)key)->addr,"FAMS") == 0){
+        ((Pointer*)temp->data)->listPtr = ((Pointer*)key)->listPtr;
+      }else {
+        ((Pointer*)temp->data)->stuff = ((Pointer*)key)->stuff;
+      }
+      //((Pointer*)temp->data)->point = (void*)((Pointer*)key)->point;
     }
     temp = temp->next;
   }
