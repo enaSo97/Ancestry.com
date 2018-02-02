@@ -112,7 +112,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   }
   Node * receive = receiver.head;
   while(receive->next != NULL){
-    linkerFunction(pointer, receive->data);
+    linkerFunction(&pointers, receive->data);
     receive = receive->next;
   }
 
