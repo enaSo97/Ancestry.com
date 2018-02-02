@@ -111,9 +111,9 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     //i = k;
   }
   Node * receive = receiver.head;
-  int length = getLength(receiver);
+  int size = getLength(receiver);
   int c = 0;
-  while(c < length){
+  while(c < size){
     printf("linker while loop\n");
     linkerFunction(&pointers, receive->data);
     receive = receive->next;
