@@ -790,12 +790,15 @@ void linkerFunction(List * pointer, void * data){
   while(temp->next != NULL){
     if (strcmp(((Pointer*)temp)->addr, set->addr) == 0){
       if (strcmp(set->type, "CHIL") == 0){
+        printf("it's child\n");
         insertBack(childrenPtr, ((Pointer*)temp)->indiPoint);
       }
       else if(strcmp(set->type, "SUBM") == 0){
+        printf("it's submitter\n");
         set->subPoint =((Pointer*)temp)->subPoint;
       }
       else if(strcmp(set->type, "HUSB") == 0 || strcmp(set->type, "WIFE") == 0){
+        printf("it's wife or husband\n");
         set->indiPoint = ((Pointer*)temp)->indiPoint;
       }
     }
