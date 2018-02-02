@@ -346,7 +346,7 @@ char* printIndividual(void* toBePrinted){
 
 
 
-  length = strlen(print->givenName) + strlen(print->surname) + 150;
+  length = strlen(print->givenName) + strlen(print->surname) + 400;
   string = (char*)calloc(length, sizeof(char));
 
   sprintf(string, "FirstName: %s, LastName: %s", print->givenName, print->surname);
