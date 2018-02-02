@@ -801,15 +801,15 @@ void linkerFunction(List * pointer, void * data){
     if (strcmp(((Pointer*)temp->data)->addr, set->addr) == 0){
       if (strcmp(set->type, "CHIL") == 0){
         printf("it's child\n");
-        insertBack(childrenPtr, ((Pointer*)temp)->indiPoint);
+        insertBack(childrenPtr, ((Pointer*)temp->data)->indiPoint);
       }
       else if(strcmp(set->type, "SUBM") == 0){
         printf("it's submitter\n");
-        set->subPoint =((Pointer*)temp)->subPoint;
+        set->subPoint =((Pointer*)temp->data)->subPoint;
       }
       else if(strcmp(set->type, "HUSB") == 0 || strcmp(set->type, "WIFE") == 0){
         printf("it's wife or husband\n");
-        set->indiPoint = ((Pointer*)temp)->indiPoint;
+        set->indiPoint = ((Pointer*)temp->data)->indiPoint;
       }
     }
     temp = temp->next;
