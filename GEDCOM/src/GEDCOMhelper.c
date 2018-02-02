@@ -790,7 +790,7 @@ void linkerFunction(List * pointer, void * data){
 
   if (strcmp(((Pointer*)temp)->addr, set->addr) == 0){
     if (strcmp(set->type, "CHIL") == 0){
-      insertBack(childrenPtr, ((Pointer*)temp)->indiPoint);
+      insertBack(childrenPtr, *((Pointer*)temp)->indiPoint);
     }
     else if(strcmp(set->type, "SUBM") == 0){
       set->subPoint =((Pointer*)temp)->subPoint;
