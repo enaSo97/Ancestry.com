@@ -114,14 +114,19 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         int num = getLength(people);
         int a = 0;
         while(a < num){
-          //printf("in IND LIST\n");
-          //int other = getLength(one.otherFields);
           one = (Individual*)iter->data;
+          printf("length of num %d\n", num);
+          char * dat = printIndividual(one);
+          puts(dat);
+          //int other = getLength(one.otherFields);
+          //one = (Individual*)iter->data;
           int other = getLength(one->otherFields);
           int b = 0;
           while(b < other){
             field = one->otherFields.head;
             buff = (Field*)field->data;
+            char * bum = printIndividual(buff);
+            puts(bum);
             if (strcmp(record[i].info, buff->tag) == 0){
               if (strcmp(record[i].info, "HUSB") == 0){
                 printf("found husbnad\n");
