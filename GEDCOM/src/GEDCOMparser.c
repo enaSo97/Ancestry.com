@@ -135,6 +135,9 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   puts(print2);
   printf("*******************************************");*/
 
+  printf("\nprint submitter\n");
+  printf("submiter Name : %s\n", object->header->submitter->submitterName);
+
   printf("\n--------Individual -------------\n");
   char * indi = toString(family);
   puts(indi);

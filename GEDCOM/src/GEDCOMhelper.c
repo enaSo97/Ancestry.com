@@ -864,7 +864,7 @@ void linkerFunction(List * pointer, void * data){
   while(i < length){
     //point = (Pointer*)temp;
     char * string = returnString(((Pointer*)temp)->addr);
-    printf("pointer %s || receiver %s||\n", ((Pointer*)temp->data)->addr, set->addr);
+    //printf("pointer %s || receiver %s||\n", ((Pointer*)temp->data)->addr, set->addr);
     if (strcmp(((Pointer*)temp->data)->addr, set->addr) == 0){
       if (strcmp(set->type, "CHIL") == 0){
         printf("it's child\n");
