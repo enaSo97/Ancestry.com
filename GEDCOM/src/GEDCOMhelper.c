@@ -891,10 +891,10 @@ void linkerFunction(List * pointer, void * data){
     temp = temp->next;
     i++;
   }
-  printf("\n!!!!!children!!!!!!\n");
-  char * children = toString(set->listPtr);
-  puts(children);
-  printf("done the loop\n");
+  //printf("\n!!!!!children!!!!!!\n");
+  //char * children = toString(set->listPtr);
+  //puts(children);
+  //printf("done the loop\n");
    // printf("\n-----in linker------\n");
    // char * child = toString(*childrenPtr);
    // puts(child);

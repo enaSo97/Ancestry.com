@@ -112,7 +112,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     //printf("<<<i : %d>>>\n", i);
     //i = k;
   }
-  Node * receive = receiver.head;
+  /*Node * receive = receiver.head;
   int size = getLength(receiver);
   int c = 0;
   while(c < size){
@@ -120,7 +120,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     linkerFunction(&pointers, receive->data);
     receive = receive->next;
     c++;
-  }
+  }*/
   length--;
   printf("length of family %d\n", getLength(family));
   /*
@@ -141,7 +141,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   printf("submiter Name : %s\n", object->header->submitter->submitterName);
 
   printf("\n--------Individual -------------\n");
-  char * indi = toString(family);
+  char * indi = toString(people);
   puts(indi);
   printf("---------------------------------\n");
 
