@@ -674,7 +674,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
       i--;
     }
     else if(strcmp(record[i].tag, "FAMC") == 0 || strcmp(record[i].tag, "FAMS") == 0){
-      strcpy(temp->type, "INDI");
+      strcpy(temp->type, record[i].tag);
       strcpy(temp->addr, record[i].info);
       temp->indiPoint = &person;
       insertBack(receiver, temp);
@@ -728,7 +728,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
       person = calloc(1,sizeof(Individual));
       family->husband = person;
       strcpy(temp->addr, record[i].info);
-      strcpy(temp->type, "INDI");
+      strcpy(temp->type, record[i].tag);
       temp->indiPoint = &family->husband;
       insertBack(receiver, temp);
     }
@@ -737,7 +737,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
       person = calloc(1,sizeof(Individual));
       family->wife = person;
       strcpy(temp->addr, record[i].info);
-      strcpy(temp->type, "INDI");
+      strcpy(temp->type, record[i].tag);
       temp->indiPoint = &family->wife;
       insertBack(receiver, temp);
     }
@@ -753,7 +753,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
     else if (strcmp(record[i].tag, "CHIL") == 0){
       person = calloc(1,sizeof(Individual));
       strcpy(temp->addr, record[i].info);
-      strcpy(temp->type, "INDI");
+      strcpy(temp->type, record[i].tag);
       temp->indiPoint = NULL;
       insertBack(receiver, temp);
       insertBack(&children, person);
