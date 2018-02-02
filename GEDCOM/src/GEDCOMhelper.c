@@ -783,8 +783,12 @@ void linkerFunction(List * pointer, void * data){
   }
   set = (Pointer*)data;
 
+  char * buff = toString(*pointer);
+  puts(buff);
+
   List * childrenPtr = set->listPtr;
   while(temp->next != NULL){
+    //char * buff = toString()
     printf("pointer %s || receiver %s||\n", ((Pointer*)temp)->addr, set->addr);
     if (strcmp(((Pointer*)temp)->addr, set->addr) == 0){
       if (strcmp(set->type, "CHIL") == 0){
