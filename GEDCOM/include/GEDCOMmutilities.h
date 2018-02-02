@@ -95,3 +95,5 @@ int validateIndividualEvent(char * check);
 int validateFamilyEvent(char * check);
 
 void linkerFunction(List * pointer, void * data);
+
+char * returnString(void * data);
