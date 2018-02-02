@@ -871,7 +871,7 @@ void linkerFunction(List * pointer, void * data){
     if (strcmp(((Pointer*)temp->data)->addr, set->addr) == 0){
       if (strcmp(set->type, "CHIL") == 0){
         printf("it's child\n");
-        insertBack(set.listPtr, ((Pointer*)temp->data)->indiPoint);
+        insertBack(&set->listPtr, ((Pointer*)temp->data)->indiPoint);
       }
       else if(strcmp(set->type, "SUBM") == 0){
         printf("it's submitter\n");
