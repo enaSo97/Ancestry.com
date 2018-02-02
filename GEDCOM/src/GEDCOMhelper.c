@@ -805,7 +805,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, "WIFE");
       temp->indiPoint = family->wife;
-      insertBack(receiver, temp);
+      insertBack(receiver, &temp);
     }
     else if (validateFamilyEvent(record[i].tag) == 1){
       i++;
@@ -879,7 +879,7 @@ void linkerFunction(List * pointer, void * data){
         printf
         ("it's wife or husband\n");
         set->indiPoint = ((Pointer*)temp->data)->indiPoint;
-        printf("address of reciever %p\n", (void*)set->indiPoint);
+        //printf("address of reciever %p\n", (void*)set->indiPoint);
         //printf("printint the addres %p\n", (void*)set->indiPoint);
         char* indi = printIndividual(set->indiPoint);
         puts(indi);
