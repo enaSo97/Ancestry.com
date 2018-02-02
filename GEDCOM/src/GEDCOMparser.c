@@ -327,8 +327,6 @@ char* printIndividual(void* toBePrinted){
   char * events;
   char * other;
   Individual* print;
-  int length;
-
   if (toBePrinted == NULL){
     return NULL;
   }
@@ -345,9 +343,8 @@ char* printIndividual(void* toBePrinted){
   }
 
 
-
-  length = strlen(print->givenName) + strlen(print->surname) + 400;
-  string = (char*)calloc(length, sizeof(char));
+  //length = strlen(print->givenName) + strlen(print->surname) + 400;
+  string = (char*)calloc(600, sizeof(char));
 
   sprintf(string, "FirstName: %s, LastName: %s", print->givenName, print->surname);
   events = toString(print->events);
