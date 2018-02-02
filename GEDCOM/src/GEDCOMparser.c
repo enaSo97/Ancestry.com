@@ -122,7 +122,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
           while(b < other){
             field = one->otherFields.head;
             buff = (Field*)field->data;
-            if (strcmp(record[i].info, buff->value) == 0){
+            if (strcmp(record[i].info, buff->tag) == 0){
               if (strcmp(record[i].info, "HUSB") == 0){
                 printf("found husbnad\n");
                 //dummyFamily->husband = malloc(sizeof(Individual));
