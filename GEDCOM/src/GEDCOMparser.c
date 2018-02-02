@@ -126,7 +126,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
               if (strcmp(record[i].info, "HUSB") == 0){
                 //dummyFamily->husband = malloc(sizeof(Individual));
                 dummyFamily->husband = one;
-                char * hus = printIndividual(dummyFamily->husband);
+                char * hus = printIndividual(one);
                 puts(hus);
               }//end husb if
               else if (strcmp(record[i].info, "WIFE") == 0){
