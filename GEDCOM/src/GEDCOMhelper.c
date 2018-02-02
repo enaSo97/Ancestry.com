@@ -714,7 +714,7 @@ int validateFamilyEvent(char * check){
 Family * parseFamily(Info * record, int length, List * pointers, List * receiver){
   Family * family = calloc(1, sizeof(Family));
   Individual * person;
-  Pointer * temp;
+  Pointer * temp = calloc(1, sizeof(Pointer));
   Field * field = calloc(1, sizeof(Field));
   List other = initializeList(printField, deleteField, compareFields);
   List children = initializeList(printIndividual, deleteIndividual, compareIndividuals);
@@ -779,8 +779,8 @@ void linkerFunction(List * receiver, List * pointers, List * family, List * pers
   Node * temp = receiver->head;
 
   //Node * temp2 = pointers->head;
-  int REClength = getLength(*receiver);
-  int prtLength = getLength(*pointers);
+  //int REClength = getLength(*receiver);
+  //int prtLength = getLength(*pointers);
   void * key;
   int i = 0;
   int j = 0;
