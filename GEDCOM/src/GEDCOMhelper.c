@@ -819,7 +819,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
     }
     else if (strcmp(record[i].tag, "CHIL") == 0){
       temp = calloc(1, sizeof(Pointer));
-      family->chilren = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
+      family->children = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, "CHIL");
       temp->listPtr = family->children;
