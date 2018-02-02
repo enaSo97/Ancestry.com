@@ -105,8 +105,6 @@ char * printPointers(void * data){
   if (data == NULL){
     return NULL;
   }
-
-
   point = (Pointer*)data;
 
   length = strlen(point->addr) + strlen(point->type) + 500;
@@ -776,10 +774,9 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
 }
 
 void linkerFunction(List * pointer, void * data){
-  Node * temp = pointer->head;
+  Node * temp = &(pointer->head);
 
   Pointer * set;
-
 
   if (data == NULL){
     return ;
@@ -788,7 +785,7 @@ void linkerFunction(List * pointer, void * data){
 
   List * childrenPtr = set->listPtr;
   while(temp->next != NULL){
-    printf("pointer %s || receiver %s||\n", *((Pointer*)temp)->addr, set->addr);
+    printf("pointer %s || receiver %s||\n", ((Pointer*)temp)->addr, set->addr);
     if (strcmp(((Pointer*)temp)->addr, set->addr) == 0){
       if (strcmp(set->type, "CHIL") == 0){
         printf("it's child\n");
