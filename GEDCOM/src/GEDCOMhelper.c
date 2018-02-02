@@ -737,11 +737,13 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
       i--;
     }
     else if(strcmp(record[i].tag, "FAMC") == 0 || strcmp(record[i].tag, "FAMS") == 0){
-      temp = calloc(1, sizeof(Pointer));
+      /*temp = calloc(1, sizeof(Pointer));
       strcpy(temp->type, record[i].tag);
       strcpy(temp->addr, record[i].info);
       temp->indiPoint = person;
-      insertBack(receiver, temp);
+      insertBack(receiver, temp);*/
+      ield = createField(record[i].tag, record[i].info);
+      insertBack(&other, field);
     }
     else{
       field = createField(record[i].tag, record[i].info);
