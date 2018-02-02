@@ -848,7 +848,7 @@ void linkerFunction(List * pointer, void * data){
   if (data == NULL){
     return ;
   }
-  set = calloc(1, sizeof(Pointer));
+  set = (Pointer*)calloc(1, sizeof(Pointer));
   strcpy(set->addr,((Pointer*)data)->addr);
 
   printf("%s // %s \n", set->addr, set->type);
