@@ -132,8 +132,8 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   printf("*******************************************");
 
   printf("\n--------Individual -------------\n");
-  char * indi = toString(family);
-  puts(indi);
+//  char * indi = toString(family);
+  //puts(indi);
   printf("---------------------------------\n");
 
   for (int i = 0; i < 10000000; i++){ // freeing the allocated memory after done parsing the file

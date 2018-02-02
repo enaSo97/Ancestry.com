@@ -7,6 +7,26 @@
 #include "GEDCOMparser.h"
 #include "GEDCOMmutilities.h"
 
+void enumToString(ErrorCode error){
+  if (error == OK){
+    printf("OK\n");
+  }
+  else if(error == INV_FILE){
+    printf("INV_FILE\n");
+  }
+  else if(error == INV_GEDCOM){
+    printf("INV_GEDCOM\n");
+  }
+  else if(error ==  INV_HEADER){
+    printf("INV_HEADER\n");
+  }
+  else if(error == INV_RECORD){
+    printf("INV_RECORD\n");
+  }
+  else if(error == OTHER){
+    printf("OTHER\n");
+  }
+}
 
 /*******sets the information of the Event ********************************/
 Event * createEvent(char type[5], char * date, char * place, List other){
@@ -223,6 +243,12 @@ enum eCode validateFile(char* fileName){
     printf("empty file name\n");
     return INV_FILE;
   }
+
+  char * end = strstr(fileName, ".ged");
+  if (strcmp(end, ".ged") != 0){
+    return INV_FILE;
+  }
+
   FILE * file = fopen(fileName, "r");
   if (file == NULL){
     printf("file is NULL, empty\n");
@@ -235,12 +261,49 @@ enum eCode validateFile(char* fileName){
 }
 /**************************************************/
 
+bool validateTags(char * check){
+  char tags[] = {"ABBR", "ADDR", "ADR1", "ADR2", "ADOP", "AFN", "AGE", "AGNC", "ALIA", "ANCE", "ANCI", "ANUL"
+                  ,"ASSO", "AUTH", "BAPL", "BAPM", "BARM", "BASM", "BIRT", "BLES", "BURI", "CALN", "CAST", "CAUS", "CENS", "CHAN",
+                  "CHAR", "CHIL", "CHR", "CHRA", "CITY", "CONC", "CONF", "CONL", "CONT", "COPR", "CORP", "CREM", "CTRY", "DATA", "DEAT",
+                  "DESC", "DESI", "DEST", "DIV", "DIVF", "DSCR", "EDUC", "EMAI", "EMIG", "ENDL", "ENGA", "EVEN", "FACT", "FAM", "FAMC",
+                  "FAMS", "FAMF", "FAX", "FCOM", "FILE", "FORM", "FONE", "GEDC", "GIVN", "GRAD", "HEAD", "HUSB", "IDNO", "IMMI", "INDI",
+                  "LANG", "LATI", "LONG", "MAP", "MARB", "MARC", "MARL", "MARR", "MARS", "MEDI", "NAME", "NATI", "NCHI", "NICK", "NMR",
+                  "NOTE", "NPFX", "NSFX", "OBJE", "OCCU", "ORDI", "ORDN", "PAGE", "PEDI", "PHON", "PLAC", "POST", "PROB", "PROP", "PUBL",
+                  "QUAY", "RFFN", "RELA", "RELI", "REPO", "RESI", "RESN", "RFN", ""}
+}
+
 /***********validating the GEDCOM line ************/
-enum eCode validateGEDCOM(char * read){
+enum eCode validateRecord(Info * record, int length){
   //int length = fileLength(read);
   //int term;
+  char convert[20];
+  if (record[0].level != 0){
+    return INV_RECORD;
 
-
+  }
+  for (int i = 0; i < length; i++){
+    if (record[i].level < 0 || record[i].level > 99){
+      return INV_RECORD;
+    }
+    else if(record[i].level != (record[i-1].level + 1)){
+      return INV_RECORD;
+    }
+    else if(record[i].info[0] == '@'){
+      if (strlen(record[i].info) > 22){
+        return INV_RECORD;
+      }
+      else if (record[i].info[strlen(record[i]) - 1] != '@'){
+        return INV_RECORD;
+      }
+    }
+    itoa(record[i].level, convert, 10);
+    if ((strlen(convert) + strlen(record[i].info) + strlen(record[i].tag)) > 255){
+      return INV_RECORD;
+    }
+    else if (strlen(record[i].tag) > 32){
+      return INV_RECORD;
+    }
+  }
   return OK;
 }
 /***************************************************/
@@ -815,8 +878,8 @@ void linkerFunction(List * pointer, void * data){
         printf("it's wife or husband\n");
         *set->indiPoint = *((Pointer*)temp->data)->indiPoint;
         printf("printint the addres %p\n", (void*)set->indiPoint);
-        char* indi = printIndividual(*(set->indiPoint));
-        puts(indi);
+        //char* indi = printIndividual(*(set->indiPoint));
+        //puts(indi);
       }
       else if (strcmp(set->type, "FAMS") == 0 || strcmp(set->type, "FAMC") == 0){
 

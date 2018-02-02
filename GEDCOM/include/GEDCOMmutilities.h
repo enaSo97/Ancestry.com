@@ -56,11 +56,12 @@ void toLower(char * toBeLower);
 
 enum eCode validateFile(char* fileName);
 
-enum eCode validateGEDCOM(char * read);
+enum eCode validateGEDCOM(Info * record, int length);
 
 char** fileReader(char * fileName);
 
-int fileLength(char ** array);
+int fileLen
+gth(char ** array);
 
 int checkTerminate(char * string);
 
@@ -97,3 +98,5 @@ int validateFamilyEvent(char * check);
 void linkerFunction(List * pointer, void * data);
 
 char * returnString(char * data);
+
+void enumToString(ErrorCode error);
