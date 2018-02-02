@@ -414,6 +414,7 @@ char* printFamily(void* toBePrinted){
   string = calloc(10000, sizeof(char));
   print = (Family*)toBePrinted;
   string = printIndividual(print->wife);
+  puts(string);
   //string = (char*)realloc(string, sizeof(char) * 100);// reallocating memory for next elements that;s in the struct
   strcat(string, printIndividual(print->husband));
   strcat(string, toString(print->children));
