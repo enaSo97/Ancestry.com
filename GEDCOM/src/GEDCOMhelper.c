@@ -795,7 +795,7 @@ void linkerFunction(List * pointer, void * data){
     else if(strcmp(set->type, "SUBM") == 0){
       set->subPoint =((Pointer*)temp)->subPoint;
     }
-    else if((strcmp(set->type, "HUSB") == 0 || strcmp(set->type, "WIFE") == 0){
+    else if(strcmp(set->type, "HUSB") == 0 || strcmp(set->type, "WIFE") == 0){
       set->indiPoint = ((Pointer*)temp)->indiPoint;
     }
   }
