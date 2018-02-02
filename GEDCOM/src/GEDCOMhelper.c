@@ -786,7 +786,7 @@ void linkerFunction(List * pointer, void * data){
   char * buff = toString(*pointer);
   puts(buff);
 
-  int length = getLength(&pointer);
+  int length = getLength(*pointer);
   printf("lenfth of poitner %d\n", length);
   List * childrenPtr = set->listPtr;
   while(temp->next != NULL){
