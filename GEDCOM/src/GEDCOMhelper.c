@@ -788,15 +788,15 @@ void linkerFunction(List * pointer, void * data){
 
   List * childrenPtr = set->listPtr;
 
-  if (strcmp(temp->addr, set->addr) == 0){
+  if (strcmp(((Pointer*)temp)->addr, set->addr) == 0){
     if (strcmp(set->type, "CHIL") == 0){
-      insertBack(childrenPtr, temp->indiPoint);
+      insertBack(childrenPtr, ((Pointer*)temp)->indiPoint);
     }
     else if(strcmp(set->type, "SUBM") == 0){
-      set->subPoint = temp->subPoint;
+      set->subPoint =((Pointer*)temp)->subPoint;
     }
-    else if((strcmp(set->type, "HUSB") == 0 || (strcmp(set->type, "WIFE") == 0){
-      set->indiPoint = temp->indiPoint;
+    else if((strcmp(set->type, "HUSB") == 0 || strcmp(set->type, "WIFE") == 0){
+      set->indiPoint = ((Pointer*)temp)->indiPoint;
     }
   }
 }
