@@ -843,7 +843,7 @@ void linkerFunction(List * pointer, void * data){
 
   Pointer * set = NULL;
 
-  Pointer * point = NULL;
+  //Pointer * point = NULL;
 
   if (data == NULL){
     return ;
@@ -862,8 +862,8 @@ void linkerFunction(List * pointer, void * data){
   while(i < length){
     //point = (Pointer*)temp;
     char * string = returnString(((Pointer*)temp)->addr);
-    printf("pointer %s || receiver %s||\n", ((Pointer*)temp->data)->addr, set->addr);
-    if (strcmp(((Pointer*)temp->data)->addr, set->addr) == 0){
+    printf("pointer %s || receiver %s||\n", ((Pointer*)temp->data)->addr, *set->addr);
+    if (strcmp(((Pointer*)temp->data)->addr, *set->addr) == 0){
       if (strcmp(set->type, "CHIL") == 0){
         printf("it's child\n");
         insertBack(set->listPtr, ((Pointer*)temp->data)->indiPoint);
