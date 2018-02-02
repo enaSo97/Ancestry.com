@@ -120,7 +120,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     c++;
   }
   length--;
-  printf("length of family %d\n" getLength(family));
+  printf("length of family %d\n", getLength(family));
   /*
   printf("\nprinting individual\n");
   char * indi = toString(people);
