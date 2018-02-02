@@ -126,17 +126,17 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   puts(indi);
   printf("*********************************************\n");*/
 
-  char * print1 = toString(pointers);
+  /*char * print1 = toString(pointers);
   char * print2 = toString(receiver);
   printf("******pointers**************************\n");
   puts(print1);
   printf("\n******receivers**********************\n");
   puts(print2);
-  printf("*******************************************");
+  printf("*******************************************");*/
 
   printf("\n--------Individual -------------\n");
-//  char * indi = toString(family);
-  //puts(indi);
+  char * indi = toString(people);
+  puts(indi);
   printf("---------------------------------\n");
 
   for (int i = 0; i < 10000000; i++){ // freeing the allocated memory after done parsing the file

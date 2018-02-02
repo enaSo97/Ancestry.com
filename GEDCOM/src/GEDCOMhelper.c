@@ -873,16 +873,16 @@ void linkerFunction(List * pointer, void * data){
       else if(strcmp(set->type, "SUBM") == 0){
         printf("it's submitter\n");
         set->subPoint = ((Pointer*)temp->data)->subPoint;
-        printf("name: %s\n", ((Submitter*)set->subPoint)->submitterName);
-        printf("set the submitter\n");
+        //printf("name: %s\n", ((Submitter*)set->subPoint)->submitterName);
+        //printf("set the submitter\n");
       }
       else if(strcmp(set->type, "HUSB") == 0 || strcmp(set->type, "WIFE") == 0){
         printf
         ("it's wife or husband\n");
         set->indiPoint = ((Pointer*)temp->data)->indiPoint;
-        printf("printint the addres %p\n", (void*)set->indiPoint);
-        char* indi = printIndividual(set->indiPoint);
-        puts(indi);
+        //printf("printint the addres %p\n", (void*)set->indiPoint);
+        //char* indi = printIndividual(set->indiPoint);
+        //puts(indi);
       }
       else if (strcmp(set->type, "FAMS") == 0 || strcmp(set->type, "FAMC") == 0){
         //insertBack(&set->family)
@@ -891,10 +891,10 @@ void linkerFunction(List * pointer, void * data){
     temp = temp->next;
     i++;
   }
-  printf("\n!!!!!children!!!!!!\n");
+/*  printf("\n!!!!!children!!!!!!\n");
   char * children = toString(set->listPtr);
   puts(children);
-  printf("done the loop\n");
+  printf("done the loop\n");*/
    // printf("\n-----in linker------\n");
    // char * child = toString(*childrenPtr);
    // puts(child);
