@@ -105,6 +105,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         //printf("indi passed\n");
       }
       else if (strcmp(record[0].tag, "FAM") == 0){
+        //printf("in FAM\n");
         dummyFamily = parseFamily(record, k, &pointers, &receiver);
         Node * iter = people.head;
         Individual * one;
@@ -113,6 +114,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         int num = getLength(people);
         int a = 0;
         while(a < num){
+          //printf("in IND LIST\n");
           //int other = getLength(one.otherFields);
           one = (Individual*)iter->data;
           int other = getLength(one->otherFields);
@@ -139,8 +141,10 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
               }
             }//end compare info and otherfield
             field = field->next;
+            b++;
           }//end other while
           iter = iter->next;
+          a++;
         }//end num while
 
         //dummyFamily = parseFamily(record, k, &pointers, &receiver);
