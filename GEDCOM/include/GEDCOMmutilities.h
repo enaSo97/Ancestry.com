@@ -16,11 +16,22 @@ typedef struct info{
 typedef struct pointer{
   char addr[10];
   Individual * indiPoint;
-  Submitter * subPoint;
   Family * family;
   List listPtr;
   char type[10];
 }Pointer;
+
+/*typedef struct indiPoint{
+  char addr[10];
+  Individual * indi;
+  char type[10];
+}
+
+typedef struct famPoint{
+  char addr[10];
+  Family * fam;
+  char type[10];
+}*/
 
 Event * createEvent(char type[5], char * date, char * place, List other);
 

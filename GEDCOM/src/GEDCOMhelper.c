@@ -148,7 +148,6 @@ void deletePointers(void * erase){
   Delete = (Pointer*)erase;
 
   free(Delete->indiPoint);
-  free(Delete->subPoint);
   //free(Delete->listPtr);
   free(Delete);
 }
@@ -880,6 +879,7 @@ void linkerFunction(List * pointer, void * data){
         printf
         ("it's wife or husband\n");
         set->indiPoint = ((Pointer*)temp->data)->indiPoint;
+        printf("address of reciever %p\n", (void*)set->indiPoint);
         //printf("printint the addres %p\n", (void*)set->indiPoint);
         char* indi = printIndividual(set->indiPoint);
         puts(indi);
