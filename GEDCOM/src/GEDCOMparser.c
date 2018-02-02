@@ -131,11 +131,11 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
               }//end husb if
               else if (strcmp(record[i].info, "WIFE") == 0){
                 //dummyFamily->wife = malloc(sizeof(Individual));
-                dummyFamily->wife = (Individual*)iter;
+                dummyFamily->wife = one;
               }//end wife if
               else if(strcmp(record[i].info, "CHIL") == 0){
                 dummyFamily->children = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
-                insertBack(&dummyFamily->children, iter);
+                insertBack(&dummyFamily->children, one);
               }//end child if
               else{
                 extraStuff = createField(record[i].tag, record[i].info);
