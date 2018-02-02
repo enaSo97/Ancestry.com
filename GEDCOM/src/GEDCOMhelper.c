@@ -787,21 +787,23 @@ void linkerFunction(List * pointer, void * data){
   set = (Pointer*)data;
 
   List * childrenPtr = set->listPtr;
-
-  if (strcmp(((Pointer*)temp)->addr, set->addr) == 0){
-    if (strcmp(set->type, "CHIL") == 0){
-      insertBack(childrenPtr, *((Pointer*)temp)->indiPoint);
+  while(temp->next != NULL){
+    if (strcmp(((Pointer*)temp)->addr, set->addr) == 0){
+      if (strcmp(set->type, "CHIL") == 0){
+        insertBack(childrenPtr, ((Pointer*)temp)->indiPoint);
+      }
+      else if(strcmp(set->type, "SUBM") == 0){
+        set->subPoint =((Pointer*)temp)->subPoint;
+      }
+      else if(strcmp(set->type, "HUSB") == 0 || strcmp(set->type, "WIFE") == 0){
+        set->indiPoint = ((Pointer*)temp)->indiPoint;
+      }
     }
-    else if(strcmp(set->type, "SUBM") == 0){
-      set->subPoint =((Pointer*)temp)->subPoint;
-    }
-    else if(strcmp(set->type, "HUSB") == 0 || strcmp(set->type, "WIFE") == 0){
-      set->indiPoint = ((Pointer*)temp)->indiPoint;
-    }
+    temp = temp->next;
   }
-  printf("\n-----in linker------\n");
-  char * child = toString(*childrenPtr);
-  puts(child);
-  printf("--------------------------\n");
+   printf("\n-----in linker------\n");
+   char * child = toString(*childrenPtr);
+   puts(child);
+   printf("--------------------------\n");
 
 }
