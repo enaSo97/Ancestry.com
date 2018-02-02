@@ -786,11 +786,11 @@ void linkerFunction(List * pointer, void * data){
   set = (Pointer*)data;
 
   char * buff = toString(*pointer);
-  puts(buff);
+  //puts(buff);
 
 
   int length = getLength(*pointer);
-  printf("lenfth of poitner %d\n", length);
+  //printf("lenfth of poitner %d\n", length);
   List * childrenPtr = set->listPtr;
 
 
@@ -810,7 +810,7 @@ void linkerFunction(List * pointer, void * data){
       else if(strcmp(set->type, "HUSB") == 0 || strcmp(set->type, "WIFE") == 0){
         printf("it's wife or husband\n");
         set->indiPoint = ((Pointer*)temp->data)->indiPoint;
-        //char* indi = printIndividual(set->indiPoint);
+        char* indi = printIndividual(set->indiPoint);
         //puts(indi);
       }
     }
