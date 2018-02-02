@@ -333,6 +333,18 @@ char* printIndividual(void* toBePrinted){
     return NULL;
   }
 
+  if (print->givenName == NULL){
+    print->givenName = calloc(1, sizeof(char));
+    strcpy(print->givenName, "\0");
+    printf("check if null\n");
+  }
+  if (print->surname == NULL){
+    print->surname = calloc(1, sizeof(char));
+    strcpy(print->surname, "\0");
+    printf("check if null\n");
+  }
+
+
   print = (Individual*)toBePrinted;
   length = strlen(print->givenName) + strlen(print->surname) + 150;
   string = (char*)calloc(length, sizeof(char));
