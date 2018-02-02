@@ -332,7 +332,7 @@ char* printIndividual(void* toBePrinted){
   if (toBePrinted == NULL){
     return NULL;
   }
-
+  print = (Individual*)toBePrinted;
   if (print->givenName == NULL){
     print->givenName = calloc(1, sizeof(char));
     strcpy(print->givenName, "\0");
@@ -345,7 +345,7 @@ char* printIndividual(void* toBePrinted){
   }
 
 
-  print = (Individual*)toBePrinted;
+
   length = strlen(print->givenName) + strlen(print->surname) + 150;
   string = (char*)calloc(length, sizeof(char));
 
