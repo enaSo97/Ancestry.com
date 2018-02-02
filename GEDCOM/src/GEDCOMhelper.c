@@ -296,10 +296,10 @@ enum eCode validateRecord(Info * record, int length){
         return INV_RECORD;
       }*/
     }
-    itoa(record[i].level, convert, 10);
+    /*itoa(record[i].level, convert, 10);
     if ((strlen(convert) + strlen(record[i].info) + strlen(record[i].tag)) > 255){
       return INV_RECORD;
-    }
+    }*/
     else if (strlen(record[i].tag) > 32){
       return INV_RECORD;
     }
