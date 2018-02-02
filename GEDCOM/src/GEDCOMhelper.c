@@ -776,7 +776,9 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
 void linkerFunction(List * pointer, void * data){
   Node * temp = pointer->head;
 
-  Pointer * set;
+  Pointer * set = NULL;
+
+  Pointer * point = NULL;
 
   if (data == NULL){
     return ;
@@ -786,12 +788,16 @@ void linkerFunction(List * pointer, void * data){
   char * buff = toString(*pointer);
   puts(buff);
 
+
   int length = getLength(*pointer);
   printf("lenfth of poitner %d\n", length);
   List * childrenPtr = set->listPtr;
+
+
   while(temp->next != NULL){
-    //char * buff = toString()
-    printf("pointer %s || receiver %s||\n", &((Pointer*)temp)->addr, set->addr);
+    //point = (Pointer*)temp;
+    char * string = toString(((Pointer*)temp)->addr);
+    printf("pointer %s || receiver %s||\n", string, set->addr);
     if (strcmp(((Pointer*)temp)->addr, set->addr) == 0){
       if (strcmp(set->type, "CHIL") == 0){
         printf("it's child\n");
