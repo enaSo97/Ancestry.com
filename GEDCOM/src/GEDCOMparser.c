@@ -124,13 +124,13 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
             buff = (Field*)field->data;
             if (strcmp(record[i].info, buff->value) == 0){
               if (strcmp(record[i].info, "HUSB") == 0){
-                dummyFamily->husband = calloc(1,sizeof(Individual));
+                //dummyFamily->husband = malloc(sizeof(Individual));
                 dummyFamily->husband = one;
                 char * hus = printIndividual(dummyFamily->husband);
                 puts(hus);
               }//end husb if
               else if (strcmp(record[i].info, "WIFE") == 0){
-                dummyFamily->wife = calloc(1,sizeof(Individual));
+                //dummyFamily->wife = malloc(sizeof(Individual));
                 dummyFamily->wife = (Individual*)iter;
               }//end wife if
               else if(strcmp(record[i].info, "CHIL") == 0){
