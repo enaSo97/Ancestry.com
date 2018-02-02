@@ -113,13 +113,14 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         int num = getLength(people);
         int a = 0;
         while(a < num){
-          int other = getLength(people.otherFields);
+          //int other = getLength(one.otherFields);
           one = (Individual*)iter->data;
+          int other = getLength(one->otherFields);
           int b = 0;
           while(b < other){
             field = one->otherFields.head;
             buff = (Field*)field->data;
-            if (strcmp(record[i].info, buff->value == 0)){
+            if (strcmp(record[i].info, buff->value) == 0){
               if (strcmp(record[i].info, "HUSB") == 0){
                 dummyFamily->husband = calloc(1,sizeof(Individual));
                 dummyFamily->husband = (Individual*)iter;
