@@ -799,4 +799,9 @@ void linkerFunction(List * pointer, void * data){
       set->indiPoint = ((Pointer*)temp)->indiPoint;
     }
   }
+  printf("\n-----in linker------\n");
+  char * child = toString(childrenPtr);
+  puts(child);
+  printf("--------------------------\n");
+
 }
