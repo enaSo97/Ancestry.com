@@ -132,7 +132,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   printf("*******************************************");
 
   printf("\n--------Individual -------------\n");
-  char * indi = toString(people);
+  char * indi = toString(family);
   puts(indi);
   printf("---------------------------------\n");
 
