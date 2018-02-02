@@ -17,7 +17,7 @@ typedef struct pointer{
   char addr[10];
   Individual ** indiPoint;
   Submitter ** subPoint;
-  //List * listPtr;
+  List * listPtr;
   void ** stuff;
   char type[10];
 }Pointer;
@@ -94,4 +94,4 @@ int validateIndividualEvent(char * check);
 
 int validateFamilyEvent(char * check);
 
-void linkerFunction(List * receiver, List * pointers);
+void linkerFunction(List * receiver, List * pointers, Family * family, Individual * person, Submitter * sub);
