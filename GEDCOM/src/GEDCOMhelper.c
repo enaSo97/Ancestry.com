@@ -876,10 +876,10 @@ void linkerFunction(List * pointer, void * data){
       }
       else if(strcmp(set->type, "HUSB") == 0 || strcmp(set->type, "WIFE") == 0){
         printf("it's wife or husband\n");
-        *set->indiPoint = *((Pointer*)temp->data)->indiPoint;
+        set->indiPoint = ((Pointer*)temp->data)->indiPoint;
         printf("printint the addres %p\n", (void*)set->indiPoint);
-        //char* indi = printIndividual(*(set->indiPoint));
-        //puts(indi);
+        char* indi = printIndividual(*(set->indiPoint));
+        puts(indi);
       }
       else if (strcmp(set->type, "FAMS") == 0 || strcmp(set->type, "FAMC") == 0){
 
