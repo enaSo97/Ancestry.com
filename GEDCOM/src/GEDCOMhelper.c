@@ -614,7 +614,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
   strcpy(temp->addr, record[0].info);
   strcpy(temp->type, record[0].tag);
   temp->indiPoint = &person;
-  printf("\nchecking for indi pointer %s || %s || \n", temp->addr, temp->type)
+  printf("\nchecking for indi pointer %s || %s || \n", temp->addr, temp->type);
   insertBack(pointers, temp);
   /*******************************************************************/
 
