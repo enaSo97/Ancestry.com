@@ -649,8 +649,9 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, "INDI");
       temp->indiPoint = &person;
-      printf("\nchecking for indi pointer %s || %s || \n", temp->addr, temp->type);
+      //printf("\nchecking for indi pointer %s || %s || \n", temp->addr, temp->type);
       insertBack(pointers, temp);
+      printf("checking for pointer %s", (Pointer*)temp->indiPoint)
     }
     else if (validateIndividualEvent(record[i].tag) == 1){
       Event * event = calloc(1, sizeof(Event));
@@ -806,15 +807,15 @@ void linkerFunction(List * pointer, void * data){
       else if(strcmp(set->type, "SUBM") == 0){
         printf("it's submitter\n");
         set->subPoint = &((Pointer*)temp->data)->subPoint;
-        printf("name: %s\n", ((Submitter*)set->subPoint)->submitterName);
+        //printf("name: %s\n", ((Submitter*)set->subPoint)->submitterName);
         printf("set the submitter\n");
       }
       else if(strcmp(set->type, "HUSB") == 0 || strcmp(set->type, "WIFE") == 0){
         printf("it's wife or husband\n");
         set->indiPoint = ((Pointer*)temp->data)->indiPoint;
         //
-        char* indi = printIndividual(set->indiPoint);
-        //puts(indi);
+        char* indi = printIndividual(*set->indiPoint);
+        puts(indi);
       }
       else if (strcmp(set->type, "FAMS") == 0 || strcmp(set->type, "FAMC") == 0){
 
