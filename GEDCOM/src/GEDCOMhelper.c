@@ -881,8 +881,8 @@ void linkerFunction(List * pointer, void * data){
         ("it's wife or husband\n");
         set->indiPoint = ((Pointer*)temp->data)->indiPoint;
         //printf("printint the addres %p\n", (void*)set->indiPoint);
-        //char* indi = printIndividual(set->indiPoint);
-        //puts(indi);
+        char* indi = printIndividual(set->indiPoint);
+        puts(indi);
       }
       else if (strcmp(set->type, "FAMS") == 0 || strcmp(set->type, "FAMC") == 0){
         //insertBack(&set->family)
@@ -891,10 +891,10 @@ void linkerFunction(List * pointer, void * data){
     temp = temp->next;
     i++;
   }
-/*  printf("\n!!!!!children!!!!!!\n");
+  printf("\n!!!!!children!!!!!!\n");
   char * children = toString(set->listPtr);
   puts(children);
-  printf("done the loop\n");*/
+  printf("done the loop\n");
    // printf("\n-----in linker------\n");
    // char * child = toString(*childrenPtr);
    // puts(child);
