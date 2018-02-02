@@ -274,7 +274,7 @@ enum eCode validateFile(char* fileName){
 enum eCode validateRecord(Info * record, int length){
   //int length = fileLength(read);
   //int term;
-  char convert[20];
+  //char convert[20];
   if (record[0].level != 0){
     return INV_RECORD;
 
@@ -430,7 +430,7 @@ Header * headParser(Info * record, int length, List * pointers, List * receiver)
   //char * string = malloc(sizeof(char));
 
   List  other = initializeList(printField, deleteField, compareFields);
-  Pointer * point = calloc(1, sizeof(Pointer));
+  //Pointer * point = calloc(1, sizeof(Pointer));
   Field * field;
   //Submitter sub;
   //insertBack(other, field);
@@ -585,7 +585,7 @@ Header * headParser(Info * record, int length, List * pointers, List * receiver)
 Submitter * subParser(Info * record, int length, List * pointers, List * receiver){
 
   Submitter * sub = calloc(1,sizeof(Submitter));
-  Pointer * temp;
+  //Pointer * temp;
   Field * field;
   List other = initializeList(printField, deleteField, compareFields);
   char string[5000] = "";
@@ -780,7 +780,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
   Pointer * temp = calloc(1, sizeof(Pointer));
   Field * field = calloc(1, sizeof(Field));
   List other = initializeList(printField, deleteField, compareFields);
-  List children = initializeList(printIndividual, deleteIndividual, compareIndividuals);
+  //List children = initializeList(printIndividual, deleteIndividual, compareIndividuals);
   //List events = initializeList(printEvent, deleteEvent, compareEvents);
   //List kids = initializeList(printIndividual, deleteIndividual, compareIndividuals);
 
@@ -841,7 +841,7 @@ void linkerFunction(List * pointer, void * data){
 
   Pointer * set = NULL;
 
-  Pointer * point = NULL;
+  //Pointer * point = NULL;
 
   if (data == NULL){
     return ;
@@ -853,7 +853,7 @@ void linkerFunction(List * pointer, void * data){
 
   printf("%s // %s \n", set->addr, set->type);
 
-  char * buff = toString(*pointer);
+  //char * buff = toString(*pointer);
   //puts(buff);
   int i = 0;
 
@@ -864,7 +864,7 @@ void linkerFunction(List * pointer, void * data){
 
   while(i < length){
     //point = (Pointer*)temp;
-    char * string = returnString(((Pointer*)temp)->addr);
+    //char * string = returnString(((Pointer*)temp)->addr);
     //printf("pointer %s || receiver %s||\n", ((Pointer*)temp->data)->addr, set->addr);
     if (strcmp(((Pointer*)temp->data)->addr, set->addr) == 0){
       if (strcmp(set->type, "CHIL") == 0){
