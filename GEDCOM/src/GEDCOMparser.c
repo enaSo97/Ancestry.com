@@ -364,7 +364,7 @@ char* printIndividual(void* toBePrinted){
   //puts(events);
   //puts(other);
   strcat(string, toString(print->events));
-  //strcat(string, toString(print->families));
+  strcat(string, toString(print->families));
   strcat(string, toString(print->otherFields));
   return string;
 }
