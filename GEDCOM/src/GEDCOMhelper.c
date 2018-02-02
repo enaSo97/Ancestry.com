@@ -711,7 +711,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
       temp = calloc(1, sizeof(Pointer));
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, "INDI");
-      temp->indiPoint = person;
+      *temp->indiPoint = person;
       //printf("\nchecking for indi pointer %s || %s || \n", temp->addr, temp->type);
       insertBack(pointers, temp);
       printf("printing address %p\n", (void*)&person);
