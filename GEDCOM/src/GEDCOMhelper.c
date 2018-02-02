@@ -131,7 +131,7 @@ void deletePointers(void * erase){
 
   free(Delete->indiPoint);
   free(Delete->subPoint);
-  free(Delete->listPtr);
+  //free(Delete->listPtr);
   free(Delete->stuff);
   free(Delete);
 }
@@ -720,7 +720,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
 
   strcpy(temp->addr, record[0].info);
   strcpy(temp->type, record[0].tag);
-  temp->fam = &family;
+  temp->stuff = (void*)&family;
   insertBack(pointers, temp);
 
   for (int i = 1; i < length; i++){
@@ -756,7 +756,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
       strcpy(temp->type, record[i].tag);
       temp->indiPoint = NULL;
       insertBack(receiver, temp);
-      insertBack(children, person);
+      insertBack(&children, person);
       family->children = children;
     }
     else{
