@@ -123,7 +123,10 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   puts(print2);
   printf("*******************************************");
 
-
+  printf("\n--------family -------------\n");
+  char * fam = toString(family);
+  puts(fam);
+  printf("---------------------------------\n");
 
   for (int i = 0; i < 10000000; i++){ // freeing the allocated memory after done parsing the file
     //free(info[i]); // freeing the allocated information struct
