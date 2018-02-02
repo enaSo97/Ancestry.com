@@ -602,7 +602,7 @@ Submitter * subParser(Info * record, int length, List * pointers, List * receive
       temp = calloc(1, sizeof(Pointer));
       strcpy(temp->addr, record[0].info);
       strcpy(temp->type, record[0].tag);
-      temp->subPoint = &sub;
+      temp->subPoint = sub;
       insertBack(pointers, temp);
     }
     else if (strcmp(record[i].tag, "ADDR") == 0){
@@ -711,7 +711,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
       temp = calloc(1, sizeof(Pointer));
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, "INDI");
-      temp->indiPoint = &person;
+      temp->indiPoint = person;
       //printf("\nchecking for indi pointer %s || %s || \n", temp->addr, temp->type);
       insertBack(pointers, temp);
       printf("printing address %p\n", (void*)&person);
@@ -793,20 +793,20 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
     if (strcmp(record[i].tag, "HUSB") == 0){
       temp = calloc(1, sizeof(Pointer));
       person = calloc(1,sizeof(Individual));
-      family->husband;
+      family->husband = person;
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, "HUSB");
-      temp->indiPoint = &(family->husband);
+      temp->indiPoint = family->husband;
       insertBack(receiver, temp);
     }
     else if (strcmp(record[i].tag, "WIFE") == 0)
     {
       temp = calloc(1, sizeof(Pointer));
       person = calloc(1,sizeof(Individual));
-      family->wife;
+      family->wife = person;
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, "WIFE");
-      temp->indiPoint = &(family->wife);
+      temp->indiPoint = family->wife;
       insertBack(receiver, temp);
     }
     else if (validateFamilyEvent(record[i].tag) == 1){
@@ -823,7 +823,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
       person = calloc(1,sizeof(Individual));
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, "CHIL");
-      temp->listPtr = &(family->children);
+      temp->listPtr = family->children;
       insertBack(receiver, temp);
       //insertBack(&children, person);
       //family->children = children;
@@ -848,10 +848,10 @@ void linkerFunction(List * pointer, void * data){
   if (data == NULL){
     return ;
   }
-  set = (Pointer*)calloc(1, sizeof(Pointer));
-  strcpy(set->addr,((Pointer*)data)->addr);
-  strcpy(set->type,((Pointer*)data)->type);
-  set->indiPoint = NULL;
+  set = (Pointer*)data;
+  //strcpy(set->addr,((Pointer*)data)->addr);
+  //strcpy(set->type,((Pointer*)data)->type);
+  //set->indiPoint = NULL;
 
   printf("%s // %s \n", set->addr, set->type);
 

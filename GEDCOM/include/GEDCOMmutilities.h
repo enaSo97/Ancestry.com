@@ -15,8 +15,8 @@ typedef struct info{
 
 typedef struct pointer{
   char addr[10];
-  Individual ** indiPoint;
-  Submitter ** subPoint;
+  Individual * indiPoint;
+  Submitter * subPoint;
   List * listPtr;
   void ** stuff;
   char type[10];
