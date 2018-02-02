@@ -814,7 +814,7 @@ void linkerFunction(List * pointer, void * data){
         printf("it's wife or husband\n");
         set->indiPoint = ((Pointer*)temp->data)->indiPoint;
         //
-        char* indi = printIndividual(*set->indiPoint);
+        char* indi = printIndividual(*(set->indiPoint));
         puts(indi);
       }
       else if (strcmp(set->type, "FAMS") == 0 || strcmp(set->type, "FAMC") == 0){
