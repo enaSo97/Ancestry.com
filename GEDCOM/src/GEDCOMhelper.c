@@ -742,7 +742,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
       strcpy(temp->addr, record[i].info);
       temp->indiPoint = person;
       insertBack(receiver, temp);*/
-      ield = createField(record[i].tag, record[i].info);
+      field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
     }
     else{
