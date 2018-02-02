@@ -363,7 +363,7 @@ char* printIndividual(void* toBePrinted){
   other = toString(print->otherFields);
   puts(events);
   puts(other);
-  if (print->event != NULL){
+  if (print->events != NULL){
     strcat(string, toString(print->events));
   }
   //strcat(string, toString(print->events));
