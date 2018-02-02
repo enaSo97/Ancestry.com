@@ -112,10 +112,10 @@ char * printPointers(void * data){
   length = strlen(point->addr) + strlen(point->type) + 500;
   string = (char*)calloc(length, sizeof(char));
   sprintf(string, "Type: %s, Address: %s\n", point->type, point->addr);
-  if (strcmp(point->type, "CHIL") == 0){
+  /*if (strcmp(point->type, "CHIL") == 0){
     printf("it's children\n");
     strcat(string, printIndividual((Individual*)point->point));
-  }
+  }*/
 
   return string;
 }
@@ -129,7 +129,10 @@ void deletePointers(void * erase){
 
   Delete = (Pointer*)erase;
 
-  free(Delete->point);
+  free(Delete->indiPoint);
+  free(Delete->subPoint);
+  free(Delete->listPtr);
+  free(Delete->stuff);
   free(Delete);
 }
 
@@ -722,13 +725,13 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
     if (strcmp(record[i].tag, "HUSB") == 0){
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, record[i].tag);
-      temp->indiPoint = family->husband;
+      temp->indiPoint = &family->husband;
       insertBack(receiver, temp);
     }
     else if (strcmp(record[i].tag, "WIFE") == 0){
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, record[i].tag);
-      temp->indiPoint = family->wife;
+      temp->indiPoint = &family->wife;
       insertBack(receiver, temp);
     }
     else if (validateFamilyEvent(record[i].tag) == 1){
@@ -743,7 +746,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
     else if (strcmp(record[i].tag, "CHIL") == 0){
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, record[i].tag);
-      temp->listPtr = family->children;
+      temp->listPtr = &family->children;
       insertBack(receiver, temp);
     }
     else{
