@@ -110,8 +110,11 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     //printf("<<<i : %d>>>\n", i);
     //i = k;
   }
-
-  linkerFunction(&receiver, &pointers, &family, &people, object->submitter);
+  Node * receive = receiver->head;
+  while(receive->next != NULL){
+    linkerFunction(&pointer, receive->data);
+    receive = receive->next;
+  }
 
   length--;
   /*

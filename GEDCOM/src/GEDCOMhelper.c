@@ -775,44 +775,17 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
   return family;
 }
 
-void linkerFunction(List * receiver, List * pointers, List * family, List * person, Submitter * sub){
-  Node * temp = receiver->head;
+void linkerFunction(List * pointer, void * data){
+  Node * temp = pointer->head;
 
-  //Node * temp2 = pointers->head;
-  //int REClength = getLength(*receiver);
-  //int prtLength = getLength(*pointers);
-  void * key;
-  int i = 0;
-  int j = 0;
+  Pointer * set;
 
-  //printf("pointer %d || receiver %d\n", REClength, prtLength);
-  while(temp->next != NULL){
-    printf("chekcing each node ||%s||\n", ((Pointer*)temp->data)->addr);
-    key = findElement(*pointers, comparePointers, temp->data);
-    if(strcmp(((Pointer*)key)->addr, ((Pointer*)temp->data)->addr) == 0){
-      //printf("\nfound the matching ones\n");
-      printf("\npointer %s == receiver %s || type %s == type %s\n\n", ((Pointer*)key)->addr, ((Pointer*)temp->data)->addr, ((Pointer*)key)->type, ((Pointer*)temp->data)->type);
-      if(strcmp(((Pointer*)key)->type,"HUSB") == 0 || strcmp(((Pointer*)key)->type,"WIFE") == 0){
-        ((Pointer*)temp->data)->indiPoint = ((Pointer*)key)->indiPoint;
-      }
+  if (data == NULL){
+    return ;
+  }
+  set = (Pointer*)data;
 
-      else if (strcmp(((Pointer*)key)->addr,"CHIL") == 0){
-
-      }
-
-      else if(strcmp(((Pointer*)key)->type,"SUBM") == 0){
-        ((Pointer*)temp->data)->subPoint = ((Pointer*)key)->subPoint;
-      }
-
-      else if (strcmp(((Pointer*)key)->type,"FAMC") == 0 || strcmp(((Pointer*)key)->type,"FAMS") == 0){
-        ((Pointer*)temp->data)->indiPoint = ((Pointer*)key)->indiPoint;
-      }
-
-      else {
-        ((Pointer*)temp->data)->stuff = ((Pointer*)key)->stuff;
-      }
-      //((Pointer*)temp->data)->point = (void*)((Pointer*)key)->point;
-    }
-    temp = temp->next;
+  if (strcmp(temp->addr, set->addr) == 0){
+    set->point = pointer->point;
   }
 }
