@@ -786,7 +786,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
 
   strcpy(temp->addr, record[0].info);
   strcpy(temp->type, "FAM");
-  temp->stuff = (void*)&family;
+  temp->family = family;
   insertBack(pointers, temp);
 
   for (int i = 1; i < length; i++){
@@ -887,12 +887,15 @@ void linkerFunction(List * pointer, void * data){
         puts(indi);
       }
       else if (strcmp(set->type, "FAMS") == 0 || strcmp(set->type, "FAMC") == 0){
-
+        //insertBack(&set->family)
       }
     }
     temp = temp->next;
     i++;
   }
+  printf("\n!!!!!children!!!!!!\n");
+  char * children = toString(set->listPtr);
+  puts(children)
   printf("done the loop\n");
    // printf("\n-----in linker------\n");
    // char * child = toString(*childrenPtr);
