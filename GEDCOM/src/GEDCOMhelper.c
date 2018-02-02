@@ -780,12 +780,23 @@ void linkerFunction(List * pointer, void * data){
 
   Pointer * set;
 
+
   if (data == NULL){
     return ;
   }
   set = (Pointer*)data;
 
+  List * childrenPtr = set->listPtr;
+
   if (strcmp(temp->addr, set->addr) == 0){
-    set->point = pointer->point;
+    if (strcmp(set->type, "CHIL") == 0){
+      insertBack(childrenPtr, temp->indiPoint);
+    }
+    else if(strcmp(set->type, "SUBM") == 0){
+      set->subPoint = temp->subPoint;
+    }
+    else if((strcmp(set->type, "HUSB") == 0 || (strcmp(set->type, "WIFE") == 0){
+      set->indiPoint = temp->indiPoint;
+    }
   }
 }
