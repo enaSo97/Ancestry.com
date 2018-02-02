@@ -610,17 +610,9 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
   char names[10][50];
   printf("in individual parser\n");
 
-  /*******Saving the pointer of the individual in the sender list*****/
-  strcpy(temp->addr, record[0].info);
-  strcpy(temp->type, record[0].tag);
-  temp->indiPoint = &person;
-  printf("\nchecking for indi pointer %s || %s || \n", temp->addr, temp->type);
-  insertBack(pointers, temp);
-  /*******************************************************************/
-
   person->surname = malloc(sizeof(char)*50);
   person->givenName = malloc(sizeof(char)*50);
-  for (int i = 1; i < length; i++){
+  for (int i = 0; i < length; i++){
     int n = 0;
     //printf("\n<<%d||%s||%s>>\n", record[i].level, record[i].tag, record[i].info);
 
@@ -652,6 +644,13 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
         i++;
       }
       i--;
+    }
+    else if (strcmp(record[i].tag, "INDI") == 0){
+      strcpy(temp->addr, record[i].info);
+      strcpy(temp->type, "INDI");
+      temp->indiPoint = &person;
+      printf("\nchecking for indi pointer %s || %s || \n", temp->addr, temp->type);
+      insertBack(pointers, temp);
     }
     else if (validateIndividualEvent(record[i].tag) == 1){
       Event * event = calloc(1, sizeof(Event));
@@ -720,7 +719,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
   //List kids = initializeList(printIndividual, deleteIndividual, compareIndividuals);
 
   strcpy(temp->addr, record[0].info);
-  strcpy(temp->type, record[0].tag);
+  strcpy(temp->type, "FAM");
   temp->stuff = (void*)&family;
   insertBack(pointers, temp);
 
