@@ -526,7 +526,7 @@ Header * headParser(Info * record, int length, List * pointers, List * receiver)
 Submitter * subParser(Info * record, int length, List * pointers, List * receiver){
 
   Submitter * sub = calloc(1,sizeof(Submitter));
-  Pointer * temp = calloc(1,sizeof(Pointer));
+  Pointer * temp;
   Field * field;
   List other = initializeList(printField, deleteField, compareFields);
   char string[5000] = "";
@@ -538,6 +538,7 @@ Submitter * subParser(Info * record, int length, List * pointers, List * receive
       strcpy(sub->submitterName, record[i].info);
     }
     else if (strcmp(record[i].tag, "SUBM") == 0){
+      temp = calloc(1, sizeof(Pointer));
       strcpy(temp->addr, record[0].info);
       strcpy(temp->type, record[0].tag);
       temp->subPoint = &sub;
@@ -601,7 +602,7 @@ int validateIndividualEvent(char * check){
 
 Individual * parseIndividual(Info * record, int length, List * pointers, List*  receiver){
   Individual * person = calloc(1, sizeof(Individual));
-  Pointer * temp = calloc(1, sizeof(Pointer));
+  Pointer * temp;
   Field * field = calloc(1, sizeof(Field));
   List other = initializeList(printField, deleteField, compareFields);
   List events = initializeList(printEvent, deleteEvent, compareEvents);
@@ -646,6 +647,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
       i--;
     }
     else if (strcmp(record[i].tag, "INDI") == 0){
+      temp = calloc(1, sizeof(Pointer));
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, "INDI");
       temp->indiPoint = &person;
@@ -674,6 +676,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
       i--;
     }
     else if(strcmp(record[i].tag, "FAMC") == 0 || strcmp(record[i].tag, "FAMS") == 0){
+      temp = calloc(1, sizeof(Pointer));
       strcpy(temp->type, record[i].tag);
       strcpy(temp->addr, record[i].info);
       temp->indiPoint = &person;
@@ -711,7 +714,7 @@ int validateFamilyEvent(char * check){
 Family * parseFamily(Info * record, int length, List * pointers, List * receiver){
   Family * family = calloc(1, sizeof(Family));
   Individual * person;
-  Pointer * temp = calloc(1, sizeof(Pointer));
+  Pointer * temp;
   Field * field = calloc(1, sizeof(Field));
   List other = initializeList(printField, deleteField, compareFields);
   List children = initializeList(printIndividual, deleteIndividual, compareIndividuals);
@@ -725,6 +728,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
 
   for (int i = 1; i < length; i++){
     if (strcmp(record[i].tag, "HUSB") == 0){
+      temp = calloc(1, sizeof(Pointer));
       person = calloc(1,sizeof(Individual));
       family->husband = person;
       strcpy(temp->addr, record[i].info);
@@ -734,6 +738,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
     }
     else if (strcmp(record[i].tag, "WIFE") == 0)
     {
+      temp = calloc(1, sizeof(Pointer));
       person = calloc(1,sizeof(Individual));
       family->wife = person;
       strcpy(temp->addr, record[i].info);
@@ -751,6 +756,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
       i--;
     }
     else if (strcmp(record[i].tag, "CHIL") == 0){
+      temp = calloc(1, sizeof(Pointer));
       person = calloc(1,sizeof(Individual));
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, "CHIL");
