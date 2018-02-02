@@ -124,20 +124,24 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
             buff = (Field*)field->data;
             if (strcmp(record[i].info, buff->value) == 0){
               if (strcmp(record[i].info, "HUSB") == 0){
+                printf("found husbnad\n");
                 //dummyFamily->husband = malloc(sizeof(Individual));
                 dummyFamily->husband = one;
                 char * hus = printIndividual(one);
                 puts(hus);
               }//end husb if
               else if (strcmp(record[i].info, "WIFE") == 0){
+                printf("wife exist\n");
                 //dummyFamily->wife = malloc(sizeof(Individual));
                 dummyFamily->wife = one;
               }//end wife if
               else if(strcmp(record[i].info, "CHIL") == 0){
+                printf("child exist\n");
                 dummyFamily->children = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
                 insertBack(&dummyFamily->children, one);
               }//end child if
               else{
+                printf("extra\n");
                 extraStuff = createField(record[i].tag, record[i].info);
                 insertBack(&dummyFamily->otherFields, extraStuff);
               }
