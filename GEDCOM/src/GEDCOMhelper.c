@@ -794,7 +794,7 @@ void linkerFunction(List * pointer, void * data){
   //List * childrenPtr = set->listPtr;
 
 
-  while(i <= length){
+  while(i < length){
     //point = (Pointer*)temp;
     char * string = returnString(((Pointer*)temp)->addr);
     printf("pointer %s || receiver %s||\n", ((Pointer*)temp->data)->addr, set->addr);
