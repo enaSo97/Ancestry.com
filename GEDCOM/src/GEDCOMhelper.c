@@ -800,7 +800,7 @@ void linkerFunction(List * pointer, void * data){
     }
   }
   printf("\n-----in linker------\n");
-  char * child = toString(childrenPtr);
+  char * child = toString(*childrenPtr);
   puts(child);
   printf("--------------------------\n");
 
