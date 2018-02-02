@@ -96,4 +96,4 @@ int validateFamilyEvent(char * check);
 
 void linkerFunction(List * pointer, void * data);
 
-char * returnString(void * data);
+char * returnString(char * data);
