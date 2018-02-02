@@ -843,7 +843,7 @@ void linkerFunction(List * pointer, void * data){
 
   Pointer * set = NULL;
 
-  //Pointer * point = NULL;
+  Pointer * point = NULL;
 
   if (data == NULL){
     return ;
