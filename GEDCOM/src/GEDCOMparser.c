@@ -114,7 +114,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   while(receive.next != NULL){
     printf("linker while loop\n");
     linkerFunction(&pointers, &receive.data);
-    receive = receiver.next;
+    receive = receive.next;
   }
   length--;
   /*
