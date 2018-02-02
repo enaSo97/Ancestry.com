@@ -113,7 +113,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         int num = getLength(people);
         int a = 0;
         while(a < num){
-          int other = getLength(people.otherFields);
+          int other = getLength(people->otherFields);
           one = (Individual*)iter->data;
           int b = 0;
           while(b < other){
