@@ -107,14 +107,19 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       else if (strcmp(record[0].tag, "FAM") == 0){
         dummyFamily = parseFamily(record, k, &pointers, &receiver);
         Node * iter = people.head;
-        Node * field = people->otherFields.head;
+        Individual * one;
+        Node * field;
+        Field * buff;
         int num = getLength(people);
         int a = 0;
         while(a < num){
           int other = getLength(people.otherFields);
+          one = (Individual*)iter->data;
           int b = 0;
           while(b < other){
-            if (strcmp(record[i].info, ((Info*)field->data)->info) == 0){
+            field = one->otherFields.head;
+            buff = (Field*)field->data;
+            if (strcmp(record[i].info, buff->value == 0){
               if (strcmp(record[i].info, "HUSB") == 0){
                 dummyFamily->husband = calloc(1,sizeof(Individual));
                 dummyFamily->husband = (Individual*)iter;
@@ -132,7 +137,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
                 insertBack(&dummyFamily->otherFields, extraStuff);
               }
             }//end compare info and otherfield
-            other = other->next;
+            field = field->next;
           }//end other while
           iter = iter->next;
         }//end num while
