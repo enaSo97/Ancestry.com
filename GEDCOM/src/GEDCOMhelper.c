@@ -873,8 +873,8 @@ void linkerFunction(List * pointer, void * data){
       else if(strcmp(set->type, "SUBM") == 0){
         printf("it's submitter\n");
         set->subPoint = ((Pointer*)temp->data)->subPoint;
-        //printf("name: %s\n", ((Submitter*)set->subPoint)->submitterName);
-        //printf("set the submitter\n");
+        printf("name: %s\n", ((Submitter*)set->subPoint)->submitterName);
+      //  printf("set the submitter\n");
       }
       else if(strcmp(set->type, "HUSB") == 0 || strcmp(set->type, "WIFE") == 0){
         printf
