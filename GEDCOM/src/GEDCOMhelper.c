@@ -805,7 +805,7 @@ void linkerFunction(List * pointer, void * data){
       }
       else if(strcmp(set->type, "SUBM") == 0){
         printf("it's submitter\n");
-        set->subPoint =((Pointer*)temp->data)->subPoint;
+        *(set->subPoint) = ((Pointer*)temp->data)->subPoint;
         printf("name: %s\n", ((Submitter*)set->subPoint)->submitterName);
         printf("set the submitter\n");
       }
