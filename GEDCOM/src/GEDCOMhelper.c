@@ -707,7 +707,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
       i--;
     }
     else if (strcmp(record[i].tag, "INDI") == 0){
-      temp = calloc(1, sizeof(Pointer));
+      temp = malloc(sizeof(Pointer));
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, "INDI");
       temp->indiPoint = person;
