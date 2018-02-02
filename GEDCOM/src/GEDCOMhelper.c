@@ -848,7 +848,7 @@ void linkerFunction(List * pointer, void * data){
   if (data == NULL){
     return ;
   }
-  set = *(Pointer*)data;
+  set = (Pointer*)data;
 
   char * buff = toString(*pointer);
   //puts(buff);
