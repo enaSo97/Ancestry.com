@@ -150,7 +150,6 @@ void deletePointers(void * erase){
   free(Delete->indiPoint);
   free(Delete->subPoint);
   //free(Delete->listPtr);
-  free(Delete->stuff);
   free(Delete);
 }
 
