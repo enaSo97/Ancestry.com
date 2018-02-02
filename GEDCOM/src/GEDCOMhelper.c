@@ -775,7 +775,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
   return family;
 }
 
-void linkerFunction(List * receiver, List * pointers, Family * family, Individual * person, Submitter * sub){
+void linkerFunction(List * receiver, List * pointers, List * family, List * person, Submitter * sub){
   Node * temp = receiver->head;
 
   //Node * temp2 = pointers->head;

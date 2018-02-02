@@ -107,7 +107,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
     //i = k;
   }
 
-  linkerFunction(&receiver, &pointers, family, people, object->submitter);
+  linkerFunction(&receiver, &pointers, &family, &people, object->submitter);
 
   length--;
   /*

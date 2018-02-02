@@ -94,4 +94,4 @@ int validateIndividualEvent(char * check);
 
 int validateFamilyEvent(char * check);
 
-void linkerFunction(List * receiver, List * pointers, Family * family, Individual * person, Submitter * sub);
+void linkerFunction(List * receiver, List * pointers, List * family, List * people, Submitter * sub);
