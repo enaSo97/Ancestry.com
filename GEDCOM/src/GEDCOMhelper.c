@@ -760,7 +760,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
       person = calloc(1,sizeof(Individual));
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, "CHIL");
-      temp->listPtr = &(family->child);
+      temp->listPtr = &(family->children);
       insertBack(receiver, temp);
       //insertBack(&children, person);
       //family->children = children;
@@ -793,7 +793,7 @@ void linkerFunction(List * receiver, List * pointers, Family * family, Individua
       //printf("\nfound the matching ones\n");
       printf("\npointer %s == receiver %s || type %s == type %s\n\n", ((Pointer*)key)->addr, ((Pointer*)temp->data)->addr, ((Pointer*)key)->type, ((Pointer*)temp->data)->type);
       if(strcmp(((Pointer*)key)->type,"HUSB") == 0 || strcmp(((Pointer*)key)->type,"WIFE") == 0){
-        ((Pointer*)temp->data)->indiPoint = &((Pointer*)key)->indiPoint;
+        ((Pointer*)temp->data)->indiPoint = ((Pointer*)key)->indiPoint;
       }
 
       else if (strcmp(((Pointer*)key)->addr,"CHIL") == 0){

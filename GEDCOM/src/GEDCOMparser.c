@@ -103,14 +103,11 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       }
     }
     i--;
-
-    object->individuals = people;
-    object->families = family;
     //printf("<<<i : %d>>>\n", i);
     //i = k;
   }
 
-  linkerFunction(&receiver, &pointers, object->family, object->individuals, object->submitter);
+  linkerFunction(&receiver, &pointers, family, people, object->submitter);
 
   length--;
   /*
