@@ -774,7 +774,7 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
 }
 
 void linkerFunction(List * pointer, void * data){
-  Node * temp = &(pointer->head);
+  Node * temp = pointer->head;
 
   Pointer * set;
 
