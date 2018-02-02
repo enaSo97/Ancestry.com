@@ -92,6 +92,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       }
       else if (strcmp(record[0].tag, "SUBM") == 0){
         object->submitter = subParser(record, k, &pointers, &receiver);
+        printf("passed submitter\n");
       }
       else if (strcmp(record[0].tag, "INDI") == 0){
         dummyPerson = parseIndividual(record, k, &pointers, &receiver);
