@@ -648,7 +648,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
       temp = calloc(1, sizeof(Pointer));
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, "INDI");
-      temp->indiPoint = person;
+      temp->indiPoint = &person;
       //printf("\nchecking for indi pointer %s || %s || \n", temp->addr, temp->type);
       insertBack(pointers, temp);
       printf("printing address %p\n", (void*)&person);
@@ -813,7 +813,7 @@ void linkerFunction(List * pointer, void * data){
       }
       else if(strcmp(set->type, "HUSB") == 0 || strcmp(set->type, "WIFE") == 0){
         printf("it's wife or husband\n");
-        set->indiPoint = ((Pointer*)temp->data)->indiPoint;
+        *set->indiPoint = *((Pointer*)temp->data)->indiPoint;
         printf("printint the addres %p\n", (void*)set->indiPoint);
         //char* indi = printIndividual(*(set->indiPoint));
         //puts(indi);
