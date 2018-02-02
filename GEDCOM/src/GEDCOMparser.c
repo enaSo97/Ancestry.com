@@ -359,10 +359,10 @@ char* printIndividual(void* toBePrinted){
   string = (char*)calloc(1000, sizeof(char));
   printf("in print individual\n");
   sprintf(string, "FirstName: %s, LastName: %s", print->givenName, print->surname);
-  events = toString(print->events);
-  other = toString(print->otherFields);
-  puts(events);
-  puts(other);
+  //events = toString(print->events);
+  //other = toString(print->otherFields);
+  //puts(events);
+  //puts(other);
   if (print->events.head != NULL){
     strcat(string, toString(print->events));
   }
