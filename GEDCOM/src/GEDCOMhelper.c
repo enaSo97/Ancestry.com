@@ -801,8 +801,8 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
     else if (strcmp(record[i].tag, "WIFE") == 0)
     {
       temp = calloc(1, sizeof(Pointer));
-      person = calloc(1,sizeof(Individual));
-      family->wife = person;
+      //person = calloc(1,sizeof(Individual));
+      family->wife = calloc(1,sizeof(Individual));
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, "WIFE");
       temp->indiPoint = family->wife;
