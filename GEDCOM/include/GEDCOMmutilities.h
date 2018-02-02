@@ -14,7 +14,7 @@ typedef struct info{
 }Info;
 
 typedef struct pointer{
-  char addr[
+  char addr[10];
   Individual ** indiPoint;
   Submitter ** subPoint;
   List * listPtr;
