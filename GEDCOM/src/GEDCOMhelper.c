@@ -488,7 +488,7 @@ Header * headParser(Info * record, int length, List * pointers, List * receiver)
     else if (strcmp(record[i].tag, "SUBM") == 0){
       strcpy(point->addr, record[i].info);
       strcpy(point->type, record[i].tag);
-      point->subPoint = &head->submitter;
+      point->subPoint = head->submitter;
       insertBack(receiver, point);
       //i++;
     }
@@ -742,7 +742,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
       temp = calloc(1, sizeof(Pointer));
       strcpy(temp->type, record[i].tag);
       strcpy(temp->addr, record[i].info);
-      temp->indiPoint = &person;
+      temp->indiPoint = person;
       insertBack(receiver, temp);
     }
     else{
