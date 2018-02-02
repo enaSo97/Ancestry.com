@@ -106,8 +106,8 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       }
       else if (strcmp(record[0].tag, "FAM") == 0){
         dummyFamily = parseFamily(record, k, &pointers, &receiver);
-        Node * iter = people->head;
-        Node * field = peole->head->otherFields;
+        Node * iter = people.head;
+        Node * field = people.head.otherFields;
         int num = getLength(people);
         int a = 0;
         while(a < num){
