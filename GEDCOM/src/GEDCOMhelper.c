@@ -261,7 +261,7 @@ enum eCode validateFile(char* fileName){
 }
 /**************************************************/
 
-bool validateTags(char * check){
+/*bool validateTags(char * check){
   char tags[] = {"ABBR", "ADDR", "ADR1", "ADR2", "ADOP", "AFN", "AGE", "AGNC", "ALIA", "ANCE", "ANCI", "ANUL"
                   ,"ASSO", "AUTH", "BAPL", "BAPM", "BARM", "BASM", "BIRT", "BLES", "BURI", "CALN", "CAST", "CAUS", "CENS", "CHAN",
                   "CHAR", "CHIL", "CHR", "CHRA", "CITY", "CONC", "CONF", "CONL", "CONT", "COPR", "CORP", "CREM", "CTRY", "DATA", "DEAT",
@@ -271,7 +271,7 @@ bool validateTags(char * check){
                   "NOTE", "NPFX", "NSFX", "OBJE", "OCCU", "ORDI", "ORDN", "PAGE", "PEDI", "PHON", "PLAC", "POST", "PROB", "PROP", "PUBL",
                   "QUAY", "RFFN", "RELA", "RELI", "REPO", "RESI", "RESN", "RFN", ""}
 }
-
+*/
 /***********validating the GEDCOM line ************/
 enum eCode validateRecord(Info * record, int length){
   //int length = fileLength(read);
