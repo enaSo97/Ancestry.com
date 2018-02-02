@@ -801,9 +801,9 @@ void linkerFunction(List * pointer, void * data){
     }
     temp = temp->next;
   }
-   printf("\n-----in linker------\n");
-   char * child = toString(*childrenPtr);
-   puts(child);
-   printf("--------------------------\n");
+   // printf("\n-----in linker------\n");
+   // char * child = toString(*childrenPtr);
+   // puts(child);
+   // printf("--------------------------\n");
 
 }
