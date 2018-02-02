@@ -736,8 +736,8 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
     {
       person = calloc(1,sizeof(Individual));
       family->wife = person;
-      strcpy(temp->addr, record[i].info);
-      strcpy(temp->type, record[i].tag);
+      strcpy(temp->addr, record[i].tag);
+      strcpy(temp->type, record[i].info);
       temp->indiPoint = &family->wife;
       insertBack(receiver, temp);
     }
