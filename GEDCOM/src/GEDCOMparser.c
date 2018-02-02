@@ -47,6 +47,8 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   GEDCOMobject * object = malloc(sizeof(GEDCOMobject));
   //*obj = malloc(sizeof(GEDCOMobject));
 
+  Field * extraStuff;
+
   read = fileReader(fileName);
   length = fileLength(read);
   info = calloc(1000000, sizeof(Info));
@@ -104,8 +106,40 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       }
       else if (strcmp(record[0].tag, "FAM") == 0){
         dummyFamily = parseFamily(record, k, &pointers, &receiver);
+        Node * iter = people->head;
+        Node * field = peole->head->otherFields;
+        int num = getLength(people);
+        int a = 0;
+        while(a < num){
+          int other = getLength(people->head->otherFields);
+          int b = 0;
+          while(b < other){
+            if (strcmp(record[i].info, ((Info*)field->data)->info) == 0){
+              if (strcmp(record[i].info, "HUSB") == 0){
+                dummyFamily->husband = calloc(1,sizeof(Individual));
+                dummyFamily->husband = iter;
+              }//end husb if
+              else if (strcmp(record[i].info, "WIFE") == 0){
+                dummyFamily->wife = calloc(1,sizeof(Individual));
+                dummyFamily->wife = iter;
+              }//end wife if
+              else if(strcmp(record[i].info, "CHIL") == 0){
+                dummyFamily->children = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
+                insertBack(&dummyFamily->children, iter);
+              }//end child if
+              else{
+                extraStuff = createField(record[i].tag, record[i].info);
+                insertBack(&dummyFamily->otherFields, extraStuff);
+              }
+            }//end compare info and otherfield
+            other = other->next;
+          }//end other while
+          iter = iter->next;
+        }//end num while
+
+        //dummyFamily = parseFamily(record, k, &pointers, &receiver);
         insertBack(&family, dummyFamily);
-        printf("passed fmailu\n");
+        printf("passed fmaily\n");
       }
     }
     i--;
