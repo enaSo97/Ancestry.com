@@ -385,12 +385,11 @@ char* printFamily(void* toBePrinted){
   if (toBePrinted == NULL){
     return NULL;
   }
-
+  string = calloc(10000, sizeof(char));
   print = (Family*)toBePrinted;
   string = printIndividual(print->wife);
-  string = (char*)realloc(string, sizeof(char) * 100);// reallocating memory for next elements that;s in the struct
-  toadd = printIndividual(print->husband);
-  strcat(string, toadd);
+  //string = (char*)realloc(string, sizeof(char) * 100);// reallocating memory for next elements that;s in the struct
+  strcat(string, toString(print->husband));
   strcat(string, toString(print->children));
   strcat(string, toString(print->otherFields));
 

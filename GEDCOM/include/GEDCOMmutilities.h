@@ -17,7 +17,7 @@ typedef struct pointer{
   char addr[10];
   Individual ** indiPoint;
   Submitter ** subPoint;
-  List * listPtr;
+  //List * listPtr;
   void ** stuff;
   char type[10];
 }Pointer;

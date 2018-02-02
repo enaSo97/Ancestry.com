@@ -427,7 +427,7 @@ Header * headParser(Info * record, int length, List * pointers, List * receiver)
     else if (strcmp(record[i].tag, "SUBM") == 0){
       strcpy(point->addr, record[i].info);
       strcpy(point->type, record[i].tag);
-      point->subPoint = head->submitter;
+      point->subPoint = &head->submitter;
       insertBack(receiver, point);
       //i++;
     }
@@ -540,7 +540,7 @@ Submitter * subParser(Info * record, int length, List * pointers, List * receive
     else if (strcmp(record[i].tag, "SUBM") == 0){
       strcpy(temp->addr, record[0].info);
       strcpy(temp->type, record[0].tag);
-      temp->subPoint = sub;
+      temp->subPoint = &sub;
       insertBack(pointers, temp);
     }
     else if (strcmp(record[i].tag, "ADDR") == 0){
@@ -613,7 +613,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
   /*******Saving the pointer of the individual in the sender list*****/
   strcpy(temp->addr, record[0].info);
   strcpy(temp->type, record[0].tag);
-  temp->indiPoint = person;
+  temp->indiPoint = &person;
   insertBack(pointers, temp);
   /*******************************************************************/
 
@@ -676,7 +676,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
     else if(strcmp(record[i].tag, "FAMC") == 0 || strcmp(record[i].tag, "FAMS") == 0){
       strcpy(temp->type, record[i].tag);
       strcpy(temp->addr, record[i].info);
-      temp->indiPoint = person;
+      temp->indiPoint = &person;
       insertBack(receiver, temp);
     }
     else{
@@ -710,25 +710,32 @@ int validateFamilyEvent(char * check){
 
 Family * parseFamily(Info * record, int length, List * pointers, List * receiver){
   Family * family = calloc(1, sizeof(Family));
+  Individual * person;
   Pointer * temp = calloc(1, sizeof(Pointer));
   Field * field = calloc(1, sizeof(Field));
   List other = initializeList(printField, deleteField, compareFields);
+  List children = initializeList(printIndividual, deleteIndividual, compareIndividuals);
   //List events = initializeList(printEvent, deleteEvent, compareEvents);
   //List kids = initializeList(printIndividual, deleteIndividual, compareIndividuals);
 
   strcpy(temp->addr, record[0].info);
   strcpy(temp->type, record[0].tag);
-  temp->point = (void*)family;
+  temp->fam = &family;
   insertBack(pointers, temp);
 
   for (int i = 1; i < length; i++){
     if (strcmp(record[i].tag, "HUSB") == 0){
+      person = calloc(1,sizeof(Individual));
+      family->husband = person;
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, record[i].tag);
       temp->indiPoint = &family->husband;
       insertBack(receiver, temp);
     }
-    else if (strcmp(record[i].tag, "WIFE") == 0){
+    else if (strcmp(record[i].tag, "WIFE") == 0)
+    {
+      person = calloc(1,sizeof(Individual));
+      family->wife = person;
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, record[i].tag);
       temp->indiPoint = &family->wife;
@@ -744,16 +751,20 @@ Family * parseFamily(Info * record, int length, List * pointers, List * receiver
       i--;
     }
     else if (strcmp(record[i].tag, "CHIL") == 0){
+      person = calloc(1,sizeof(Individual));
       strcpy(temp->addr, record[i].info);
       strcpy(temp->type, record[i].tag);
-      temp->listPtr = &family->children;
+      temp->indiPoint = NULL;
       insertBack(receiver, temp);
+      insertBack(children, person);
+      family->children = children;
     }
     else{
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
     }
   }
+  family->otherFields = other;
 
   return family;
 }
@@ -774,14 +785,14 @@ void linkerFunction(List * receiver, List * pointers){
     if(strcmp(((Pointer*)key)->addr, ((Pointer*)temp->data)->addr) == 0){
       //printf("\nfound the matching ones\n");
       printf("\npointer %s == receiver %s || type %s == type %s\n\n", ((Pointer*)key)->addr, ((Pointer*)temp->data)->addr, ((Pointer*)key)->type, ((Pointer*)temp->data)->type);
-      if(strcmp(((Pointer*)key)->addr,"HUSB") == 0 || strcmp(((Pointer*)key)->addr,"WIFE") == 0 || strcmp(((Pointer*)key)->addr,"CHIL") == 0){
+      if(strcmp(((Pointer*)key)->type,"HUSB") == 0 || strcmp(((Pointer*)key)->type,"WIFE") == 0 || strcmp(((Pointer*)key)->addr,"CHIL") == 0){
         ((Pointer*)temp->data)->indiPoint = ((Pointer*)key)->indiPoint;
       }
-      else if(strcmp(((Pointer*)key)->addr,"SUBM") == 0){
+      else if(strcmp(((Pointer*)key)->type,"SUBM") == 0){
         ((Pointer*)temp->data)->subPoint = ((Pointer*)key)->subPoint;
       }
-      else if (strcmp(((Pointer*)key)->addr,"FAMC") == 0 || strcmp(((Pointer*)key)->addr,"FAMS") == 0){
-        ((Pointer*)temp->data)->listPtr = ((Pointer*)key)->listPtr;
+      else if (strcmp(((Pointer*)key)->type,"FAMC") == 0 || strcmp(((Pointer*)key)->type,"FAMS") == 0){
+        ((Pointer*)temp->data)->indiPoint = ((Pointer*)key)->indiPoint;
       }else {
         ((Pointer*)temp->data)->stuff = ((Pointer*)key)->stuff;
       }
