@@ -780,7 +780,7 @@ Family * parseFamily(Info * record, int length, List people){
   Family * dummyFamily = calloc(1, sizeof(Family));
   Individual * person;
   Pointer * temp = calloc(1, sizeof(Pointer));
-  Field * field = calloc(1, sizeof(Field));
+  //Field * field = calloc(1, sizeof(Field));
   List other = initializeList(printField, deleteField, compareFields);
   Field * extraStuff;
   //List children = initializeList(printIndividual, deleteIndividual, compareIndividuals);
@@ -799,7 +799,7 @@ Family * parseFamily(Info * record, int length, List people){
   Field * second;
   while(node != NULL){
     one = (Individual*)node->data;
-    field = one->otherFiels.head;
+    field = one->otherFields.head;
     while(field != NULL){
       second = (Field*)field->data;
       if(strcmp(xref, second->value) == 0){
