@@ -785,11 +785,10 @@ Family * parseFamily(Info * record, int length, List people){
   // strcpy(temp->type, "FAM");
   // temp->family = family;
   // insertBack(pointers, temp);
-
+  Individual * one;
   int num = getLength(people);
   int other = getLength(one->otherFields);
   Node * iterate = people.head;//node of individual
-  Individual * one;
   Node * field;
   Field * buff;
 
