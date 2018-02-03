@@ -833,7 +833,7 @@ Family * parseFamily(Info * record, int length, List people){
       }//end compare info and otherfield
       field = field->next;
     }//end other while
-    iter = iter->next;
+    iterate = iterate->next;
 
     }
 
