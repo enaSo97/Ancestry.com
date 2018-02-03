@@ -816,22 +816,22 @@ Family * parseFamily(Info * record, int length, List people){
       strcpy(xref, record[i].info);
     }
   }
-  /*Node * node = people.head;//
-  Individual * one;
-  Node * field;
-  Field * second;*/
-  while(node != NULL){
-    one = (Individual*)node->data;
-    field = one->otherFields.head;
-    while(field != NULL){
-      second = (Field*)field->data;
-      if(strcmp(xref, second->value) == 0){
-        dummyFamily->husband = one;
+  Node * node2 = people.head;//
+  Individual * one2;
+  Node * field2;
+  Field * second2;
+  while(node2 != NULL){
+    one2 = (Individual*)node->data;
+    field2 = one2->otherFields.head;
+    while(field2 != NULL){
+      second2 = (Field*)field2->data;
+      if(strcmp(xref, second2->value) == 0){
+        dummyFamily->husband = one2;
         break;
       }
-      field = field->next;
+      field2 = field2->next;
     }
-    node = node->next;
+    node2 = node2->next;
   }
 
   //char * wife = printIndividual(dummyFamily->wife);
