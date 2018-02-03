@@ -866,7 +866,7 @@ Family * parseFamily(Info * record, int length, List people){
             printf("found children %s || value in list %s\n",kidRef[v], second3->value);
             //char * kids = printIndividual(one3);
             //puts(kids);
-            insertBack(&children, one3);
+            insertBack(&dummyFamily->children, one3);
             break;
           //  printf("after insertbvack\n\n");
           }
@@ -875,7 +875,7 @@ Family * parseFamily(Info * record, int length, List people){
         node3 = node3->next;
       }
     }
-  dummyFamily->children = children;
+  //dummyFamily->children = children;
   //char * wife = printIndividual(dummyFamily->wife);
   //puts(wife);
 
