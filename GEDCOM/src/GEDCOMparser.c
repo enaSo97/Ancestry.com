@@ -159,7 +159,7 @@ void deleteGEDCOM(GEDCOMobject* obj){
   clearList(&obj->header->otherFields);
   clearList(&obj->individuals);
   clearList(&obj->families);
-  clearList(&submitter->otherFields);
+  clearList(&obj->submitter->otherFields);
   free(obj->submitter);
   free(obj);
 }
