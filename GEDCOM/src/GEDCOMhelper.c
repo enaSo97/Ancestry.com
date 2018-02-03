@@ -849,22 +849,23 @@ Family * parseFamily(Info * record, int length, List people){
     Node * field3;
     Field * second3;
     int v = 0;
-    while(node3 != NULL){
-      one3 = (Individual*)node3->data;
-      field3 = one3->otherFields.head;
-      while(field3 != NULL){
-        second3 = (Field*)field3->data;
-        if(strcmp(kidRef[v], second3->value) == 0){
-          printf("\n\n");
-          char * kids = printIndividual(one3);
-          puts(kids);
-          insertBack(&children, one3);
-        //  printf("after insertbvack\n\n");
-          v++;
+    for (int v = 0; v < length; v++){
+      while(node3 != NULL){
+        one3 = (Individual*)node3->data;
+        field3 = one3->otherFields.head;
+        while(field3 != NULL){
+          second3 = (Field*)field3->data;
+          if(strcmp(kidRef[v], second3->value) == 0){
+            printf("\n\n");
+            char * kids = printIndividual(one3);
+            puts(kids);
+            insertBack(&children, one3);
+          //  printf("after insertbvack\n\n");
+          }
+          field3 = field3->next;
         }
-        field3 = field3->next;
+        node3 = node3->next;
       }
-      node3 = node3->next;
     }
   dummyFamily->children = children;
   //char * wife = printIndividual(dummyFamily->wife);
