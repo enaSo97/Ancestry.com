@@ -837,6 +837,7 @@ Family * parseFamily(Info * record, int length, List people){
 
   for (int i = 0; i < length; i++){
     if (strcmp(record[i].tag, "CHIL") == 0){
+      printf("found children\n");
       strcpy(xref, record[i].info);
     }
   }
@@ -850,12 +851,14 @@ Family * parseFamily(Info * record, int length, List people){
     while(field3 != NULL){
       second3 = (Field*)field3->data;
       if(strcmp(xref, second3->value) == 0){
+        printf("child xref match\n");
         insertBack(&children, one3);
+        printf("after insertbvack\n");
         break;
       }
-      field2 = field2->next;
+      field3 = field3->next;
     }
-    node2 = node2->next;
+    node3 = node3->next;
   }
   dummyFamily->children = children;
   //char * wife = printIndividual(dummyFamily->wife);
