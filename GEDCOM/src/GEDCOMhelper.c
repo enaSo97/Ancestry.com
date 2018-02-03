@@ -806,9 +806,9 @@ Family * parseFamily(Info * record, int length, List people){
         dummyFamily->wife = one;
         break;
       }
-      second = second->next;
+      field = field->next;
     }
-    one = one->next;
+    node = node->next;
   }
 
   char * wife = printIndividual(dummyFamily->wife);
