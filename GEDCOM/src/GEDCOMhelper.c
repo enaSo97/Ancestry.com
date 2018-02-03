@@ -661,7 +661,7 @@ int validateIndividualEvent(char * check){
 
 Individual * parseIndividual(Info * record, int length, List * pointers, List*  receiver){
   Individual * person = calloc(1, sizeof(Individual));
-  Pointer * temp;
+  //Pointer * temp;
   Field * field = calloc(1, sizeof(Field));
   List other = initializeList(printField, deleteField, compareFields);
   List events = initializeList(printEvent, deleteEvent, compareEvents);
@@ -781,9 +781,9 @@ Family * parseFamily(Info * record, int length, List people){
   //Individual * person;
   //Pointer * temp = calloc(1, sizeof(Pointer));
   //Field * field = calloc(1, sizeof(Field));
-  List other = initializeList(&printField, &deleteField, &compareFields);
-  Field * extraStuff;
-  List children  = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
+  //List other = initializeList(&printField, &deleteField, &compareFields);
+  //Field * extraStuff;
+  //List children  = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
   //List children = initializeList(printIndividual, deleteIndividual, compareIndividuals);
   //List events = initializeList(printEvent, deleteEvent, compareEvents);
   //List kids = initializeList(printIndividual, deleteIndividual, compareIndividuals);

@@ -88,7 +88,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         i++;
         j++;
       }
-      if (validateRecord(record, k) == )
+      //if (validateRecord(record, k) == )
       //printf("record 0 ||%d||%s||%s||\n", record[0].level, record[0].tag, record[0].info);
       if (strcmp(record[0].tag, "HEAD") == 0){
         object->header = headParser(record, k, &pointers, &receiver);
@@ -144,7 +144,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
  *@param obj - a pointer to a GEDCOMobject struct
  **/
 char* printGEDCOM(const GEDCOMobject* obj){
-
+ return NULL;
 }
 
 
@@ -402,7 +402,7 @@ int compareFamilies(const void* first,const void* second){
   if (compare1->husband != NULL){
     count1++;
   }
-  if (compare1->children != NULL){
+  if (compare1->children.head != NULL){
     count1 = getLength(compare1->children) + count;
   }
 
@@ -412,7 +412,7 @@ int compareFamilies(const void* first,const void* second){
   if (compare2->husband != NULL){
     count2++;
   }
-  if (compare2->children != NULL){
+  if (compare2->children.head != NULL){
     count2 = getLength(compare1->children) + count;
   }
 
