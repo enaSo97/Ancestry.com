@@ -95,7 +95,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         object->submitter = subParser(record, k, &pointers, &receiver);
         object->header->submitter = object->submitter;
         //printf("objects submiter Name : %s\n", object->submitter->submitterName);
-        printf("passed submitter\n");
+        //printf("passed submitter\n");
       }
       else if (strcmp(record[0].tag, "INDI") == 0){
         //printf("before parsing indi\n");
@@ -106,21 +106,21 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       else if (strcmp(record[0].tag, "FAM") == 0){
         dummyFamily = parseFamily(record, k, people);
         insertBack(&family, dummyFamily);
-        printf("passed fmaily\n");
+        //printf("passed fmaily\n");
       }
     }
     i--;
   }
   length--;
-  printf("length of family %d\n", getLength(family));
+  //printf("length of family %d\n", getLength(family));
 
-  printf("\nprint submitter\n");
-  printf("submiter Name : %s\n", object->header->submitter->submitterName);
+  //printf("\nprint submitter\n");
+  //printf("submiter Name : %s\n", object->header->submitter->submitterName);
 
-  printf("\n--------Individual -------------\n");
-  char * indi = toString(family);
-  puts(indi);
-  printf("---------------------------------\n");
+  //printf("\n--------Individual -------------\n");
+  //char * indi = toString(family);
+  //puts(indi);
+  //printf("---------------------------------\n");
 
   *obj = object;
 
