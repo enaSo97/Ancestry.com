@@ -150,7 +150,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         //         printf("extra\n");
         //         extraStuff = createField(record[i].tag, record[i].info);
         //         insertBack(&dummyFamily->otherFields, extraStuff);
-        //       }
+        //       }.;/
         //     }//end compare info and otherfield
         //     field = field->next;
         //     b++;

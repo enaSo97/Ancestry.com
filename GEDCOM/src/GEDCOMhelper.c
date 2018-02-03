@@ -809,9 +809,11 @@ Family * parseFamily(Info * record, int length, List people){
       while(b < other){
         field = one->otherFields.head;
         buff = (Field*)field->data;
+        printf("\n------------------------------------\n");
         char * bum = printIndividual(buff);
         puts(bum);
-        printf("record info print %s\n", record[i].info);
+        printf("---------------------------------------\n");
+        printf("\nrecord info print %s for index %d \n", record[i].info, i);
         if (strcmp(record[i].info, buff->value) == 0){
           if (strcmp(record[i].info, "HUSB") == 0){
             printf("found husbnad\n");
