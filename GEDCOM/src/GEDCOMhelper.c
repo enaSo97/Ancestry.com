@@ -789,7 +789,7 @@ Family * parseFamily(Info * record, int length, List people){
   //List kids = initializeList(printIndividual, deleteIndividual, compareIndividuals);
   char xref[32];
   char kidRef[20][32];
-
+  int k = 0;
   for (int i = 0; i < length; i++){
     if (strcmp(record[i].tag, "WIFE") == 0){
       strcpy(xref, record[i].info);
@@ -837,7 +837,7 @@ Family * parseFamily(Info * record, int length, List people){
   }
 
     for (int i = 0; i < length; i++){
-      int k = 0;
+      k = 0;
       if (strcmp(record[i].tag, "CHIL") == 0){
         printf("found children %s\n", record[i].info);
         strcpy(kidRef[k], record[i].info);
