@@ -851,7 +851,6 @@ Family * parseFamily(Info * record, int length, List people){
           second3 = (Field*)field3->data;
           if(strcmp(xref, second3->value) == 0){
             insertBack(&children, one3);
-            break;
           }
           field2 = field2->next;
         }
