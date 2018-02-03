@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "GEDCOMparser.h"
-#include "GEDCOMmutilities.h"
+#include "GEDCOMutilities.h"
 #include "LinkedListAPI.h"
 
 

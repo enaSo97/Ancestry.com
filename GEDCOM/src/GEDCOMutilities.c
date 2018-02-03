@@ -5,7 +5,7 @@
 #include <string.h>
 #include "LinkedListAPI.h"
 #include "GEDCOMparser.h"
-#include "GEDCOMmutilities.h"
+#include "GEDCOMutilities.h"
 
 void enumToString(ErrorCode error){
   if (error == OK){
