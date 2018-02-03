@@ -821,7 +821,7 @@ Family * parseFamily(Info * record, int length, List people){
   Node * field2;
   Field * second2;
   while(node2 != NULL){
-    one2 = (Individual*)node->data;
+    one2 = (Individual*)node2->data;
     field2 = one2->otherFields.head;
     while(field2 != NULL){
       second2 = (Field*)field2->data;
