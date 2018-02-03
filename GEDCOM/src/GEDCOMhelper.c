@@ -867,6 +867,7 @@ Family * parseFamily(Info * record, int length, List people){
             //char * kids = printIndividual(one3);
             //puts(kids);
             insertBack(&children, one3);
+            break;
           //  printf("after insertbvack\n\n");
           }
           field3 = field3->next;
