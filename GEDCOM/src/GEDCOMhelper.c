@@ -835,7 +835,7 @@ Family * parseFamily(Info * record, int length, List people){
     node2 = node2->next;
   }
 
-  for (int i = 0; i < length; i++){
+  /*for (int i = 0; i < length; i++){
     if (strcmp(record[i].tag, "CHIL") == 0){
       strcpy(xref, record[i].info);
 
@@ -858,7 +858,7 @@ Family * parseFamily(Info * record, int length, List people){
       }
     }
   }
-  dummyFamily->children = children;
+  dummyFamily->children = children;*/
 
   //char * wife = printIndividual(dummyFamily->wife);
   //puts(wife);
