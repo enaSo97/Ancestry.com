@@ -811,8 +811,31 @@ Family * parseFamily(Info * record, int length, List people){
     node = node->next;
   }
 
-  char * wife = printIndividual(dummyFamily->wife);
-  puts(wife);
+  for (int i = 0; i < length; i++){
+    if (strcmp(record[i].tag, "HUSB") == 0){
+      strcpy(xref, record[i].info);
+    }
+  }
+  Node * node = people.head;//
+  Individual * one;
+  Node * field;
+  Field * second;
+  while(node != NULL){
+    one = (Individual*)node->data;
+    field = one->otherFields.head;
+    while(field != NULL){
+      second = (Field*)field->data;
+      if(strcmp(xref, second->value) == 0){
+        dummyFamily->husband = one;
+        break;
+      }
+      field = field->next;
+    }
+    node = node->next;
+  }
+
+  //char * wife = printIndividual(dummyFamily->wife);
+  //puts(wife);
 
   return dummyFamily;
 }
