@@ -844,12 +844,17 @@ Family * parseFamily(Info * record, int length, List people){
         k++;
       }
     }
-    Node * node3 = people.head;//
+    /*Node * node3 = people.head;//
     Individual * one3;
     Node * field3;
     Field * second3;
-    int v = 0;
+    int v = 0;*/
+
     for (int v = 0; v < k; v++){
+      Node * node3 = people.head;//
+      Individual * one3;
+      Node * field3;
+      Field * second3;
       while(node3 != NULL){
         one3 = (Individual*)node3->data;
         field3 = one3->otherFields.head;
