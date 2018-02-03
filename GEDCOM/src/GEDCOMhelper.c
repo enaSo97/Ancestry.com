@@ -816,10 +816,10 @@ Family * parseFamily(Info * record, int length, List people){
       strcpy(xref, record[i].info);
     }
   }
-  Node * node = people.head;//
+  /*Node * node = people.head;//
   Individual * one;
   Node * field;
-  Field * second;
+  Field * second;*/
   while(node != NULL){
     one = (Individual*)node->data;
     field = one->otherFields.head;
