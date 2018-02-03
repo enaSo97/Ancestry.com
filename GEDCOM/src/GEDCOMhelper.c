@@ -788,7 +788,7 @@ Family * parseFamily(Info * record, int length, List people){
 
   int num = getLength(people);
   int other = getLength(one->otherFields);
-  Node * iter = people.head;//node of individual
+  Node * iterate = people.head;//node of individual
   Individual * one;
   Node * field;
   Field * buff;
@@ -799,7 +799,7 @@ Family * parseFamily(Info * record, int length, List people){
     char * dat = printIndividual(one);
     puts(dat);
     printf("--------------------------------------------\n");
-    for (int j = 0; j < buff; j++){
+    for (int j = 0; j < other; j++){
       field = one->otherFields.head;
       buff = (Field*)field->data;
       printf("\n*****printing other fileds in the loop******\n");
