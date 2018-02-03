@@ -879,8 +879,6 @@ Family * parseFamily(Info * record, int length, List people){
       insertBack(&other, field);
     }*/
 
-  }
-
   return dummyFamily;
 }
 
