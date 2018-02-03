@@ -47,8 +47,6 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   GEDCOMobject * object = malloc(sizeof(GEDCOMobject));
   //*obj = malloc(sizeof(GEDCOMobject));
 
-  Field * extraStuff;
-
   read = fileReader(fileName);
   length = fileLength(read);
   info = calloc(1000000, sizeof(Info));
@@ -124,7 +122,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   puts(indi);
   printf("---------------------------------\n");
 
-  obj = object;
+  *obj = object;
 
   for (int i = 0; i < 10000000; i++){ // freeing the allocated memory after done parsing the file
     free(read[i]);//freeing the allocated strings
@@ -403,7 +401,7 @@ int compareFamilies(const void* first,const void* second){
     count1++;
   }
   if (compare1->children.head != NULL){
-    count1 = getLength(compare1->children) + count;
+    count1 = getLength(compare1->children) + count1;
   }
 
   if (compare2->wife != NULL){
@@ -413,7 +411,7 @@ int compareFamilies(const void* first,const void* second){
     count2++;
   }
   if (compare2->children.head != NULL){
-    count2 = getLength(compare1->children) + count;
+    count2 = getLength(compare1->children) + count2;
   }
 
   return count1 - count2;
