@@ -841,6 +841,7 @@ Family * parseFamily(Info * record, int length, List people){
       if (strcmp(record[i].tag, "CHIL") == 0){
         printf("found children %s\n", record[i].info);
         strcpy(kidRef[k], record[i].info);
+        printf("saving to 2d array %s\n", record[i].info);
         k++;
       }
     }
@@ -849,7 +850,7 @@ Family * parseFamily(Info * record, int length, List people){
     Node * field3;
     Field * second3;
     int v = 0;*/
-
+    printf("+_________________________________+\n");
     for (int v = 0; v < k; v++){
       Node * node3 = people.head;//
       Individual * one3;
@@ -862,7 +863,7 @@ Family * parseFamily(Info * record, int length, List people){
           second3 = (Field*)field3->data;
           if(strcmp(kidRef[v], second3->value) == 0){
             printf("\n\n");
-            printf("found children %s\n",kidRef[v]);
+            printf("found children %s || value in list %s\n",kidRef[v], second3->value);
             //char * kids = printIndividual(one3);
             //puts(kids);
             insertBack(&children, one3);
