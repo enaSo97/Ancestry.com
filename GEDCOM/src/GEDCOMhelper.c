@@ -839,7 +839,7 @@ Family * parseFamily(Info * record, int length, List people){
     for (int i = 0; i < length; i++){
       int k = 0;
       if (strcmp(record[i].tag, "CHIL") == 0){
-        printf("found children\n");
+        printf("found children %s\n", record[i].tag);
         strcpy(kidRef[k], record[i].info);
         k++;
       }
