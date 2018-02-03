@@ -88,6 +88,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         i++;
         j++;
       }
+      if (validateRecord(record, k) == )
       //printf("record 0 ||%d||%s||%s||\n", record[0].level, record[0].tag, record[0].info);
       if (strcmp(record[0].tag, "HEAD") == 0){
         object->header = headParser(record, k, &pointers, &receiver);
@@ -105,93 +106,15 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         //printf("indi passed\n");
       }
       else if (strcmp(record[0].tag, "FAM") == 0){
-        //printf("in FAM\n");
-        // dummyFamily = parseFamily(record, k, &pointers, &receiver);
-        // Node * iter = people.head;
-        // Individual * one;
-        // Node * field;
-        // Field * buff;
-        // int num = getLength(people);
-        // int a = 0;
-        // while(a < num){
-        //   one = (Individual*)iter->data;
-        //   printf("length of num %d\n", num);
-        //   char * dat = printIndividual(one);
-        //   puts(dat);
-        //   //int other = getLength(one.otherFields);
-        //   //one = (Individual*)iter->data;
-        //   int other = getLength(one->otherFields);
-        //   int b = 0;
-        //   while(b < other){
-        //     field = one->otherFields.head;
-        //     buff = (Field*)field->data;
-        //     char * bum = printIndividual(buff);
-        //     puts(bum);
-        //     printf("record info print %s\n", record[i].info);
-        //     if (strcmp(record[i].info, buff->value) == 0){
-        //       if (strcmp(record[i].info, "HUSB") == 0){
-        //         printf("found husbnad\n");
-        //         //dummyFamily->husband = malloc(sizeof(Individual));
-        //         dummyFamily->husband = one;
-        //         char * hus = printIndividual(one);
-        //         puts(hus);
-        //       }//end husb if
-        //       else if (strcmp(record[i].info, "WIFE") == 0){
-        //         printf("wife exist\n");
-        //         //dummyFamily->wife = malloc(sizeof(Individual));
-        //         dummyFamily->wife = one;
-        //       }//end wife if
-        //       else if(strcmp(record[i].info, "CHIL") == 0){
-        //         printf("child exist\n");
-        //         dummyFamily->children = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
-        //         insertBack(&dummyFamily->children, one);
-        //       }//end child if
-        //       else{
-        //         printf("extra\n");
-        //         extraStuff = createField(record[i].tag, record[i].info);
-        //         insertBack(&dummyFamily->otherFields, extraStuff);
-        //       }.;/
-        //     }//end compare info and otherfield
-        //     field = field->next;
-        //     b++;
-        //   }//end other while
-        //   iter = iter->next;
-        //   a++;
-        // }//end num while
-
         dummyFamily = parseFamily(record, k, people);
         insertBack(&family, dummyFamily);
         printf("passed fmaily\n");
       }
     }
     i--;
-    //printf("<<<i : %d>>>\n", i);
-    //i = k;
   }
-  /*Node * receive = receiver.head;
-  int size = getLength(receiver);
-  int c = 0;
-  while(c < size){
-    printf("linker while loop\n");
-    linkerFunction(&pointers, receive->data);
-    receive = receive->next;
-    c++;
-  }*/
   length--;
   printf("length of family %d\n", getLength(family));
-  /*
-  printf("\nprinting individual\n");
-  char * indi = toString(people);
-  puts(indi);
-  printf("*********************************************\n");*/
-
-  /*char * print1 = toString(pointers);
-  char * print2 = toString(receiver);
-  printf("******pointers**************************\n");
-  puts(print1);
-  printf("\n******receivers**********************\n");
-  puts(print2);
-  printf("*******************************************");*/
 
   printf("\nprint submitter\n");
   printf("submiter Name : %s\n", object->header->submitter->submitterName);
@@ -201,8 +124,9 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   puts(indi);
   printf("---------------------------------\n");
 
+  obj = object;
+
   for (int i = 0; i < 10000000; i++){ // freeing the allocated memory after done parsing the file
-    //free(info[i]); // freeing the allocated information struct
     free(read[i]);//freeing the allocated strings
   }
   free(read);
@@ -219,7 +143,9 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
  *@return a string contaning a humanly readable representation of a GEDCOMobject
  *@param obj - a pointer to a GEDCOMobject struct
  **/
-char* printGEDCOM(const GEDCOMobject* obj);
+char* printGEDCOM(const GEDCOMobject* obj){
+
+}
 
 
 /** Function to delete all GEDCOM object content and free all the memory.
@@ -455,14 +381,44 @@ void deleteFamily(void* toBeDeleted){
   deleteIndividual(Delete->husband);
   free(Delete);
 }
+
 int compareFamilies(const void* first,const void* second){
-  //Family * compare1 = (Family*)first;
-  //Family * compare2 = (Family*)second;
+  Family * compare1;
+  Family * compare2;
 
-  //int count2;
+  if (first == NULL || second == NULL){
+    return 0;
+  }
 
-  return 0;
+  compare1 = (Family*)first;
+  compare2 = (Family*)second;
+
+  int count1 = 0;
+  int count2 = 0;
+
+  if (compare1->wife != NULL){
+    count1++;
+  }
+  if (compare1->husband != NULL){
+    count1++;
+  }
+  if (compare1->children != NULL){
+    count1 = getLength(compare1->children) + count;
+  }
+
+  if (compare2->wife != NULL){
+    count2++;
+  }
+  if (compare2->husband != NULL){
+    count2++;
+  }
+  if (compare2->children != NULL){
+    count2 = getLength(compare1->children) + count;
+  }
+
+  return count1 - count2;
 }
+
 char* printFamily(void* toBePrinted){
   char * string;
   //char * toadd;
@@ -499,10 +455,31 @@ void deleteField(void* toBeDeleted){
   free(Delete);
 }
 int compareFields(const void* first,const void* second){
-  //Field * compare1 = (Field*)first;
-  //Field * compare2 = (Field*)second;
-  return 0;
+  Field * compare1 = (Field*)first;
+  Field * compare2 = (Field*)second;
+
+  if (first == NULL || second == NULL){
+    return 0;
+  }
+
+  compare1 = (Field*)first;
+  compare2 = (Field*)second;
+
+
+  char * combine1 = malloc(sizeof(char) * 500);
+  char * combine2 = malloc(sizeof(char) * 500);
+
+  strcpy(combine1, compare1->tag);
+  strcat(combine1, " ");
+  strcpy(combine1, compare1->value);
+
+  strcpy(combine2, compare2->tag);
+  strcat(combine2, " ");
+  strcpy(combine2, compare2->value);
+
+  return strcmp(combine1, combine2);
 }
+
 char* printField(void* toBePrinted){
   char* string;
   Field * print;

@@ -839,19 +839,13 @@ Family * parseFamily(Info * record, int length, List people){
     for (int i = 0; i < length; i++){
       k = 0;
       if (strcmp(record[i].tag, "CHIL") == 0){
-        printf("found children %s\n", record[i].info);
+        //printf("found children %s\n", record[i].info);
         strcpy(kidRef[k], record[i].info);
-        printf("saving to 2d array %s\n", record[i].info);
+        //printf("saving to 2d array %s\n", record[i].info);
         k++;
       }
     }
-    /*Node * node3 = people.head;//
-    Individual * one3;
-    Node * field3;
-    Field * second3;
-    int v = 0;*/
-    printf("+_________________________________+\n");
-    for (int v = 0; v < k; v++){
+    /*for (int v = 0; v < k; v++){
       Node * node3 = people.head;//
       Individual * one3;
       Node * field3;
@@ -862,8 +856,8 @@ Family * parseFamily(Info * record, int length, List people){
         while(field3 != NULL){
           second3 = (Field*)field3->data;
           if(strcmp(kidRef[v], second3->value) == 0){
-            printf("\n\n");
-            printf("found children %s || value in list %s\n",kidRef[v], second3->value);
+            //printf("\n\n");
+            //printf("found children %s || value in list %s\n",kidRef[v], second3->value);
             //char * kids = printIndividual(one3);
             //puts(kids);
             insertBack(&dummyFamily->children, one3);
@@ -874,80 +868,9 @@ Family * parseFamily(Info * record, int length, List people){
         }
         node3 = node3->next;
       }
-    }
-  //dummyFamily->children = children;
-  //char * wife = printIndividual(dummyFamily->wife);
-  //puts(wife);
+    }*/
 
   return dummyFamily;
-}
-
-void linkerFunction(List * pointer, void * data){
-  Node * temp = pointer->head;
-
-  Pointer * set = NULL;
-
-  //Pointer * point = NULL;
-
-  if (data == NULL){
-    return ;
-  }
-  set = (Pointer*)data;
-  //strcpy(set->addr,((Pointer*)data)->addr);
-  //strcpy(set->type,((Pointer*)data)->type);
-  //set->indiPoint = NULL;
-
-  printf("%s // %s \n", set->addr, set->type);
-
-  //char * buff = toString(*pointer);
-  //puts(buff);
-  int i = 0;
-
-  int length = getLength(*pointer);
-  //printf("lenfth of poitner %d\n", length);
-  //List * childrenPtr = set->listPtr;
-
-
-  while(i < length){
-    //point = (Pointer*)temp;
-    //char * string = returnString(((Pointer*)temp)->addr);
-    //printf("pointer %s || receiver %s||\n", ((Pointer*)temp->data)->addr, set->addr);
-    if (strcmp(((Pointer*)temp->data)->addr, set->addr) == 0){
-      if (strcmp(set->type, "CHIL") == 0){
-        printf("it's child\n");
-        insertBack(&set->listPtr, ((Pointer*)temp->data)->indiPoint);
-      }
-      /*else if(strcmp(set->type, "SUBM") == 0){
-        printf("it's submitter\n");
-        set->subPoint = ((Pointer*)temp->data)->subPoint;
-        printf("name: %s\n", ((Submitter*)set->subPoint)->submitterName);
-      //  printf("set the submitter\n");
-    }*/
-      else if(strcmp(set->type, "HUSB") == 0 || strcmp(set->type, "WIFE") == 0){
-        printf
-        ("it's wife or husband\n");
-        set->indiPoint = ((Pointer*)temp->data)->indiPoint;
-        //printf("address of reciever %p\n", (void*)set->indiPoint);
-        //printf("printint the addres %p\n", (void*)set->indiPoint);
-        char* indi = printIndividual(set->indiPoint);
-        puts(indi);
-      }
-      else if (strcmp(set->type, "FAMS") == 0 || strcmp(set->type, "FAMC") == 0){
-        //insertBack(&set->family)
-      }
-    }
-    temp = temp->next;
-    i++;
-  }
-  //printf("\n!!!!!children!!!!!!\n");
-  //char * children = toString(set->listPtr);
-  //puts(children);
-  //printf("done the loop\n");
-   // printf("\n-----in linker------\n");
-   // char * child = toString(*childrenPtr);
-   // puts(child);
-   // printf("--------------------------\n");
-
 }
 
 char * returnString(char * data){
