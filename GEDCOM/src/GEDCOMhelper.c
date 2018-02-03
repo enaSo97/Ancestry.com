@@ -790,60 +790,58 @@ Family * parseFamily(Info * record, int length, List people){
   // temp->family = family;
   // insertBack(pointers, temp);
 
-  for (int i = 1; i < length; i++){
-    Node * iter = people.head;
-    Individual * one;
-    Node * field;
-    Field * buff;
-    int num = getLength(people);
-    int a = 0;
-    while(a < num){
-      one = (Individual*)iter->data;
-      printf("length of num %d\n", num);
-      char * dat = printIndividual(one);
-      puts(dat);
-      //int other = getLength(one.otherFields);
-      //one = (Individual*)iter->data;
-      int other = getLength(one->otherFields);
-      int b = 0;
-      while(b < other){
-        field = one->otherFields.head;
-        buff = (Field*)field->data;
-        printf("\n------------------------------------\n");
-        char * bum = printIndividual(buff);
-        puts(bum);
-        printf("---------------------------------------\n");
-        printf("\nrecord info print %s for index %d \n", record[i].info, i);
-        if (strcmp(record[i].info, buff->value) == 0){
-          if (strcmp(record[i].info, "HUSB") == 0){
-            printf("found husbnad\n");
-            //dummyFamily->husband = malloc(sizeof(Individual));
-            dummyFamily->husband = one;
-            char * hus = printIndividual(one);
-            puts(hus);
-          }//end husb if
-          else if (strcmp(record[i].info, "WIFE") == 0){
-            printf("wife exist\n");
-            //dummyFamily->wife = malloc(sizeof(Individual));
-            dummyFamily->wife = one;
-          }//end wife if
-          else if(strcmp(record[i].info, "CHIL") == 0){
-            printf("child exist\n");
-            dummyFamily->children = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
-            insertBack(&dummyFamily->children, one);
-          }//end child if
-          else{
-            printf("extra\n");
-            extraStuff = createField(record[i].tag, record[i].info);
-            insertBack(&dummyFamily->otherFields, extraStuff);
-          }
-        }//end compare info and otherfield
-        field = field->next;
-        b++;
-      }//end other while
-      iter = iter->next;
-      a++;
-    }//end num while
+  int num = getLength(people);
+  int other = getLength(one->otherFields);
+  Node * iter = people.head;//node of individual
+  Individual * one;
+  Node * field;
+  Field * buff;
+
+  for (int i = 0; i < num; i++){
+    one = (Individual*)iterate->data;
+    printf("\nprinting the individual in the for loop\n");
+    char * dat = printIndividual(one);
+    puts(dat);
+    printf("--------------------------------------------\n");
+    for (int j = 0; j < buff; j++){
+      field = one->otherFields.head;
+      buff = (Field*)field->data;
+      printf("\n*****printing other fileds in the loop******\n");
+      char * bum = printField(buff);
+      puts(bum);
+      printf("***********************************************\n");
+      printf("\nrecord info print %s for index %d \n", record[i].info, i);
+
+      if (strcmp(record[i].info, buff->value) == 0){
+        if (strcmp(record[i].info, "HUSB") == 0){
+          printf("found husbnad\n");
+          //dummyFamily->husband = malloc(sizeof(Individual));
+          dummyFamily->husband = one;
+          char * hus = printIndividual(one);
+          puts(hus);
+        }//end husb if
+        else if (strcmp(record[i].info, "WIFE") == 0){
+          printf("wife exist\n");
+          //dummyFamily->wife = malloc(sizeof(Individual));
+          dummyFamily->wife = one;
+        }//end wife if
+        else if(strcmp(record[i].info, "CHIL") == 0){
+          printf("child exist\n");
+          dummyFamily->children = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
+          insertBack(&dummyFamily->children, one);
+        }//end child if
+        else{
+          printf("extra\n");
+          extraStuff = createField(record[i].tag, record[i].info);
+          insertBack(&dummyFamily->otherFields, extraStuff);
+        }
+      }//end compare info and otherfield
+      field = field->next;
+    }//end other while
+    iter = iter->next;
+
+    }
+
     /*if (strcmp(record[i].tag, "HUSB") == 0){
       temp = calloc(1, sizeof(Pointer));
       person = calloc(1,sizeof(Individual));
