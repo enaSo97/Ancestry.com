@@ -85,7 +85,7 @@ Submitter * subParser(Info * record, int length, List * pointers, List * receive
 
 Individual * parseIndividual(Info * record, int length, List * pointers, List * receiver);
 
-Family * parseFamily(Info * record, int length, List * pointers, List * receiver);
+Family * parseFamily(Info * record, int length, List people);
 
 char * printFunc(void * data);
 

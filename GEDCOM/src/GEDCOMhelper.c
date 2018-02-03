@@ -774,12 +774,13 @@ int validateFamilyEvent(char * check){
   return -1;
 }
 
-Family * parseFamily(Info * record, int length, List * pointers, List * receiver){
+Family * parseFamily(Info * record, int length, List people){
   Family * dummyFamily = calloc(1, sizeof(Family));
   Individual * person;
   Pointer * temp = calloc(1, sizeof(Pointer));
   Field * field = calloc(1, sizeof(Field));
   List other = initializeList(printField, deleteField, compareFields);
+  Field * extraStuff;
   //List children = initializeList(printIndividual, deleteIndividual, compareIndividuals);
   //List events = initializeList(printEvent, deleteEvent, compareEvents);
   //List kids = initializeList(printIndividual, deleteIndividual, compareIndividuals);

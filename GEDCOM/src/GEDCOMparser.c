@@ -159,7 +159,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         //   a++;
         // }//end num while
 
-        dummyFamily = parseFamily(record, k, &pointers, &receiver);
+        dummyFamily = parseFamily(record, k, people);
         insertBack(&family, dummyFamily);
         printf("passed fmaily\n");
       }
