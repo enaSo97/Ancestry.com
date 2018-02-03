@@ -788,6 +788,7 @@ Family * parseFamily(Info * record, int length, List people){
   //List events = initializeList(printEvent, deleteEvent, compareEvents);
   //List kids = initializeList(printIndividual, deleteIndividual, compareIndividuals);
   char xref[32];
+  char kidRef[20][32];
 
   for (int i = 0; i < length; i++){
     if (strcmp(record[i].tag, "WIFE") == 0){
@@ -834,33 +835,35 @@ Family * parseFamily(Info * record, int length, List people){
     }
     node2 = node2->next;
   }
-  for (int j = 0; j < length; j++){
-    for (int i = j; i < length; i++){
+
+    for (int i = 0; i < length; i++){
+      int k = 0;
       if (strcmp(record[i].tag, "CHIL") == 0){
         printf("found children\n");
-        strcpy(xref, record[i].info);
+        strcpy(kidRef[k], record[i].info);
+        k++;
       }
     }
     Node * node3 = people.head;//
     Individual * one3;
     Node * field3;
     Field * second3;
+    int v = 0;
     while(node3 != NULL){
       one3 = (Individual*)node3->data;
       field3 = one3->otherFields.head;
       while(field3 != NULL){
         second3 = (Field*)field3->data;
-        if(strcmp(xref, second3->value) == 0){
+        if(strcmp(kidRef[v], second3->value) == 0){
           printf("child xref match\n");
           insertBack(&children, one3);
           printf("after insertbvack\n");
-          break;
+          v++;
         }
         field3 = field3->next;
       }
       node3 = node3->next;
     }
-  }
   dummyFamily->children = children;
   //char * wife = printIndividual(dummyFamily->wife);
   //puts(wife);
