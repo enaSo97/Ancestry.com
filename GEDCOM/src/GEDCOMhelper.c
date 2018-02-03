@@ -791,7 +791,6 @@ Family * parseFamily(Info * record, int length, List people){
   Node * iterate = people.head;//node of individual
   Node * field;
   Field * buff;
-  for (int j = 0; j < length; j++){
     for (int i = 0; i < num; i++){
       one = (Individual*)iterate->data;
       printf("\nprinting the individual in the for loop\n");
@@ -800,7 +799,6 @@ Family * parseFamily(Info * record, int length, List people){
       printf("--------------------------------------------\n");
       iterate = iterate->next;
     }
-  }
 
     /*if (strcmp(record[i].tag, "HUSB") == 0){
       temp = calloc(1, sizeof(Pointer));
