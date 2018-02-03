@@ -885,7 +885,7 @@ Family * parseFamily(Info * record, int length, List people){
 
   }
 
-  return family;
+  return dummyFamily;
 }
 
 void linkerFunction(List * pointer, void * data){
