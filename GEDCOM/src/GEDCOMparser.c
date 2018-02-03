@@ -157,7 +157,11 @@ void deleteGEDCOM(GEDCOMobject* obj){
     return ;
   }
   clearList(&obj->header->otherFields);
-  clearList(&obj->individuals)
+  clearList(&obj->individuals);
+  clearList(&boj->families);
+  clearLIst(&submitter->otherFields);
+  free(obj->submitter);
+  free(obj);
 }
 
 
@@ -381,8 +385,6 @@ void deleteFamily(void* toBeDeleted){
     return;
   }
   Delete = (Family*)toBeDeleted;
-  deleteField(Delete->otherFields);
-  deleteIndividual(Delete->husband);
   free(Delete);
 }
 
