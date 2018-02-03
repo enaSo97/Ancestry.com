@@ -152,7 +152,13 @@ char* printGEDCOM(const GEDCOMobject* obj){
  *@return none
  *@param obj - a pointer to a GEDCOMobject struct
  **/
-void deleteGEDCOM(GEDCOMobject* obj);
+void deleteGEDCOM(GEDCOMobject* obj){
+  if (obj == NULL){
+    return ;
+  }
+  clearList(&obj->header->otherFields);
+  clearList(&obj->individuals)
+}
 
 
 /** Function to "convert" the GEDCOMerror into a humanly redabale string.
@@ -375,7 +381,7 @@ void deleteFamily(void* toBeDeleted){
     return;
   }
   Delete = (Family*)toBeDeleted;
-  deleteIndividual(Delete->wife);
+  deleteField(Delete->otherFields);
   deleteIndividual(Delete->husband);
   free(Delete);
 }
