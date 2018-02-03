@@ -235,7 +235,7 @@ int getMonth(char * getter){
 
 /******Validating the File ************************/
 enum eCode validateFile(char* fileName){
-  printf("in the function\n");
+  //printf("in the function\n");
   //char ext[80];
   if (strlen(fileName) == 0){ // checking if the file argument is empty, file is invalid
     printf("empty file name\n");
@@ -327,7 +327,7 @@ char** fileReader(char * fileName){
   int counter = 1;
   int i = 0;
   FILE * file = fopen(fileName, "r");
-  if(DEBUG) printf("\nopening the file\n");
+  //if(DEBUG) printf("\nopening the file\n");
 
   while(fgets(reader, 800, file) != NULL){
     //if(DEBUG)printf("\nread a line \n");
@@ -350,7 +350,7 @@ char** fileReader(char * fileName){
 
 int fileLength(char ** array){
   int i = 0;
-  if (DEBUG)printf("\ngetting the length of file\n");
+  //if (DEBUG)printf("\ngetting the length of file\n");
 
   while(array[i] != NULL){
     i++;
@@ -435,9 +435,9 @@ Header * headParser(Info * record, int length, List * pointers, List * receiver)
   //Submitter sub;
   //insertBack(other, field);
   //char dadsd  = toString(other)
-  printf("length of one record %d\n", length);
+  //printf("length of one record %d\n", length);
 
-  printf("in head parser\n");
+  //printf("in head parser\n");
   for (int i = 0; i < length; i++){
     //printf("in head parser\n");
     if (strcmp(record[i].tag, "SOUR") == 0){ //name of the source
@@ -590,7 +590,7 @@ Submitter * subParser(Info * record, int length, List * pointers, List * receive
   List other = initializeList(printField, deleteField, compareFields);
   char string[5000] = "";
 
-  printf("\nin sub parser\n");
+  //printf("\nin sub parser\n");
 
   for (int i = 0; i < length; i++){
     if (strcmp(record[i].tag, "NAME") == 0){
@@ -668,7 +668,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
   char string[50] = "";
   //char last[50] = "";
   char names[10][50];
-  printf("in individual parser\n");
+  //printf("in individual parser\n");
 
   person->surname = malloc(sizeof(char)*50);
   person->givenName = malloc(sizeof(char)*50);
