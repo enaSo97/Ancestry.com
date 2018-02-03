@@ -706,14 +706,16 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
       i--;
     }
     else if (strcmp(record[i].tag, "INDI") == 0){
-      temp = malloc(sizeof(Pointer));
-      strcpy(temp->addr, record[i].info);
-      strcpy(temp->type, "INDI");
-      temp->indiPoint = person;
+      //temp = malloc(sizeof(Pointer));
+      //strcpy(temp->addr, record[i].info);
+      //strcpy(temp->type, "INDI");
+      //temp->indiPoint = person;
       //printf("\nchecking for indi pointer %s || %s || \n", temp->addr, temp->type);
-      insertBack(pointers, temp);
-      printf("printing address %p\n", (void*)person);
+      //insertBack(pointers, temp);
+      //printf("printing address %p\n", (void*)person);
       //printf("checking for pointer %s", (Pointer*)temp->indiPoint)
+      field = createField(record[i].tag, record[i].info);
+      insertBack(&other, field);
     }
     else if (validateIndividualEvent(record[i].tag) == 1){
       Event * event = calloc(1, sizeof(Event));
@@ -776,70 +778,41 @@ int validateFamilyEvent(char * check){
 
 Family * parseFamily(Info * record, int length, List people){
   Family * dummyFamily = calloc(1, sizeof(Family));
+  Individual * person;
+  Pointer * temp = calloc(1, sizeof(Pointer));
+  Field * field = calloc(1, sizeof(Field));
+  List other = initializeList(printField, deleteField, compareFields);
   Field * extraStuff;
   //List children = initializeList(printIndividual, deleteIndividual, compareIndividuals);
   //List events = initializeList(printEvent, deleteEvent, compareEvents);
   //List kids = initializeList(printIndividual, deleteIndividual, compareIndividuals);
+  char xref[32];
 
-  // strcpy(temp->addr, record[0].info);
-  // strcpy(temp->type, "FAM");
-  // temp->family = family;
-  // insertBack(pointers, temp);
+  for (int i = 0; i < length; i++){
+    if (strcmp(record[i].tag, "WIFE") == 0){
+      strcpy(xref, record[i].info);
+    }
+  }
+  Node * node = people.head;//
   Individual * one;
-  int num = getLength(people);
-  int other = getLength(one->otherFields);
-  Node * iterate = people.head;//node of individual
   Node * field;
-  Field * buff;
-    for (int i = 0; i < num; i++){
-      one = (Individual*)iterate->data;
-      printf("\nprinting the individual in the for loop\n");
-      char * dat = printIndividual(one);
-      puts(dat);
-      printf("--------------------------------------------\n");
-      iterate = iterate->next;
-    }
-
-    /*if (strcmp(record[i].tag, "HUSB") == 0){
-      temp = calloc(1, sizeof(Pointer));
-      person = calloc(1,sizeof(Individual));
-      family->husband = person;
-      strcpy(temp->addr, record[i].info);
-      strcpy(temp->type, "HUSB");
-      temp->indiPoint = family->husband;
-      insertBack(receiver, temp);
-    }
-    else if (strcmp(record[i].tag, "WIFE") == 0)
-    {
-      temp = calloc(1, sizeof(Pointer));
-      //person = calloc(1,sizeof(Individual));
-      family->wife = calloc(1,sizeof(Individual));
-      strcpy(temp->addr, record[i].info);
-      strcpy(temp->type, "WIFE");
-      temp->indiPoint = family->wife;
-      insertBack(receiver, &temp);
-    }
-    else if (validateFamilyEvent(record[i].tag) == 1){
-      i++;
-      while(record[i].level != 1){
-        field = createField(record[i].tag, record[i].info);
-        insertBack(&other, field);
-        i++;
+  Field * second;
+  while(node != NULL){
+    one = (Individual*)node->data;
+    field = one->otherFiels.head;
+    while(field != NULL){
+      second = (Field*)field->data;
+      if(strcmp(xref, second->value) == 0){
+        dummyFamily->wife = one;
+        break;
       }
-      i--;
+      second = second->next;
     }
-    else if (strcmp(record[i].tag, "CHIL") == 0){
-      temp = calloc(1, sizeof(Pointer));
-      family->children = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
-      strcpy(temp->addr, record[i].info);
-      strcpy(temp->type, "CHIL");
-      temp->listPtr = family->children;
-      insertBack(receiver, temp);
-    }
-    else{
-      field = createField(record[i].tag, record[i].info);
-      insertBack(&other, field);
-    }*/
+    one = one->next;
+  }
+
+  char * wife = printIndividual(dummyFamily->wife);
+  puts(wife);
 
   return dummyFamily;
 }
