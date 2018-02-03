@@ -855,10 +855,10 @@ Family * parseFamily(Info * record, int length, List people){
       while(field3 != NULL){
         second3 = (Field*)field3->data;
         if(strcmp(kidRef[v], second3->value) == 0){
-          printf("\n\nchild xref match\n");
+          printf("\n\n");
           printIndividual(one3)
           insertBack(&children, one3);
-          printf("after insertbvack\n\n");
+        //  printf("after insertbvack\n\n");
           v++;
         }
         field3 = field3->next;
