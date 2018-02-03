@@ -834,31 +834,32 @@ Family * parseFamily(Info * record, int length, List people){
     }
     node2 = node2->next;
   }
-
-  for (int i = 0; i < length; i++){
-    if (strcmp(record[i].tag, "CHIL") == 0){
-      printf("found children\n");
-      strcpy(xref, record[i].info);
-    }
-  }
-  Node * node3 = people.head;//
-  Individual * one3;
-  Node * field3;
-  Field * second3;
-  while(node3 != NULL){
-    one3 = (Individual*)node3->data;
-    field3 = one3->otherFields.head;
-    while(field3 != NULL){
-      second3 = (Field*)field3->data;
-      if(strcmp(xref, second3->value) == 0){
-        printf("child xref match\n");
-        insertBack(&children, one3);
-        printf("after insertbvack\n");
-        break;
+  for (int j = 0; j < length; j++){
+    for (int i = j; i < length; i++){
+      if (strcmp(record[i].tag, "CHIL") == 0){
+        printf("found children\n");
+        strcpy(xref, record[i].info);
       }
-      field3 = field3->next;
     }
-    node3 = node3->next;
+    Node * node3 = people.head;//
+    Individual * one3;
+    Node * field3;
+    Field * second3;
+    while(node3 != NULL){
+      one3 = (Individual*)node3->data;
+      field3 = one3->otherFields.head;
+      while(field3 != NULL){
+        second3 = (Field*)field3->data;
+        if(strcmp(xref, second3->value) == 0){
+          printf("child xref match\n");
+          insertBack(&children, one3);
+          printf("after insertbvack\n");
+          break;
+        }
+        field3 = field3->next;
+      }
+      node3 = node3->next;
+    }
   }
   dummyFamily->children = children;
   //char * wife = printIndividual(dummyFamily->wife);
