@@ -787,6 +787,7 @@ Family * parseFamily(Info * record, int length, List people){
   //List children = initializeList(printIndividual, deleteIndividual, compareIndividuals);
   //List events = initializeList(printEvent, deleteEvent, compareEvents);
   //List kids = initializeList(printIndividual, deleteIndividual, compareIndividuals);
+  dummyFamily->children = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
   char xref[32];
   char kidRef[20][32];
   int k = 0;
