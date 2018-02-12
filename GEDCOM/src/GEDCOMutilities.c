@@ -839,13 +839,13 @@ Family * parseFamily(Info * record, int length, List people){
     for (int i = 0; i < length; i++){
       k = 0;
       if (strcmp(record[i].tag, "CHIL") == 0){
-        //printf("found children %s\n", record[i].info);
+        printf("found children %s\n", record[i].info);
         strcpy(kidRef[k], record[i].info);
-        //printf("saving to 2d array %s\n", record[i].info);
+        printf("saving to 2d array %s\n", record[i].info);
         k++;
       }
     }
-    /*for (int v = 0; v < k; v++){
+    for (int v = 0; v < k; v++){
       Node * node3 = people.head;//
       Individual * one3;
       Node * field3;
@@ -856,10 +856,10 @@ Family * parseFamily(Info * record, int length, List people){
         while(field3 != NULL){
           second3 = (Field*)field3->data;
           if(strcmp(kidRef[v], second3->value) == 0){
-            //printf("\n\n");
-            //printf("found children %s || value in list %s\n",kidRef[v], second3->value);
-            //char * kids = printIndividual(one3);
-            //puts(kids);
+            printf("\n\n");
+            printf("found children %s || value in list %s\n",kidRef[v], second3->value);
+            char * kids = printIndividual(one3);
+            puts(kids);
             insertBack(&dummyFamily->children, one3);
             break;
           //  printf("after insertbvack\n\n");
@@ -868,7 +868,7 @@ Family * parseFamily(Info * record, int length, List people){
         }
         node3 = node3->next;
       }
-    }*/
+    }
 
   return dummyFamily;
 }
