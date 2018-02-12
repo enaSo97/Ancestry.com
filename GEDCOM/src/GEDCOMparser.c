@@ -201,7 +201,8 @@ Individual* findPerson(const GEDCOMobject* failyRecord, bool (*compare)(const vo
  *@param person - the Individual record whose descendants we want
  **/
 List getDescendants(const GEDCOMobject* failyRecord, const Individual* person){
-  return NULL;
+  List hey;
+  return hey;
 }
 
 
