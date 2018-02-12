@@ -869,7 +869,8 @@ Family * parseFamily(Info * record, int length, List people){
         node3 = node3->next;
       }
     }
-
+  char * fam = printFamily(dummyFamily);
+  puts(fam);
   return dummyFamily;
 }
 
