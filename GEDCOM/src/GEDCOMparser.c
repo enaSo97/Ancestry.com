@@ -448,7 +448,9 @@ char* printFamily(void* toBePrinted){
   //puts(string);
   //string = (char*)realloc(string, sizeof(char) * 100);// reallocating memory for next elements that;s in the struct
   strcat(string, printIndividual(print->husband));
+  printf("after hus\n");
   strcat(string, toString(print->children));
+  printf("after child\n");
   strcat(string, toString(print->otherFields));
   printf("befroe returning\n");
   return string;
