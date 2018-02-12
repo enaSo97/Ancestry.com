@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "GEDCOMparser.h"
-#include "GEDCOMhelper.h"
+#include "GEDCOMutilities.h"
 #include "LinkedListAPI.h"
 
 int main (int argc, char ** argv){
