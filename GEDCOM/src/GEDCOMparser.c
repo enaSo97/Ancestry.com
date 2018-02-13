@@ -376,9 +376,11 @@ char* printIndividual(void* toBePrinted){
   if (print->events.head != NULL){
     strcat(string, toString(print->events));
   }
+  printf("before indi famlist\n");
   if (print->families.head != NULL){
     strcat(string, toString(print->families));
   }
+  printf("after indi famlist\n");
   if (print->otherFields.head != NULL){
     strcat(string, toString(print->otherFields));
   }
