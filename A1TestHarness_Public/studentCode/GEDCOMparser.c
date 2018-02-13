@@ -170,7 +170,8 @@ void deleteGEDCOM(GEDCOMobject* obj){
  *@param err - an error struct
  **/
 char* printError(GEDCOMerror err){
-  return NULL;
+  char * error = NULLl
+  return error;
 }
 
 /** Function that searches for an individual in the list using a comparator function.
@@ -187,7 +188,8 @@ char* printError(GEDCOMerror err){
  *      all of the same type - just like arguments to the compare() function in the List struct
  **/
 Individual* findPerson(const GEDCOMobject* failyRecord, bool (*compare)(const void* first, const void* second), const void* person){
-  return NULL;
+  Individual* person = NULL;
+  return person;
 }
 
 
