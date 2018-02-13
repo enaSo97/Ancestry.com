@@ -100,6 +100,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       else if (strcmp(record[0].tag, "INDI") == 0){
         //printf("before parsing indi\n");
         dummyPerson = parseIndividual(record, k, &pointers, &receiver);
+        dummyPerson->families = initializeList(&printFamily, &deleteFamily, &compareFamilies);
         insertBack(&people, dummyPerson);
         //printf("indi passed\n");
       }
