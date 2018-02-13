@@ -125,6 +125,8 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   //char * indi = toString(family);
   //puts(indi);
   //printf("---------------------------------\n");
+  object->individuals = people;
+  object->families = family;
 
   *obj = object;
 
@@ -377,11 +379,11 @@ char* printIndividual(void* toBePrinted){
   if (print->events.head != NULL){
     strcat(string, toString(print->events));
   }
-  printf("before indi famlist\n");
-  if (print->families.head != NULL){
-    strcat(string, toString(print->families));
-  }
-  printf("after indi famlist\n");
+  //printf("before indi famlist\n");
+  // if (print->families.head != NULL){
+  //   strcat(string, toString(print->families));
+  // }
+  //printf("after indi famlist\n");
   if (print->otherFields.head != NULL){
     strcat(string, toString(print->otherFields));
   }
@@ -456,10 +458,12 @@ char* printFamily(void* toBePrinted){
   //string = (char*)realloc(string, sizeof(char) * 100);// reallocating memory for next elements that;s in the struct
   strcat(string, "HUSBAND:\n");
   strcat(string, printIndividual(print->husband));
-  strcat(string, "CHILDREN:\n");
-  strcat(string, toString(print->children));
-  strcat(string, "OTHERFIELDS:\n");
-  strcat(string, toString(print->otherFields));
+  char temp[40];
+  sprintf(temp, "Number of Children %d\n", print->children.length);
+  strcat(string, temp);
+  //strcat(string, toString(print->children));
+  //strcat(string, "OTHERFIELDS:\n");
+  //strcat(string, toString(print->otherFields));
   return string;
 }
 

@@ -15,6 +15,8 @@ int main (int argc, char ** argv){
   createGEDCOM(argv[1],&object);
   if(DEBUG)printf("obejct has been called\n");
 
+  Individual * person = object->individuals.head->data;
+  printFamily(person->families.head->data);
   //fclose(file);
 
   return 0;
