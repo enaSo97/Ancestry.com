@@ -640,8 +640,9 @@ Submitter * subParser(Info * record, int length, List * pointers, List * receive
   insertBack(pointers, temp);*/
 
   //printf("\nName: %s, Address: %s\n", sub->submitterName, sub->address);
-  char * print = toString(other);
-  puts(print);
+  //char * print = toString(other);
+  //puts(print);
+  printf("parsing submitter \n");
 
   return sub;
 }
@@ -778,15 +779,6 @@ int validateFamilyEvent(char * check){
 
 Family * parseFamily(Info * record, int length, List people){
   Family * dummyFamily = calloc(1, sizeof(Family));
-  //Individual * person;
-  //Pointer * temp = calloc(1, sizeof(Pointer));
-  //Field * field = calloc(1, sizeof(Field));
-  //List other = initializeList(&printField, &deleteField, &compareFields);
-  //Field * extraStuff;
-  //List children  = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
-  //List children = initializeList(printIndividual, deleteIndividual, compareIndividuals);
-  //List events = initializeList(printEvent, deleteEvent, compareEvents);
-  //List kids = initializeList(printIndividual, deleteIndividual, compareIndividuals);
   dummyFamily->children = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
   char xref[32];
   char kidRef[20][32];
