@@ -860,21 +860,21 @@ Family * parseFamily(Info * record, int length, List people){
           second3 = (Field*)field3->data;
           if(strcmp(kidRef[v], second3->value) == 0){
             printf("\n\n");
-            //printf("found children %s || value in list %s\n",kidRef[v], second3->value);
-            //char * kids = printIndividual(one3);
-            //puts(kids);
+            printf("found children %s || value in list %s\n",kidRef[v], second3->value);
+            char * kids = printIndividual(one3);
+            puts(kids);
             insertBack(&(dummyFamily->children), one3);
             //break;
-          //  printf("after insertbvack\n\n");
+            printf("after insertbvack\n\n");
           }
           field3 = field3->next;
         }
         node3 = node3->next;
       }
     }
-    //printf("\n\n\n");
-    //printf("length of chile %d\n", (dummyFamily->children).length);
-   // puts(toString(dummyFamily->children));
+    printf("\n\n\n");
+    printf("length of chile %d\n", (dummyFamily->children).length);
+    puts(toString(dummyFamily->children));
   //char * fam = printFamily(dummyFamily);
   //puts(fam);
   return dummyFamily;
