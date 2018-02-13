@@ -760,7 +760,7 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
   //char * output = toString(other);
   //puts(output);
 
-
+  printf("parsing individual \n");
   return person;
 }
 
@@ -838,7 +838,7 @@ Family * parseFamily(Info * record, int length, List people){
       if (strcmp(record[i].tag, "CHIL") == 0){
         //printf("found children %s\n", record[i].info);
         strcpy(kidRef[k], record[i].info);
-        //printf("saving to 2d array %s\n", record[i].info);
+        //printf("saving to 2d array %s\n", record[i].info);r
         k++;
       }
     }
@@ -872,6 +872,7 @@ Family * parseFamily(Info * record, int length, List people){
     //puts(toString(dummyFamily->children));
   //char * fam = printFamily(dummyFamily);
   //puts(fam);
+  printf("parsing family\n");
   return dummyFamily;
 }
 
