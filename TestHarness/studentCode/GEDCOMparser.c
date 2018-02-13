@@ -133,6 +133,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
 
   for (int i = 0; i < 10000000; i++){ // freeing the allocated memory after done parsing the file
     free(read[i]);//freeing the allocated strings
+    printf("freeeing\n");
   }
   free(read);
   free(info);
