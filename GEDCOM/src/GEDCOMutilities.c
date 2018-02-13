@@ -837,6 +837,8 @@ Family * parseFamily(Info * record, int length, List people){
     node2 = node2->next;
   }
     k = 0;
+
+    printf("length of record %d\n", length);
     for (int i = 0; i < length; i++){
       //k = 0;
       if (strcmp(record[i].tag, "CHIL") == 0){
