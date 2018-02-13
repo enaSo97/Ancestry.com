@@ -863,8 +863,8 @@ Family * parseFamily(Info * record, int length, List people){
           if(strcmp(kidRef[v], second3->value) == 0){
             //printf("\n\n");
             //printf("found children %s || value in list %s\n",kidRef[v], second3->value);
-            char * kids = printIndividual(one3);
-            puts(kids);
+            //char * kids = printIndividual(one3);
+            //puts(kids);
             insertBack(&(dummyFamily->children), one3);
             //insertBack(&(one3->families), dummyFamily);
             //break;
