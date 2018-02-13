@@ -169,10 +169,7 @@ void deleteGEDCOM(GEDCOMobject* obj){
  *@return a string contaning a humanly readable representation of the error code
  *@param err - an error struct
  **/
-char* printError(GEDCOMerror err){
-  char * error = NULLl
-  return error;
-}
+char* printError(GEDCOMerror err);
 
 /** Function that searches for an individual in the list using a comparator function.
  * If an individual is found, a pointer to the Individual record
@@ -187,10 +184,7 @@ char* printError(GEDCOMerror err){
  *Note: while the arguments of compare() and person are all void, it is assumed that records they point to are
  *      all of the same type - just like arguments to the compare() function in the List struct
  **/
-Individual* findPerson(const GEDCOMobject* failyRecord, bool (*compare)(const void* first, const void* second), const void* person){
-  Individual* person = NULL;
-  return person;
-}
+Individual* findPerson(const GEDCOMobject* failyRecord, bool (*compare)(const void* first, const void* second), const void* person);
 
 
 /** Function to return a list of all descendants of an individual in a GEDCOM
@@ -202,10 +196,7 @@ Individual* findPerson(const GEDCOMobject* failyRecord, bool (*compare)(const vo
  *@param failyRecord - a pointer to a GEDCOMobject struct
  *@param person - the Individual record whose descendants we want
  **/
-List getDescendants(const GEDCOMobject* failyRecord, const Individual* person){
-  List dum = NULL;
-  return dum;
-}
+List getDescendants(const GEDCOMobject* failyRecord, const Individual* person);
 
 
 //************************************************************************************************************
