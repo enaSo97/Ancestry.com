@@ -446,16 +446,17 @@ char* printFamily(void* toBePrinted){
   //print->children = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
   string = calloc(10000000, sizeof(char));
   print = (Family*)toBePrinted;
-  string = printIndividual(print->wife);
+  strcat(string, "WIFE:\n");
+  strcat(string, printIndividual(print->wife));
   //printf("print wife\n");
   //puts(string);
   //string = (char*)realloc(string, sizeof(char) * 100);// reallocating memory for next elements that;s in the struct
+  strcat(string, "HUSBAND:\n");
   strcat(string, printIndividual(print->husband));
-  printf("after hus\n");
+  strcat(string, "CHILDREN:\n");
   strcat(string, toString(print->children));
-  printf("after child\n");
+  strcat(string, "OTHERFIELDS:\n");
   strcat(string, toString(print->otherFields));
-  printf("befroe returning\n");
   return string;
 }
 
