@@ -16,8 +16,8 @@ int main (int argc, char ** argv){
   if(DEBUG)printf("obejct has been called\n");
 
   Individual * person = object->individuals.head->data;
-  printFamily(person->families.head->data);
-  //fclose(file);
+  //printFamily(person->families.head->data);
+  puts(printFamily(person->families.head->data));
 
   return 0;
 }

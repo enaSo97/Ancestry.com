@@ -16,9 +16,10 @@ List initializeList(char* (*printFunction)(void *toBePrinted),void (*deleteFunct
 	List list;
 	list.head = NULL;
 	list.tail = NULL;
-  list.printData = printFunction;
-  list.deleteData = deleteFunction;
-  list.compare = compareFunction;
+    list.printData = printFunction;
+    list.deleteData = deleteFunction;
+    list.compare = compareFunction;
+	list.length = 0;
 return list;
 }
 void insertBack(List* list, void* toBeAdded){
