@@ -112,6 +112,7 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
         //printf("\n****************************\n");
         //printf("passed fmaily\n");
       }
+      printf("looping\n");
     }
     i--;
   }
