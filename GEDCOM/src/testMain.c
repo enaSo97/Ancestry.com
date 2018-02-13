@@ -15,9 +15,11 @@ int main (int argc, char ** argv){
   createGEDCOM(argv[1],&object);
   if(DEBUG)printf("obejct has been called\n");
 
-  Individual * person = object->individuals.head->data;
+  Individual * person = object->individuals.tail->data;
   //printFamily(person->families.head->data);
+  printf("families of last inividual\n");
   puts(printFamily(person->families.head->data));
-
+  printf("-----------------------------------");
+  puts(printFamily(person->families.head->next->data));
   return 0;
 }
