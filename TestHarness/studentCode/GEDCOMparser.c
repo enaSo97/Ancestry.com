@@ -107,9 +107,9 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       else if (strcmp(record[0].tag, "FAM") == 0){
         dummyFamily = parseFamily(record, k, people);
         insertBack(&family, dummyFamily);
-        printf("\n****************************\n");
-        puts(printFamily(dummyFamily));
-        printf("\n****************************\n");
+        //printf("\n****************************\n");
+        //puts(printFamily(dummyFamily));
+        //printf("\n****************************\n");
         //printf("passed fmaily\n");
       }
     }
@@ -354,7 +354,6 @@ char* printIndividual(void* toBePrinted){
   if (toBePrinted == NULL){
     return NULL;
   }
-  printf("in here\n");
   print = (Individual*)toBePrinted;
   if (print->givenName == NULL){
     print->givenName = calloc(1, sizeof(char));
@@ -461,9 +460,6 @@ char* printFamily(void* toBePrinted){
   char temp[40];
   sprintf(temp, "Number of Children %d\n", print->children.length);
   strcat(string, temp);
-  //strcat(string, toString(print->children));
-  //strcat(string, "OTHERFIELDS:\n");
-  //strcat(string, toString(print->otherFields));
   return string;
 }
 

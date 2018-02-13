@@ -875,8 +875,8 @@ Family * parseFamily(Info * record, int length, List people){
         node3 = node3->next;
       }
     }
-    printf("\n\n");
-    printf("length of chile %d\n", (dummyFamily->children).length);
+    //printf("\n\n");
+    //printf("length of chile %d\n", (dummyFamily->children).length);
     //puts(toString(dummyFamily->children));
   //char * fam = printFamily(dummyFamily);
   //puts(fam);
