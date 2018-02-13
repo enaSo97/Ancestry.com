@@ -195,8 +195,8 @@ char* printError(GEDCOMerror err){
  *      all of the same type - just like arguments to the compare() function in the List struct
  **/
 Individual* findPerson(const GEDCOMobject* failyRecord, bool (*compare)(const void* first, const void* second), const void* person){
-  Individual * person = NULL;
-  return person;
+  Individual * dum = NULL;
+  return dum;
 }
 
 
