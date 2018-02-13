@@ -866,7 +866,7 @@ Family * parseFamily(Info * record, int length, List people){
             char * kids = printIndividual(one3);
             puts(kids);
             insertBack(&(dummyFamily->children), one3);
-            insertBack(&(one3->families), dummyFamily);
+            //insertBack(&(one3->families), dummyFamily);
             //break;
             printf("after insertbvack\n\n");
           }
@@ -877,7 +877,7 @@ Family * parseFamily(Info * record, int length, List people){
     }
     printf("\n\n\n");
     printf("length of chile %d\n", (dummyFamily->children).length);
-    //puts(toString(dummyFamily->children));
+    puts(toString(dummyFamily->children));
   //char * fam = printFamily(dummyFamily);
   //puts(fam);
   return dummyFamily;
