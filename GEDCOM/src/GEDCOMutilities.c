@@ -807,6 +807,7 @@ Family * parseFamily(Info * record, int length, List people){
       second = (Field*)field->data;
       if(strcmp(xref, second->value) == 0){
         dummyFamily->wife = one;
+        insertBack(&(one->families), dummyFamily);
         break;
       }
       field = field->next;
@@ -830,6 +831,7 @@ Family * parseFamily(Info * record, int length, List people){
       second2 = (Field*)field2->data;
       if(strcmp(xref, second2->value) == 0){
         dummyFamily->husband = one2;
+        insertBack(&(one2->families), dummyFamily);
         break;
       }
       field2 = field2->next;
@@ -864,6 +866,7 @@ Family * parseFamily(Info * record, int length, List people){
             char * kids = printIndividual(one3);
             puts(kids);
             insertBack(&(dummyFamily->children), one3);
+            insertBack(&(one3->families), dummyFamily);
             //break;
             printf("after insertbvack\n\n");
           }
