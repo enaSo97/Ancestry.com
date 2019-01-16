@@ -10,16 +10,22 @@ int main (int argc, char ** argv){
   //FILE * file = fopen(argv[1], "r");
 
   GEDCOMobject* object;
+  GEDCOMerror error;
 
   if(DEBUG)printf("Calling the object\n");
-  createGEDCOM(argv[1],&object);
+  error = createGEDCOM(argv[1],&object);
   if(DEBUG)printf("obejct has been called\n");
 
-  Individual * person = object->individuals.head->data;
+  //Individual * person = object->individuals.head->data;
   //printFamily(person->families.head->data);
-  printf("families of last inividual\n");
-  puts(printFamily(person->families.head->data));
-  printf("-----------------------------------");
-  puts(printFamily(person->families.head->next->data));
+  //printf("families of last inividual\n");
+  //puts(printFamily(person->families.head->data));
+  //printf("-----------------------------------\n");
+  //puts(printFamily(person->families.head->next->data))
+  puts(printGEDCOM(object));
+  //puts(toString(object->individuals));
+  //puts(printFamily(object->families.head->data));
+  //puts(printError(error));
+  
   return 0;
 }

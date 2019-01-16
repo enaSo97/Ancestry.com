@@ -23,12 +23,12 @@
  **/
 GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   GEDCOMerror errorCheck;
-  //if(DEBUG)printf("int the create\n");
   char** read; // storing the each line of GEDCOM file in double pointer array
   int length;
   //int recLength = 0;
   Info * info;
   Info * record;
+  int subFlag = 0;
   //int flag = 0;
   //char ** stuff;
   int k =0;
@@ -45,55 +45,121 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
   Family * dummyFamily = calloc(1, sizeof(Family));
 
   GEDCOMobject * object = malloc(sizeof(GEDCOMobject));
+  
+  if (validateFile(fileName) == INV_FILE){
+    errorCheck = setType(INV_FILE, -1);
+    obj = NULL;
+    return errorCheck;
+  }
+  
   //*obj = malloc(sizeof(GEDCOMobject));
-
+  printf("\nparsing this file |%s|\n", fileName);
   read = fileReader(fileName);
+  printf("finding long ass line || %s\n", read[2]);
   length = fileLength(read);
   info = calloc(1000000, sizeof(Info));
   record = calloc(1000000, sizeof(Info));
 
-  if (validateFile(fileName) == INV_FILE){
-    errorCheck = setType(INV_FILE, -1);
-    obj = NULL;
-  }
   /**
   ** this function tockenizes the line of GEDCOM line and put it into information struct
   **/
+  printf("\n after validateing parsing this file |%s|\n", fileName);
   for (int i = 0; i < length; i++){
     info[i] = tockenInfo(read[i]);
     info[i].line = i + 1;
   }
-  for (int i = 0; i < length; i++){
-    //printf("finding for record <%d>\n", i);
-    int j = 1;
-    //printf("tracking i %d\n", i);
+  printf("fitst one %d\n", info[length-1].level);
+  printf("second one %s\n", info[length-1].tag);
+  printf("third one %s\n", info[length-1].info);
+  printf("last line of file %d || %s || %s || %d\n", info[length-1].level, info[length-1].tag, info[length-1].info, length-1);
+  if (strcmp(info[length-1].tag, "TRLR") != 0){
+	  printf("trlr is nor there\n");
+	  errorCheck.type = INV_GEDCOM;
+	  errorCheck.line = -1;
+	  return errorCheck;
+  }
+  //printf(" afte tokenizing parsing this file |%s|\n", fileName);
+  
+  /*if (strcmp(info[length-1].tag, "TRLR") != 0){
+	  errorCheck.type = INV_GEDCOM;
+	  errorCheck.line = info[length-1].line;
+	  return errorCheck;
+  }*/
+  
+  int i = 0;
+  while(i < length){
+	  if (i == 0){//very first record from the file
+		  //must be Header
+		  if (strcmp(info[i].tag, "HEAD") != 0){
+			  errorCheck.type = INV_GEDCOM;
+			  errorCheck.line = -1;
+			  return errorCheck;
+		  }
+	  }
+	  if (i == length - 1){
+		  if (strcmp(info[i].tag, "TRLR") != 0){
+			  errorCheck.type = INV_GEDCOM;
+			  errorCheck.line = info[i].line;
+			  return errorCheck;
+		  }
+	  }
     if (info[i].level == 0){
       k = 0;
-      record[k].level = info[i].level;
+      record[k].level = info[i].level;//saving the first line of record into temporary record struct
+      record[k].line = info[i].line;
       strcpy(record[k].tag, info[i].tag);
-      strcpy(record[k].info, info[i].info);
-      //printf("\nnew ||%s||%s||%s||\n", record[k].level, record[k].tag, record[k].info);
-      k++;
-      i++;
-      j++;
-      while(info[i].level != 0){
-        //printf("info : %s i <%d>\n", info[i].info, i);
-        //record = realloc(record, sizeof(Info) * j);
+      strcpy(record[k++].info, info[i++].info);
+      
+      while(info[i].level != 0){ //saving the rest of the record until it reaches the next new record which is next 0
         record[k].level = info[i].level;
+        record[i].line = info[i].line;
         strcpy(record[k].tag, info[i].tag);
-        strcpy(record[k].info, info[i].info);
-        k++;
-        i++;
-        j++;
+        strcpy(record[k++].info, info[i++].info);
       }
-      //if (validateRecord(record, k) == )
-      //printf("record 0 ||%d||%s||%s||\n", record[0].level, record[0].tag, record[0].info);
       if (strcmp(record[0].tag, "HEAD") == 0){
+		/***********************error checkin for header ****************************************************************/
+		if (strcmp(record[1].tag, "SOUR") != 0){//checking for missing SOURCE
+			errorCheck.type = INV_HEADER;
+			errorCheck.line = 1;
+			return errorCheck;
+		}
+		else if (strcmp(record[2].tag, "VERS") != 0 && strcmp(record[3].tag, "VERS") != 0) {
+			errorCheck.type = INV_HEADER;
+			errorCheck.line = 1;
+			return errorCheck;
+		}
+		if (strcmp(record[k -2].tag, "CHAR") != 0){//checking for missing encoding
+			errorCheck.type = INV_HEADER;
+			errorCheck.line = k;
+			return errorCheck;
+		}
+		if (strcmp(record[k -1].tag, "SUBM") != 0){//checking for missing submitter 
+			errorCheck.type = INV_HEADER;
+			errorCheck.line = k;
+			return errorCheck;
+		}
+		/**********************error Checking for Header End*****************************************************************/
+		for (int m = 0; m < k; m++){//this for loop is to validate the record
+			//printf("cheking for record\n");
+			if (strlen(record[m].tag) + strlen(record[m].info) > 255){
+				printf("longer than 255  characters\n");
+				errorCheck.type = INV_RECORD;
+				errorCheck.line = record[m].line;
+				return errorCheck;
+			}
+			if ((record[m+1].level - record[m].level) > 1){
+				printf("line diff is greate than one\n");
+				errorCheck.type = INV_RECORD;
+				errorCheck.line = record[m + 1].line;
+				return errorCheck;
+			}
+		}//validating recrod for loop ends
         object->header = headParser(record, k, &pointers, &receiver);
       }
       else if (strcmp(record[0].tag, "SUBM") == 0){
         object->submitter = subParser(record, k, &pointers, &receiver);
         object->header->submitter = object->submitter;
+        subFlag = 1;
         //printf("objects submiter Name : %s\n", object->submitter->submitterName);
         //printf("passed submitter\n");
       }
@@ -107,36 +173,48 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
       else if (strcmp(record[0].tag, "FAM") == 0){
         dummyFamily = parseFamily(record, k, people);
         insertBack(&family, dummyFamily);
-        printf("\n****************************\n");
-        puts(printFamily(dummyFamily));
-        printf("\n****************************\n");
-        //printf("passed fmaily\n");
       }
+    }else{
+		//printf("start is not 0\n");
+		//printf("info level: %d tag: %s level: %s\n", info[i].level, info[i].tag, info[i].info);
+	  if (strcmp(info[i].tag, "HEAD") == 0){
+		if (info[i].level > 0){
+			//printf("header level not zero\n");
+			errorCheck.type = INV_HEADER;
+			errorCheck.line = -1;
+			return errorCheck;
+		}
+	  }
     }
-    i--;
   }
-  length--;
-  //printf("length of family %d\n", getLength(family));
+  if (subFlag == 0){
+	  errorCheck.type = INV_GEDCOM;
+	  printf("Fuck inbalid\n");
+	  errorCheck.line = -1;
+	  return errorCheck;
+  }
+  if (strcmp(info[length-1].tag, "TRLR") != 0){
+	  errorCheck.type = INV_GEDCOM;
+	  errorCheck.line = info[length-1].line;
+	  return errorCheck;
+  }
 
-  //printf("\nprint submitter\n");
-  //printf("submiter Name : %s\n", object->header->submitter->submitterName);
-
-  //printf("\n--------Individual -------------\n");
-  //char * indi = toString(family);
-  //puts(indi);
-  //printf("---------------------------------\n");
   object->individuals = people;
   object->families = family;
 
   *obj = object;
 
-  for (int i = 0; i < 10000000; i++){ // freeing the allocated memory after done parsing the file
+  for (int i = 0; i < 1000; i++){ // freeing the allocated memory after done parsing the file
     free(read[i]);//freeing the allocated strings
   }
   free(read);
   free(info);
   free(record);
-
+  //printf("before returning from create GEDCOM of <<%s>>\n", fileName);
+  
+  errorCheck.type = OK;//setting the right type 
+  errorCheck.line = -1;
+  
   return errorCheck;
 }
 
@@ -148,9 +226,80 @@ GEDCOMerror createGEDCOM(char* fileName, GEDCOMobject** obj){
  *@param obj - a pointer to a GEDCOMobject struct
  **/
 char* printGEDCOM(const GEDCOMobject* obj){
- return NULL;
+	/*printf("inside print GEDFCOm\n");
+	char * string = malloc(sizeof(char)*500);
+	
+	if (obj == NULL){
+		return "\0";
+	}*/
+	//sprintf(string, "SOUR: %s GEDOM VERSION: %lf Submitter: %s\n", obj->header->source, obj->header->gedcVersion, obj->submitter->submitterName);
+	/*if (obj->individuals.head != NULL){
+		char indiString[40];
+		strncpy(indiString, "Number of Individual %d\n", obj->individuals.length);
+		strcat(string, indiString);
+		//strcat(string, toString(obj->individuals));
+	}
+	if (obj->families.head != NULL){
+		char famString[50];
+		strncpy(                                                                                                                                                                      famString, "Number of fmailies %d\n", obj->families.length);
+		strcat(string, famString);
+		//strcat(string, toString(obj->families));
+	}*/
+	char* tmpStr;
+	int len = 0;
+	
+	if (obj == NULL){
+	    return "\0";
+	}
+		
+	len = strlen(obj->header->source) + strlen(obj->submitter->submitterName) + 200;
+	tmpStr = (char*)malloc((sizeof(char)*len));
+	
+	sprintf(tmpStr, "Source: %s\nGEDCOM version: %.1lf\nSubmitter: %s\n", obj->header->source, obj->header->gedcVersion, obj->submitter->submitterName);
+	len = len + (obj->individuals.length)*60;
+	tmpStr = realloc(tmpStr, (sizeof(char)*len));
+	Node* tmpNode = obj->individuals.head;
+	Individual* tmpIndi;
+	strcat(tmpStr, "Individuals:\n\n");
+	for (int i=0; i<(obj->individuals.length); i++) {
+		tmpIndi = tmpNode->data;
+        strcat(tmpStr, (tmpIndi->givenName));
+        strcat(tmpStr, " ");
+        strcat(tmpStr, (tmpIndi->surname));
+        strcat(tmpStr, "\n\n");
+        tmpNode = tmpNode->next;
+    }
+    len = len + (obj->families.length)*200;
+    tmpStr = realloc(tmpStr, (sizeof(char)*len));
+	tmpNode = obj->families.head;
+	Family* tmpFam;
+	strcat(tmpStr, "Families:\n\n");
+	for (int i=0; i<(obj->families.length); i++) {
+		tmpFam = tmpNode->data;
+		strcat(tmpStr, "Wife: ");
+		if (tmpFam->wife!=NULL) {
+            strcat(tmpStr, (tmpFam->wife->givenName));
+            strcat(tmpStr, " ");
+            strcat(tmpStr, (tmpFam->wife->surname));
+	    }
+        strcat(tmpStr, "\n");
+        strcat(tmpStr, "Husband: ");
+        if (tmpFam->husband!=NULL) {
+            strcat(tmpStr, (tmpFam->husband->givenName));
+            strcat(tmpStr, " ");
+            strcat(tmpStr, (tmpFam->husband->surname));
+	    }
+        strcat(tmpStr, "\n");
+        char kids[10];
+        sprintf(kids, "Number of kids: %d", tmpFam->children.length);
+        strcat(tmpStr, kids);
+        strcat(tmpStr, "\n\n");
+        tmpNode = tmpNode->next;
+    }
+    return tmpStr;	
+	
+ //return string;
 }
-
 
 /** Function to delete all GEDCOM object content and free all the memory.
  *@pre GEDCOM object exists, is not null, and has not been freed
@@ -176,7 +325,28 @@ void deleteGEDCOM(GEDCOMobject* obj){
  *@param err - an error struct
  **/
 char* printError(GEDCOMerror err){
-  return NULL;
+	char * string = malloc(sizeof(char) * 20);
+	strcpy(string, "");
+	if (err.type == INV_FILE){
+		strcat(string, "Inavlid File\n");
+	}
+	else if (err.type == INV_HEADER){
+		strcat(string, "Invalid Header\n");
+	}
+	else if (err.type == INV_GEDCOM){
+		strcat(string, "Invalid GEDCOM\n");
+	}
+	else if (err.type == INV_RECORD){
+		strcat(string, "Invalid Record\n");
+	}
+	else if (err.type == OTHER_ERROR){
+		strcat(string, "Other Error\n");
+	}
+	else if (err.type == OK){
+		strcat(string, "OK");
+	}
+	
+  return string;
 }
 
 /** Function that searches for an individual in the list using a comparator function.
@@ -193,7 +363,14 @@ char* printError(GEDCOMerror err){
  *      all of the same type - just like arguments to the compare() function in the List struct
  **/
 Individual* findPerson(const GEDCOMobject* failyRecord, bool (*compare)(const void* first, const void* second), const void* person){
-  return NULL;
+	Individual * indi = NULL;
+	
+	if (failyRecord == NULL){
+		return NULL;
+	}
+	indi = findElement(failyRecord->individuals, compare, person);
+	
+  return indi;
 }
 
 
@@ -207,7 +384,11 @@ Individual* findPerson(const GEDCOMobject* failyRecord, bool (*compare)(const vo
  *@param person - the Individual record whose descendants we want
  **/
 List getDescendants(const GEDCOMobject* failyRecord, const Individual* person){
-  List hey;
+  List hey = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
+  
+  if (failyRecord == NULL || person == NULL){
+	  return hey;
+  }
   return hey;
 }
 
@@ -342,6 +523,12 @@ int compareIndividuals(const void* first,const void* second){
 
   compare1 = (Individual*)first;
   compare2 = (Individual*)second;
+  
+  char name1[50];
+  
+  strcat(name1, compare1->givenName);
+  strcat(name1, ", ");
+  strcat(name1, compare1->surname);
 
   return strcmp(compare1->surname, compare2->surname);
 }
@@ -369,7 +556,7 @@ char* printIndividual(void* toBePrinted){
 
 
   //length = strlen(print->givenName) + strlen(print->surname) + 400;
-  string = (char*)calloc(100000, sizeof(char));
+  string = (char*)malloc(100000 * sizeof(char));
   //printf("in print individual\n");
   sprintf(string, "FirstName: %s, LastName: %s", print->givenName, print->surname);
   //events = toString(print->events);
@@ -442,28 +629,24 @@ int compareFamilies(const void* first,const void* second){
 
 char* printFamily(void* toBePrinted){
   char * string;
-  //char * toadd;
   Family * print;
 
   if (toBePrinted == NULL){
     return NULL;
   }
-  //print->children = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
+  
   string = calloc(10000000, sizeof(char));
   print = (Family*)toBePrinted;
+  
   strcat(string, "WIFE:\n");
   strcat(string, printIndividual(print->wife));
-  //printf("print wife\n");
-  //puts(string);
-  //string = (char*)realloc(string, sizeof(char) * 100);// reallocating memory for next elements that;s in the struct
+  
   strcat(string, "HUSBAND:\n");
   strcat(string, printIndividual(print->husband));
+  
   char temp[40];
   sprintf(temp, "Number of Children %d\n", print->children.length);
   strcat(string, temp);
-  //strcat(string, toString(print->children));
-  //strcat(string, "OTHERFIELDS:\n");
-  //strcat(string, toString(print->otherFields));
   return string;
 }
 

@@ -4,7 +4,7 @@
 2 NAME webtreeprint
 1 FILE shakespeare.ged
 1 GEDC
-2 VERS 5.5.1
+2 VERS 5.5
 2 FORM LINEAGE-LINKED
 1 CHAR UTF-8
 1 SUBM @SUB1@
@@ -352,7 +352,6 @@
 1 NAME Not named /Quiney/
 2 GIVN Not named
 2 SURN Quiney
-1 SEX 
 1 DEAT
 2 PLAC Died in childbirth
 1 BURI

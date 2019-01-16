@@ -7,27 +7,6 @@
 #include "GEDCOMparser.h"
 #include "GEDCOMutilities.h"
 
-/*void enumToString(ErrorCode error){
-  if (error == OK){
-    printf("OK\n");
-  }
-  else if(error == INV_FILE){
-    printf("INV_FILE\n");
-  }
-  else if(error == INV_GEDCOM){
-    printf("INV_GEDCOM\n");
-  }
-  else if(error ==  INV_HEADER){
-    printf("INV_HEADER\n");
-  }
-  else if(error == INV_RECORD){
-    printf("INV_RECORD\n");
-  }
-  else if(error == OTHER_ER^C
-ROR){
-    printf("OTHER\n");
-  }
-}*/
 
 /*******sets the information of the Event ********************************/
 Event * createEvent(char type[5], char * date, char * place, List other){
@@ -140,7 +119,7 @@ char * printPointers(void * data){
 }
 
 void deletePointers(void * erase){
-  Pointer * Delete;
+  /*Pointer * Delete;
 
   if (erase == NULL){
     return;
@@ -150,11 +129,12 @@ void deletePointers(void * erase){
 
   free(Delete->indiPoint);
   //free(Delete->listPtr);
-  free(Delete);
+  free(Delete);*/
+
 }
 
 bool comparePointers(const void *first,const void *second){
-  Pointer * compare1;
+  /*Pointer * compare1;
   Pointer * compare2;
 
   if (first == NULL || second == NULL){
@@ -168,7 +148,8 @@ bool comparePointers(const void *first,const void *second){
     return true;
   }
 
-  return false;
+  return false;*/
+  return true;
 }
 
 int dummyCompare(const void *first,const void *second){
@@ -262,20 +243,6 @@ enum eCode validateFile(char* fileName){
   //ext = strrchr(fileName, '.');
   return OK;
 }
-/**************************************************/
-
-/*bool validateTags(char * check){
-  char tags[] = {"ABBR", "ADDR", "ADR1", "ADR2", "ADOP", "AFN", "AGE", "AGNC", "ALIA", "ANCE", "ANCI", "ANUL"
-                  ,"ASSO", "AUTH", "BAPL", "BAPM", "BARM", "BASM", "BIRT", "BLES", "BURI", "CALN", "CAST", "CAUS", "CENS", "CHAN",
-                  "CHAR", "CHIL", "CHR", "CHRA", "CITY", "CONC", "CONF", "CONL", "CONT", "COPR", "CORP", "CREM", "CTRY", "DATA", "DEAT",
-                  "DESC", "DESI", "DEST", "DIV", "DIVF", "DSCR", "EDUC", "EMAI", "EMIG", "ENDL", "ENGA", "EVEN", "FACT", "FAM", "FAMC",
-                  "FAMS", "FAMF", "FAX", "FCOM", "FILE", "FORM", "FONE", "GEDC", "GIVN", "GRAD", "HEAD", "HUSB", "IDNO", "IMMI", "INDI",
-                  "LANG", "LATI", "LONG", "MAP", "MARB", "MARC", "MARL", "MARR", "MARS", "MEDI", "NAME", "NATI", "NCHI", "NICK", "NMR",
-                  "NOTE", "NPFX", "NSFX", "OBJE", "OCCU", "ORDI", "ORDN", "PAGE", "PEDI", "PHON", "PLAC", "POST", "PROB", "PROP", "PUBL",
-                  "QUAY", "RFFN", "RELA", "RELI", "REPO", "RESI", "RESN", "RFN", ""}
-}
-*/
-/***********validating the GEDCOM line ************/
 enum eCode validateRecord(Info * record, int length){
   //int length = fileLength(read);
   //int term;
@@ -327,31 +294,17 @@ int checkTerminate(char * string){
 }
 
 char** fileReader(char * fileName){
-  char** array = calloc(1000, sizeof(char*));
+  char** array = NULL;
+  array = calloc(100000, sizeof(array));
   //char reader[1000];
-  //int counter = 1;
   int i = 0;
   FILE * file = fopen(fileName, "r");
-  //if(DEBUG) printf("\nopening the file\n");
-
-  /*while(fgets(reader, 1000, file) != NULL){
-    //if(DEBUG)printf("\nread a line \n");
-
-    //array = (char**)realloc(array, sizeof(char*)*counter);
-    while(reader[strlen(reader) - 1] == '\n' || reader[strlen(reader) - 1] =='\r'){
-      reader[strlen(reader) - 1] = '\0';
-    }
-    array[i] = (char*)malloc(sizeof(char) * 500);
-    strcpy(array[i], reader);
-    //printf("reading in file: %s\n", array[i]);
-    i++;
-    counter++;
-  }*/
   int c;
-  int bump = 0;
-  printf("int the file reading\n");
+  //int bump = 0;
+  //printf("int the file reading\n");
   int j = 0;
-  char * code = malloc(sizeof(char)*10000);
+  char * code = NULL;
+  code =  calloc(10000, sizeof(char));
   while(1){
 	  c = getc(file);
 	  if (c == EOF){
@@ -359,30 +312,25 @@ char** fileReader(char * fileName){
 	  }
 	  code[j++] = (char)c;
   }
-  printf("\n code:\n%s", code);
   
   char * token = strtok(code, "\n\r");
 
   while(token != NULL){
     array[i] = calloc(500, sizeof(char));
     strcpy(array[i], token);
-    //printf("array %s\n", array[i]);
     token = strtok(NULL, "\r\n");
     i++;
   }
-
   fclose(file);
+  free(code);
   return array;
 }
 
 int fileLength(char ** array){
   int i = 0;
-  //if (DEBUG)printf("\ngetting the length of file\n");
-
   while(array[i] != NULL){
     i++;
   }
-  //printf("number of element in array %d\n", i);
   return i;
 }
 
@@ -391,8 +339,8 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
   int i = 0;
   int j = 2;
   int level = 0;
-  char information[500] = "";
-  char parsed[100][500] = {""};
+  char information[1000] = "";
+  char parsed[100][1000] = {""};
   info.strlen = strlen(toParse);
   //printf("parsing this line : %s\n", toParse);
   char * token = strtok(toParse, " ");
@@ -416,7 +364,7 @@ Info tockenInfo(char * toParse){ //parses the line of GEDCOM and saves into temp
     //parsed[j][strlen(parsed[j])-2] = '\0';
   }else{
     strcat(information, parsed[2]);
-    strcpy(parsed[i], "\0");
+    strcpy(parsed[2], "\0");
   }
   level = atoi(parsed[0]);
   info.level = level;
@@ -618,19 +566,19 @@ Header * headParser(Info * record, int length, List * pointers, List * receiver)
   }
   /*printf("\nSource: %s, GED VER: %f, Encoding: %d\n", head->source, head->gedcVersion, head->encoding);
   char * print = toString(other);
-  puts(print);
-  head->otherFields = other;*/
+  puts(print);*/
+  head->otherFields = other;
   return head;
 }
 
 Submitter * subParser(Info * record, int length, List * pointers, List * receiver){
 
-  Submitter * sub = calloc(1,sizeof(Submitter));
+  Submitter * sub = calloc(1000,sizeof(Submitter));
   //Pointer * temp;
   Field * field;
   List other = initializeList(printField, deleteField, compareFields);
   char string[5000] = "";
-
+  int addFlag = 0;
   //printf("\nin sub parser\n");
 
   for (int i = 0; i < length; i++){
@@ -645,6 +593,7 @@ Submitter * subParser(Info * record, int length, List * pointers, List * receive
       insertBack(pointers, temp);
     }*/
     else if (strcmp(record[i].tag, "ADDR") == 0){
+	  addFlag = 1;
       strcpy(sub->address, record[i].info);
       i++;
       while(record[i].level != 1){
@@ -668,22 +617,14 @@ Submitter * subParser(Info * record, int length, List * pointers, List * receive
       insertBack(&other, field);
     }
   }
+  if (addFlag == 0){
+	  strcpy(sub->address, "");
+  }
   if (strlen(string) > 0){
     field = createField("CONT", string);
     insertBack(&other, field);
   }
   sub->otherFields = other;
-  /*if (record[0].info[0] == '@' && record[0].info[strlen(record[0].tag) - 1] == '@'){
-    strcpy(temp->addr, record[0].info);
-    strcpy(temp->type, record[0].tag);
-    temp->point = (void*)sub;
-  }
-  insertBack(pointers, temp);*/
-
-  //printf("\nName: %s, Address: %s\n", sub->submitterName, sub->address);
-  //char * print = toString(other);
-  //puts(print);
-
   return sub;
 }
 
@@ -700,63 +641,63 @@ int validateIndividualEvent(char * check){
   return -1;
 }
 
-Individual * parseIndividual(Info * record, int length, List * pointers, List*  receiver){
+Individual * parseIndividual(Info * record, int length, List * pointers, List*  receiver, List * reference){
   Individual * person = calloc(1, sizeof(Individual));
   //Pointer * temp;
-  Field * field = calloc(1, sizeof(Field));
+  Field * field /*= calloc(1, sizeof(Field))*/;
   List other = initializeList(printField, deleteField, compareFields);
   List events = initializeList(printEvent, deleteEvent, compareEvents);
-  char string[50] = "";
-  //char last[50] = "";
-  char names[10][50];
-  //printf("in individual parser\n");
+  Reference * ref = calloc(1,sizeof(Reference));
+  //char string[50] = "";
+  char names[10][50] = {""};
 
-  person->surname = malloc(sizeof(char)*50);
-  person->givenName = malloc(sizeof(char)*50);
+  person->surname = calloc(50,sizeof(char));
+  person->givenName = calloc(50,sizeof(char));
   for (int i = 0; i < length; i++){
     int n = 0;
-    //printf("\n<<%d||%s||%s>>\n", record[i].level, record[i].tag, record[i].info);
-
+    //int surFlag = 0;
     if (strcmp(record[i].tag, "NAME") == 0){
-      if (strlen(record[i].info) > 0){// if name exist
+      if(record[i].info[0] == '/' && record[i].info[strlen(record[i].info) - 1] == '/'){
         char * personName = strtok(record[i].info, "/");
         while(personName != NULL){ //parses the full name
-          strcpy(names[n], personName);
+          //printf("when only surname |%s|\n", personName);
+          strcpy(person->givenName, "");
+          strcpy(person->surname, personName);
           personName = strtok(NULL, "/"); // saving parsed name in to temp 2d array
+        }
+        //printf("first |%s| last |%s|\n", person->givenName, person->surname);
+      }else{
+        char * personName = strtok(record[i].info, "/ ");
+        while(personName != NULL){
+          strcpy(names[n], personName);
+          //printf("each name |%s|\n", names[n]);
           n++;
+          personName = strtok(NULL, "/ ");
         }
-        for (int j = 0; j < n; j++){
-          if (j == n - 1){
-            //names[j][strlen(names[j])-1] = '\0';
-            strcpy(person->surname, names[j]);
-          }else{
-            names[j][strlen(names[j]) - 1] = '\0';
-            strcat(string, names[j]);
-          }
-        }
-        if (strlen(string) > 0){
-          strcpy(person->givenName, string);
-        }
+        
+        if (n == 1){//just the first name
+			strcpy(person->givenName, names[0]);
+		}else{
+			strcpy(person->surname, names[n-1]);
+			char firstName[50] = "";
+			for (int j = 0; j < n -1; j++){
+			  strcat(firstName, names[j]);
+			  strcat(firstName, " ");
+			}
+			firstName[strlen(firstName) - 1] = '\0';
+			strcpy(person->givenName, firstName);
+		}
+        //printf("first |%s| last |%s|\n", person->givenName, person->surname);
       }
-      i++;
-      while(record[i].level != 1){
-        field = createField(record[i].tag, record[i].info);
-        insertBack(&other, field);
-        i++;
-      }
-      i--;
     }
-    else if (strcmp(record[i].tag, "INDI") == 0){
-      //temp = malloc(sizeof(Pointer));
-      //strcpy(temp->addr, record[i].info);
-      //strcpy(temp->type, "INDI");
-      //temp->indiPoint = person;
-      //printf("\nchecking for indi pointer %s || %s || \n", temp->addr, temp->type);
-      //insertBack(pointers, temp);
-      //printf("printing address %p\n", (void*)person);
-      //printf("checking for pointer %s", (Pointer*)temp->indiPoint)
-      field = createField(record[i].tag, record[i].info);
-      insertBack(&other, field);
+    
+    //printf("first |%s| last |%s|\n", person->givenName, person->surname);
+    if (strcmp(record[i].tag, "INDI") == 0){
+      //ref = calloc(1, sizeof(Reference));
+      strcpy(ref->indi, record[i].info);
+      //field = createField(record[i].tag, record[i].info);
+      //insertBack(&other, field);
+      //insertBack(&GARBAGE_COLLECTOR,field);
     }
     else if (validateIndividualEvent(record[i].tag) == 1){
       Event * event = calloc(1, sizeof(Event));
@@ -780,27 +721,32 @@ Individual * parseIndividual(Info * record, int length, List * pointers, List*  
       i--;
     }
     else if(strcmp(record[i].tag, "FAMC") == 0 || strcmp(record[i].tag, "FAMS") == 0){
-      /*temp = calloc(1, sizeof(Pointer));
-      strcpy(temp->type, record[i].tag);
-      strcpy(temp->addr, record[i].info);
-      temp->indiPoint = person;
-      insertBack(receiver, temp);*/
-      field = createField(record[i].tag, record[i].info);
-      insertBack(&other, field);
+      //ref = calloc(1, sizeof(Reference));
+      if (strcmp(record[i].tag, "FAMC") == 0){
+        strcpy(ref->FAMC, record[i].info);
+      }
+      if (strcmp(record[i].tag, "FAMS") == 0){
+        strcpy(ref->FAMS, record[i].info);
+      }
+      //field = createField(record[i].tag, record[i].info);
+      //insertBack(&other, field);
+      //insertBack(&GARBAGE_COLLECTOR, field);
     }
-    else{
+    else if (strcmp(record[i].tag, "GIVN") == 0){
+      //strcpy(person->givenName, record[i].info);
+    }
+    else if (strcmp(record[i].tag, "SURN") == 0){
+      //strcpy(person->surname, record[i].info);
+    }
+    else if (strcmp(record[i].tag, "NAME") != 0){
       field = createField(record[i].tag, record[i].info);
       insertBack(&other, field);
     }
   }
   person->events = events;
   person->otherFields = other;
-  //char * print = toString(events);
-  //puts(print);
-  //char * output = toString(other);
-  //puts(output);
-
-
+  ref->point = person;
+  insertBack(reference, ref);
   return person;
 }
 
@@ -817,30 +763,73 @@ int validateFamilyEvent(char * check){
   return -1;
 }
 
-Family * parseFamily(Info * record, int length, List people){
+Family * parseFamily(Info * record, int length, List people, List * reference){
   Family * dummyFamily = calloc(1, sizeof(Family));
-  //Individual * person;
-  //Pointer * temp = calloc(1, sizeof(Pointer));
-  //Field * field = calloc(1, sizeof(Field));
-  //List other = initializeList(&printField, &deleteField, &compareFields);
-  //Field * extraStuff;
-  //List children  = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
-  //List children = initializeList(printIndividual, deleteIndividual, compareIndividuals);
-  //List events = initializeList(printEvent, deleteEvent, compareEvents);
-  //List kids = initializeList(printIndividual, deleteIndividual, compareIndividuals);
-  dummyFamily->children = initializeList(&printIndividual, &deleteIndividual, &compareIndividuals);
-  char xref[32];
-  char kidRef[20][32];
+  dummyFamily->children = initializeList(&printIndividual, &dummyDelete, &compareIndividuals);
+  char xref[32] = "";
+  char kidRef[20][32] = {""};
   int k = 0;
   for (int i = 0; i < length; i++){
     if (strcmp(record[i].tag, "WIFE") == 0){
       strcpy(xref, record[i].info);
     }
   }
-  Node * node = people.head;//
+  //printf("\nwife ref %s\n", xref);
+  Node * node = reference->head;
+  while(node != NULL){
+    Reference * ref = (Reference*)node->data;
+    //puts(printReference(ref));
+    if (strcmp(xref, ref->indi) == 0){
+      //printf("wife found\n");
+      dummyFamily->wife = ref->point;
+      insertBack(&ref->point->families, dummyFamily);
+    }
+    node = node->next;
+  }
+  for (int i = 0; i < length; i++){
+    if (strcmp(record[i].tag, "HUSB") == 0){
+      strcpy(xref, record[i].info);
+    }
+  }
+  Node * node1 = reference->head;
+  while(node1 != NULL){
+    Reference * ref = (Reference*)node1->data;
+    if (strcmp(xref, ref->indi) == 0){
+      //printf("husband foumd\n");
+      dummyFamily->husband = ref->point;
+      insertBack(&ref->point->families, dummyFamily);
+    }
+    node1 = node1->next;
+  }
+
+  k = 0;
+  //printf("length of record %d\n", length);
+  for (int i = 0; i < length; i++){
+   //k = 0;
+    if (strcmp(record[i].tag, "CHIL") == 0){
+      //printf("found children %s\n", record[i].info);
+      strcpy(kidRef[k], record[i].info);
+      //printf("saving to 2d array %s\n", record[i].info);
+      k++;
+    }
+  }
+
+  for (int i = 0; i < k; i++){
+    Node * node2 = reference->head;
+    while(node2 != NULL){
+      Reference * ref = (Reference*)node2->data;
+      if (strcmp(kidRef[i], ref->indi) == 0){
+        insertBack(&(dummyFamily->children), ref->point);
+        insertBack(&(ref->point->families), dummyFamily);
+      }
+      node2 = node2->next;
+    }
+  }
+  /*Node * node = people.head;//
   Individual * one;
   Node * field;
   Field * second;
+  puts(toString(*reference));
   while(node != NULL){
     one = (Individual*)node->data;
     field = one->otherFields.head;
@@ -849,14 +838,16 @@ Family * parseFamily(Info * record, int length, List people){
       if(strcmp(xref, second->value) == 0){
         dummyFamily->wife = one;
         insertBack(&(one->families), dummyFamily);
+        //free(dummyFamily);
+        //insertBack(&FAMILY_GARBAGE, dummyFamily);
         break;
       }
       field = field->next;
     }
     node = node->next;
-  }
+  }*/
 
-  for (int i = 0; i < length; i++){
+  /*for (int i = 0; i < length; i++){
     if (strcmp(record[i].tag, "HUSB") == 0){
       strcpy(xref, record[i].info);
     }
@@ -873,13 +864,14 @@ Family * parseFamily(Info * record, int length, List people){
       if(strcmp(xref, second2->value) == 0){
         dummyFamily->husband = one2;
         insertBack(&(one2->families), dummyFamily);
+        //insertBack(&FAMILY_GARBAGE, dummyFamily);
         break;
       }
       field2 = field2->next;
     }
     node2 = node2->next;
-  }
-    k = 0;
+  }*/
+    /*k = 0;
 
     //printf("length of record %d\n", length);
     for (int i = 0; i < length; i++){
@@ -902,25 +894,49 @@ Family * parseFamily(Info * record, int length, List people){
         while(field3 != NULL){
           second3 = (Field*)field3->data;
           if(strcmp(kidRef[v], second3->value) == 0){
-            //printf("\n\n");
-            //printf("found children %s || value in list %s\n",kidRef[v], second3->value);
-            //char * kids = printIndividual(one3);
-            //puts(kids);
+            
             insertBack(&(dummyFamily->children), one3);
             insertBack(&(one3->families), dummyFamily);
-            //break;
-            //printf("after insertbvack\n\n");
+            //insertBack(&FAMILY_GARBAGE, dummyFamily);
+
           }
           field3 = field3->next;
         }
         node3 = node3->next;
       }
+    }*/
+    List events = initializeList(printEvent, deleteEvent, compareEvents);
+    List other = initializeList(printField, deleteField, compareFields);
+    Field * temp;
+    for (int i = 0; i < length; i++){
+      if (validateFamilyEvent(record[i].tag) == 1){
+        Event * event = calloc(1, sizeof(Event));
+        strcpy(event->type, record[i].tag);
+        i++;
+        while(record[i].level != 1){
+          if(strcmp(record[i].tag, "PLAC") == 0){
+            event->place = calloc(500, sizeof(char));
+            strcpy(event->place, record[i].info);
+          }
+          else if (strcmp(record[i].tag, "DATE") == 0){
+            event->date = calloc(200,sizeof(char));
+            strcpy(event->date, record[i].info);
+          }else{
+            temp = createField(record[i].tag, record[i].info);
+            insertBack(&other, temp);
+          }
+          i++;
+        }
+        insertBack(&events, event);
+        i--;
+      }
     }
-    //printf("\n\n");
-    //printf("length of chile %d\n", (dummyFamily->children).length);
-    //puts(toString(dummyFamily->children));
-  //char * fam = printFamily(dummyFamily);
-  //puts(fam);
+    //dummyFamily->otherFields = other;
+  dummyFamily->events = events;
+  strcpy(xref, "\0");
+  //printf("-----------------------\n");
+  //puts(printFamily(dummyFamily));
+  //printf("------------------------\n");
   return dummyFamily;
 }
 
@@ -938,3 +954,348 @@ char * returnString(char * data){
 
   return str;
 }
+
+List collectDescendents(Individual * person, List * listOfDescendents){
+	if (person == NULL){
+    return *listOfDescendents;
+	}
+  Node * fam = person->families.head;
+  while(fam != NULL){
+
+    Node * e = ((Family*)fam->data)->children.head;
+    if (((Family*)fam->data)->husband == person || ((Family*)fam->data)->wife == person){//it is husban of the family
+      // level++;
+      while(e != NULL){
+        //level++;
+        
+        Individual * send = ((Individual*)e->data);
+        Individual * copy = NULL;
+        copy = copyIndividual(send);
+        e = e->next;
+        insertBack(listOfDescendents, copy);
+        *listOfDescendents = collectDescendents(send, listOfDescendents);
+      }
+    }
+    fam = fam->next;
+  }
+  return *listOfDescendents;
+}
+
+bool comparePerson(const void* first, const void* second){
+  Individual * compare1 = NULL;
+  Individual * compare2 = NULL;
+  //printf("comparing individuals\n");
+  if (first == NULL || second == NULL){
+    return false;
+  }
+  // compare1->givenName = "";
+  // compare1->surname = "";
+  // compare2->givenName = "";
+  // compare2->surname = "";
+
+  compare1 = (Individual*)first;
+  compare2 = (Individual*)second;
+  if (compare1 != NULL && compare2 != NULL){
+    if(strcmp(compare1->givenName, compare2->givenName) == 0){//when the given name match
+     if (strcmp(compare1->surname, compare2->surname) == 0){//when the last name match
+       return true;
+       /*if (compare1->families.length == compare2->families.length){//when the number of family match
+         if (compare1->events.length == compare2->events.length){//when the number of events match
+           return true;
+         }//end if 
+       }//end if */
+     }//end if 
+   }//end if 
+  }
+  
+  //  if(strcmp(compare1->givenName, compare2->givenName) == 0){//when the given name match
+  //    if (strcmp(compare1->surname, compare2->surname) == 0){//when the last name match
+  //      if (compare1->families.length == compare2->families.length){//when the number of family match
+  //        if (compare1->events.length == compare2->events.length){//when the number of events match
+  //          return true;
+  //        }//end if 
+  //      }//end if 
+  //    }//end if 
+  //  }//end if 
+
+   return false;
+}//end customCompare
+
+List DescendentWrapper(Individual * person, List * lists, int var){
+  if (person == NULL){
+    return *lists;
+	}
+  //EachGen * thing = calloc(1, sizeof(EachGen));
+  Node * fam = person->families.head;
+  while(fam != NULL){
+    Node * c = ((Family*)fam->data)->children.head;
+    if (((Family*)fam->data)->husband == person || ((Family*)fam->data)->wife == person){//it is husban of the family
+     // Node * c = ((Family*)fam->data)->children.head;
+      while(c != NULL){
+        var++;
+        Individual * child = ((Individual*)c->data);
+        c = c->next;
+        EachGen * thing = calloc(1, sizeof(EachGen));
+        thing->indi = copyIndividual(child);
+        thing->level = var;
+        insertBack(lists, thing);
+        *lists = DescendentWrapper(child, lists, var);
+        var--;
+      }
+    }
+    fam = fam->next;
+  }
+  
+  return *lists;
+}
+
+List AncestorWrapper(Individual * person, List * list, int var){
+  if (person == NULL){
+    return *list;
+  }
+  Node * fam = person->families.head;
+  while(fam != NULL){
+    Family * family = (Family*)fam->data;
+    Node * node = family->children.head;
+    while(node != NULL){
+      //var++;
+      Individual * child = (Individual*)node->data;
+      if (child == person){//it is child of the family
+        if (family->husband != NULL){
+          var++;
+          EachGen * dad = calloc(1, sizeof(EachGen));
+          dad->level = var;
+          dad->indi = copyIndividual(family->husband);
+          insertBack(list, dad);
+          *list = AncestorWrapper(family->husband, list, var);
+          var--;
+        }
+        if (family->wife != NULL){
+          var++;
+          EachGen * mom = calloc(1, sizeof(EachGen));
+          mom->level = var;
+          mom->indi = copyIndividual(family->wife);
+          insertBack(list, mom);
+          *list = AncestorWrapper(family->wife, list, var);
+          var--;
+        }
+      }
+      node = node->next;
+    }
+    fam = fam->next;
+  }
+  return *list;
+}
+void deleteStruct(void * toBeDeleted){
+  EachGen * Delete;
+  if (toBeDeleted == NULL){
+    return;
+  }
+  Delete = (EachGen*)toBeDeleted;
+  //free(Delete->indi);
+  free(Delete);
+}
+
+char * printStruct(void * print){
+  EachGen * str;
+  if (print == NULL){
+    return NULL;
+  }
+  str = (EachGen*)print;
+  char * string = NULL;
+  int len = 0;
+  len = strlen(str->indi->givenName) + strlen(str->indi->surname);
+  string = calloc(len + 50, sizeof(char));
+  sprintf(string, "level: %d\n", str->level);
+  strcat(string, "givenName: ");
+  strcat(string, str->indi->givenName);
+  strcat(string, "\nsurname: ");
+  strcat(string, str->indi->surname);
+  strcat(string, "\n");
+  return string;
+}
+void deleteIndiReference(void * toBeDeleted){
+  IndividualRef * Delete;
+  if (toBeDeleted == NULL){
+    return;
+  }
+  Delete = (IndividualRef*)toBeDeleted;
+  clearList(&Delete->famcRef);
+  clearList(&Delete->famsRef);
+  //ree(Delete->point);
+  free(Delete);
+}
+void deleteFamReference(void * toBeDeleted){
+  FamilyRef * Delete;
+  if (toBeDeleted == NULL){
+    return;
+  }
+  Delete = (FamilyRef*)toBeDeleted;
+  clearList(&Delete->children);
+  free(Delete);
+}
+void dummyDelete(void * toBeDeleted){
+  //dummy delete function 
+}
+
+Individual * copyIndividual(Individual * toCopy){
+  if (toCopy == NULL){
+    return NULL;
+  }
+  int len = 0;
+  Individual * person = calloc(1, sizeof(Individual));
+  if (toCopy->givenName != NULL){
+    len = strlen(toCopy->givenName);
+    person->givenName = calloc(len + 50,sizeof(char));
+    strcpy(person->givenName, toCopy->givenName);
+  }
+  if (toCopy->surname != NULL){
+    len = strlen(toCopy->surname);
+    person->surname = calloc(len + 50,sizeof(char));
+    strcpy(person->surname, toCopy->surname);
+  }
+  person->events = initializeList(printEvent, dummyDelete, compareEvents);
+  //person->events = toCopy->events;
+  person->otherFields = initializeList(printField, dummyDelete, compareEvents);
+  //person->otherFields = toCopy->otherFields;
+  person->families = initializeList(printFamily, dummyDelete, compareFamilies);
+  //person->families = toCopy->families;
+  return person;
+}
+
+void deleteReferenceList(void * toBeDeleted){
+  Reference * Delete;
+  if (toBeDeleted == NULL){
+    return;
+  }
+  Delete = (Reference*)toBeDeleted;
+  free(Delete);
+}
+
+char * printReference(void * toBePrinted){
+  Reference * print;
+  char * string = calloc(100, sizeof(char));
+  if (toBePrinted == NULL){
+    strcpy(string, "");
+    return string;
+  }
+  print = (Reference*)toBePrinted;
+
+  sprintf(string, "indi %s\n", print->indi);
+  char temp[30] = "";
+  char temp2[30] = "";
+  if (print->FAMS == NULL){
+    strcpy(temp, "FAMS: \n");
+    strcat(string, temp);
+  }
+  if (print->FAMS != NULL){
+    sprintf(temp, "FAMS: %s\n", print->FAMS);
+    strcat(string, temp);
+  }
+  if (print->FAMC == NULL){
+    strcpy(temp2, "FAMC: \n");
+    strcat(string, temp2);
+  }
+  if (print->FAMC != NULL){
+    sprintf(temp2, "FAMC: %s\n", print->FAMC);
+    strcat(string, temp2);
+  }
+  return string;
+}
+
+void deleteGenStruct(void * toBeDeleted){
+	Generation * Delete;
+	if (toBeDeleted == NULL){
+		return ;
+	}
+	Delete = (Generation*)toBeDeleted;
+	
+	free(Delete);
+}
+
+
+void deleteFinalList(void * toBeDeleted){
+  List * Delete;
+  if (toBeDeleted == NULL){
+    return ;
+  }
+  Delete = (List*)toBeDeleted;
+  Node * current = Delete->head;
+  while(current != NULL){
+    List * indi = (List*)current->data;
+    clearList(indi);
+    current = current->next;
+  }
+}
+char * printListDescendents(void * toBePrinted){
+  char * string = NULL;
+  if (toBePrinted == NULL){
+    return string;
+  }
+  List * print = (List*)toBePrinted;
+  string = toString(*print);
+  return string;
+}
+
+ErrorCode validateField(List otherFields){
+	Node * node = otherFields.head;
+	while(node != NULL){
+		Field * field = (Field*)node->data;
+		//printf("field fpr\n");
+		if (field == NULL){
+			return INV_RECORD;
+		}
+		else if (field != NULL){
+			if (strlen(field->value) > 200){ //the field value is greather than 200
+				return INV_RECORD;
+			}
+			else if (strlen(field->tag) > 200){
+				return INV_RECORD;
+			}
+		}
+		node = node->next;
+	}
+	return OK;
+}
+
+ErrorCode validateEvent(List events){
+	//ErrorCode error = OK;
+	if (events.length > 0){
+		Node * node = events.head;
+		for (int i = 0; i < events.length; i++){
+			//printf("event for\n");
+			Event * event = (Event*)node->data;
+			if (event == NULL){
+				return INV_RECORD;
+			}
+			else if (event != NULL){
+				if (event->place != NULL){
+					if(strlen(event->place) > 200){
+						return INV_RECORD;
+					}
+				}
+				else if (event->date != NULL){
+					if(strlen(event->date) > 200){
+						return INV_RECORD;
+					}
+				}
+				else if (event->type != NULL){
+					if (strlen(event->type) > 5){
+						return INV_RECORD;
+					}
+				}
+			}
+			Node * event_other = event->otherFields.head;
+			if (event->otherFields.length > 0){
+				List * list = (List*)event_other->data;
+				if(validateField(*list) == INV_RECORD){
+					return INV_RECORD;
+				}
+				event_other = event_other->next;
+			}
+			node = node->next;
+		}
+	}
+	return OK;
+}
+

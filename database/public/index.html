@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Genealogy App</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CHANGE ME">
+    <meta name="keywords" content="CHANGE ME">
+    <meta name="author" content="CHANGE ME">
+    <!-- Load jquery, bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Custom CSS End -->
+</head>
+<body>
+    <!--<h3>Download test</h3>
+    If simpleValid.ged exists in the uploads/ directory on the server, then clicking on the link below will download it from the server.<br>
+    <a href="/uploads/simpleValid.ged">simpleValid.ged</a>
+    <hr>-->
+    <div align="right">
+		<h1 align="center">Welcome to geneology app webpage!</h1>
+		<button onclick="document.getElementById('login').style.display='block'" style="width:auto;" align="center">Login</button>
+	</div>
+    <table class="table">
+        <thead>
+        <tr>
+            <td id="stat"><div id="STAT" class="cont1">
+				<h3 align="center">Status</h3>
+				<div id="status">
+					<p id="demo" align="center">Welcome to geneology app webpage!<br></p>
+					<div id="P" class="sub-stat"></div>
+				</div>
+				<button type="button" align="center" id="clear">Clear Panel</button>
+           </td></div>
+           
+        </tr> 
+        <tr>
+            <td id="log"><div id="LOG" class="cont1">
+				<h3 align="center">File Log</h3>
+				<p id="FILE_LOG" align="center"></p>
+					<table id="fileLog" class="tStyle">
+					  <tr class="colorChange">
+						<th class="subStyle">File Name <br/> Click to download</th>
+						<th class="subStyle">Source</th>
+						<th class="subStyle">GEDC<br/>version</th>
+						<th class="subStyle">encoding</th>
+						<th class="subStyle">Submitter<br/>name</th>
+						<th class="subStyle">Submitter<br/>address</th>
+						<th class="subStyle"># of <br/>Individuals</th>
+						<th class="subStyle"># of<br/>Families</th>
+					  </tr>
+					 
+					</table>
+					<div id="log" align="center"></div>
+				</div>
+			</td>
+        </tr>
+        <tr>
+			<>
+            <td><div class="cont1">
+				<h3 align="center">GEDCOM view</h3>
+				<select id="selectDrop">
+					<option selected disabled>choose file</option>
+				</select>
+					<table id="gedcomView" class="tStyle">
+					  <tr id="head" class="colorChange">
+						<th class="subStyle">Given Name</th>
+						<th class="subStyle">Surname</th>
+						<th class="subStyle">Sex</th>
+						<th class="subStyle">Family Size</th>
+					  </tr>
+					</table>
+					<div id="view" align="center"></div>
+			</div></td>
+        </tr>
+        </thead>
+    </table>
+    
+    
+    
+    <br>
+    <br>
+    
+	<div id="login" class="modal2">
+	  <form id="loginForm" class="modal-content2" action="/action_page.php">
+		<!--<div class="imgcontainer">
+		  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+		  <img src="img_avatar2.png" alt="Avatar" class="avatar">
+		</div>-->
+
+		<div class="container2">
+		  <label for="uname"><b>Username</b></label>
+		  <input type="text" placeholder="Enter Username" name="uname" id="user"required>
+
+		  <label for="psw"><b>Password</b></label>
+		  <input type="password" placeholder="Enter Password" name="psw" id="pass"required>
+		  
+		  <label for="dbName"><b>Database Name</b></label>
+		  <input type="dataBase" placeholder="Enter Database Name" name="dbname" id="database" required>
+			
+		  <button type="submit">Login</button>
+		  
+		</div>
+
+		<div class="container2" style="background-color:#f1f1f1">
+		  <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbtn">Exit</button>
+		</div>
+	  </form>
+	</div>
+	
+	
+	<div align="center">
+		<button align="center" style="width:auto;" id="store">Store All Files</button>
+		<div>
+		<button align="center" style="width:auto; display:none;" id="lol">dummy</button>
+		</div>
+		<button align="center" style="width:auto;" id="clearData">Clear All Data</button>
+		<button align="center" style="width:auto;" id="displayDB">Displya DB Status</button>
+	</div>
+	<br>
+	<div align="center">
+		<button align="center" style="width:auto;" id="Q1">Query1</button>
+		<button align="center" style="width:auto;" id="Q2">Query2</button>
+		<button align="center" style="width:auto;" id="Q3">Query3</button>
+		<button align="center" style="width:auto;" id="Q4">Query4</button>
+		<button align="center" style="width:auto;" id="Q5">Query5</button>
+	</div>
+	<div id="Q2subdiv" style="display:none;" align="center">
+		<select id="query2Drop">
+			<option selected disabled>choose file</option>
+		</select>
+	</div>
+	<div align="center">
+		<form>
+			<input type="text" name="area" id="userSelect" placeholder="Select ex) * from FILE (select is already typed for you)" autocomplete="off">
+			<br>
+			<input type="submit" id="select" value="submit" class="click">
+			<input type="submit" id="help" value="help" class="click">
+		</form>
+	</div>
+	
+	<td><div class="cont1">
+		<br>
+		<h3 id="h3Text" align="center">Query Result</h3>
+		<table id="selectTable" class="tStyle">
+		</table>
+		<!--<div id="view" align="center"></div>-->
+		</div></td>
+
+	<div class="all2" style="display:none;">
+		<div class="menu2">
+			<table id="fileHelp" class="tStyle"></table>
+		</div>
+		<div class="content2">
+			<table id="indiHelp" class="tStyle"></table>
+		</div>
+	</div>
+
+    <br>
+    <br>
+	
+	<button onclick = "showUpload('uploadGEDCOM')" style="width:100%;" class="click">Upload GEDCOM file</button>
+	<div id="uploadGEDCOM" style="display:none">
+		<form method="post" action="/upload" enctype="multipart/form-data">
+			<input type="file" name="uploadFile" id="FILE" onchange="return fileValidation()"/>
+			<input type="submit" id="SUB" name="getFile" value="submit" style="width:auto;" align="right" class="click">
+		</form>
+        <br>
+	</div>
+	<br>
+
+	
+	<!--adding individual part-->
+	<button onclick="document.getElementById('id01').style.display='block'" style="width:100%;" class="click">Add Invidual</button>
+
+	<div id="id01" class="modal">
+	  
+	  <form class="modal-content animate" id="Individual">
+		<select id="indiDrop">
+			<option selected disabled>choose file</option>
+		</select>
+		<label for="Gname"><b>Given Name</b></label>
+		<input id="name"type="text" placeholder="Enter GivenName" name="givenNAme" autocomplete="off">
+
+		<label for="Sname"><b>Surname</b></label>
+		<input id="last" type="text" placeholder="Enter Surname" name="surname" autocomplete="off">
+			
+		<input type="submit" id="ADD" value="Add" class="click">
+	</div>
+	</form>
+	</div>
+	<br>
+	<!--creating simple GEDCOM-->
+	<button onclick="document.getElementById('id02').style.display='block'" style="width:100%;" class="click">Create GEDCOM</button>
+	<div id="id02" class="modal">
+	  
+	  <form method="post" class="modal-content animate" id="create" enctype="multipart/form-data">
+		<span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>	 
+		
+		<div class="all">
+		<div class="menu" id="head" >
+			<h4><b>Header</b></h4>
+			<label for="source" style="font-size: 20px;"><b>Source</b></label>
+			<label style="font-size: 20px;" name="PAF" id="hSource">PAF</label><br/>
+			<label for="source" style="font-size: 20px;"><b>Encoding</b></label>
+			<label for="source.value" style="font-size: 20px;" id="encode">ASCII</label><br/>
+			<label for="GEDCOMvers" style="font-size: 20px;"><b>GEDCON version</b></label>
+			<label for="version" style="font-size: 20px;" id="vers">5.5</label>
+		</div>
+		<div class="content" id="submitter">
+			<h4><b>Submitter</b></h4>
+			<label for="submitter" style="font-size: 20px;"><b>Name</b></label>
+			<input id="subName" name="subInput" type="text" placeholder="Enter submitter name" name="surname" autocomplete="off" required><br/>
+			<label for="subAddress" style="font-size: 20px;"><b>Address</b></label>
+			<input id="subAddress" name="ADDR" type="text" placeholder="Enter Address (optional)" name="surname" autocomplete="off">
+		</div>
+		</div>
+		<input type="text" id="fileInput" placeholder="Eneter FileName ex) simple.ged" name="file" required>
+		<input type="submit" id="create" value="Create" class="click">
+	  </form>
+	</div>
+	<br>
+	<!--Get Descendents-->
+	<button onclick="document.getElementById('id03').style.display='block'" style="width:100%;" class="click">Get Descendents</button>
+
+	<div id="id03" class="modal">
+	  
+	  <form class="modal-content animate" id="getDesc">
+		  <span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&times;</span>	 
+		 <div class="LRmother">
+			  <div class="leftPan">
+				<div class="selectPan">
+					<select id="descFileDrop">
+						<option selected disabled>choose file</option>
+					</select><br/>
+				</div>
+				<div class="selectPan">
+					<select id="indiDropList">
+						<option selected disabled>choose individual</option>
+					</select>
+				</div>
+				<div style="padding:10px;"class="selectPan">
+					<label id="GEN">Select Max Generation</label><br/>
+					<input type="number" id="generation" name="quantity" min="0" value="0" required>
+				</div>
+				<input align="center" type="submit" id="descendent" value="Get Descendents" class="butt">
+			  </div>
+			  
+			  <div class="rightPan" style="padding:20px">
+				  <table id="descDisplay" class="tStyle">
+						  <tr id="head" class="colorChange">
+							<th class="subStyle">GEN</th>
+							<th class="subStyle">Descendents</th>
+						  </tr>
+					</table>
+					<div class="errorMES" id="Message"></div>
+			  </div>
+		  </div>
+	</form>
+	</div>
+	<br>
+	<!--Get Ancesotors-->
+	<button onclick="document.getElementById('id04').style.display='block'" style="width:100%;" class="click">Get Ancestors</button>
+
+	<div id="id04" class="modal">
+	  
+	  <form class="modal-content animate" id="getAnc">
+		  <span onclick="document.getElementById('id04').style.display='none'" class="close" title="Close Modal">&times;</span>	 
+		 <div class="LRmother">
+			  <div class="leftPan">
+				<div class="selectPan">
+					<select id="ancFileDrop">
+						<option selected disabled>choose file</option>
+					</select><br/>
+				</div>
+				<div class="selectPan">
+					<select id="indiDropList2">
+						<option selected disabled>choose individual</option>
+					</select>
+				</div>
+				<div style="padding:10px;"class="selectPan">
+					<label id="GEN">Select Max Generation</label><br/>
+					<input type="number" id="generation2" name="quantity" min="0" value="0" required>
+				</div>
+				<input align="center" type="submit" id="descendent" value="Get Descendents" class="butt">
+			  </div>
+			  
+			  <div class="rightPan" style="padding:20px">
+				  <table id="ancDisplay" class="tStyle">
+						  <tr id="head" class="colorChange">
+							<th class="subStyle">GEN</th>
+							<th class="subStyle">Ancestors</th>
+						  </tr>
+					</table>
+					<div class="errorMES" id="Message2"></div>
+			  </div>
+		  </div>
+	</form>
+	</div>
+	<br>
+    
+    <script src="index.js">
+    
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+

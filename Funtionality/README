@@ -1,0 +1,9 @@
+Ena So yso02 0961375
+
+it creates static .a library of GEDCOMutilities and GEDCOMparser
+
+added functionality such as wring the GEDCOm object to the file, 
+
+converting the individuals to JSON string or converting JSON string to object.. etc
+
+

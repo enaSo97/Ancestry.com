@@ -12,11 +12,7 @@
 typedef enum cSet {ANSEL, UTF8, UNICODE, ASCII} CharSet;
 
 //error code enum
-typedef enum eCode {OK, INV_FILE, INV_GEDCOM, INV_HEADER, INV_RECORD, OTHER_ERROR} ErrorCode;
-
-#ifdef OTHER_INSTEAD
-#define OTHER 6
-#endif
+typedef enum eCode {OK, INV_FILE, INV_GEDCOM, INV_HEADER, INV_RECORD, OTHER_ERROR, WRITE_ERROR} ErrorCode;
 
 //Represents a generic event, e.g. individual event, family event, etc.
 typedef struct {
@@ -214,6 +210,100 @@ Individual* findPerson(const GEDCOMobject* familyRecord, bool (*compare)(const v
 List getDescendants(const GEDCOMobject* familyRecord, const Individual* person);
 
 
+
+// ****************************** A2 functions ******************************
+
+/** Function to writing a GEDCOMobject into a file in GEDCOM format.
+ *@pre GEDCOMobject object exists, is not null, and is valid
+ *@post GEDCOMobject has not been modified in any way, and a file representing the
+ GEDCOMobject contents in GEDCOM format has been created
+ *@return the error code indicating success or the error encountered when parsing the calendar
+ *@param obj - a pointer to a GEDCOMobject struct
+ **/
+GEDCOMerror writeGEDCOM(char* fileName, const GEDCOMobject* obj);
+
+/** Function for validating an existing GEDCOM object
+ *@pre GEDCOM object exists and is not null
+ *@post GEDCOM object has not been modified in any way
+ *@return the error code indicating success or the error encountered when validating the GEDCOM
+ *@param obj - a pointer to a GEDCOMobject struct
+ **/
+ErrorCode validateGEDCOM(const GEDCOMobject* obj);
+
+/** Function to return a list of up to N generations of descendants of an individual in a GEDCOM
+ *@pre GEDCOM object exists, is not null, and is valid
+ *@post GEDCOM object has not been modified in any way, and a list of descendants has been created
+ *@return a list of descendants.  The list may be empty.  All list members must be of type List.    *@param familyRecord - a pointer to a GEDCOMobject struct
+ *@param person - the Individual record whose descendants we want
+ *@param maxGen - maximum number of generations to examine (must be >= 1)
+ **/
+List getDescendantListN(const GEDCOMobject* familyRecord, const Individual* person, unsigned int maxGen);
+
+/** Function to return a list of up to N generations of ancestors of an individual in a GEDCOM
+ *@pre GEDCOM object exists, is not null, and is valid
+ *@post GEDCOM object has not been modified in any way, and a list of ancestors has been created
+ *@return a list of ancestors.  The list may be empty.
+ *@param familyRecord - a pointer to a GEDCOMobject struct
+ *@param person - the Individual record whose descendants we want
+ *@param maxGen - maximum number of generations to examine (must be >= 1)
+ **/
+List getAncestorListN(const GEDCOMobject* familyRecord, const Individual* person, int maxGen);
+
+/** Function for converting an Individual struct into a JSON string
+ *@pre Individual exists, is not null, and is valid
+ *@post Individual has not been modified in any way, and a JSON string has been created
+ *@return newly allocated JSON string.  May be NULL.
+ *@param ind - a pointer to an Individual struct
+ **/
+char* indToJSON(const Individual* ind);
+
+/** Function for creating an Individual struct from an JSON string
+ *@pre String is not null, and is valid
+ *@post String has not been modified in any way, and an Individual struct has been created
+ *@return a newly allocated Individual struct.  May be NULL.
+ *@param str - a pointer to a JSON string
+ **/
+Individual* JSONtoInd(const char* str);
+
+/** Function for creating a GEDCOMobject struct from an JSON string
+ *@pre String is not null, and is valid
+ *@post String has not been modified in any way, and a GEDCOMobject struct has been created
+ *@return a newly allocated GEDCOMobject struct.  May be NULL.
+ *@param str - a pointer to a JSON string
+ **/
+GEDCOMobject* JSONtoGEDCOM(const char* str);
+
+/** Function for adding an Individual to a GEDCCOMobject
+ *@pre both arguments are not NULL and valid
+ *@post Individual has not been modified in any way, and its address had been added to GEDCOMobject's individuals list
+ *@return void
+ *@param obj - a pointer to a GEDCOMobject struct
+ *@param toBeAdded - a pointer to an Individual struct
+**/
+void addIndividual(GEDCOMobject* obj, const Individual* toBeAdded);
+
+/** Function for converting a list of Individual structs into a JSON string
+ *@pre List exists, is not null, and has been initialized
+ *@post List has not been modified in any way, and a JSON string has been created
+ *@return newly allocated JSON string.  May be NULL.
+ *@param iList - a pointer to a list of Individual structs
+ **/
+char* iListToJSON(List iList);
+
+/** Function for converting a list of lists of Individual structs into a JSON string
+ *@pre List exists, is not null, and has been initialized
+ *@post List has not been modified in any way, and a JSON string has been created
+ *@return newly allocated JSON string.  May be NULL.
+ *@param gList - a pointer to a list of lists of Individual structs
+ **/
+char* gListToJSON(List gList);
+
+
+//****************************************** List helper functions added for A2 *******************************************
+void deleteGeneration(void* toBeDeleted);
+int compareGenerations(const void* first,const void* second);
+char* printGeneration(void* toBePrinted);
+
 //************************************************************************************************************
 
 //****************************************** List helper functions *******************************************
@@ -232,6 +322,8 @@ char* printFamily(void* toBePrinted);
 void deleteField(void* toBeDeleted);
 int compareFields(const void* first,const void* second);
 char* printField(void* toBePrinted);
+
+
 //************************************************************************************************************
 
 #endif

@@ -6,13 +6,37 @@
 
 #define DEBUG true
 
+typedef struct {
+  char indiRef[10];
+  List famsRef;
+  List famcRef;
+  Individual * point;
+}IndividualRef;
+
+typedef struct{
+  char famRef[10];
+  char husbandRef[10];
+  char wifeRef[10];
+  List children;
+  Family * point;
+}FamilyRef;
+
 typedef struct info{
   int level;
   char tag[255];
-  char info[255];
+  char info[500];
   int line;
   int strlen;
 }Info;
+
+
+typedef struct{
+  char indi[10];
+  char FAMS[10];
+  char FAMC[10];
+  Individual * point;
+}Reference;
+
 
 typedef struct pointer{
   char addr[10];
@@ -22,17 +46,15 @@ typedef struct pointer{
   char type[10];
 }Pointer;
 
-/*typedef struct indiPoint{
-  char addr[10];
+typedef struct {
+  int level;
   Individual * indi;
-  char type[10];
-}
+}EachGen;
 
-typedef struct famPoint{
-  char addr[10];
-  Family * fam;
-  char type[10];
-}*/
+typedef struct{
+  int level;
+  List * generation;
+}Generation;
 
 Event * createEvent(char type[5], char * date, char * place, List other);
 
@@ -86,9 +108,9 @@ Header * headParser(Info * record, int length, List * pointers, List * receiver)
 
 Submitter * subParser(Info * record, int length, List * pointers, List * receiver);
 
-Individual * parseIndividual(Info * record, int length, List * pointers, List * receiver);
+Individual * parseIndividual(Info * record, int length, List * pointers, List * receiver, List * reference);
 
-Family * parseFamily(Info * record, int length, List people);
+Family * parseFamily(Info * record, int length, List people, List * reference);
 
 char * printFunc(void * data);
 
@@ -116,4 +138,42 @@ char * returnString(char * data);
 
 bool validateTags(char * check);
 
+List collectDescendents(Individual * person, List * listOfDescendents);
 
+bool checkSpouse(Family * fam, Individual * key);
+
+bool checkExtistChild(List * children, Individual * search);
+
+bool comparePerson(const void* first, const void* second);
+
+void dummyDelete(void * toBeDeleted);
+
+void deleteIndiReference(void * toBeDeleted);
+
+void deleteFamReference(void * toBeDeleted);
+
+List DescendentWrapper(Individual * person, List * lists, int var);
+
+List AncestorWrapper(Individual * person, List * list, int var);
+
+void deleteStruct(void * toBeDeleted);
+
+char * printStruct(void * print);
+
+Individual * copyIndividual(Individual * toCopy);
+
+char * printListDescendents(void * toBePrinted);
+
+void deleteFinalList(void * toBeDeleted);
+
+void deleteReferenceList(void * toBeDeleted);
+
+char * printReference(void * toBePrinted);
+
+void deleteGenStruct(void * toBeDeleted);
+
+ErrorCode validateField(List otherFields);
+
+ErrorCode validateEvent(List events);
+
+//char* toStringStar(List * list);
